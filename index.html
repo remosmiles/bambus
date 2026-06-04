@@ -23,10 +23,11 @@
         .logo-container { display: inline-block; background: white; padding: 5px 15px; border: 3px solid var(--dark); transform: skew(-5deg); cursor: pointer; }
         .logo { font-size: 48px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; color: var(--red); transform: skew(5deg); display: block; margin: 0; line-height: 1; }
         
-        /* Navigation (Fake) */
-        nav { background: var(--dark); color: white; padding: 10px 0; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; }
-        nav span { margin: 0 15px; cursor: pointer; }
-        nav span:hover { color: var(--red); }
+        /* Echte Navigation mit Links */
+        nav { background: var(--dark); color: white; padding: 10px 0; text-align: center; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; cursor: pointer; display: inline-block; }
+        nav a:hover { color: var(--red); }
+        .nav-divider { color: #555; }
 
         /* Roter Ticker */
         .ticker { background: white; color: var(--dark); padding: 10px 20px; font-weight: 900; font-size: 16px; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--dark); }
@@ -96,8 +97,14 @@
             <h1 class="logo">Bambus News</h1>
         </div>
     </header>
+    
+    <!-- Die neuen verlinkten Navigationspunkte -->
     <nav>
-        <span>Front</span> | <span>Uri Regional</span> | <span>Blaulicht</span> | <span>Sport</span> | <span>SVZ Inside</span>
+        <a href="https://www.ur.ch" target="_blank">Front</a> <span class="nav-divider">|</span>
+        <a href="https://www.toggo.de" target="_blank">Uri Regional</a> <span class="nav-divider">|</span>
+        <a href="#" onclick="window.close(); alert('🚨 POLIZEILICHE SPERRUNG 🚨\n\nDein Browser blockiert das automatische Schliessen dieses Fensters. Du musst das X oben rechts selbst drücken!'); return false;">Blaulicht</a> <span class="nav-divider">|</span>
+        <a href="https://www.youtube.com/results?search_query=One+Day+or+Day+One+Motivation" target="_blank">Sport</a> <span class="nav-divider">|</span>
+        <a href="https://www.blick.ch" target="_blank">SVZ Inside</a>
     </nav>
 
     <div class="ticker">
