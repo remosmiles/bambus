@@ -82,6 +82,7 @@
 
     <div id="flash-overlay"></div>
 
+    <!-- Normales Radar-Zugriff-Verweigert Modal -->
     <div class="modal-overlay" id="myModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -92,13 +93,26 @@
         </div>
     </div>
 
+    <!-- NEU: Das Gedankenleser 15-Sekunden Modal -->
+    <div class="modal-overlay" id="mindReaderModal">
+        <div class="modal-content" style="border-color: #ff9900;">
+            <span class="close-btn" onclick="closeMindReader()">&times;</span>
+            <h2 style="color: #ff9900; font-weight: 900; font-size: 30px; margin-top: 0;">🔮 SYSTEM-WARNUNG</h2>
+            <p style="font-family: Arial, sans-serif; font-size: 18px;">Die neuen 5G-Antennen des Schwerverkehrszentrums haben soeben unerlaubte Gehirnströme erfasst.</p>
+            <p style="font-size: 22px; margin: 20px 0;">Du hast exakt in diesem Moment an jemanden gedacht!</p>
+            <div style="background: var(--gray); padding: 15px; border-left: 5px solid #ff9900; margin-bottom: 20px;">
+                <strong style="font-size: 24px; color: var(--dark);">Schöne Grüsse von Remo! 🐼✌️</strong>
+            </div>
+            <button class="radar-btn" style="background: #ff9900; color: var(--dark);" onclick="closeMindReader()">Überwachung beenden</button>
+        </div>
+    </div>
+
     <header>
         <div class="logo-container" onclick="makeItRain()">
             <h1 class="logo">Bambus News</h1>
         </div>
     </header>
     
-    <!-- Die neuen verlinkten Navigationspunkte -->
     <nav>
         <a href="https://www.ur.ch" target="_blank">Front</a> <span class="nav-divider">|</span>
         <a href="https://www.toggo.de" target="_blank">Uri Regional</a> <span class="nav-divider">|</span>
@@ -207,7 +221,7 @@
             }, 10);
         }
 
-        // Funktion 2: Modal öffnen & schliessen
+        // Funktion 2: Normales Modal öffnen & schliessen
         function openModal() {
             document.getElementById('myModal').classList.add('active');
         }
@@ -255,6 +269,15 @@
             e.stopPropagation();
             alert('Unglaublich! Du hast es trotz der kurzen Arme geschafft!');
         });
+
+        // Funktion 5: Der 15-Sekunden Gedankenleser-Timer!
+        setTimeout(() => {
+            document.getElementById('mindReaderModal').classList.add('active');
+        }, 15000);
+
+        function closeMindReader() {
+            document.getElementById('mindReaderModal').classList.remove('active');
+        }
     </script>
 
 </body>
