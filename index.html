@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bambus News - Interaktive Edition</title>
+    <title>Bambus News - Kanton Uri</title>
     <style>
-        /* CSS Reset & Variablen */
-        :root { --main-red: #e3000f; --dark: #1a1a1a; --bg: #f0f2f5; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: #333; overflow-x: hidden; }
+        /* CSS Reset & Boulevard-Tabloid Variablen */
+        :root { --red: #e00000; --dark: #000000; --bg: #ffffff; --gray: #f4f4f4; --border: #dddddd; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: var(--gray); color: #111; overflow-x: hidden; }
         
         /* Blitzer-Effekt Overlay */
         #flash-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 9999; opacity: 0; pointer-events: none; }
@@ -18,167 +18,172 @@
         .bamboo-drop { position: fixed; top: -50px; font-size: 2rem; z-index: 1000; animation: fall linear forwards; user-select: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* Header mit Neon-Glow */
-        header { background: var(--dark); color: white; padding: 20px; text-align: center; border-bottom: 5px solid var(--main-red); box-shadow: 0 4px 15px rgba(227, 0, 15, 0.3); }
-        .logo { font-size: 42px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; font-style: italic; cursor: pointer; display: inline-block; transition: transform 0.2s; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-        .logo:hover { transform: scale(1.05); color: #ffcc00; }
-        .subtitle { display: block; font-size: 14px; color: #aaa; margin-top: 5px; font-weight: normal; letter-spacing: 2px; }
+        /* Header BILD/20Min-Style */
+        header { background: var(--red); color: white; padding: 15px 20px; border-bottom: 4px solid var(--dark); text-align: center; }
+        .logo-container { display: inline-block; background: white; padding: 5px 15px; border: 3px solid var(--dark); transform: skew(-5deg); cursor: pointer; }
+        .logo { font-size: 48px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; color: var(--red); transform: skew(5deg); display: block; margin: 0; line-height: 1; }
+        
+        /* Navigation (Fake) */
+        nav { background: var(--dark); color: white; padding: 10px 0; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; }
+        nav span { margin: 0 15px; cursor: pointer; }
+        nav span:hover { color: var(--red); }
 
-        /* Ticker */
-        .ticker { background: var(--main-red); color: white; padding: 12px 20px; font-weight: bold; font-size: 15px; overflow: hidden; white-space: nowrap; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
-        .ticker-text { display: inline-block; animation: scroll 30s linear infinite; }
+        /* Roter Ticker */
+        .ticker { background: white; color: var(--dark); padding: 10px 20px; font-weight: 900; font-size: 16px; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--dark); }
+        .ticker span { color: var(--red); margin-right: 10px; }
+        .ticker-text { display: inline-block; animation: scroll 35s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
         /* Layout */
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; display: flex; gap: 30px; flex-wrap: wrap; }
-        .main-content { flex: 3; min-width: 65%; }
+        .container { max-width: 1100px; margin: 20px auto; padding: 0 10px; display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; }
+        .main-content { flex: 3; min-width: 65%; background: white; border: 1px solid var(--border); padding: 20px; }
         .sidebar { flex: 1; min-width: 300px; }
 
-        /* Animierte Artikel-Karten */
-        .article { background: white; margin-bottom: 30px; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; border-left: 6px solid transparent; }
-        .article:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-left-color: var(--main-red); }
-        .tag { display: inline-block; background: var(--dark); color: white; padding: 6px 12px; font-size: 12px; font-weight: bold; border-radius: 20px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
-        .tag.hot { background: var(--main-red); animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(227, 0, 15, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(227, 0, 15, 0); } 100% { box-shadow: 0 0 0 0 rgba(227, 0, 15, 0); } }
-        
-        .article h2 { margin: 0 0 15px 0; font-size: 32px; line-height: 1.2; letter-spacing: -0.5px; }
-        .article p { color: #555; line-height: 1.8; font-size: 17px; }
+        /* Artikel-Design (Harte Kanten, grosse Fonts) */
+        .article { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid var(--dark); }
+        .article:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .kicker { display: block; color: var(--red); font-size: 14px; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
+        .article h2 { margin: 0 0 10px 0; font-size: 38px; line-height: 1.05; letter-spacing: -1px; font-weight: 900; }
+        .article p { color: #333; line-height: 1.5; font-size: 18px; font-family: Georgia, serif; margin-top: 10px; }
         
         /* Interaktiver Radar-Button */
-        .radar-btn { background: var(--main-red); color: white; border: none; padding: 15px 25px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 15px; transition: 0.3s; text-transform: uppercase; width: 100%; }
-        .radar-btn:hover { background: #b3000c; transform: scale(1.02); }
+        .radar-btn { background: var(--dark); color: white; border: none; padding: 12px 20px; font-size: 16px; font-weight: 900; cursor: pointer; margin-top: 15px; text-transform: uppercase; transition: 0.2s; display: inline-block; }
+        .radar-btn:hover { background: var(--red); }
 
-        /* Fake Werbung Styling */
-        .ad-space { background: white; border: 3px dashed #ccc; padding: 25px; text-align: center; margin-bottom: 25px; border-radius: 12px; position: relative; transition: all 0.2s ease-out; }
-        .ad-label { font-size: 12px; color: #888; display: block; text-align: left; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; }
-        .ad-space h4 { margin: 0 0 10px 0; font-size: 20px; }
-        .ad-space p { font-size: 14px; color: #555; margin-bottom: 10px; line-height: 1.4; }
+        /* Sidebar Werbung Styling */
+        .ad-space { background: white; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; position: relative; border-top: 4px solid var(--dark); }
+        .ad-label { font-size: 10px; color: #999; display: block; text-align: left; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
+        .ad-space h4 { margin: 0 0 10px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; line-height: 1.1; }
+        .ad-space p { font-size: 14px; color: #444; margin-bottom: 15px; line-height: 1.4; }
 
-        /* Spezifische Werbung Styles */
-        .ad-lothar { border-color: #2c3e50; background: linear-gradient(135deg, #ecf0f1, #bdc3c7); cursor: help; }
-        .ad-lothar h4 { color: #2c3e50; text-transform: uppercase; letter-spacing: 1px; }
+        /* Spezifische Ads */
+        .ad-remo { border-top-color: #e1306c; }
+        .ad-remo h4 { color: #e1306c; }
+        .ad-link-btn { display: block; background: #e1306c; color: white; text-decoration: none; padding: 10px; font-weight: bold; text-transform: uppercase; text-align: center; }
+        .ad-link-btn:hover { background: var(--dark); }
+
+        .ad-lothar { border-top-color: #0044cc; background: #f0f5ff; }
+        .ad-lothar h4 { color: #0044cc; }
         
-        .ad-trex { border-color: #27ae60; background: #e8f8f5; }
+        .ad-trex { border-top-color: #27ae60; }
         .ad-trex h4 { color: #27ae60; }
-        
-        .ad-scheiber { border-style: double; border-width: 8px; border-color: #8b4513; background: #fdf5e6; cursor: crosshair; }
-        .ad-scheiber h4 { font-family: 'Courier New', Courier, monospace; font-size: 26px; color: #8b4513; margin-bottom: 5px; }
-
-        .ad-remo { border-color: #8e44ad; background: #f4ecf7; cursor: pointer; }
-        .ad-remo h4 { color: #8e44ad; text-transform: uppercase; font-size: 22px; }
 
         /* Modernes Modal (Popup) */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
-        .modal-content { background: white; padding: 40px; border-radius: 12px; max-width: 500px; text-align: center; position: relative; transform: scale(0.8); transition: transform 0.3s; border-top: 8px solid var(--main-red); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 40px; border: 5px solid var(--red); max-width: 500px; text-align: center; position: relative; transform: scale(0.8); transition: transform 0.3s; }
         .modal-overlay.active { display: flex; }
         .modal-overlay.active .modal-content { transform: scale(1); }
-        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #888; }
-        .close-btn:hover { color: var(--main-red); }
-        
-        /* Sidebar Widget */
-        .widget { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
-        .widget h3 { margin-top: 0; border-bottom: 2px solid var(--main-red); padding-bottom: 10px; font-size: 22px; text-transform: uppercase; }
-        .widget ul { list-style: none; padding: 0; margin: 0; }
-        .widget li { padding: 15px 0; border-bottom: 1px solid #eee; font-size: 16px; transition: padding-left 0.3s; cursor: pointer; }
-        .widget li:hover { padding-left: 10px; color: var(--main-red); font-weight: bold; }
+        .close-btn { position: absolute; top: 5px; right: 10px; font-size: 30px; cursor: pointer; color: var(--dark); font-weight: bold; line-height: 1; }
+        .close-btn:hover { color: var(--red); }
     </style>
 </head>
 <body>
 
-    <!-- Verstecktes Overlay für den Radar-Blitz -->
     <div id="flash-overlay"></div>
 
-    <!-- Das neue interaktive Modal -->
     <div class="modal-overlay" id="myModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 style="color: #e3000f; margin-top: 0;">🚨 ZUGRIFF VERWEIGERT</h2>
-            <p>Dieser Artikel ist klassifiziert. Nur für den autorisierten Schichtchef des Schwerverkehrszentrums Erstfeld freigegeben!</p>
-            <p style="font-size: 40px; margin: 10px 0;">🐼🚫</p>
-            <button class="radar-btn" onclick="closeModal()">Verstanden</button>
+            <h2 style="color: var(--red); font-weight: 900; font-size: 30px; margin-top: 0;">🚨 ZUGRIFF VERWEIGERT</h2>
+            <p style="font-family: Arial, sans-serif; font-size: 18px;">Dieser Artikel ist streng geheim. Nur für den autorisierten Schichtchef des Schwerverkehrszentrums Erstfeld freigegeben!</p>
+            <p style="font-size: 50px; margin: 20px 0;">🐼🚫</p>
+            <button class="radar-btn" onclick="closeModal()">VERSTANDEN</button>
         </div>
     </div>
 
     <header>
-        <div class="logo" onclick="makeItRain()">BAMBUS NEWS<br><span class="subtitle">Klick mich für eine Überraschung</span></div>
+        <div class="logo-container" onclick="makeItRain()">
+            <h1 class="logo">Bambus News</h1>
+        </div>
     </header>
+    <nav>
+        <span>Front</span> | <span>Uri Regional</span> | <span>Blaulicht</span> | <span>Sport</span> | <span>SVZ Inside</span>
+    </nav>
 
     <div class="ticker">
-        <div class="ticker-text">🚨 BREAKING NEWS +++ Überflieger Angelo löst Fall vor dem ersten Klingeln +++ Wachtmeister Freddi legt Verkehr lahm +++ T-Rex Gisler verzweifelt an Ausweiskontrolle +++ Post mietet Lagerhalle für Gnos Daniels Liebesbriefe +++ </div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span> Überflieger Angelo löst Fall vor dem ersten Klingeln <span>+++</span> Wachtmeister Freddi legt Verkehr lahm <span>+++</span> T-Rex Gisler verzweifelt an Ausweiskontrolle <span>+++</span></div>
     </div>
 
     <div class="container">
+        <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
             
             <article class="article">
-                <span class="tag">Held der Hotline</span>
-                <h2>Der Mozart der Einsatzzentrale: Wie "Überflieger" Angelo das Telefon-Game revolutioniert</h2>
-                <p><strong>ALTDORF -</strong> Wenn auf der Einsatzzentrale der Kapo Uri das Telefon noch gar nicht geklingelt hat, hat Angelo den Hörer bereits abgenommen und das Problem gelöst. Der Zentralist, der intern nur noch ehrfürchtig als "der Überflieger" bezeichnet wird, setzt völlig neue Massstäbe in der Koordination.</p>
-                <p>"Er disponiert die Patrouillen teilweise schon an den Tatort, bevor der Täter überhaupt weiss, dass er eine Straftat begehen wird", staunt ein sichtlich verwirrter Kollege. Gerüchten zufolge tippt Angelo mit 400 Anschlägen pro Minute, hat vier Bildschirme gleichzeitig im Blick und telefoniert parallel tiefenentspannt, ohne auch nur einmal zu blinzeln. Es wird bereits gemunkelt, ob man Angelo klonen sollte, um das gesamte europäische Notruf-System im Alleingang zu übernehmen.</p>
+                <span class="kicker">Das Standesamt in besten Händen</span>
+                <h2>Verwaltungs-Coup: "Seniorita Huber" übernimmt die Leitung!</h2>
+                <p><strong>ALTDORF -</strong> Gute Neuigkeiten aus der Kantonsverwaltung! Das Standesamt wird ab sofort von niemand Geringerem als der besten Kantonsangestellten geleitet: Seniorita Huber übernimmt das Ruder. Mit ihrer jahrelangen Erfahrung, ihrer unbestrittenen Kompetenz und einem stets wachsamen Auge sorgt sie dafür, dass in Sachen Zivilstand im Kanton Uri alles reibungslos läuft.</p>
+                <p>Kollegen und Bürger sind sich einig: Wenn jemand die Zügel im Standesamt fest in der Hand hält, dann Seniorita Huber. Erste Stimmen fordern bereits, ihr direkt das gesamte Gebäude zu unterstellen.</p>
             </article>
 
             <article class="article">
-                <span class="tag hot">Herzensbrecher am Limit</span>
-                <h2>Post-Logistik kollabiert: Daniel Gnos ertrinkt in anonymen Liebesbriefen!</h2>
-                <p><strong>ERSTFELD -</strong> Wachtmeister Fabio Freddi mag durch sein Lächeln den Verkehr lahmlegen, aber Daniel Gnos bringt die Schweizerische Post an den Rand des Ruins. Wie gut unterrichtete Insider berichten, wird der charmante Beamte täglich von einer regelrechten Flut an anonymen Grüssen und handschriftlichen Liebesbotschaften bedrängt.</p>
-                <p>"Wir mussten extra Rollwagen anfordern, weil der Pöstler die Fanpost nicht mehr tragen konnte", seufzt ein Kollege kopfschüttelnd. Einige glühende Verehrerinnen sollen sogar versuchen, über verdeckte Kanäle romantische Gedichte einzuschleusen. Gnos selbst gibt sich bescheiden und pragmatisch: "Ich komme gar nicht mehr zum Lesen. Ich nutze das dicke Parfümpapier momentan primär, um wackelige Bürotische auszugleichen."</p>
+                <span class="kicker">Held der Hotline</span>
+                <h2>Der Mozart der Zentrale: Angelo revolutioniert das Telefon-Game</h2>
+                <p><strong>ALTDORF -</strong> Wenn auf der Einsatzzentrale der Kapo Uri das Telefon noch gar nicht geklingelt hat, hat Angelo den Hörer bereits abgenommen und das Problem gelöst. Der Zentralist, intern ehrfürchtig "der Überflieger" genannt, setzt völlig neue Massstäbe.</p>
+                <p>"Er disponiert die Patrouillen teilweise schon an den Tatort, bevor der Täter weiss, dass er eine Straftat begehen wird", staunt ein Kollege. Gerüchten zufolge tippt Angelo mit 400 Anschlägen pro Minute und hat vier Bildschirme gleichzeitig im Blick.</p>
             </article>
 
             <article class="article">
-                <span class="tag hot">Herzklopfen am Strassenrand</span>
-                <h2>Ausnahmezustand bei Kontrollen: Alle wollen von "Schönling" Fabio Freddi gebüsst werden!</h2>
-                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem absurden Problem. Es staut sich rund um das Schwerverkehrszentrum, weil die Leute mit Absicht unangeschnallt oder zu schnell fahren, nur damit Fabio Freddi sie rausnimmt. Einige montieren sogar abgefahrene Reifen für ein längeres Gespräch mit dem charmanten Polizisten.</p>
-                <button class="radar-btn" onclick="openModal()">Gesamtes Einsatzprotokoll lesen</button>
+                <span class="kicker">Herzensbrecher am Limit</span>
+                <h2>Post kollabiert: Gnos ertrinkt in anonymen Liebesbriefen!</h2>
+                <p><strong>ERSTFELD -</strong> Daniel Gnos bringt die Schweizerische Post an den Rand des Ruins. Wie gut unterrichtete Insider berichten, wird der charmante Beamte täglich von einer Flut an anonymen Grüssen und Liebesbotschaften bedrängt.</p>
+                <p>"Wir mussten extra Rollwagen anfordern, weil der Pöstler die Fanpost nicht mehr tragen konnte", seufzt ein Kollege. Gnos selbst gibt sich bescheiden: "Ich komme nicht mehr zum Lesen. Ich nutze das dicke Parfümpapier momentan primär, um wackelige Bürotische auszugleichen."</p>
             </article>
 
             <article class="article">
-                <span class="tag">Interaktiver Test</span>
-                <h2>Skandal in der Verkehrspolizei: Radar-Anlagen gehackt?</h2>
-                <p>Ein anonymer Insider berichtet, dass die Blitzer in der Nacht umprogrammiert wurden. Wer schneller als 80 fährt, kriegt statt einer Busse ein Rezept für Bambus-Tee. Teste hier live die neue Radaranlage (auf eigene Gefahr):</p>
-                <button class="radar-btn" onclick="triggerRadar()" style="background: #222;">📸 RADAR MANUELL AUSLÖSEN</button>
+                <span class="kicker">Herzklopfen am Strassenrand</span>
+                <h2>Verkehrschaos: Alle wollen von "Schönling" Freddi gebüsst werden!</h2>
+                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem absurden Problem. Es staut sich am SVZ, weil Leute mit Absicht unangeschnallt fahren, nur damit Fabio Freddi sie rausnimmt. Einige montieren sogar abgefahrene Reifen für ein Gespräch mit dem charmanten Polizisten.</p>
+                <button class="radar-btn" onclick="openModal()">Einsatzprotokoll lesen</button>
+            </article>
+
+            <article class="article" style="border: none;">
+                <span class="kicker">Interaktiver Test</span>
+                <h2>Radar-Anlagen gehackt?</h2>
+                <p>Ein anonymer Insider berichtet, dass die Blitzer umprogrammiert wurden. Wer zu schnell fährt, kriegt ein Rezept für Bambus-Tee. Teste hier die Radaranlage (auf eigene Gefahr):</p>
+                <button class="radar-btn" onclick="triggerRadar()" style="background: var(--red);">📸 RADAR MANUELL AUSLÖSEN</button>
             </article>
 
         </main>
 
+        <!-- SEITENLEISTE RECHTS (WERBUNG) -->
         <aside class="sidebar">
             
-            <!-- NEU: Remo Tresch Werbung -->
-            <div class="ad-space ad-remo" onclick="alert('🚨 VIRAL ALARM! 🚨\n\nFolge jetzt @remosmiles! Aber Achtung: Es besteht absolute Gefahr von plötzlichem Muskelaufbau durch 500 Liegestütze und akutem Lachkrampf wegen feinstem Urner Humor.')">
-                <span class="ad-label">Social Media Sensation</span>
-                <h4>Kapo Uri Goes Hollywood!</h4>
-                <p>Vergiss das normale Fernsehen. Die berühmt-berüchtigten Reels von <strong>Content Creator Remo Tresch</strong> sprengen das Internet!</p>
-                <p>Regional-Comedy, geniale AI-Lifehacks und geballte Fitness in einem Feed.</p>
-                <div style="font-size: 40px; margin: 10px 0;">📱🎬🤖</div>
-                <em>Klick hier und folge @remosmiles!</em>
+            <!-- Content Creator Remo Tresch -->
+            <div class="ad-space ad-remo">
+                <span class="ad-label">Anzeige / Social Media</span>
+                <h4>Kapo Uri Instagram Reels</h4>
+                <p>Erlebe den Schwerverkehr hautnah! Content Creator <strong>Remo Tresch</strong> bringt dir den echten Alltag aus dem SVZ (Schwerverkehrszentrum) Erstfeld direkt auf den Bildschirm.</p>
+                <p>Spannende Kontrollen, fesselnde Einsichten und bullenstarker Content.</p>
+                <div style="font-size: 30px; text-align: center; margin: 10px 0;">📱🚛🚓</div>
+                <a href="https://www.bullenpower-uri.ch" target="_blank" class="ad-link-btn">JETZT REELS SCHAUEN!</a>
             </div>
 
-            <!-- AKTUALISIERT: Zynische Lothar Imhof Werbung -->
-            <div class="ad-space ad-lothar" onclick="alert('Einsatzleiter Imhof ist derzeit in einem extrem wichtigen... äh... Meeting zur Überwachung der Kaffeemaschine. Bitte werfen Sie Ihr Anliegen direkt in den Papierkorb.')">
-                <span class="ad-label">Masterclass Führungskräfte</span>
-                <h4>Die Kunst des Nicht-Eingreifens</h4>
-                <p>Warum selber Verantwortung übernehmen, wenn man zuschauen kann? Lerne von Einsatzleiter <strong>Lothar Imhof</strong>, wie man bei maximalem Chaos die perfekte Tasse Kaffee trinkt.</p>
-                <strong style="font-size: 16px;">Prädikat: Absolute "Extraklasse"</strong>
-                <div style="font-size: 40px; margin: 10px 0;">☕🌪️📉</div>
-                <em>Jetzt stressfrei delegieren lernen!</em>
+            <!-- Lothar Imhof (Seriöser) -->
+            <div class="ad-space ad-lothar">
+                <span class="ad-label">Im Einsatz für Uri</span>
+                <h4>Kompetenz an vorderster Front</h4>
+                <p>Bereit, wenn es darauf ankommt. <strong>Lothar Imhof</strong> hat bereits sein Einsatzleitergilet übergestreift und sucht den nächsten Einsatzort.</p>
+                <p><em>Führung, Übersicht und absolute Einsatzbereitschaft für die Sicherheit im Kanton.</em></p>
+                <div style="font-size: 30px; text-align: center; margin: 10px 0;">🦺🦅🚔</div>
             </div>
 
             <!-- Stefan Gisler (T-Rex) Werbung -->
             <div class="ad-space ad-trex">
                 <span class="ad-label">Kapo Ausrüstungs-Shop</span>
                 <h4>Masshemden "Edition T-Rex"</h4>
-                <p>Exklusiv für <strong>Stefan Gisler</strong>: Uniformhemden mit extra kurzen Ärmeln. Inklusive Gratis-Greifzange für entspannte Ausweiskontrollen am LKW-Fenster!</p>
-                <div style="font-size: 40px; margin: 10px 0;">🦖👕🤏</div>
-                <button id="trexBtn" class="radar-btn" style="background: #27ae60; position: relative; transition: all 0.2s; font-size: 14px;">Hier Ausweis greifen!</button>
+                <p>Exklusiv für <strong>Stefan Gisler</strong>: Uniformhemden mit extra kurzen Ärmeln. Inklusive Gratis-Greifzange für Ausweiskontrollen am LKW-Fenster!</p>
+                <div style="font-size: 40px; text-align: center; margin: 10px 0;">🦖🤏</div>
+                <button id="trexBtn" class="radar-btn" style="background: #27ae60; width: 100%; transition: all 0.2s; font-size: 14px;">HIER AUSWEIS GREIFEN!</button>
             </div>
 
             <!-- Scheiber Werbung -->
-            <div class="ad-space ad-scheiber" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick soeben konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
+            <div class="ad-space" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
                 <span class="ad-label">WANTED</span>
-                <h4>DER DORF SHERIFF</h4>
+                <h4 style="color: #8b4513;">DER DORF SHERIFF</h4>
                 <p>Er braucht kein Blaulicht. Er hat einen Hut und das Gesetz auf seiner Seite.</p>
-                <strong style="font-size: 18px;">SCHEIBER RÄUMT AUF.</strong>
-                <div style="font-size: 40px; margin: 10px 0;">🤠🐴🚔</div>
-                <em>Jetzt den Sheriff-Stern polieren lassen!</em>
+                <strong style="font-size: 16px;">SCHEIBER RÄUMT AUF.</strong>
+                <div style="font-size: 40px; text-align: center; margin: 10px 0;">🤠🐴</div>
+                <button class="radar-btn" style="background: #8b4513; width: 100%; font-size: 12px;">Stern polieren</button>
             </div>
 
         </aside>
@@ -205,7 +210,7 @@
 
         // Funktion 3: Bambus Regen
         function makeItRain() {
-            const emojis = ['🎋', '🐼', '🚨', '🚓'];
+            const emojis = ['🎋', '🐼', '🚨', '📰'];
             for(let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     const drop = document.createElement('div');
@@ -223,20 +228,20 @@
         const trexBtn = document.getElementById('trexBtn');
         trexBtn.addEventListener('mouseover', function() {
             if(window.innerWidth > 768) {
-                const randomX = Math.floor(Math.random() * 140) - 70; 
-                const randomY = Math.floor(Math.random() * 80) - 40; 
+                const randomX = Math.floor(Math.random() * 100) - 50; 
+                const randomY = Math.floor(Math.random() * 60) - 30; 
                 this.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
-                this.innerText = '🦖 Zu kurze Arme! 🦖';
-                this.style.background = '#e3000f';
+                this.innerText = '🦖 ZU KURZE ARME! 🦖';
+                this.style.background = 'var(--red)';
             }
         });
         
         trexBtn.addEventListener('mouseout', function() {
             setTimeout(() => {
                 this.style.transform = `translate(0px, 0px) scale(1)`;
-                this.innerText = 'Hier Ausweis greifen!';
+                this.innerText = 'HIER AUSWEIS GREIFEN!';
                 this.style.background = '#27ae60';
-            }, 1500);
+            }, 1000);
         });
 
         trexBtn.addEventListener('click', function(e) {
