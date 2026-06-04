@@ -82,6 +82,7 @@
 
     <div id="flash-overlay"></div>
 
+    <!-- Normales Radar-Zugriff-Verweigert Modal -->
     <div class="modal-overlay" id="myModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -92,6 +93,7 @@
         </div>
     </div>
 
+    <!-- Das Gedankenleser 15-Sekunden Modal -->
     <div class="modal-overlay" id="mindReaderModal">
         <div class="modal-content" style="border-color: #ff9900;">
             <span class="close-btn" onclick="closeMindReader()">&times;</span>
@@ -120,10 +122,11 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> 12-Stunden-Schichten eskalieren: Kapo schläft unter Schreibtischen <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll: Alle Schweizer müssen das Land verlassen <span>+++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> 12-Stunden-Schichten eskalieren: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll: Alle Schweizer müssen das Land verlassen <span>+++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span> Post kollabiert wegen Gnos <span>+++</span></div>
     </div>
 
     <div class="container">
+        <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
             
             <article class="article">
@@ -134,10 +137,24 @@
             </article>
 
             <article class="article">
+                <span class="kicker">Herzklopfen am Strassenrand</span>
+                <h2>Verkehrschaos: Alle wollen von "Schönling" Freddi gebüsst werden!</h2>
+                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem absurden Problem. Es staut sich am SVZ, weil Leute mit Absicht unangeschnallt fahren, nur damit Fabio Freddi sie rausnimmt. Einige montieren sogar abgefahrene Reifen für ein längeres Gespräch mit dem charmanten Polizisten.</p>
+                <button class="radar-btn" onclick="openModal()">Einsatzprotokoll lesen</button>
+            </article>
+
+            <article class="article">
                 <span class="kicker">Kapo-interner Skandal</span>
                 <h2>Fassungslosigkeit bei Preisverleihung: Ein Hamster gewinnt das Monatsfoto!</h2>
                 <p><strong>ALTDORF -</strong> Die Spannung bei der Wahl zum prestigeträchtigen "Patrouillen-Foto des Monats" war greifbar. Die Kollegen reichten spektakuläre Helikopter-Aufnahmen, epische Blitzer-Bilder und dramatische Festnahmen bei Sonnenuntergang ein. Doch als der Gewinner verkündet wurde, herrschte absolute Stille: Platz 1 ging an einen leicht unscharfen Hamster, der auf dem Lenkrad eines Streifenwagens sitzt.</p>
                 <p>Die knallharten Verkehrspolizisten waren fassungslos. Die Jury verteidigte ihre Entscheidung vehement: "Dieser Nager strahlt genau jene Ruhe und Autorität aus, die wir auf den Strassen von Uri brauchen. Ausserdem war er angeschnallt." Es wird gemunkelt, dass einige Einsatzkräfte aus Protest drohen, ihre Diensthunde durch Meerschweinchen zu ersetzen.</p>
+            </article>
+
+            <article class="article">
+                <span class="kicker">Herzensbrecher am Limit</span>
+                <h2>Post kollabiert: Gnos ertrinkt in anonymen Liebesbriefen!</h2>
+                <p><strong>ERSTFELD -</strong> Daniel Gnos bringt die Schweizerische Post an den Rand des Ruins. Wie gut unterrichtete Insider berichten, wird der charmante Beamte täglich von einer Flut an anonymen Grüssen und Liebesbotschaften bedrängt.</p>
+                <p>"Wir mussten extra Rollwagen anfordern, weil der Pöstler die Fanpost nicht mehr tragen konnte", seufzt ein Kollege. Gnos selbst gibt sich bescheiden: "Ich komme nicht mehr zum Lesen. Ich nutze das dicke Parfümpapier momentan primär, um wackelige Bürotische auszugleichen."</p>
             </article>
 
             <article class="article">
@@ -168,8 +185,10 @@
 
         </main>
 
+        <!-- SEITENLEISTE RECHTS (WERBUNG) -->
         <aside class="sidebar">
             
+            <!-- Content Creator Remo Tresch -->
             <div class="ad-space ad-remo">
                 <span class="ad-label">Anzeige / Social Media</span>
                 <h4>Kapo Uri Instagram Reels</h4>
@@ -179,6 +198,7 @@
                 <a href="https://www.bullenpower-uri.ch" target="_blank" class="ad-link-btn">JETZT REELS SCHAUEN!</a>
             </div>
 
+            <!-- Lothar Imhof (Seriöser) -->
             <div class="ad-space ad-lothar">
                 <span class="ad-label">Im Einsatz für Uri</span>
                 <h4>Kompetenz an vorderster Front</h4>
@@ -187,6 +207,7 @@
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">🦺🦅🚔</div>
             </div>
 
+            <!-- Stefan Gisler (T-Rex) Werbung -->
             <div class="ad-space ad-trex">
                 <span class="ad-label">Kapo Ausrüstungs-Shop</span>
                 <h4>Masshemden "Edition T-Rex"</h4>
@@ -195,6 +216,7 @@
                 <button id="trexBtn" class="radar-btn" style="background: #27ae60; width: 100%; transition: all 0.2s; font-size: 14px;">HIER AUSWEIS GREIFEN!</button>
             </div>
 
+            <!-- Scheiber Werbung -->
             <div class="ad-space" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
                 <span class="ad-label">WANTED</span>
                 <h4 style="color: #8b4513;">DER DORF SHERIFF</h4>
