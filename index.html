@@ -32,7 +32,7 @@
         /* Roter Ticker */
         .ticker { background: white; color: var(--dark); padding: 10px 20px; font-weight: 900; font-size: 16px; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--dark); }
         .ticker span { color: var(--red); margin-right: 10px; }
-        .ticker-text { display: inline-block; animation: scroll 35s linear infinite; }
+        .ticker-text { display: inline-block; animation: scroll 40s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
         /* Layout */
@@ -82,7 +82,6 @@
 
     <div id="flash-overlay"></div>
 
-    <!-- Normales Radar-Zugriff-Verweigert Modal -->
     <div class="modal-overlay" id="myModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -93,7 +92,6 @@
         </div>
     </div>
 
-    <!-- NEU: Das Gedankenleser 15-Sekunden Modal -->
     <div class="modal-overlay" id="mindReaderModal">
         <div class="modal-content" style="border-color: #ff9900;">
             <span class="close-btn" onclick="closeMindReader()">&times;</span>
@@ -122,39 +120,43 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span> Überflieger Angelo löst Fall vor dem ersten Klingeln <span>+++</span> Wachtmeister Freddi legt Verkehr lahm <span>+++</span> T-Rex Gisler verzweifelt an Ausweiskontrolle <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> 12-Stunden-Schichten eskalieren: Kapo schläft unter Schreibtischen <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll: Alle Schweizer müssen das Land verlassen <span>+++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span></div>
     </div>
 
     <div class="container">
-        <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
             
             <article class="article">
+                <span class="kicker">Schlafentzug an der Front</span>
+                <h2>Neues 12-Stunden-Schichtmodell: SVZ-Büros zu Matratzenlagern umfunktioniert!</h2>
+                <p><strong>ERSTFELD -</strong> Das neue 12-Stunden-Schichtmodell fordert seine ersten Opfer in der Bereitschafts- und Verkehrspolizei. Wer das Schwerverkehrszentrum betritt, muss neuerdings aufpassen, wo er hintritt: Überall liegen erschöpfte Beamte. Unter den Schreibtischen, hinter den Aktenregalen und sogar auf dem Kopierer wird mittlerweile geschlafen.</p>
+                <p>"Wir haben beschlagnahmte Plüsch-Pandas als Kissen konfisziert", gesteht ein übermüdeter Wachtmeister mit tiefen Augenringen. Die Kaffeemaschine wurde offiziell zur kritischen Infrastruktur des Kantons Uri erklärt und wird nun rund um die Uhr von einer Sondereinheit bewacht. Wer in der Pause blinzelt, hat schon verloren.</p>
+            </article>
+
+            <article class="article">
+                <span class="kicker">Kapo-interner Skandal</span>
+                <h2>Fassungslosigkeit bei Preisverleihung: Ein Hamster gewinnt das Monatsfoto!</h2>
+                <p><strong>ALTDORF -</strong> Die Spannung bei der Wahl zum prestigeträchtigen "Patrouillen-Foto des Monats" war greifbar. Die Kollegen reichten spektakuläre Helikopter-Aufnahmen, epische Blitzer-Bilder und dramatische Festnahmen bei Sonnenuntergang ein. Doch als der Gewinner verkündet wurde, herrschte absolute Stille: Platz 1 ging an einen leicht unscharfen Hamster, der auf dem Lenkrad eines Streifenwagens sitzt.</p>
+                <p>Die knallharten Verkehrspolizisten waren fassungslos. Die Jury verteidigte ihre Entscheidung vehement: "Dieser Nager strahlt genau jene Ruhe und Autorität aus, die wir auf den Strassen von Uri brauchen. Ausserdem war er angeschnallt." Es wird gemunkelt, dass einige Einsatzkräfte aus Protest drohen, ihre Diensthunde durch Meerschweinchen zu ersetzen.</p>
+            </article>
+
+            <article class="article">
+                <span class="kicker">Bevölkerungslimit erreicht</span>
+                <h2>10-Millionen-Schweiz ist voll: Alle Einheimischen müssen das Land verlassen!</h2>
+                <p><strong>BERN / URI -</strong> Der Bundesrat hat den absoluten Notstand ausgerufen: Die 10-Millionen-Grenze ist geknackt! Die radikale, aber offenbar einzig logische Lösung der Politik: Alle gebürtigen Schweizer müssen per sofort ihre Koffer packen und das Land verlassen, um Platz zu machen.</p>
+                <p>Am Gotthard spielen sich dramatische Szenen ab. Das Schwerverkehrszentrum Erstfeld wurde kurzerhand umfunktioniert, um den Massenexodus der Eidgenossen Richtung Italien zu kontrollieren. "Wer noch Cervelat oder Aromat im Kofferraum hat, muss Strafzoll zahlen", ruft ein Polizist durchs Megafon. Wo die Schweizer nun hinziehen, ist unklar – erste Gerüchte besagen, dass Mallorca zum 27. Kanton ernannt wird.</p>
+            </article>
+
+            <article class="article">
                 <span class="kicker">Das Standesamt in besten Händen</span>
                 <h2>Verwaltungs-Coup: "Seniorita Huber" übernimmt die Leitung!</h2>
-                <p><strong>ALTDORF -</strong> Gute Neuigkeiten aus der Kantonsverwaltung! Das Standesamt wird ab sofort von niemand Geringerem als der besten Kantonsangestellten geleitet: Seniorita Huber übernimmt das Ruder. Mit ihrer jahrelangen Erfahrung, ihrer unbestrittenen Kompetenz und einem stets wachsamen Auge sorgt sie dafür, dass in Sachen Zivilstand im Kanton Uri alles reibungslos läuft.</p>
-                <p>Kollegen und Bürger sind sich einig: Wenn jemand die Zügel im Standesamt fest in der Hand hält, dann Seniorita Huber. Erste Stimmen fordern bereits, ihr direkt das gesamte Gebäude zu unterstellen.</p>
+                <p><strong>ALTDORF -</strong> Das Standesamt wird ab sofort von der besten Kantonsangestellten geleitet: Seniorita Huber übernimmt das Ruder. Mit ihrer jahrelangen Erfahrung und einem stets wachsamen Auge sorgt sie dafür, dass in Sachen Zivilstand im Kanton Uri alles reibungslos läuft. Erste Stimmen fordern bereits, ihr direkt das gesamte Gebäude zu unterstellen.</p>
             </article>
 
             <article class="article">
                 <span class="kicker">Held der Hotline</span>
                 <h2>Der Mozart der Zentrale: Angelo revolutioniert das Telefon-Game</h2>
-                <p><strong>ALTDORF -</strong> Wenn auf der Einsatzzentrale der Kapo Uri das Telefon noch gar nicht geklingelt hat, hat Angelo den Hörer bereits abgenommen und das Problem gelöst. Der Zentralist, intern ehrfürchtig "der Überflieger" genannt, setzt völlig neue Massstäbe.</p>
-                <p>"Er disponiert die Patrouillen teilweise schon an den Tatort, bevor der Täter weiss, dass er eine Straftat begehen wird", staunt ein Kollege. Gerüchten zufolge tippt Angelo mit 400 Anschlägen pro Minute und hat vier Bildschirme gleichzeitig im Blick.</p>
-            </article>
-
-            <article class="article">
-                <span class="kicker">Herzensbrecher am Limit</span>
-                <h2>Post kollabiert: Gnos ertrinkt in anonymen Liebesbriefen!</h2>
-                <p><strong>ERSTFELD -</strong> Daniel Gnos bringt die Schweizerische Post an den Rand des Ruins. Wie gut unterrichtete Insider berichten, wird der charmante Beamte täglich von einer Flut an anonymen Grüssen und Liebesbotschaften bedrängt.</p>
-                <p>"Wir mussten extra Rollwagen anfordern, weil der Pöstler die Fanpost nicht mehr tragen konnte", seufzt ein Kollege. Gnos selbst gibt sich bescheiden: "Ich komme nicht mehr zum Lesen. Ich nutze das dicke Parfümpapier momentan primär, um wackelige Bürotische auszugleichen."</p>
-            </article>
-
-            <article class="article">
-                <span class="kicker">Herzklopfen am Strassenrand</span>
-                <h2>Verkehrschaos: Alle wollen von "Schönling" Freddi gebüsst werden!</h2>
-                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem absurden Problem. Es staut sich am SVZ, weil Leute mit Absicht unangeschnallt fahren, nur damit Fabio Freddi sie rausnimmt. Einige montieren sogar abgefahrene Reifen für ein Gespräch mit dem charmanten Polizisten.</p>
-                <button class="radar-btn" onclick="openModal()">Einsatzprotokoll lesen</button>
+                <p><strong>ALTDORF -</strong> Wenn auf der Einsatzzentrale der Kapo Uri das Telefon noch gar nicht geklingelt hat, hat Angelo den Hörer bereits abgenommen und das Problem gelöst. "Er disponiert die Patrouillen teilweise schon an den Tatort, bevor der Täter weiss, dass er eine Straftat begehen wird", staunt ein Kollege.</p>
             </article>
 
             <article class="article" style="border: none;">
@@ -166,20 +168,17 @@
 
         </main>
 
-        <!-- SEITENLEISTE RECHTS (WERBUNG) -->
         <aside class="sidebar">
             
-            <!-- Content Creator Remo Tresch -->
             <div class="ad-space ad-remo">
                 <span class="ad-label">Anzeige / Social Media</span>
                 <h4>Kapo Uri Instagram Reels</h4>
-                <p>Erlebe den Schwerverkehr hautnah! Content Creator <strong>Remo Tresch</strong> bringt dir den echten Alltag aus dem SVZ (Schwerverkehrszentrum) Erstfeld direkt auf den Bildschirm.</p>
+                <p>Erlebe den Schwerverkehr hautnah! Content Creator <strong>Remo Tresch</strong> bringt dir den echten Alltag aus dem SVZ Erstfeld direkt auf den Bildschirm.</p>
                 <p>Spannende Kontrollen, fesselnde Einsichten und bullenstarker Content.</p>
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">📱🚛🚓</div>
                 <a href="https://www.bullenpower-uri.ch" target="_blank" class="ad-link-btn">JETZT REELS SCHAUEN!</a>
             </div>
 
-            <!-- Lothar Imhof (Seriöser) -->
             <div class="ad-space ad-lothar">
                 <span class="ad-label">Im Einsatz für Uri</span>
                 <h4>Kompetenz an vorderster Front</h4>
@@ -188,7 +187,6 @@
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">🦺🦅🚔</div>
             </div>
 
-            <!-- Stefan Gisler (T-Rex) Werbung -->
             <div class="ad-space ad-trex">
                 <span class="ad-label">Kapo Ausrüstungs-Shop</span>
                 <h4>Masshemden "Edition T-Rex"</h4>
@@ -197,7 +195,6 @@
                 <button id="trexBtn" class="radar-btn" style="background: #27ae60; width: 100%; transition: all 0.2s; font-size: 14px;">HIER AUSWEIS GREIFEN!</button>
             </div>
 
-            <!-- Scheiber Werbung -->
             <div class="ad-space" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
                 <span class="ad-label">WANTED</span>
                 <h4 style="color: #8b4513;">DER DORF SHERIFF</h4>
