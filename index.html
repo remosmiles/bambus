@@ -3,125 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bambus News - Die schnellste News-Seite im Kanton Uri</title>
+    <title>Bambus News - Interaktive Edition</title>
     <style>
-        /* CSS Reset & Basis-Layout */
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        /* CSS Reset & Variablen */
+        :root { --main-red: #e3000f; --dark: #1a1a1a; --bg: #f0f2f5; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: #333; overflow-x: hidden; }
         
-        /* Header im typischen Boulevard-Stil */
-        header { background-color: #e3000f; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .logo { font-size: 36px; font-weight: 900; letter-spacing: -1.5px; text-transform: uppercase; font-style: italic; }
-        nav { margin-top: 10px; }
-        nav a { color: white; text-decoration: none; margin-left: 15px; font-weight: bold; text-transform: uppercase; font-size: 14px; }
-        nav a:hover { text-decoration: underline; }
+        /* Blitzer-Effekt Overlay */
+        #flash-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 9999; opacity: 0; pointer-events: none; }
+        .blitz-active { animation: blitzAnim 0.8s ease-out; }
+        @keyframes blitzAnim { 0% { opacity: 1; } 100% { opacity: 0; } }
 
-        /* Ticker für Breaking News */
-        .ticker { background: #222; color: white; padding: 10px 20px; font-weight: bold; font-size: 14px; overflow: hidden; white-space: nowrap; }
-        .ticker-text { display: inline-block; animation: scroll 20s linear infinite; color: #ffcc00; }
+        /* Magischer Bambus Regen */
+        .bamboo-drop { position: fixed; top: -50px; font-size: 2rem; z-index: 1000; animation: fall linear forwards; user-select: none; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        /* Header mit Neon-Glow */
+        header { background: var(--dark); color: white; padding: 20px; text-align: center; border-bottom: 5px solid var(--main-red); box-shadow: 0 4px 15px rgba(227, 0, 15, 0.3); }
+        .logo { font-size: 42px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; font-style: italic; cursor: pointer; display: inline-block; transition: transform 0.2s; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .logo:hover { transform: scale(1.05); color: #ffcc00; }
+        .subtitle { display: block; font-size: 14px; color: #aaa; margin-top: 5px; font-weight: normal; letter-spacing: 2px; }
+
+        /* Ticker */
+        .ticker { background: var(--main-red); color: white; padding: 12px 20px; font-weight: bold; font-size: 15px; overflow: hidden; white-space: nowrap; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
+        .ticker-text { display: inline-block; animation: scroll 25s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        /* Haupt-Grid für Artikel und Sidebar */
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: flex; gap: 20px; flex-wrap: wrap; }
+        /* Layout */
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; display: flex; gap: 30px; flex-wrap: wrap; }
         .main-content { flex: 3; min-width: 65%; }
         .sidebar { flex: 1; min-width: 300px; }
 
-        /* Artikel-Karten */
-        .article { background: white; margin-bottom: 20px; padding: 20px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .article.breaking { border-top: 6px solid #e3000f; }
-        .article img { width: 100%; height: auto; border-radius: 4px; background-color: #ddd; object-fit: cover; }
-        .tag { display: inline-block; background: #e3000f; color: white; padding: 4px 8px; font-size: 12px; font-weight: bold; border-radius: 2px; margin-bottom: 10px; text-transform: uppercase; }
-        .article h2 { margin: 10px 0; font-size: 32px; line-height: 1.1; letter-spacing: -0.5px; }
-        .article p { color: #444; line-height: 1.6; font-size: 16px; }
-
-        /* Sidebar & Fake Werbung */
-        .ad-space { background: #fffde7; border: 2px dashed #ccc; padding: 20px; text-align: center; margin-bottom: 20px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        .ad-space:hover { background: #fff59d; border-color: #e3000f; }
-        .ad-label { font-size: 10px; color: #999; display: block; text-align: left; margin-bottom: 10px; text-transform: uppercase; }
+        /* Animierte Artikel-Karten ohne Bilder */
+        .article { background: white; margin-bottom: 30px; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; border-left: 6px solid transparent; }
+        .article:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-left-color: var(--main-red); }
+        .tag { display: inline-block; background: var(--dark); color: white; padding: 6px 12px; font-size: 12px; font-weight: bold; border-radius: 20px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .tag.hot { background: var(--main-red); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(227, 0, 15, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(227, 0, 15, 0); } 100% { box-shadow: 0 0 0 0 rgba(227, 0, 15, 0); } }
         
-        .widget { background: white; padding: 15px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .widget h3 { margin-top: 0; border-bottom: 3px solid #333; padding-bottom: 5px; font-size: 20px; text-transform: uppercase; }
+        .article h2 { margin: 0 0 15px 0; font-size: 36px; line-height: 1.2; letter-spacing: -0.5px; }
+        .article p { color: #555; line-height: 1.8; font-size: 17px; }
+        
+        /* Interaktiver Radar-Button */
+        .radar-btn { background: var(--main-red); color: white; border: none; padding: 15px 25px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 15px; transition: 0.3s; text-transform: uppercase; width: 100%; }
+        .radar-btn:hover { background: #b3000c; transform: scale(1.02); }
+
+        /* Trick-Werbung (Rennt weg) */
+        .ad-space { background: linear-gradient(135deg, #fffde7, #fff59d); border: 3px dashed #fbc02d; padding: 30px; text-align: center; margin-bottom: 30px; border-radius: 12px; position: relative; transition: all 0.2s ease-out; }
+        .ad-label { font-size: 12px; color: #888; display: block; text-align: left; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; }
+        .ad-space h4 { margin: 0 0 10px 0; font-size: 22px; color: #d32f2f; }
+
+        /* Modernes Modal (Popup) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
+        .modal-content { background: white; padding: 40px; border-radius: 12px; max-width: 500px; text-align: center; position: relative; transform: scale(0.8); transition: transform 0.3s; border-top: 8px solid var(--main-red); }
+        .modal-overlay.active { display: flex; }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #888; }
+        .close-btn:hover { color: var(--main-red); }
+        
+        /* Sidebar Widget */
+        .widget { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .widget h3 { margin-top: 0; border-bottom: 2px solid var(--main-red); padding-bottom: 10px; font-size: 22px; text-transform: uppercase; }
         .widget ul { list-style: none; padding: 0; margin: 0; }
-        .widget li { padding: 12px 0; border-bottom: 1px solid #eee; font-weight: bold; font-size: 15px; }
-        .widget li:last-child { border-bottom: none; }
-        .widget li a { color: #333; text-decoration: none; display: flex; align-items: center; }
-        .widget li a:hover { color: #e3000f; }
-        .number { color: #e3000f; font-size: 24px; font-weight: 900; margin-right: 10px; }
-        
-        .badge-container { text-align: center; margin-bottom: 20px; }
-        .badge-container img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-
-        /* Footer */
-        footer { background: #222; color: #aaa; text-align: center; padding: 30px; margin-top: 40px; font-size: 14px; }
+        .widget li { padding: 15px 0; border-bottom: 1px solid #eee; font-size: 16px; transition: padding-left 0.3s; cursor: pointer; }
+        .widget li:hover { padding-left: 10px; color: var(--main-red); font-weight: bold; }
     </style>
 </head>
 <body>
 
+    <!-- Verstecktes Overlay für den Radar-Blitz -->
+    <div id="flash-overlay"></div>
+
+    <!-- Das neue interaktive Modal -->
+    <div class="modal-overlay" id="myModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 style="color: #e3000f; margin-top: 0;">🚨 ZUGRIFF VERWEIGERT</h2>
+            <p>Dieser Artikel ist klassifiziert. Nur für den autorisierten Schichtchef des Schwerverkehrszentrums Erstfeld freigegeben!</p>
+            <p style="font-size: 40px; margin: 10px 0;">🐼🚫</p>
+            <button class="radar-btn" onclick="closeModal()">Verstanden</button>
+        </div>
+    </div>
+
     <header>
-        <div class="logo">Bambus News</div>
-        <nav>
-            <a href="#">Front</a>
-            <a href="#">Blaulicht</a>
-            <a href="#">Uri Regional</a>
-            <a href="#">Sport</a>
-        </nav>
+        <div class="logo" onclick="makeItRain()">BAMBUS NEWS<br><span class="subtitle">Klick mich für eine Überraschung</span></div>
     </header>
 
     <div class="ticker">
-        <div class="ticker-text">🚨 BREAKING NEWS: +++ Verkehrschaos in Erstfeld: Alle wollen von Wachtmeister Freddi kontrolliert werden +++ Radar-Panne im Kanton Uri: Blitzer zeigen plötzlich Smileys an +++ </div>
+        <div class="ticker-text">🚨 BREAKING NEWS +++ Wachtmeister Freddi löst Verkehrschaos aus +++ Radar in Erstfeld blitzt nur noch rote Autos +++ Bambus-Schmuggler auf der A2 gestoppt +++ </div>
     </div>
 
     <div class="container">
         <main class="main-content">
             
-            <article class="article breaking">
-                <span class="tag">Herzklopfen am Strassenrand</span>
-                <img src="fr1.png" alt="Wachtmeister Fabio Freddi">
+            <article class="article">
+                <span class="tag hot">Herzklopfen am Strassenrand</span>
                 <h2>Ausnahmezustand bei Verkehrskontrollen: Alle wollen von "Schönling" Fabio Freddi gebüsst werden!</h2>
-                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem völlig neuen, absurd anmutenden Problem. Seit Neuestem staut es sich rund um das Schwerverkehrszentrum. Der Grund für das Verkehrschaos ist jedoch kein Unfall, sondern Wachtmeister Fabio Freddi. Der intern als "Schönling der Kapo" bekannte Beamte verdreht den Kontrollierten reihenweise den Kopf.</p>
-                <p>"Es ist völlig verrückt", berichtet ein völlig erschöpfter Kollege aus der Schicht. "Wir haben Leute, die fahren mit Absicht unangeschnallt oder mit 15 km/h zu viel an uns vorbei und winken wie wild, nur damit Fabio sie rausnimmt." Einige Fahrerinnen und Fahrer sollen sogar extra abgefahrene Reifen montiert haben, in der Hoffnung auf ein längeres Aufklärungsgespräch mit dem charmanten Polizisten.</p>
-                <p>Freddi selbst nimmt den Trubel um seine Person mit einem strahlenden Lächeln zur Kenntnis: "Ich mache hier nur meinen Job für die Sicherheit im Kanton Uri. Dass mein Auftreten dabei derart zur Verkehrsberuhigung beiträgt, ist natürlich ein schöner Nebeneffekt." Es wird bereits gemunkelt, dass für Fabio Freddi demnächst eine eigene "Fan-Kontroll-Spur" eingerichtet werden muss, damit die eigentliche Arbeit nicht liegen bleibt.</p>
+                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem völlig neuen, absurd anmutenden Problem. Seit Neuestem staut es sich rund um das Schwerverkehrszentrum. Der Grund für das Verkehrschaos ist jedoch kein Unfall, sondern Wachtmeister Fabio Freddi.</p>
+                <p>Der intern als "Schönling der Kapo" bekannte Beamte verdreht den Kontrollierten reihenweise den Kopf. "Es ist völlig verrückt", berichtet ein völlig erschöpfter Kollege aus der Schicht. "Wir haben Leute, die fahren mit Absicht unangeschnallt oder mit 15 km/h zu viel an uns vorbei und winken wie wild, nur damit Fabio sie rausnimmt." Einige Fahrerinnen und Fahrer sollen sogar extra abgefahrene Reifen montiert haben, in der Hoffnung auf ein längeres Aufklärungsgespräch mit dem charmanten Polizisten.</p>
+                <button class="radar-btn" onclick="openModal()">Gesamtes Einsatzprotokoll lesen</button>
             </article>
 
             <article class="article">
-                <span class="tag">Blaulicht Exklusiv</span>
-                <img src="miär.png" alt="Einsatzteam">
-                <h2>Skandal in der Verkehrspolizei: Radar blitzt nur noch rote Autos!</h2>
-                <p><strong>ALTDORF -</strong> Unglaubliche Szenen im Kanton Uri. Ein anonymer Insider berichtet, dass die Blitzeranlagen in der Nacht umprogrammiert wurden. "Wer schneller als 80 fährt, kriegt statt einer Busse ein Rezept für Bambus-Tee zugeschickt", so ein erstes Gerücht. Die Untersuchungen laufen derzeit auf Hochtouren.</p>
+                <span class="tag">Interaktiver Test</span>
+                <h2>Skandal in der Verkehrspolizei: Radar-Anlagen gehackt?</h2>
+                <p><strong>ALTDORF -</strong> Ein anonymer Insider berichtet, dass die Blitzeranlagen in der Nacht umprogrammiert wurden. Wer schneller als 80 fährt, kriegt statt einer Busse angeblich ein Rezept für Bambus-Tee zugeschickt. Teste hier live die neue Radaranlage (auf eigene Gefahr):</p>
+                <!-- Der Button, der den Flash auslöst -->
+                <button class="radar-btn" onclick="triggerRadar()" style="background: #222;">📸 RADAR MANUELL AUSLÖSEN</button>
             </article>
 
         </main>
 
         <aside class="sidebar">
             
-            <div class="badge-container">
-                <img src="https://raw.githubusercontent.com/remosmiles/bambus/main/badge.png" alt="Offizielles Bambus Badge">
-            </div>
-            
-            <div class="ad-space" onclick="alert('BAMBUS-ALARM! 🐼 Du wurdest erwischt. Diese Werbung ist natürlich Fake!')">
+            <!-- Die "flüchtende" Werbung -->
+            <div class="ad-space" id="runawayAd">
                 <span class="ad-label">Anzeige</span>
-                Brauchst du mehr Energie für die lange Schicht?<br><br>
-                <strong>KAUF DEN NEUEN BAMBUS-ENERGY-DRINK!</strong>
+                <h4>Mehr Energie auf Schicht?</h4>
+                <strong>BAMBUS-ENERGY-DRINK!</strong>
                 <div style="font-size: 50px; margin: 15px 0;">🎋⚡</div>
-                <em>Hier klicken für 50% Polizei-Rabatt!</em>
+                <em>Klick hier für 50% Rabatt!</em>
             </div>
 
             <div class="widget">
-                <h3>🔥 Meistgelesen</h3>
+                <h3>🔥 Aktenzeichen XY</h3>
                 <ul>
-                    <li><a href="#"><span class="number">1</span> Gotthard-Stau: Autofahrer grillieren auf der A2</a></li>
-                    <li><a href="#"><span class="number">2</span> Der ultimative 500-Liegestütze-Test der Kapo Uri</a></li>
-                    <li><a href="#"><span class="number">3</span> Alte Vespa 125 beim Überholen eines Ferrari geblitzt</a></li>
-                    <li><a href="#"><span class="number">4</span> SVZ meldet: LKW voller Plüsch-Pandas gestoppt</a></li>
+                    <li onclick="openModal()">Gotthard-Stau: Autofahrer grillieren auf der A2</li>
+                    <li onclick="openModal()">Der ultimative 500-Liegestütze-Test</li>
+                    <li onclick="openModal()">SVZ meldet: LKW voller Plüsch-Pandas</li>
                 </ul>
             </div>
 
         </aside>
     </div>
 
-    <footer>
-        &copy; 2026 Bambus News - Die seriöseste Satire-Seite der Schweiz.<br>
-        <small>Made with ❤️ for die Bereitschafts- und Verkehrspolizei.</small>
-    </footer>
+    <script>
+        // Funktion 1: Der Blitzer-Effekt
+        function triggerRadar() {
+            const overlay = document.getElementById('flash-overlay');
+            overlay.classList.remove('blitz-active');
+            // Ein minimaler Timeout erzwingt, dass die CSS Animation neu startet
+            setTimeout(() => {
+                overlay.classList.add('blitz-active');
+                // Nach dem Blitz öffnet sich frecherweise das Modal
+                setTimeout(openModal, 800); 
+            }, 10);
+        }
+
+        // Funktion 2: Modal öffnen & schliessen
+        function openModal() {
+            document.getElementById('myModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('myModal').classList.remove('active');
+        }
+
+        // Funktion 3: Bambus Regen (Easter Egg)
+        function makeItRain() {
+            const emojis = ['🎋', '🐼', '🚨', '🚓'];
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const drop = document.createElement('div');
+                    drop.classList.add('bamboo-drop');
+                    // Zufälliges Emoji auswählen
+                    drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                    // Zufällige Position auf dem Bildschirm
+                    drop.style.left = Math.random() * 100 + 'vw';
+                    // Zufällige Fall-Geschwindigkeit
+                    drop.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(drop);
+                    
+                    // Element nach dem Fallen löschen, damit der Browser nicht abstürzt
+                    setTimeout(() => { drop.remove(); }, 5000);
+                }, i * 150); // Erzeugt die Tropfen nacheinander
+            }
+        }
+
+        // Funktion 4: Die flüchtende Werbung (Nur auf Desktop)
+        const ad = document.getElementById('runawayAd');
+        ad.addEventListener('mouseover', function() {
+            // Nur ausführen, wenn der Bildschirm breit genug ist (kein Handy)
+            if(window.innerWidth > 768) {
+                const randomX = Math.floor(Math.random() * 150) - 75; // Bewegt sich links/rechts
+                const randomY = Math.floor(Math.random() * 150) - 75; // Bewegt sich hoch/runter
+                this.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            }
+        });
+        // Falls jemand es auf dem Handy doch schafft zu klicken:
+        ad.addEventListener('click', function() {
+            alert('Zu langsam! Der Rabatt ist leider gerade abgelaufen.');
+        });
+    </script>
 
 </body>
 </html>
