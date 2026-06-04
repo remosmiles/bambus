@@ -34,7 +34,7 @@
         .main-content { flex: 3; min-width: 65%; }
         .sidebar { flex: 1; min-width: 300px; }
 
-        /* Animierte Artikel-Karten ohne Bilder */
+        /* Animierte Artikel-Karten */
         .article { background: white; margin-bottom: 30px; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; border-left: 6px solid transparent; }
         .article:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-left-color: var(--main-red); }
         .tag { display: inline-block; background: var(--dark); color: white; padding: 6px 12px; font-size: 12px; font-weight: bold; border-radius: 20px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
@@ -48,10 +48,21 @@
         .radar-btn { background: var(--main-red); color: white; border: none; padding: 15px 25px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 15px; transition: 0.3s; text-transform: uppercase; width: 100%; }
         .radar-btn:hover { background: #b3000c; transform: scale(1.02); }
 
-        /* Trick-Werbung (Rennt weg) */
-        .ad-space { background: linear-gradient(135deg, #fffde7, #fff59d); border: 3px dashed #fbc02d; padding: 30px; text-align: center; margin-bottom: 30px; border-radius: 12px; position: relative; transition: all 0.2s ease-out; }
+        /* Fake Werbung Styling */
+        .ad-space { background: white; border: 3px dashed #ccc; padding: 25px; text-align: center; margin-bottom: 25px; border-radius: 12px; position: relative; transition: all 0.2s ease-out; }
         .ad-label { font-size: 12px; color: #888; display: block; text-align: left; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; }
-        .ad-space h4 { margin: 0 0 10px 0; font-size: 22px; color: #d32f2f; }
+        .ad-space h4 { margin: 0 0 10px 0; font-size: 20px; }
+        .ad-space p { font-size: 14px; color: #555; margin-bottom: 10px; line-height: 1.4; }
+
+        /* Spezifische Werbung Styles */
+        .ad-lothar { border-color: #2c3e50; background: linear-gradient(135deg, #ecf0f1, #bdc3c7); cursor: help; }
+        .ad-lothar h4 { color: #2c3e50; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .ad-trex { border-color: #27ae60; background: #e8f8f5; }
+        .ad-trex h4 { color: #27ae60; }
+        
+        .ad-scheiber { border-style: double; border-width: 8px; border-color: #8b4513; background: #fdf5e6; cursor: crosshair; }
+        .ad-scheiber h4 { font-family: 'Courier New', Courier, monospace; font-size: 26px; color: #8b4513; margin-bottom: 5px; }
 
         /* Modernes Modal (Popup) */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
@@ -62,7 +73,7 @@
         .close-btn:hover { color: var(--main-red); }
         
         /* Sidebar Widget */
-        .widget { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .widget { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
         .widget h3 { margin-top: 0; border-bottom: 2px solid var(--main-red); padding-bottom: 10px; font-size: 22px; text-transform: uppercase; }
         .widget ul { list-style: none; padding: 0; margin: 0; }
         .widget li { padding: 15px 0; border-bottom: 1px solid #eee; font-size: 16px; transition: padding-left 0.3s; cursor: pointer; }
@@ -90,7 +101,7 @@
     </header>
 
     <div class="ticker">
-        <div class="ticker-text">🚨 BREAKING NEWS +++ Wachtmeister Freddi löst Verkehrschaos aus +++ Radar in Erstfeld blitzt nur noch rote Autos +++ Bambus-Schmuggler auf der A2 gestoppt +++ </div>
+        <div class="ticker-text">🚨 BREAKING NEWS +++ Wachtmeister Freddi löst Verkehrschaos aus +++ Einsatzleiter Imhof sucht noch seine Kaffeetasse +++ T-Rex Gisler hat Mühe beim Ausweisgreifen +++ Dorf-Sheriff Scheiber patrouilliert hoch zu Ross +++ </div>
     </div>
 
     <div class="container">
@@ -108,7 +119,6 @@
                 <span class="tag">Interaktiver Test</span>
                 <h2>Skandal in der Verkehrspolizei: Radar-Anlagen gehackt?</h2>
                 <p><strong>ALTDORF -</strong> Ein anonymer Insider berichtet, dass die Blitzeranlagen in der Nacht umprogrammiert wurden. Wer schneller als 80 fährt, kriegt statt einer Busse angeblich ein Rezept für Bambus-Tee zugeschickt. Teste hier live die neue Radaranlage (auf eigene Gefahr):</p>
-                <!-- Der Button, der den Flash auslöst -->
                 <button class="radar-btn" onclick="triggerRadar()" style="background: #222;">📸 RADAR MANUELL AUSLÖSEN</button>
             </article>
 
@@ -116,21 +126,42 @@
 
         <aside class="sidebar">
             
-            <!-- Die "flüchtende" Werbung -->
-            <div class="ad-space" id="runawayAd">
-                <span class="ad-label">Anzeige</span>
-                <h4>Mehr Energie auf Schicht?</h4>
-                <strong>BAMBUS-ENERGY-DRINK!</strong>
-                <div style="font-size: 50px; margin: 15px 0;">🎋⚡</div>
-                <em>Klick hier für 50% Rabatt!</em>
+            <!-- NEU: Lothar Imhof Werbung -->
+            <div class="ad-space ad-lothar" onclick="alert('Einsatzleiter Imhof meldet:\n\nDieser Klick wurde erfolgreich delegiert. Bitte warten Sie 45 Minuten, bis jemand anderes die Arbeit erledigt. Der Kaffee ist noch zu heiss!')">
+                <span class="ad-label">Masterclass Sponsoring</span>
+                <h4>Chaos-Management & Kaffeepausen</h4>
+                <p>Lerne die Kunst der Einsatzleitung von der absoluten "Extraklasse" (ironisch gemeint).</p>
+                <strong>Mit Lothar Imhof</strong>
+                <div style="font-size: 40px; margin: 10px 0;">☕🌪️🤷‍♂️</div>
+                <em>Garantiert stressfrei delegieren!</em>
             </div>
 
+            <!-- NEU: Stefan Gisler (T-Rex) Werbung -->
+            <div class="ad-space ad-trex">
+                <span class="ad-label">Kapo Ausrüstungs-Shop</span>
+                <h4>Masshemden "Edition T-Rex"</h4>
+                <p>Exklusiv für <strong>Stefan Gisler</strong>: Uniformhemden mit extra kurzen Ärmeln. Inklusive Gratis-Greifzange für entspannte Ausweiskontrollen am LKW-Fenster!</p>
+                <div style="font-size: 40px; margin: 10px 0;">🦖👕🤏</div>
+                <button id="trexBtn" class="radar-btn" style="background: #27ae60; position: relative; transition: all 0.2s; font-size: 14px;">Hier Ausweis greifen!</button>
+            </div>
+
+            <!-- NEU: Scheiber Werbung -->
+            <div class="ad-space ad-scheiber" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick soeben konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
+                <span class="ad-label">WANTED</span>
+                <h4>DER DORF SHERIFF</h4>
+                <p>Er braucht kein Blaulicht. Er hat einen Hut und das Gesetz auf seiner Seite.</p>
+                <strong style="font-size: 18px;">SCHEIBER RÄUMT AUF.</strong>
+                <div style="font-size: 40px; margin: 10px 0;">🤠🐴🚔</div>
+                <em>Jetzt den Sheriff-Stern polieren lassen!</em>
+            </div>
+
+            <!-- Meistgelesen Widget -->
             <div class="widget">
                 <h3>🔥 Aktenzeichen XY</h3>
                 <ul>
                     <li onclick="openModal()">Gotthard-Stau: Autofahrer grillieren auf der A2</li>
                     <li onclick="openModal()">Der ultimative 500-Liegestütze-Test</li>
-                    <li onclick="openModal()">SVZ meldet: LKW voller Plüsch-Pandas</li>
+                    <li onclick="openModal()">Alte Vespa 125 beim Überholen geblitzt</li>
                 </ul>
             </div>
 
@@ -142,10 +173,8 @@
         function triggerRadar() {
             const overlay = document.getElementById('flash-overlay');
             overlay.classList.remove('blitz-active');
-            // Ein minimaler Timeout erzwingt, dass die CSS Animation neu startet
             setTimeout(() => {
                 overlay.classList.add('blitz-active');
-                // Nach dem Blitz öffnet sich frecherweise das Modal
                 setTimeout(openModal, 800); 
             }, 10);
         }
@@ -158,40 +187,45 @@
             document.getElementById('myModal').classList.remove('active');
         }
 
-        // Funktion 3: Bambus Regen (Easter Egg)
+        // Funktion 3: Bambus Regen
         function makeItRain() {
             const emojis = ['🎋', '🐼', '🚨', '🚓'];
             for(let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     const drop = document.createElement('div');
                     drop.classList.add('bamboo-drop');
-                    // Zufälliges Emoji auswählen
                     drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                    // Zufällige Position auf dem Bildschirm
                     drop.style.left = Math.random() * 100 + 'vw';
-                    // Zufällige Fall-Geschwindigkeit
                     drop.style.animationDuration = (Math.random() * 3 + 2) + 's';
                     document.body.appendChild(drop);
-                    
-                    // Element nach dem Fallen löschen, damit der Browser nicht abstürzt
                     setTimeout(() => { drop.remove(); }, 5000);
-                }, i * 150); // Erzeugt die Tropfen nacheinander
+                }, i * 150);
             }
         }
 
-        // Funktion 4: Die flüchtende Werbung (Nur auf Desktop)
-        const ad = document.getElementById('runawayAd');
-        ad.addEventListener('mouseover', function() {
-            // Nur ausführen, wenn der Bildschirm breit genug ist (kein Handy)
+        // Funktion 4: Der flüchtende T-Rex Button
+        const trexBtn = document.getElementById('trexBtn');
+        trexBtn.addEventListener('mouseover', function() {
             if(window.innerWidth > 768) {
-                const randomX = Math.floor(Math.random() * 150) - 75; // Bewegt sich links/rechts
-                const randomY = Math.floor(Math.random() * 150) - 75; // Bewegt sich hoch/runter
-                this.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                const randomX = Math.floor(Math.random() * 140) - 70; 
+                const randomY = Math.floor(Math.random() * 80) - 40; 
+                this.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
+                this.innerText = '🦖 Zu kurze Arme! 🦖';
+                this.style.background = '#e3000f';
             }
         });
-        // Falls jemand es auf dem Handy doch schafft zu klicken:
-        ad.addEventListener('click', function() {
-            alert('Zu langsam! Der Rabatt ist leider gerade abgelaufen.');
+        
+        trexBtn.addEventListener('mouseout', function() {
+            setTimeout(() => {
+                this.style.transform = `translate(0px, 0px) scale(1)`;
+                this.innerText = 'Hier Ausweis greifen!';
+                this.style.background = '#27ae60';
+            }, 1500); // Button bleibt kurz weg und kommt dann zurück
+        });
+
+        trexBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Verhindert, dass etwas anderes auslöst
+            alert('Unglaublich! Du hast es trotz der kurzen Arme geschafft!');
         });
     </script>
 
