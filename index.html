@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bambus News - Die schnellste News-Seite im Kanton Uri</title>
+    <style>
+        /* CSS Reset & Basis-Layout */
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        
+        /* Header im typischen Boulevard-Stil */
+        header { background-color: #e3000f; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo { font-size: 36px; font-weight: 900; letter-spacing: -1.5px; text-transform: uppercase; font-style: italic; }
+        nav { margin-top: 10px; }
+        nav a { color: white; text-decoration: none; margin-left: 15px; font-weight: bold; text-transform: uppercase; font-size: 14px; }
+        nav a:hover { text-decoration: underline; }
+
+        /* Ticker für Breaking News */
+        .ticker { background: #222; color: white; padding: 10px 20px; font-weight: bold; font-size: 14px; overflow: hidden; white-space: nowrap; }
+        .ticker-text { display: inline-block; animation: scroll 20s linear infinite; color: #ffcc00; }
+        @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+
+        /* Haupt-Grid für Artikel und Sidebar */
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: flex; gap: 20px; flex-wrap: wrap; }
+        .main-content { flex: 3; min-width: 65%; }
+        .sidebar { flex: 1; min-width: 300px; }
+
+        /* Artikel-Karten */
+        .article { background: white; margin-bottom: 20px; padding: 20px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .article.breaking { border-top: 6px solid #e3000f; }
+        .article img { width: 100%; height: auto; border-radius: 4px; background-color: #ddd; object-fit: cover; aspect-ratio: 16/9; }
+        .tag { display: inline-block; background: #e3000f; color: white; padding: 4px 8px; font-size: 12px; font-weight: bold; border-radius: 2px; margin-bottom: 10px; text-transform: uppercase; }
+        .article h2 { margin: 10px 0; font-size: 32px; line-height: 1.1; letter-spacing: -0.5px; }
+        .article p { color: #444; line-height: 1.6; font-size: 16px; }
+
+        /* Sidebar & Fake Werbung */
+        .ad-space { background: #fffde7; border: 2px dashed #ccc; padding: 20px; text-align: center; margin-bottom: 20px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .ad-space:hover { background: #fff59d; border-color: #e3000f; }
+        .ad-label { font-size: 10px; color: #999; display: block; text-align: left; margin-bottom: 10px; text-transform: uppercase; }
+        
+        .widget { background: white; padding: 15px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .widget h3 { margin-top: 0; border-bottom: 3px solid #333; padding-bottom: 5px; font-size: 20px; text-transform: uppercase; }
+        .widget ul { list-style: none; padding: 0; margin: 0; }
+        .widget li { padding: 12px 0; border-bottom: 1px solid #eee; font-weight: bold; font-size: 15px; }
+        .widget li:last-child { border-bottom: none; }
+        .widget li a { color: #333; text-decoration: none; display: flex; align-items: center; }
+        .widget li a:hover { color: #e3000f; }
+        .number { color: #e3000f; font-size: 24px; font-weight: 900; margin-right: 10px; }
+
+        /* Footer */
+        footer { background: #222; color: #aaa; text-align: center; padding: 30px; margin-top: 40px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Bambus News</div>
+        <nav>
+            <a href="#">Front</a>
+            <a href="#">Blaulicht</a>
+            <a href="#">Uri Regional</a>
+            <a href="#">Sport</a>
+        </nav>
+    </header>
+
+    <div class="ticker">
+        <div class="ticker-text">🚨 BREAKING NEWS: +++ Radar-Panne im Kanton Uri: Alle Blitzer zeigen plötzlich Smileys an +++ Schwerverkehrszentrum meldet: LKW-Fahrer schmuggeln Bambus-Sprossen +++</div>
+    </div>
+
+    <div class="container">
+        <main class="main-content">
+            <article class="article breaking">
+                <span class="tag">Blaulicht Exklusiv</span>
+                <img src="https://images.unsplash.com/photo-1555864326-5bc22fa6f8cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Polizei Symbolbild">
+                <h2>Skandal in der Verkehrspolizei: Radar blitzt nur noch rote Autos!</h2>
+                <p><strong>ALTDORF -</strong> Unglaubliche Szenen im Kanton Uri. Die Bereitschafts- und Verkehrspolizei steht vor einem Rätsel. Ein anonymer Insider berichtet, dass die Blitzeranlagen in der Nacht umprogrammiert wurden. "Wer schneller als 80 fährt, kriegt statt einer Busse ein Rezept für Bambus-Tee zugeschickt", so die offizielle Stellungnahme.</p>
+                <p>Experten vermuten einen Scherzkeks aus den eigenen Reihen. Die Untersuchungen der Wachtmeister laufen derzeit auf Hochtouren.</p>
+            </article>
+
+            <article class="article">
+                <span class="tag">Regional</span>
+                <h2>SVZ Erstfeld: LKW voller Plüsch-Pandas gestoppt</h2>
+                <p>Bei einer routinemässigen Kontrolle staunte die Schicht im Schwerverkehrszentrum Erstfeld nicht schlecht. Statt der deklarierten Autoteile fand man über 40'000 Plüsch-Pandas im Auflieger. Der Fahrer gab bei der Befragung an, er sei auf dem direkten Weg zu einer "streng geheimen Bambus-Party". Das Fahrzeug wurde vorübergehend stillgelegt.</p>
+            </article>
+        </main>
+
+        <aside class="sidebar">
+            
+            <div class="ad-space" onclick="alert('BAMBUS-ALARM! 🐼 Du wurdest erwischt. Diese Werbung ist natürlich Fake!')">
+                <span class="ad-label">Anzeige</span>
+                Brauchst du mehr Energie für die lange Schicht?<br><br>
+                <strong>KAUF DEN NEUEN BAMBUS-ENERGY-DRINK!</strong>
+                <div style="font-size: 50px; margin: 15px 0;">🎋⚡</div>
+                <em>Hier klicken für 50% Polizei-Rabatt!</em>
+            </div>
+
+            <div class="widget">
+                <h3>🔥 Meistgelesen</h3>
+                <ul>
+                    <li><a href="#"><span class="number">1</span> Gotthard-Stau: Autofahrer grillieren auf der A2</a></li>
+                    <li><a href="#"><span class="number">2</span> Der ultimative 500-Liegestütze-Test der Kapo Uri</a></li>
+                    <li><a href="#"><span class="number">3</span> Alte Vespa 125 beim Überholen eines Ferrari geblitzt</a></li>
+                    <li><a href="#"><span class="number">4</span> Kampfjet im Tiefflug über dem Urnersee gesichtet</a></li>
+                </ul>
+            </div>
+
+            <div class="ad-space" onclick="alert('Schon wieder geklickt? Dein Ad-Blocker hat wohl heute frei!')">
+                <span class="ad-label">Anzeige</span>
+                <strong>Hol dir die beste Ausrüstung!</strong><br><br>
+                Taktische Bambus-Socken für kalte Nächte auf Patrouille.<br>
+                <span style="color:#e3000f; font-weight: bold;">Jetzt zugreifen!</span>
+            </div>
+
+        </aside>
+    </div>
+
+    <footer>
+        &copy; 2026 Bambus News - Die seriöseste Satire-Seite der Schweiz.<br>
+        <small>Made with ❤️ for the Bereitschafts- und Verkehrspolizei.</small>
+    </footer>
+
+</body>
+</html>
