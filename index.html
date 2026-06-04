@@ -26,7 +26,7 @@
 
         /* Ticker */
         .ticker { background: var(--main-red); color: white; padding: 12px 20px; font-weight: bold; font-size: 15px; overflow: hidden; white-space: nowrap; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
-        .ticker-text { display: inline-block; animation: scroll 25s linear infinite; }
+        .ticker-text { display: inline-block; animation: scroll 30s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
         /* Layout */
@@ -41,7 +41,7 @@
         .tag.hot { background: var(--main-red); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(227, 0, 15, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(227, 0, 15, 0); } 100% { box-shadow: 0 0 0 0 rgba(227, 0, 15, 0); } }
         
-        .article h2 { margin: 0 0 15px 0; font-size: 36px; line-height: 1.2; letter-spacing: -0.5px; }
+        .article h2 { margin: 0 0 15px 0; font-size: 32px; line-height: 1.2; letter-spacing: -0.5px; }
         .article p { color: #555; line-height: 1.8; font-size: 17px; }
         
         /* Interaktiver Radar-Button */
@@ -63,6 +63,9 @@
         
         .ad-scheiber { border-style: double; border-width: 8px; border-color: #8b4513; background: #fdf5e6; cursor: crosshair; }
         .ad-scheiber h4 { font-family: 'Courier New', Courier, monospace; font-size: 26px; color: #8b4513; margin-bottom: 5px; }
+
+        .ad-remo { border-color: #8e44ad; background: #f4ecf7; cursor: pointer; }
+        .ad-remo h4 { color: #8e44ad; text-transform: uppercase; font-size: 22px; }
 
         /* Modernes Modal (Popup) */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
@@ -101,24 +104,37 @@
     </header>
 
     <div class="ticker">
-        <div class="ticker-text">🚨 BREAKING NEWS +++ Wachtmeister Freddi löst Verkehrschaos aus +++ Einsatzleiter Imhof sucht noch seine Kaffeetasse +++ T-Rex Gisler hat Mühe beim Ausweisgreifen +++ Dorf-Sheriff Scheiber patrouilliert hoch zu Ross +++ </div>
+        <div class="ticker-text">🚨 BREAKING NEWS +++ Überflieger Angelo löst Fall vor dem ersten Klingeln +++ Wachtmeister Freddi legt Verkehr lahm +++ T-Rex Gisler verzweifelt an Ausweiskontrolle +++ Post mietet Lagerhalle für Gnos Daniels Liebesbriefe +++ </div>
     </div>
 
     <div class="container">
         <main class="main-content">
             
             <article class="article">
+                <span class="tag">Held der Hotline</span>
+                <h2>Der Mozart der Einsatzzentrale: Wie "Überflieger" Angelo das Telefon-Game revolutioniert</h2>
+                <p><strong>ALTDORF -</strong> Wenn auf der Einsatzzentrale der Kapo Uri das Telefon noch gar nicht geklingelt hat, hat Angelo den Hörer bereits abgenommen und das Problem gelöst. Der Zentralist, der intern nur noch ehrfürchtig als "der Überflieger" bezeichnet wird, setzt völlig neue Massstäbe in der Koordination.</p>
+                <p>"Er disponiert die Patrouillen teilweise schon an den Tatort, bevor der Täter überhaupt weiss, dass er eine Straftat begehen wird", staunt ein sichtlich verwirrter Kollege. Gerüchten zufolge tippt Angelo mit 400 Anschlägen pro Minute, hat vier Bildschirme gleichzeitig im Blick und telefoniert parallel tiefenentspannt, ohne auch nur einmal zu blinzeln. Es wird bereits gemunkelt, ob man Angelo klonen sollte, um das gesamte europäische Notruf-System im Alleingang zu übernehmen.</p>
+            </article>
+
+            <article class="article">
+                <span class="tag hot">Herzensbrecher am Limit</span>
+                <h2>Post-Logistik kollabiert: Daniel Gnos ertrinkt in anonymen Liebesbriefen!</h2>
+                <p><strong>ERSTFELD -</strong> Wachtmeister Fabio Freddi mag durch sein Lächeln den Verkehr lahmlegen, aber Daniel Gnos bringt die Schweizerische Post an den Rand des Ruins. Wie gut unterrichtete Insider berichten, wird der charmante Beamte täglich von einer regelrechten Flut an anonymen Grüssen und handschriftlichen Liebesbotschaften bedrängt.</p>
+                <p>"Wir mussten extra Rollwagen anfordern, weil der Pöstler die Fanpost nicht mehr tragen konnte", seufzt ein Kollege kopfschüttelnd. Einige glühende Verehrerinnen sollen sogar versuchen, über verdeckte Kanäle romantische Gedichte einzuschleusen. Gnos selbst gibt sich bescheiden und pragmatisch: "Ich komme gar nicht mehr zum Lesen. Ich nutze das dicke Parfümpapier momentan primär, um wackelige Bürotische auszugleichen."</p>
+            </article>
+
+            <article class="article">
                 <span class="tag hot">Herzklopfen am Strassenrand</span>
-                <h2>Ausnahmezustand bei Verkehrskontrollen: Alle wollen von "Schönling" Fabio Freddi gebüsst werden!</h2>
-                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem völlig neuen, absurd anmutenden Problem. Seit Neuestem staut es sich rund um das Schwerverkehrszentrum. Der Grund für das Verkehrschaos ist jedoch kein Unfall, sondern Wachtmeister Fabio Freddi.</p>
-                <p>Der intern als "Schönling der Kapo" bekannte Beamte verdreht den Kontrollierten reihenweise den Kopf. "Es ist völlig verrückt", berichtet ein völlig erschöpfter Kollege aus der Schicht. "Wir haben Leute, die fahren mit Absicht unangeschnallt oder mit 15 km/h zu viel an uns vorbei und winken wie wild, nur damit Fabio sie rausnimmt." Einige Fahrerinnen und Fahrer sollen sogar extra abgefahrene Reifen montiert haben, in der Hoffnung auf ein längeres Aufklärungsgespräch mit dem charmanten Polizisten.</p>
+                <h2>Ausnahmezustand bei Kontrollen: Alle wollen von "Schönling" Fabio Freddi gebüsst werden!</h2>
+                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem absurden Problem. Es staut sich rund um das Schwerverkehrszentrum, weil die Leute mit Absicht unangeschnallt oder zu schnell fahren, nur damit Fabio Freddi sie rausnimmt. Einige montieren sogar abgefahrene Reifen für ein längeres Gespräch mit dem charmanten Polizisten.</p>
                 <button class="radar-btn" onclick="openModal()">Gesamtes Einsatzprotokoll lesen</button>
             </article>
 
             <article class="article">
                 <span class="tag">Interaktiver Test</span>
                 <h2>Skandal in der Verkehrspolizei: Radar-Anlagen gehackt?</h2>
-                <p><strong>ALTDORF -</strong> Ein anonymer Insider berichtet, dass die Blitzeranlagen in der Nacht umprogrammiert wurden. Wer schneller als 80 fährt, kriegt statt einer Busse angeblich ein Rezept für Bambus-Tee zugeschickt. Teste hier live die neue Radaranlage (auf eigene Gefahr):</p>
+                <p>Ein anonymer Insider berichtet, dass die Blitzer in der Nacht umprogrammiert wurden. Wer schneller als 80 fährt, kriegt statt einer Busse ein Rezept für Bambus-Tee. Teste hier live die neue Radaranlage (auf eigene Gefahr):</p>
                 <button class="radar-btn" onclick="triggerRadar()" style="background: #222;">📸 RADAR MANUELL AUSLÖSEN</button>
             </article>
 
@@ -126,17 +142,27 @@
 
         <aside class="sidebar">
             
-            <!-- NEU: Lothar Imhof Werbung -->
-            <div class="ad-space ad-lothar" onclick="alert('Einsatzleiter Imhof meldet:\n\nDieser Klick wurde erfolgreich delegiert. Bitte warten Sie 45 Minuten, bis jemand anderes die Arbeit erledigt. Der Kaffee ist noch zu heiss!')">
-                <span class="ad-label">Masterclass Sponsoring</span>
-                <h4>Chaos-Management & Kaffeepausen</h4>
-                <p>Lerne die Kunst der Einsatzleitung von der absoluten "Extraklasse" (ironisch gemeint).</p>
-                <strong>Mit Lothar Imhof</strong>
-                <div style="font-size: 40px; margin: 10px 0;">☕🌪️🤷‍♂️</div>
-                <em>Garantiert stressfrei delegieren!</em>
+            <!-- NEU: Remo Tresch Werbung -->
+            <div class="ad-space ad-remo" onclick="alert('🚨 VIRAL ALARM! 🚨\n\nFolge jetzt @remosmiles! Aber Achtung: Es besteht absolute Gefahr von plötzlichem Muskelaufbau durch 500 Liegestütze und akutem Lachkrampf wegen feinstem Urner Humor.')">
+                <span class="ad-label">Social Media Sensation</span>
+                <h4>Kapo Uri Goes Hollywood!</h4>
+                <p>Vergiss das normale Fernsehen. Die berühmt-berüchtigten Reels von <strong>Content Creator Remo Tresch</strong> sprengen das Internet!</p>
+                <p>Regional-Comedy, geniale AI-Lifehacks und geballte Fitness in einem Feed.</p>
+                <div style="font-size: 40px; margin: 10px 0;">📱🎬🤖</div>
+                <em>Klick hier und folge @remosmiles!</em>
             </div>
 
-            <!-- NEU: Stefan Gisler (T-Rex) Werbung -->
+            <!-- AKTUALISIERT: Zynische Lothar Imhof Werbung -->
+            <div class="ad-space ad-lothar" onclick="alert('Einsatzleiter Imhof ist derzeit in einem extrem wichtigen... äh... Meeting zur Überwachung der Kaffeemaschine. Bitte werfen Sie Ihr Anliegen direkt in den Papierkorb.')">
+                <span class="ad-label">Masterclass Führungskräfte</span>
+                <h4>Die Kunst des Nicht-Eingreifens</h4>
+                <p>Warum selber Verantwortung übernehmen, wenn man zuschauen kann? Lerne von Einsatzleiter <strong>Lothar Imhof</strong>, wie man bei maximalem Chaos die perfekte Tasse Kaffee trinkt.</p>
+                <strong style="font-size: 16px;">Prädikat: Absolute "Extraklasse"</strong>
+                <div style="font-size: 40px; margin: 10px 0;">☕🌪️📉</div>
+                <em>Jetzt stressfrei delegieren lernen!</em>
+            </div>
+
+            <!-- Stefan Gisler (T-Rex) Werbung -->
             <div class="ad-space ad-trex">
                 <span class="ad-label">Kapo Ausrüstungs-Shop</span>
                 <h4>Masshemden "Edition T-Rex"</h4>
@@ -145,7 +171,7 @@
                 <button id="trexBtn" class="radar-btn" style="background: #27ae60; position: relative; transition: all 0.2s; font-size: 14px;">Hier Ausweis greifen!</button>
             </div>
 
-            <!-- NEU: Scheiber Werbung -->
+            <!-- Scheiber Werbung -->
             <div class="ad-space ad-scheiber" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick soeben konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
                 <span class="ad-label">WANTED</span>
                 <h4>DER DORF SHERIFF</h4>
@@ -153,16 +179,6 @@
                 <strong style="font-size: 18px;">SCHEIBER RÄUMT AUF.</strong>
                 <div style="font-size: 40px; margin: 10px 0;">🤠🐴🚔</div>
                 <em>Jetzt den Sheriff-Stern polieren lassen!</em>
-            </div>
-
-            <!-- Meistgelesen Widget -->
-            <div class="widget">
-                <h3>🔥 Aktenzeichen XY</h3>
-                <ul>
-                    <li onclick="openModal()">Gotthard-Stau: Autofahrer grillieren auf der A2</li>
-                    <li onclick="openModal()">Der ultimative 500-Liegestütze-Test</li>
-                    <li onclick="openModal()">Alte Vespa 125 beim Überholen geblitzt</li>
-                </ul>
             </div>
 
         </aside>
@@ -220,11 +236,11 @@
                 this.style.transform = `translate(0px, 0px) scale(1)`;
                 this.innerText = 'Hier Ausweis greifen!';
                 this.style.background = '#27ae60';
-            }, 1500); // Button bleibt kurz weg und kommt dann zurück
+            }, 1500);
         });
 
         trexBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Verhindert, dass etwas anderes auslöst
+            e.stopPropagation();
             alert('Unglaublich! Du hast es trotz der kurzen Arme geschafft!');
         });
     </script>
