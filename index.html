@@ -171,7 +171,7 @@
                 <span class="kicker">Herzklopfen am Strassenrand</span>
                 <h2>Verkehrschaos in Flüelen: Alle wollen von "Schönling" Freddi kontrolliert werden!</h2>
                 <p><strong>FLÜELEN -</strong> Es herrschen absurde Zustände rund um den Werkhof in Flüelen. Seit bekannt ist, dass Fabio Freddi dort arbeitet, staut es sich auf den Zufahrtsstrassen. Verkehrspsychologen stehen vor einem Rätsel. Die Bereiche um den Werkhof gleichen zeitweise einem gut besuchten VIP-Wartebereich, weil alle Autofahrer hoffen, einen Blick auf ihn zu erhaschen.</p>
-                <p>"Ich bin heute schon dreimal mit einem absichtlich defekten Blinker am Werkhof vorbeigefahren, in der Hoffnung, dass er mich für eine Kontrolle rausnimmt", gesteht eine 25-jährige Autofahrerin, die bereits eine beeindruckende Sammlung an Bussen hortet. Der Werkhof musste bereits zusätzliche Ausweichflächen schaffen, weil simulierte Fahrzeugpannen in der Umgebung drastisch zugenommen haben. Es wird derzeit auf höchster Ebene geprüft, ob Freddi künftig nur noch mit einer verdunkelten Sturmmaske arbeiten darf, um den Verkehrsfluss in Flüelen zu gewährleisten.</p>
+                <p>"Ich bin heute schon dreimal mit einem absichtlich defekten Blinker am Werkhof vorbeigefahren, in der Hoffnung, dass er mich für eine Kontrolle rausnimmt", gesteht eine 25-jährige Autofahrerin, die bereits eine beeindruckende Sammlung an Bussen hortet. Der Werkhof musste bereits zusätzliche Ausweichflächen schaffen, weil simulierte Fahrzeugpannen in class="ad-link-btn"der Umgebung drastisch zugenommen haben. Es wird derzeit auf höchster Ebene geprüft, ob Freddi künftig nur noch mit einer verdunkelten Sturmmaske arbeiten darf, um den Verkehrsfluss in Flüelen zu gewährleisten.</p>
                 <button class="radar-btn" onclick="openModal()">Einsatzprotokoll & Liebesbriefe lesen</button>
             </article>
 
@@ -218,87 +218,89 @@
             </article>
 
             <div class="comments-section" id="community">
-                <div class="comments-header">Community <span>(13 Kommentare)</span></div>
+                <div class="comments-header">Community <span>(Live!)</span></div>
                 
                 <div class="comment-input-box">
-                    <input type="text" id="newCommentText" placeholder="Schreibe einen Kommentar... (Nur für registrierte User)">
-                    <button onclick="addComment()">Senden</button>
+                    <input type="text" id="newCommentText" placeholder="Schreibe einen Live-Kommentar...">
+                    <button onclick="window.addLiveComment()">Senden</button>
                 </div>
 
-                <div class="comment">
-                    <div class="comment-meta"><span class="user">SchlaflosInErstfeld</span> <span>Vor 12 Minuten</span></div>
+                <div id="liveCommentsContainer"></div>
+
+                <div class="comment" style="margin-top: 30px;">
+                    <div class="comment-meta"><span class="user">SchlaflosInErstfeld</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Hab gestern während der 12-Stunden-Schicht unter dem Kopierer geschlafen. War extrem gemütlich, bis T-Rex Gisler versucht hat, Papier nachzufüllen. Pures Chaos.</p>
                     <div class="comment-actions"><span>👍 45</span> <span>👎 2</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">Taser_Profi_99</span> <span>Vor 18 Minuten</span></div>
+                    <div class="comment-meta"><span class="user">Taser_Profi_99</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Sorry für den Router beim Taser-WK. War echt keine Absicht. Aber hey, 10 Schuss = 10 Treffer. Das Gerät ist geil!</p>
                     <div class="comment-actions"><span>👍 112</span> <span>👎 0</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">Lisa_M_89</span> <span>Vor 24 Minuten</span></div>
+                    <div class="comment-meta"><span class="user">Lisa_M_89</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Wo genau im Werkhof in Flüelen steht Freddi heute? Frage für eine Freundin. Sie hat rein zufällig 4 komplett abgefahrene Reifen montiert.</p>
                     <div class="comment-actions"><span>👍 128</span> <span>👎 5</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">Gotthard_Griller</span> <span>Vor 41 Minuten</span></div>
+                    <div class="comment-meta"><span class="user">Gotthard_Griller</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Mallorca als 27. Kanton? Endlich! Weiss jemand, ob das SVZ dorthin verlegt wird? Nehme mein Aromat auf jeden Fall mit in den Süden!</p>
                     <div class="comment-actions"><span>👍 89</span> <span>👎 0</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">HundeFührer_Max</span> <span>Vor 1 Stunde</span></div>
+                    <div class="comment-meta"><span class="user">HundeFührer_Max</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Wachtmeister Krümel (der Hamster) hat mehr Autorität als mein aktueller Schichtchef. Wann kriegt der kleine Kerl endlich seinen ersten offiziellen Stern?</p>
                     <div class="comment-actions"><span>👍 210</span> <span>👎 12</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">SecretAdmirer_Uri</span> <span>Vor 1 Stunde</span></div>
+                    <div class="comment-meta"><span class="user">SecretAdmirer_Uri</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Daniel Gnos, falls du das hier liest: Der rosa Brief mit dem extra viel Glitzerstaub war von mir! Ruf mich endlich an, mein Herz brennt wie ein Blaulicht!</p>
                     <div class="comment-actions"><span>👍 15</span> <span>👎 34</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">KaffeeJunkie_Kapo</span> <span>Vor 2 Stunden</span></div>
+                    <div class="comment-meta"><span class="user">KaffeeJunkie_Kapo</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Angelo hat mir heute Morgen einen Kaffee an den Schreibtisch gebracht, bevor ich überhaupt wusste, dass ich müde bin. Der Typ macht mir langsam echt Angst. Aber der Kaffee war super.</p>
                     <div class="comment-actions"><span>👍 304</span> <span>👎 1</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">Portfolio_Opfer</span> <span>Vor 2 Stunden</span></div>
+                    <div class="comment-meta"><span class="user">Portfolio_Opfer</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Meine Tastatur brennt. Ich habe "Verhältnismässigkeit" heute 400-mal geschrieben. Word hasst mich. Bitte schickt Hilfe. Oder Red Bull.</p>
                     <div class="comment-actions"><span>👍 312</span> <span>👎 2</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">JustMarried2026</span> <span>Vor 2 Stunden</span></div>
+                    <div class="comment-meta"><span class="user">JustMarried2026</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Seniorita Huber hat meine Hochzeit im Standesamt in exakt 42 Sekunden durchgezogen. Neue persönliche Bestzeit! Danke, so hatten wir viel mehr Zeit fürs Apéro.</p>
                     <div class="comment-actions"><span>👍 187</span> <span>👎 4</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">RaserRole</span> <span>Vor 3 Stunden</span></div>
+                    <div class="comment-meta"><span class="user">RaserRole</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Habe den Bambus-Tee vom Radar probiert. Schmeckt wie nasses Gras, aber die Beratung bei 120 km/h im 80er-Bereich war echt top. 5 Sterne, gerne wieder geblitzt.</p>
                     <div class="comment-actions"><span>👍 66</span> <span>👎 19</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">BüroGummi_007</span> <span>Vor 3 Stunden</span></div>
+                    <div class="comment-meta"><span class="user">BüroGummi_007</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Lothar Imhof hat heute das Delegieren delegiert. Ein absolutes Mastermind der modernen Polizeiführung. Davon können wir alle noch was lernen.</p>
                     <div class="comment-actions"><span>👍 142</span> <span>👎 0</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">PostAuto_Driver</span> <span>Vor 5 Stunden</span></div>
+                    <div class="comment-meta"><span class="user">PostAuto_Driver</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Die Schweizerische Post sucht händeringend Pöstler für den neuen 'Sektor Gnos'. Gute Bezahlung, aber Rückenschule und ein Gabelstapler-Ausweis zwingend nötig.</p>
                     <div class="comment-actions"><span>👍 199</span> <span>👎 2</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">UriGeller_Real</span> <span>Vor 6 Stunden</span></div>
+                    <div class="comment-meta"><span class="user">UriGeller_Real</span> <span>Kult-Kommentar</span></div>
                     <p class="comment-text">Die informativste und härteste News-Seite, die Uri je gesehen hat. Blick und 20 Minuten können endgültig einpacken! Weiter so, Bambus News!</p>
                     <div class="comment-actions"><span>👍 420</span> <span>👎 5</span> <span>Antworten</span></div>
                 </div>
@@ -355,7 +357,6 @@
     </div>
 
     <script>
-        // Funktion 1: Der Blitzer-Effekt
         function triggerRadar() {
             const overlay = document.getElementById('flash-overlay');
             overlay.classList.remove('blitz-active');
@@ -365,15 +366,9 @@
             }, 10);
         }
 
-        // Funktion 2: Normales Modal öffnen & schliessen
-        function openModal() {
-            document.getElementById('myModal').classList.add('active');
-        }
-        function closeModal() {
-            document.getElementById('myModal').classList.remove('active');
-        }
+        function openModal() { document.getElementById('myModal').classList.add('active'); }
+        function closeModal() { document.getElementById('myModal').classList.remove('active'); }
 
-        // Funktion 3: Bambus Regen
         function makeItRain() {
             const emojis = ['🎋', '🐼', '🚨', '📰'];
             for(let i = 0; i < 30; i++) {
@@ -389,7 +384,6 @@
             }
         }
 
-        // Funktion 4: Der flüchtende T-Rex Button
         const trexBtn = document.getElementById('trexBtn');
         trexBtn.addEventListener('mouseover', function() {
             if(window.innerWidth > 768) {
@@ -414,40 +408,71 @@
             alert('Unglaublich! Du hast es trotz der kurzen Arme geschafft!');
         });
 
-        // Funktion 5: Der 15-Sekunden Gedankenleser-Timer!
-        setTimeout(() => {
-            document.getElementById('mindReaderModal').classList.add('active');
-        }, 15000);
+        setTimeout(() => { document.getElementById('mindReaderModal').classList.add('active'); }, 15000);
+        function closeMindReader() { document.getElementById('mindReaderModal').classList.remove('active'); }
+    </script>
 
-        function closeMindReader() {
-            document.getElementById('mindReaderModal').classList.remove('active');
-        }
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-        // Funktion 6: Kommentare lokal hinzufügen
-        function addComment() {
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7rsjJ-YwVxvEtLz0ya4k6ARFVSZq_Xj4",
+            authDomain: "bambus-news.firebaseapp.com",
+            projectId: "bambus-news",
+            storageBucket: "bambus-news.firebasestorage.app",
+            messagingSenderId: "401445127639",
+            appId: "1:401445127639:web:925c3f5aa64ebce28eb792",
+            measurementId: "G-5R1H9DL0TY"
+        };
+
+        // Firebase starten
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Kommentare in Echtzeit laden
+        const q = query(collection(db, "bambus_comments"), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            const container = document.getElementById('liveCommentsContainer');
+            container.innerHTML = ''; // Container leeren bevor neue geladen werden
+            
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.style.borderLeftColor = '#ffcc00'; // Live-Kommentare kriegen einen gelben Strich
+                newComment.innerHTML = `
+                    <div class="comment-meta"><span class="user" style="color: #ff9900;">${data.user}</span> <span>Gerade eben</span></div>
+                    <p class="comment-text">${data.text}</p>
+                    <div class="comment-actions"><span>👍 0</span> <span>👎 0</span> <span>Antworten</span></div>
+                `;
+                container.appendChild(newComment);
+            });
+        });
+
+        // Funktion zum Senden an die Datenbank (Global verfügbar machen)
+        window.addLiveComment = async function() {
             const input = document.getElementById('newCommentText');
             const text = input.value.trim();
             
             if(text === '') {
-                alert('Du musst schon etwas schreiben, um bei den Bambus News mitzureden!');
+                alert('Leere Kommentare werden sofort zur Fahndung ausgeschrieben!');
                 return;
             }
 
-            const newComment = document.createElement('div');
-            newComment.className = 'comment';
-            newComment.innerHTML = `
-                <div class="comment-meta"><span class="user" style="color: var(--red);">Gast_User_${Math.floor(Math.random()*9000)+1000}</span> <span>Gerade eben</span></div>
-                <p class="comment-text">${text}</p>
-                <div class="comment-actions"><span>👍 0</span> <span>👎 0</span> <span>Antworten</span></div>
-            `;
-            
-            // Fügt den neuen Kommentar direkt unter dem Eingabefeld ein
-            const inputBox = document.querySelector('.comment-input-box');
-            inputBox.parentNode.insertBefore(newComment, inputBox.nextSibling);
-            
-            // Leert das Eingabefeld
-            input.value = '';
-        }
+            // In die Datenbank schreiben
+            try {
+                await addDoc(collection(db, "bambus_comments"), {
+                    text: text,
+                    user: "Kapo_User_" + Math.floor(Math.random() * 9000 + 1000),
+                    timestamp: serverTimestamp()
+                });
+                input.value = ''; // Eingabefeld leeren
+            } catch (e) {
+                alert("Fehler beim Senden! Dein Internet hat wohl Radar-Probleme.");
+                console.error("Firebase Fehler: ", e);
+            }
+        };
     </script>
 
 </body>
