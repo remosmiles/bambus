@@ -18,10 +18,16 @@
         .bamboo-drop { position: fixed; top: -50px; font-size: 2rem; z-index: 1000; animation: fall linear forwards; user-select: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
+        /* Funkel-Effekt für das Logo */
+        @keyframes sparkle {
+            0%, 100% { text-shadow: none; }
+            50% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #e00000; }
+        }
+
         /* Header BILD/20Min-Style */
         header { background: var(--red); color: white; padding: 15px 20px; border-bottom: 4px solid var(--dark); text-align: center; }
         .logo-container { display: inline-block; background: white; padding: 5px 15px; border: 3px solid var(--dark); transform: skew(-5deg); cursor: pointer; }
-        .logo { font-size: 48px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; color: var(--red); transform: skew(5deg); display: block; margin: 0; line-height: 1; }
+        .logo { font-size: 48px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; color: var(--red); transform: skew(5deg); display: block; margin: 0; line-height: 1; animation: sparkle 2.5s ease-in-out infinite; }
         
         /* Echte Navigation mit Links */
         nav { background: var(--dark); color: white; padding: 10px 0; text-align: center; }
@@ -32,7 +38,7 @@
         /* Roter Ticker */
         .ticker { background: white; color: var(--dark); padding: 10px 20px; font-weight: 900; font-size: 16px; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--dark); }
         .ticker span { color: var(--red); margin-right: 10px; }
-        .ticker-text { display: inline-block; animation: scroll 50s linear infinite; }
+        .ticker-text { display: inline-block; animation: scroll 60s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
         /* Layout */
@@ -143,11 +149,25 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> Taser 10 WK: Trefferquote bei 150%! Kaffeetasse neutralisiert <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll: Alle Schweizer müssen das Land verlassen <span>+++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span> Post kollabiert wegen Gnos <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll: Alle Schweizer müssen das Land verlassen <span>+++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span> Post kollabiert wegen Gnos <span>+++</span></div>
     </div>
 
     <div class="container">
         <main class="main-content">
+
+            <article class="article">
+                <span class="kicker">BVP Info Exklusiv</span>
+                <h2>Muskelaufbau im Dienst: Neu gibt es Proteinriegel für die Pausen!</h2>
+                <p><strong>ALTDORF -</strong> Die Führungsebene hat erkannt: Wer den Gotthard-Verkehr bändigen will, braucht mehr als nur wässrigen Kaffee. An der jüngsten BVP Info wurde eine revolutionäre Neuerung für die Bereitschafts- und Verkehrspolizei verkündet: Zur Stärkung der Truppe werden ab sofort in den offiziellen Pausen feinstaubgeprüfte Proteinriegel ausgegeben.</p>
+                <p>"Die trockenen Gipfeli von früher haben einfach nicht genug Masse gebracht", erklärt ein sichtlich aufgepumpter Wachtmeister. "Jetzt können wir zwischen den LKW-Kontrollen ordentlich Gains machen." Böse Zungen behaupten, die Neuerung sei primär deshalb eingeführt worden, damit die Kollegen die interne 500-Liegestütze-Challenge ohne kompletten Schwächeanfall überstehen. Die Uniformschneider der Kapo Uri sind jedenfalls bereits in Alarmbereitschaft versetzt worden, falls die blauen Hemden an den Ärmeln bald bedrohlich zu spannen beginnen.</p>
+            </article>
+
+            <article class="article">
+                <span class="kicker">Phantomjagd im Kanton</span>
+                <h2>Grossangelegte UBER-Kontrollen auf Urner Strassen: Bisher exakt null Treffer!</h2>
+                <p><strong>URI -</strong> Mit höchster Alarmbereitschaft, verdeckten Ermittlern und modernster Technik machte sich die Verkehrspolizei auf die Jagd. Das Ziel der grossangelegten Kontrolloffensive: Die berüchtigten UBER-Fahrer auf den Strassen des Kantons Uri dingfest zu machen. Das erstaunliche Ergebnis der wochenlangen, intensiven Einsätze: Es wurde bis heute nicht ein einziger angetroffen.</p>
+                <p>"Wir haben jeden dunklen Kombi und jeden verdächtig freundlich winkenden Fahrer herausgewinkt", berichtet ein leicht desillusionierter Beamter. "Aber hier fährt schlichtweg niemand UBER." Verkehrsexperten gehen stark davon aus, dass sich in absehbarer Zukunft daran auch absolut nichts ändern wird, da die meisten Urner im Zweifelsfall lieber den Traktor des Nachbarn nehmen. Die Einsatzkräfte überlegen nun, die Ressourcen umzuverteilen und stattdessen verstärkt nach Einhörnern oder Yetis zu fahnden – die Trefferquote dürfte in etwa gleich hoch ausfallen.</p>
+            </article>
 
             <article class="article">
                 <span class="kicker">Hochspannung im WK</span>
@@ -443,7 +463,7 @@
             snapshot.forEach((firebaseDoc) => {
                 const data = firebaseDoc.data();
                 const commentId = firebaseDoc.id;
-                const likes = data.likes || 0; // Standard auf 0, falls noch keine Likes
+                const likes = data.likes || 0; 
                 
                 const newComment = document.createElement('div');
                 newComment.className = 'comment';
@@ -475,29 +495,27 @@
             }
             
             if(userName === '') {
-                userName = 'Unbekannter Polizist'; // Fallback Name
+                userName = 'Unbekannter Polizist'; 
             }
 
-            // In die Datenbank schreiben
             try {
                 await addDoc(collection(db, "bambus_comments"), {
                     text: text,
                     user: userName,
-                    likes: 0, // Neuer Kommentar startet mit 0 Likes
+                    likes: 0, 
                     timestamp: serverTimestamp()
                 });
-                textBox.value = ''; // Textfeld leeren (Namen lassen wir stehen)
+                textBox.value = ''; 
             } catch (e) {
                 alert("Fehler beim Senden! Dein Internet hat wohl Radar-Probleme.");
                 console.error("Firebase Fehler: ", e);
             }
         };
 
-        // Funktion zum Liken (Live in die Datenbank)
+        // Funktion zum Liken
         window.likeLiveComment = async function(commentId) {
             try {
                 const commentRef = doc(db, "bambus_comments", commentId);
-                // Erhöht den Like-Zähler in der Datenbank exakt um 1
                 await updateDoc(commentRef, {
                     likes: increment(1)
                 });
