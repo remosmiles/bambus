@@ -57,6 +57,13 @@
         .radar-btn { background: var(--dark); color: white; border: none; padding: 12px 20px; font-size: 16px; font-weight: 900; cursor: pointer; margin-top: 15px; text-transform: uppercase; transition: 0.2s; display: inline-block; width: 100%; box-sizing: border-box; text-align: center; }
         .radar-btn:hover { background: var(--red); }
 
+        /* Pagination Design */
+        .pagination { text-align: center; margin: 20px 0 40px 0; border-top: 2px dashed #ccc; padding-top: 20px; }
+        .pagination button { background: var(--dark); color: white; border: none; padding: 10px 18px; margin: 0 5px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.2s; }
+        .pagination button:hover { background: var(--red); }
+        .pagination button.active { background: var(--red); transform: scale(1.1); }
+        .news-article { display: none; } /* Wird per JS gesteuert */
+
         /* Sidebar Werbung Styling */
         .ad-space { background: white; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; position: relative; border-top: 4px solid var(--dark); }
         .ad-label { font-size: 10px; color: #999; display: block; text-align: left; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
@@ -145,7 +152,7 @@
     
     <nav>
         <a href="https://www.ur.ch" target="_blank">Front</a> <span class="nav-divider">|</span>
-        <a href="https://www.www.20min.ch" target="_blank">Uri Regional</a> <span class="nav-divider">|</span>
+        <a href="https://www.20min.ch" target="_blank">Uri Regional</a> <span class="nav-divider">|</span>
         <a href="#" onclick="window.close(); alert('🚨 POLIZEILICHE SPERRUNG 🚨\n\nDein Browser blockiert das automatische Schliessen dieses Fensters. Du musst das X oben rechts selbst drücken!'); return false;">Blaulicht</a> <span class="nav-divider">|</span>
         <a href="https://www.youtube.com/results?search_query=One+Day+or+Day+One+Motivation" target="_blank">Sport</a> <span class="nav-divider">|</span>
         <a href="https://www.blick.ch" target="_blank">SVZ Inside</a>
@@ -158,42 +165,42 @@
     <div class="container">
         <main class="main-content">
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">BVP Info Exklusiv</span>
                 <h2>Muskelaufbau im Dienst: Neu gibt es Proteinriegel für die Pausen!</h2>
                 <p><strong>ALTDORF -</strong> Die Führungsebene hat erkannt: Wer den Gotthard-Verkehr bändigen will, braucht mehr als nur wässrigen Kaffee. An der jüngsten BVP Info wurde eine revolutionäre Neuerung für die Bereitschafts- und Verkehrspolizei verkündet: Zur Stärkung der Truppe werden ab sofort in den offiziellen Pausen feinstaubgeprüfte Proteinriegel ausgegeben.</p>
                 <p>"Die trockenen Gipfeli von früher haben einfach nicht genug Masse gebracht", erklärt ein sichtlich aufgepumpter Wachtmeister. "Jetzt können wir zwischen den LKW-Kontrollen ordentlich Gains machen." Böse Zungen behaupten, die Neuerung sei primär deshalb eingeführt worden, damit die Kollegen die interne 500-Liegestütze-Challenge ohne kompletten Schwächeanfall überstehen. Die Uniformschneider der Kapo Uri sind jedenfalls bereits in Alarmbereitschaft versetzt worden, falls die blauen Hemden an den Ärmeln bald bedrohlich zu spannen beginnen.</p>
             </article>
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Phantomjagd im Kanton</span>
                 <h2>Grossangelegte UBER-Kontrollen auf Urner Strassen: Bisher exakt null Treffer!</h2>
                 <p><strong>URI -</strong> Mit höchster Alarmbereitschaft, verdeckten Ermittlern und modernster Technik machte sich die Verkehrspolizei auf die Jagd. Das Ziel der grossangelegten Kontrolloffensive: Die berüchtigten UBER-Fahrer auf den Strassen des Kantons Uri dingfest zu machen. Das erstaunliche Ergebnis der wochenlangen, intensiven Einsätze: Es wurde bis heute nicht ein einziger angetroffen.</p>
                 <p>"Wir haben jeden dunklen Kombi und jeden verdächtig freundlich winkenden Fahrer herausgewinkt", berichtet ein leicht desillusionierter Beamter. "Aber hier fährt schlichtweg niemand UBER." Verkehrsexperten gehen stark davon aus, dass sich in absehbarer Zukunft daran auch absolut nichts ändern wird, da die meisten Urner im Zweifelsfall lieber den Traktor des Nachbarn nehmen. Die Einsatzkräfte überlegen nun, die Ressourcen umzuverteilen und stattdessen verstärkt nach Einhörnern oder Yetis zu fahnden – die Trefferquote dürfte in etwa gleich hoch ausfallen.</p>
             </article>
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Hochspannung im WK</span>
                 <h2>Kapo Uri brilliert am Taser 10 Wiederholungskurs: "Wir haben einfach alles getroffen!"</h2>
                 <p><strong>ALTDORF -</strong> Die Kantonspolizei Uri hat den Taser 10 Wiederholungskurs (WK) mit wehenden Fahnen, fliegenden Sonden und zuckenden Muskeln gemeistert. Laut internen Berichten war die Trefferquote der Beamten bei der Repetition so exorbitant hoch, dass die Ausbildner noch immer fassungslos den Kopf schütteln.</p>
                 <p>"Der Taser hat 10 Schuss, aber einige Kollegen haben gefühlt 12 Treffer gelandet", staunt ein Instruktor. Die Euphorie war so gross, dass nicht nur die Zielscheiben erfolgreich neutralisiert wurden, sondern im Eifer des Gefechts auch zwei Kaffeetassen, ein flüchtender Bürostuhl und versehentlich der WLAN-Router im Schulungsraum eine Ladung abbekamen. "Die Energie im Raum war sprichwörtlich elektrisierend", so ein sichtlich geladener Teilnehmer. Da der Taser 10 über eine massiv grössere Reichweite verfügt, wird nun auf Direktionsebene geprüft, ob man flüchtige Verkehrssünder künftig ganz bequem und ressourcenschonend direkt aus dem Pausenraumfenster stoppen kann.</p>
             </article>
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Tastatur-Elite am Limit</span>
                 <h2>Polizeianwärter im Portfolio-Wahn: Unermüdliches Tippen bis die Finger bluten!</h2>
                 <p><strong>ALTDORF -</strong> Auf den Fluren der Kapo Uri herrscht derzeit eine gespenstische Stille, die nur vom ohrenbetäubenden, maschinengewehrartigen Rattern hunderter Tastenanschläge unterbrochen wird. Die neuen Polizeianwärter arbeiten seit nunmehr zwei Wochen völlig unermüdlich und schlaflos an ihren berühmt-berüchtigten Portfolio-Berichten. Red Bull-Dosen stapeln sich auf den Tischen zu epischen, architektonischen Meisterwerken.</p>
                 <p>Die Rekruten versuchen verzweifelt, ihre heldenhaften Praxiseinsätze in perfekt formatiertem, juristisch wasserdichtem Beamtendeutsch auf Papier zu bringen. "Wir trainieren sie hart für den Strassenkampf, für Takedowns und Pfeffersprayeinsätze. Aber der wahre, unbarmherzige Endgegner ist und bleibt MS Word", seufzt ein Ausbildungsleiter, während er einem weinenden Anwärter bei der Inhaltsverzeichnis-Formatierung hilft. Gerüchten zufolge hat ein besonders eifriger Rekrut bereits seine dritte Tastatur durchgeschmort, weil er den Begriff "Verhältnismässigkeitsprinzip" mit über 200 Anschlägen pro Minute in sein Fazit gehämmert hat.</p>
             </article>
             
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Schlafentzug an der Front</span>
                 <h2>Neues 12-Stunden-Schichtmodell: Büros zu Matratzenlagern umfunktioniert!</h2>
                 <p><strong>ERSTFELD -</strong> Das neue 12-Stunden-Schichtmodell fordert seine ersten Opfer in der Bereitschafts- und Verkehrspolizei. Wer das Schwerverkehrszentrum betritt, muss neuerdings aufpassen, wo er hintritt: Überall liegen erschöpfte Beamte. Unter den Schreibtischen, hinter den Aktenregalen und sogar auf dem Kopierer wird mittlerweile geschlafen. Die Garderoben riechen nach Verzweiflung und kaltem Kaffee.</p>
                 <p>Ein anonymer Wachtmeister berichtet mit leerem Blick: "Wir haben bereits ein komplexes Rotationssystem für den Platz unter dem Kopierer eingeführt, weil es dort so schön warm ist." Der interne Schwarzmarkt für koffeinhaltige Kaltgetränke blüht auf beängstigende Weise. Die Kommandoebene überlegt angeblich bereits ernsthaft, taktische Schlafsäcke zur Standardausrüstung hinzuzufügen, nachdem ein Kollege versehentlich beim Morgenrapport im Stehen eingeschlafen und beinahe in den Papierschredder gefallen ist. Die Kaffeemaschine wurde offiziell zur kritischen Infrastruktur des Kantons Uri erklärt und wird nun rund um die Uhr von einer schwer bewaffneten Sondereinheit beschützt. Wer in der Pause blinzelt, hat schon verloren.</p>
             </article>
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Herzklopfen am Strassenrand</span>
                 <h2>Verkehrschaos in Flüelen: Alle wollen von "Schönling" Freddi kontrolliert werden!</h2>
                 <p><strong>FLÜELEN -</strong> Es herrschen absurde Zustände rund um den Werkhof in Flüelen. Seit bekannt ist, dass Fabio Freddi dort arbeitet, staut es sich auf den Zufahrtsstrassen. Verkehrspsychologen stehen vor einem Rätsel. Die Bereiche um den Werkhof gleichen zeitweise einem gut besuchten VIP-Wartebereich, weil alle Autofahrer hoffen, einen Blick auf ihn zu erhaschen.</p>
@@ -201,47 +208,50 @@
                 <button class="radar-btn" onclick="openModal()">Einsatzprotokoll & Liebesbriefe lesen</button>
             </article>
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Kapo-interner Skandal</span>
                 <h2>Fassungslosigkeit bei Preisverleihung: Ein Hamster gewinnt das Monatsfoto!</h2>
                 <p><strong>ALTDORF -</strong> Die Spannung bei der Wahl zum prestigeträchtigen "Patrouillen-Foto des Monats" war greifbar. Die Kollegen reichten spektakuläre Helikopter-Aufnahmen, epische Blitzer-Bilder und dramatische Festnahmen bei Sonnenuntergang ein. Doch als der Gewinner beim grossen Rapport verkündet wurde, herrschte absolute, schockierte Stille im Saal: Platz 1 ging an einen leicht unscharfen Hamster, der entspannt auf dem Lenkrad eines Streifenwagens sitzt.</p>
                 <p>Der kleine Nager namens "Wachtmeister Krümel" posierte im perfekten Licht auf dem Armaturenbrett und degradierte damit alle knallharten Verkehrspolizisten zu Verlierern. Die Hundestaffel der Kantonspolizei hat bereits rechtliche Schritte gegen die Wertung eingeleitet. "Das ist ein Affront für jeden hart arbeitenden Diensthund", bellte ein sichtlich empörter Hundeführer ins Mikrofon. Krümel hingegen nahm den Sieg gelassen und knabberte während der feierlichen Siegerehrung genüsslich an einem unbezahlten Strafzettel. Die Kapo Uri prüft nun, ob Hamster künftig ganz offiziell für Radarkontrollen in engen Röhren eingesetzt werden können.</p>
             </article>
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Herzensbrecher am Limit</span>
                 <h2>Post-Logistik kollabiert: Gnos ertrinkt in anonymen Liebesbriefen!</h2>
                 <p><strong>ERSTFELD -</strong> Daniel Gnos bringt die Schweizerische Post an den Rand des logistischen Ruins. Wie gut unterrichtete Insider der Verteilerzentrale berichten, wird der charmante Beamte täglich von einer regelrechten Flut an anonymen Grüssen, handgeschriebenen Gedichten und parfümierten Liebesbotschaften bedrängt.</p>
                 <p>Die Postfilialen im Kanton melden offiziell "Land unter". Pöstler klagen über chronische Rückenschmerzen, da die Pakete mit handgestrickten Polizei-Socken und edlen Pralinen für Gnos epische Ausmasse annehmen. "Wir mussten extra Rollwagen anfordern, weil der Briefträger die Fanpost nicht mehr auf dem Velo balancieren konnte. Gnos hat jetzt einen eigenen Postleitzahlen-Bereich bekommen", seufzt ein Kollege kopfschüttelnd. Das Büro des Beamten duftet mittlerweile nach einer wilden Mischung aus 15 verschiedenen Luxus-Damenparfüms. Gnos selbst gibt sich bescheiden: "Ich komme gar nicht mehr zum Lesen. Ich nutze das dicke, rosa Parfümpapier momentan primär, um wackelige Bürotische im Pausenraum auszugleichen." Die Kapo-Leitung überlegt nun, Gnos als offizielle Touristenattraktion anzumelden.</p>
             </article>
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Bevölkerungslimit erreicht</span>
                 <h2>10-Millionen-Schweiz ist voll: Alle Einheimischen müssen das Land verlassen!</h2>
                 <p><strong>BERN / URI -</strong> Der Bundesrat hat den absoluten Notstand ausgerufen: Die viel diskutierte 10-Millionen-Grenze ist geknackt! Die radikale, aber offenbar einzig logische Lösung der Politik, die heute Morgen per Eilmeldung verbreitet wurde: Alle gebürtigen Schweizer müssen per sofort ihre Koffer packen und das Land verlassen, um Platz zu machen. Wer keinen doppelten Pass besitzt, hat schlichtweg Pech gehabt.</p>
                 <p>Am Gotthard spielen sich seit den frühen Morgenstunden dramatische Szenen ab. Das Schwerverkehrszentrum Erstfeld wurde kurzerhand umfunktioniert, um den beispiellosen Massenexodus der Eidgenossen Richtung Italien zu kanalisieren. Am Strassenrand werden derzeit die letzten verbliebenen Alphörner, Kuckucksuhren und gusseisernen Fondue-Caquelons auf eilig angemietete LKWs verladen, um sie weinend ins Exil zu transportieren. "Wer noch illegale Bestände von Cervelat oder Aromat im Kofferraum hat, muss an der Grenze harten Strafzoll zahlen", ruft ein Polizist durchs Megafon, während er selbst eine Träne wegdrückt. Wo die Schweizer nun hinziehen, ist unklar – erste diplomatische Gerüchte besagen, dass Mallorca zum 27. Kanton ernannt wird und das Wallis künftig auf Teneriffa angesiedelt ist.</p>
             </article>
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Das Standesamt in besten Händen</span>
                 <h2>Verwaltungs-Coup: "Seniorita Huber" übernimmt die absolute Leitung!</h2>
                 <p><strong>ALTDORF -</strong> Die kantonale Verwaltung bebt! Das Standesamt wird ab sofort von niemand Geringerem als der besten Kantonsangestellten aller Zeiten geleitet: Seniorita Huber übernimmt das Ruder. Seit sie im Amt ist, herrscht dort eine Effizienz, die selbst Schweizer Uhrmacher vor blankem Neid erblassen lässt. Mit ihrer jahrelangen Erfahrung und einem stets wachsamen Auge sorgt sie dafür, dass in Sachen Zivilstand im Kanton Uri alles reibungslos läuft.</p>
                 <p>Termine werden auf die Millisekunde genau eingehalten. Wer beim entscheidenden "Ja"-Wort vor dem Altar stottert, wird ohne Vorwarnung sofort wieder hinten in die Warteschlange im Korridor eingereiht. "Es ist hart, aber absolut fair", berichtet ein frisch vermählter Bräutigam, der nach der Zeremonie noch immer leicht zittert. Dank Hubers gnadenlosem Optimierungswahn dauern Eheschliessungen nur noch genau 45 Sekunden – inklusive Unterschrift, Ringwechsel und einem kurzen, offiziell abgesegneten Kuss. Kollegen und Bürger sind sich einig: Erste Stimmen fordern bereits vehement, ihr direkt das gesamte Gebäude zu unterstellen und sie zur obersten Diktatorin aller Papierkram-Abteilungen zu befördern.</p>
             </article>
 
-            <article class="article">
+            <article class="article news-article">
                 <span class="kicker">Held der Hotline</span>
                 <h2>Der telepathische Mozart der Zentrale: Angelo revolutioniert das Telefon-Game</h2>
                 <p><strong>ALTDORF -</strong> Die Telepathie hat still und heimlich Einzug in die Polizeiarbeit der Kapo Uri gehalten. Wenn auf der Einsatzzentrale das Telefon noch gar nicht geklingelt hat, hat Angelo den Hörer bereits in der Hand und das Problem souverän gelöst. Der Zentralist, intern nur noch ehrfürchtig "der Überflieger" genannt, setzt völlig neue Massstäbe, die selbst Science-Fiction-Autoren blass aussehen lassen.</p>
                 <p>"Gestern rief ein nervöser Mann an, um einen Einbruch zu melden. Angelo hatte die Handschellen beim Täter schon klicken lassen, bevor der Anrufer überhaupt seine Adresse gestammelt hat", flüstert ein sichtlich verängstigter Kollege. Einige behaupten sogar, Angelo könne durch reines, intensives Anstarren des Telefons einen Notruf bei der Gegenseite auslösen. Seine Reaktionszeit ist mittlerweile offiziell in den negativen Bereich gerutscht. Gerüchten zufolge tippt Angelo mit 400 Anschlägen pro Minute, bestellt parallel Pizza für Anrufer, bevor diese überhaupt wissen, dass sie Hunger haben, und hat vier Bildschirme gleichzeitig im Blick. Die IT-Abteilung ist völlig überfordert, weil das veraltete Einsatzleitsystem abstürzt, da Angelo neuerdings Ereignisse rapportiert, die voraussichtlich erst übermorgen passieren werden.</p>
             </article>
 
-            <article class="article" style="border: none;">
+            <article class="article news-article" style="border: none;">
                 <span class="kicker">Interaktiver Test</span>
                 <h2>Radar-Anlagen gehackt? Sünder kriegen Bambus-Tee!</h2>
                 <p><strong>URSERENTAL -</strong> Die Verkehrssünder im Kanton sind begeistert, die Staatskasse weint. Ein anonymer Insider berichtet, dass die Blitzer in der tiefsten Nacht umprogrammiert wurden. Statt teurer Bussen spuckt die Drucker-Infrastruktur der Kapo Uri plötzlich detaillierte Anleitungen für vegane Bambus-Smoothies und entspannende Tee-Rituale aus. "Ich bin gestern extra mit 120 km/h in die 80er-Zone gedonnert, weil mir noch das genaue Rezept für den Ingwer-Bambus-Aufguss gefehlt hat", gesteht ein Raser lachend vor laufender Kamera.</p>
                 <button class="radar-btn" onclick="triggerRadar()" style="background: var(--red);">📸 RADAR MANUELL AUSLÖSEN</button>
             </article>
+
+            <div class="pagination" id="pagination-controls">
+                </div>
 
             <div class="comments-section" id="community">
                 <div class="comments-header">Community <span>(Live!)</span></div>
@@ -255,7 +265,7 @@
                 <div id="liveCommentsContainer"></div>
 
                 <div class="comment" style="margin-top: 30px;">
-                    <div class="comment-meta"><span class="user">SchlaflosInErstfeld</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">SchlaflosInErstfeld</span> <span>09.06.2026, 06:15 Uhr</span></div>
                     <p class="comment-text">Hab gestern während der 12-Stunden-Schicht unter dem Kopierer geschlafen. War extrem gemütlich, bis T-Rex Gisler versucht hat, Papier nachzufüllen. Pures Chaos.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 45</span> 
@@ -265,7 +275,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">Taser_Profi_99</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">Taser_Profi_99</span> <span>09.06.2026, 06:42 Uhr</span></div>
                     <p class="comment-text">Sorry für den Router beim Taser-WK. War echt keine Absicht. Aber hey, 10 Schuss = 10 Treffer. Das Gerät ist geil!</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 112</span> 
@@ -275,7 +285,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">Lisa_M_89</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">Lisa_M_89</span> <span>09.06.2026, 07:05 Uhr</span></div>
                     <p class="comment-text">Wo genau im Werkhof in Flüelen steht Freddi heute? Frage für eine Freundin. Sie hat rein zufällig 4 komplett abgefahrene Reifen montiert.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 128</span> 
@@ -285,7 +295,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">Gotthard_Griller</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">Gotthard_Griller</span> <span>09.06.2026, 07:30 Uhr</span></div>
                     <p class="comment-text">Mallorca als 27. Kanton? Endlich! Weiss jemand, ob das SVZ dorthin verlegt wird? Nehme mein Aromat auf jeden Fall mit in den Süden!</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 89</span> 
@@ -295,7 +305,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">HundeFührer_Max</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">HundeFührer_Max</span> <span>09.06.2026, 07:55 Uhr</span></div>
                     <p class="comment-text">Wachtmeister Krümel (der Hamster) hat mehr Autorität als mein aktueller Schichtchef. Wann kriegt der kleine Kerl endlich seinen ersten offiziellen Stern?</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 210</span> 
@@ -305,7 +315,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">SecretAdmirer_Uri</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">SecretAdmirer_Uri</span> <span>09.06.2026, 08:12 Uhr</span></div>
                     <p class="comment-text">Daniel Gnos, falls du das hier liest: Der rosa Brief mit dem extra viel Glitzerstaub war von mir! Ruf mich endlich an, mein Herz brennt wie ein Blaulicht!</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 15</span> 
@@ -315,7 +325,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">KaffeeJunkie_Kapo</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">KaffeeJunkie_Kapo</span> <span>09.06.2026, 08:45 Uhr</span></div>
                     <p class="comment-text">Angelo hat mir heute Morgen einen Kaffee an den Schreibtisch gebracht, bevor ich überhaupt wusste, dass ich müde bin. Der Typ macht mir langsam echt Angst. Aber der Kaffee war super.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 304</span> 
@@ -325,7 +335,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">Portfolio_Opfer</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">Portfolio_Opfer</span> <span>09.06.2026, 09:02 Uhr</span></div>
                     <p class="comment-text">Meine Tastatur brennt. Ich habe "Verhältnismässigkeit" heute 400-mal geschrieben. Word hasst mich. Bitte schickt Hilfe. Oder Red Bull.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 312</span> 
@@ -335,7 +345,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">JustMarried2026</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">JustMarried2026</span> <span>09.06.2026, 09:15 Uhr</span></div>
                     <p class="comment-text">Seniorita Huber hat meine Hochzeit im Standesamt in exakt 42 Sekunden durchgezogen. Neue persönliche Bestzeit! Danke, so hatten wir viel mehr Zeit fürs Apéro.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 187</span> 
@@ -345,7 +355,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">RaserRole</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">RaserRole</span> <span>09.06.2026, 09:22 Uhr</span></div>
                     <p class="comment-text">Habe den Bambus-Tee vom Radar probiert. Schmeckt wie nasses Gras, aber die Beratung bei 120 km/h im 80er-Bereich war echt top. 5 Sterne, gerne wieder geblitzt.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 66</span> 
@@ -355,7 +365,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">BüroGummi_007</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">BüroGummi_007</span> <span>09.06.2026, 09:35 Uhr</span></div>
                     <p class="comment-text">Lothar Imhof hat heute das Delegieren delegiert. Ein absolutes Mastermind der modernen Polizeiführung. Davon können wir alle noch was lernen.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 142</span> 
@@ -365,7 +375,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">PostAuto_Driver</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">PostAuto_Driver</span> <span>09.06.2026, 09:48 Uhr</span></div>
                     <p class="comment-text">Die Schweizerische Post sucht händeringend Pöstler für den neuen 'Sektor Gnos'. Gute Bezahlung, aber Rückenschule und ein Gabelstapler-Ausweis zwingend nötig.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 199</span> 
@@ -375,7 +385,7 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">UriGeller_Real</span> <span>Kult-Kommentar</span></div>
+                    <div class="comment-meta"><span class="user">UriGeller_Real</span> <span>09.06.2026, 09:55 Uhr</span></div>
                     <p class="comment-text">Die informativste und härteste News-Seite, die Uri je gesehen hat. Blick und 20 Minuten können endgültig einpacken! Weiter so, Bambus News!</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 420</span> 
@@ -436,6 +446,48 @@
     </div>
 
     <script>
+        // -- PAGINATION LOGIK --
+        const articlesPerPage = 5;
+        let currentPage = 1;
+
+        function renderArticles() {
+            const articles = document.querySelectorAll('.news-article');
+            const totalArticles = articles.length;
+            const totalPages = Math.ceil(totalArticles / articlesPerPage);
+
+            // Container leeren und Buttons neu aufbauen
+            const paginationContainer = document.getElementById('pagination-controls');
+            paginationContainer.innerHTML = '';
+            
+            for(let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = "Seite " + i;
+                if(i === currentPage) btn.classList.add('active');
+                btn.onclick = () => {
+                    currentPage = i;
+                    renderArticles();
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrollt sanft nach oben beim Blättern
+                };
+                paginationContainer.appendChild(btn);
+            }
+
+            // Artikel ein- und ausblenden
+            articles.forEach((art, index) => {
+                const start = (currentPage - 1) * articlesPerPage;
+                const end = start + articlesPerPage;
+                if (index >= start && index < end) {
+                    art.style.display = 'block';
+                } else {
+                    art.style.display = 'none';
+                }
+            });
+        }
+        
+        // Pagination beim Start laden
+        document.addEventListener('DOMContentLoaded', renderArticles);
+
+
+        // -- WEITERE FUNKTIONEN --
         function triggerRadar() {
             const overlay = document.getElementById('flash-overlay');
             overlay.classList.remove('blitz-active');
@@ -505,11 +557,9 @@
             measurementId: "G-5R1H9DL0TY"
         };
 
-        // Firebase starten
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Kommentare in Echtzeit laden und filtern
         const q = query(collection(db, "bambus_comments"), orderBy("timestamp", "desc"));
         onSnapshot(q, (snapshot) => {
             const container = document.getElementById('liveCommentsContainer');
@@ -548,8 +598,15 @@
                 const likes = data.likes || 0; 
                 const dislikes = data.dislikes || 0; 
                 
+                // Formatiertes Datum generieren
+                let timeString = "Gerade eben";
+                if (data.timestamp) {
+                    const dateObj = data.timestamp.toDate();
+                    timeString = dateObj.toLocaleDateString('de-CH') + ', ' + dateObj.toLocaleTimeString('de-CH', {hour: '2-digit', minute:'2-digit'}) + ' Uhr';
+                }
+                
                 let html = `
-                    <div class="comment-meta"><span class="user" style="color: #ff9900;">${data.user}</span> <span>Live</span></div>
+                    <div class="comment-meta"><span class="user" style="color: #ff9900;">${data.user}</span> <span>${timeString}</span></div>
                     <p class="comment-text">${data.text}</p>
                     <div class="comment-actions">
                         <span onclick="window.likeLiveComment('${data.id}')" title="Like">👍 <b style="color: var(--dark);">${likes}</b></span> 
@@ -558,15 +615,21 @@
                     </div>
                 `;
 
-                // Wenn es Antworten auf diesen Kommentar gibt, direkt darunter einfügen
                 if (replies[data.id]) {
                     html += `<div style="margin-top: 15px;">`;
                     replies[data.id].forEach(reply => {
                         const rLikes = reply.likes || 0;
                         const rDislikes = reply.dislikes || 0;
+                        
+                        let rTimeString = "Gerade eben";
+                        if (reply.timestamp) {
+                            const rDateObj = reply.timestamp.toDate();
+                            rTimeString = rDateObj.toLocaleDateString('de-CH') + ', ' + rDateObj.toLocaleTimeString('de-CH', {hour: '2-digit', minute:'2-digit'}) + ' Uhr';
+                        }
+
                         html += `
                         <div class="comment reply-comment">
-                            <div class="comment-meta"><span class="user" style="color: #ff9900;">${reply.user}</span> <span>Antwort</span></div>
+                            <div class="comment-meta"><span class="user" style="color: #ff9900;">${reply.user}</span> <span>${rTimeString}</span></div>
                             <p class="comment-text">${reply.text}</p>
                             <div class="comment-actions">
                                 <span onclick="window.likeLiveComment('${reply.id}')" title="Like">👍 <b style="color: var(--dark);">${rLikes}</b></span> 
@@ -582,7 +645,6 @@
             });
         });
 
-        // Normaler Kommentar senden
         window.addLiveComment = async function() {
             const userBox = document.getElementById('newCommentUser');
             const textBox = document.getElementById('newCommentText');
@@ -610,7 +672,6 @@
             }
         };
 
-        // Funktion zum Beantworten von LIVE Kommentaren (Nesting)
         window.replyToComment = async function(parentId, replyToUser) {
             let defaultName = document.getElementById('newCommentUser').value.trim();
             if(defaultName === '') defaultName = 'Unbekannter Polizist';
@@ -626,7 +687,7 @@
                         user: userName.trim() === '' ? 'Unbekannter Polizist' : userName.trim(),
                         likes: 0, 
                         dislikes: 0,
-                        parentId: parentId, // Speichert die Zuordnung!
+                        parentId: parentId, 
                         timestamp: serverTimestamp()
                     });
                 } catch (e) {
@@ -635,7 +696,6 @@
             }
         };
 
-        // Funktion zum Beantworten von KULT Kommentaren (Erscheinen ganz oben)
         window.replyToStatic = async function(replyToUser) {
             let defaultName = document.getElementById('newCommentUser').value.trim();
             if(defaultName === '') defaultName = 'Unbekannter Polizist';
@@ -659,14 +719,12 @@
             }
         };
 
-        // Liken
         window.likeLiveComment = async function(commentId) {
             try {
                 await updateDoc(doc(db, "bambus_comments", commentId), { likes: increment(1) });
             } catch (e) { console.error(e); }
         };
 
-        // Disliken
         window.dislikeLiveComment = async function(commentId) {
             try {
                 await updateDoc(doc(db, "bambus_comments", commentId), { dislikes: increment(1) });
