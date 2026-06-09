@@ -32,7 +32,7 @@
         /* Roter Ticker */
         .ticker { background: white; color: var(--dark); padding: 10px 20px; font-weight: 900; font-size: 16px; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--dark); }
         .ticker span { color: var(--red); margin-right: 10px; }
-        .ticker-text { display: inline-block; animation: scroll 40s linear infinite; }
+        .ticker-text { display: inline-block; animation: scroll 50s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
         /* Layout */
@@ -48,7 +48,7 @@
         .article p { color: #333; line-height: 1.6; font-size: 17px; font-family: Georgia, serif; margin-top: 15px; }
         
         /* Interaktiver Radar-Button */
-        .radar-btn { background: var(--dark); color: white; border: none; padding: 12px 20px; font-size: 16px; font-weight: 900; cursor: pointer; margin-top: 15px; text-transform: uppercase; transition: 0.2s; display: inline-block; }
+        .radar-btn { background: var(--dark); color: white; border: none; padding: 12px 20px; font-size: 16px; font-weight: 900; cursor: pointer; margin-top: 15px; text-transform: uppercase; transition: 0.2s; display: inline-block; width: 100%; box-sizing: border-box; text-align: center; }
         .radar-btn:hover { background: var(--red); }
 
         /* Sidebar Werbung Styling */
@@ -69,6 +69,9 @@
         .ad-trex { border-top-color: #27ae60; }
         .ad-trex h4 { color: #27ae60; }
 
+        .ad-guesel { border-top-color: #8e44ad; background: #fdfaef; cursor: pointer; }
+        .ad-guesel h4 { color: #8e44ad; }
+
         /* Modernes Modal (Popup) */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { background: white; padding: 40px; border: 5px solid var(--red); max-width: 500px; text-align: center; position: relative; transform: scale(0.8); transition: transform 0.3s; }
@@ -77,7 +80,7 @@
         .close-btn { position: absolute; top: 5px; right: 10px; font-size: 30px; cursor: pointer; color: var(--dark); font-weight: bold; line-height: 1; }
         .close-btn:hover { color: var(--red); }
 
-        /* NEU: Kommentar-Bereich */
+        /* Kommentar-Bereich */
         .comments-section { margin-top: 40px; border-top: 6px solid var(--dark); padding-top: 30px; }
         .comments-header { font-size: 28px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; color: var(--dark); }
         .comments-header span { color: var(--red); }
@@ -99,7 +102,6 @@
 
     <div id="flash-overlay"></div>
 
-    <!-- Normales Radar-Zugriff-Verweigert Modal -->
     <div class="modal-overlay" id="myModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -110,7 +112,6 @@
         </div>
     </div>
 
-    <!-- Das Gedankenleser 15-Sekunden Modal -->
     <div class="modal-overlay" id="mindReaderModal">
         <div class="modal-content" style="border-color: #ff9900;">
             <span class="close-btn" onclick="closeMindReader()">&times;</span>
@@ -139,12 +140,25 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> 12-Stunden-Schichten eskalieren: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll: Alle Schweizer müssen das Land verlassen <span>+++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span> Post kollabiert wegen Gnos <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> Taser 10 Ausbildung: Trefferquote bei 150%! Kaffeetasse neutralisiert <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll: Alle Schweizer müssen das Land verlassen <span>+++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span> Post kollabiert wegen Gnos <span>+++</span></div>
     </div>
 
     <div class="container">
-        <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
+
+            <article class="article">
+                <span class="kicker">Hochspannung im Training</span>
+                <h2>Kapo Uri brilliert an der Taser 10 Ausbildung: "Wir haben einfach alles getroffen!"</h2>
+                <p><strong>ALTDORF -</strong> Die Kantonspolizei Uri hat die heiß ersehnte Einführung des neuen Taser 10 mit wehenden Fahnen, fliegenden Sonden und zuckenden Muskeln gemeistert. Laut internen Ausbildungsberichten war die Trefferquote der Beamten so exorbitant hoch, dass die Ausbildner noch immer fassungslos den Kopf schütteln.</p>
+                <p>"Der neue Taser hat 10 Schuss, aber einige Kollegen haben gefühlt 12 Treffer gelandet", staunt ein Instruktor. Die Euphorie war so gross, dass nicht nur die Zielscheiben erfolgreich neutralisiert wurden, sondern im Eifer des Gefechts auch zwei Kaffeetassen, ein flüchtender Bürostuhl und versehentlich der WLAN-Router im Schulungsraum eine Ladung abbekamen. "Die Energie im Raum war sprichwörtlich elektrisierend", so ein sichtlich geladener Teilnehmer. Da der Taser 10 über eine massiv grössere Reichweite verfügt, wird nun auf Direktionsebene geprüft, ob man flüchtige Verkehrssünder am Gotthard künftig ganz bequem und ressourcenschonend direkt aus dem Pausenraumfenster des SVZ Erstfeld stoppen kann.</p>
+            </article>
+
+            <article class="article">
+                <span class="kicker">Tastatur-Elite am Limit</span>
+                <h2>Polizeianwärter im Portfolio-Wahn: Unermüdliches Tippen bis die Finger bluten!</h2>
+                <p><strong>ALTDORF -</strong> Auf den Fluren der Kapo Uri herrscht derzeit eine gespenstische Stille, die nur vom ohrenbetäubenden, maschinengewehrartigen Rattern hunderter Tastenanschläge unterbrochen wird. Die neuen Polizeianwärter arbeiten seit nunmehr zwei Wochen völlig unermüdlich und schlaflos an ihren berühmt-berüchtigten Portfolio-Berichten. Red Bull-Dosen stapeln sich auf den Tischen zu epischen, architektonischen Meisterwerken.</p>
+                <p>Die Rekruten versuchen verzweifelt, ihre heldenhaften Praxiseinsätze in perfekt formatiertem, juristisch wasserdichtem Beamtendeutsch auf Papier zu bringen. "Wir trainieren sie hart für den Strassenkampf, für Takedowns und Pfeffersprayeinsätze. Aber der wahre, unbarmherzige Endgegner ist und bleibt MS Word", seufzt ein Ausbildungsleiter, während er einem weinenden Anwärter bei der Inhaltsverzeichnis-Formatierung hilft. Gerüchten zufolge hat ein besonders eifriger Rekrut bereits seine dritte Tastatur durchgeschmort, weil er den Begriff "Verhältnismässigkeitsprinzip" mit über 200 Anschlägen pro Minute in sein Fazit gehämmert hat.</p>
+            </article>
             
             <article class="article">
                 <span class="kicker">Schlafentzug an der Front</span>
@@ -156,9 +170,8 @@
             <article class="article">
                 <span class="kicker">Herzklopfen am Strassenrand</span>
                 <h2>Verkehrschaos eskaliert: Alle wollen von "Schönling" Freddi gebüsst werden!</h2>
-                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem absurden Problem, das selbst die erfahrensten Einsatzleiter an den Rand des Wahnsinns treibt. Es kommt vermehrt zu gefährlichen Manöver auf den urner Strassen, weil Leute mit Absicht unangeschnallt fahren, nur damit Fabio Freddi sie rausnimmt. Verkehrspsychologen stehen vor einem Rätsel. Die Pannenstreifen auf der A2 glichen am Dienstagmorgen zeitweise einem gut besuchten VIP-Wartebereich.</p>
-                <p>"Ich habe gestern Abend extra meinen linken Blinker abmontiert und bin dreimal in Schlangenlinien durch die Kontrolle gefahren, damit er mich endlich anhält", gesteht eine 25-jährige Autofahrerin, die bereits eine beeindruckende Sammlung an Ordnungsbussen in ihrem Handschuhfach hortet. Die Kapo Uri musste bereits zusätzliche Abschleppwagen anfordern, weil simulierte Motorschäden rund um den Werkhof Flüelen drastisch zugenommen haben. Verzweifelte Kollegen versuchen nun, den Verkehr umzuleiten. Es wird derzeit auf höchster Ebene geprüft, ob Freddi aus rein verkehrstechnischen Sicherheitsgründen künftig nur noch mit einer verdunkelten Sturmmaske kontrollieren darf, um den Verkehrsfluss am Gotthard zu gewährleisten.</p>
-                <button class="radar-btn" onclick="openModal()">Einsatzprotokoll & Liebesbriefe lesen</button>
+                <p><strong>ERSTFELD -</strong> Die Verkehrspolizei steht vor einem absurden Problem, das selbst die erfahrensten Einsatzleiter an den Rand des Wahnsinns treibt. Es staut sich am SVZ, weil Leute mit Absicht unangeschnallt fahren, nur damit Wachtmeister Fabio Freddi sie rausnimmt. Verkehrspsychologen stehen vor einem Rätsel. Die Pannenstreifen auf der A2 glichen am Dienstagmorgen zeitweise einem gut besuchten VIP-Wartebereich.</p>
+                <p>"Ich habe gestern Abend extra meinen linken Blinker abmontiert und bin dreimal in Schlangenlinien durch die Kontrolle gefahren, damit er mich endlich anhält", gesteht eine 25-jährige Autofahrerin, die bereits eine beeindruckende Sammlung an Ordnungsbussen in ihrem Handschuhfach hortet. Die Kapo Uri musste bereits zusätzliche Abschleppwagen anfordern, weil simulierte Motorschäden rund um das SVZ drastisch zugenommen haben. Verzweifelte Kollegen versuchen nun, den Verkehr umzuleiten. Es wird derzeit auf höchster Ebene geprüft, ob Freddi aus rein verkehrstechnischen Sicherheitsgründen künftig nur noch mit einer verdunkelten Sturmmaske kontrollieren darf, um den Verkehrsfluss am Gotthard zu gewährleisten.</p>
             </article>
 
             <article class="article">
@@ -193,18 +206,16 @@
                 <span class="kicker">Held der Hotline</span>
                 <h2>Der telepathische Mozart der Zentrale: Angelo revolutioniert das Telefon-Game</h2>
                 <p><strong>ALTDORF -</strong> Die Telepathie hat still und heimlich Einzug in die Polizeiarbeit der Kapo Uri gehalten. Wenn auf der Einsatzzentrale das Telefon noch gar nicht geklingelt hat, hat Angelo den Hörer bereits in der Hand und das Problem souverän gelöst. Der Zentralist, intern nur noch ehrfürchtig "der Überflieger" genannt, setzt völlig neue Massstäbe, die selbst Science-Fiction-Autoren blass aussehen lassen.</p>
-                <p>"Gestern rief ein nervöser Mann an, um einen Einbruch zu melden. Angelo hatte die Handschellen beim Täter schon klicken lassen, bevor der Anrufer überhaupt seine Adresse gestammelt hat", flüstert ein sichtlich verängstigter Kollege. Einige behaupten sogar, Angelo könne durch reines, intensives Anstarren des Telefons einen Notruf bei der Gegenseite auslösen. Seine Reaktionszeit ist mittlerweile offiziell in den negativen Bereich gerutscht. Gerüchten zufolge tippt Angelo mit 400 Anschlägen pro Minute, bestellt parallel Pizza für Anrufer, bevor diese überhaupt wissen, dass sie Hunger haben, und hat vier Bildschirme gleichzeitig im Blick. Die IT-Abteilung ist völlig überfordert, weil das veraltete Einsatzleitsystem abstürzt, da Angelo neuerdings Ereignisse rapportiert, die voraussichtlich erst übermorgen passieren werden. Hollywood plant bereits eine Blockbuster-Verfilmung unter dem Titel 'Minority Report: Altdorf'.</p>
+                <p>"Gestern rief ein nervöser Mann an, um einen Einbruch zu melden. Angelo hatte die Handschellen beim Täter schon klicken lassen, bevor der Anrufer überhaupt seine Adresse gestammelt hat", flüstert ein sichtlich verängstigter Kollege. Einige behaupten sogar, Angelo könne durch reines, intensives Anstarren des Telefons einen Notruf bei der Gegenseite auslösen. Seine Reaktionszeit ist mittlerweile offiziell in den negativen Bereich gerutscht. Gerüchten zufolge tippt Angelo mit 400 Anschlägen pro Minute, bestellt parallel Pizza für Anrufer, bevor diese überhaupt wissen, dass sie Hunger haben, und hat vier Bildschirme gleichzeitig im Blick. Die IT-Abteilung ist völlig überfordert, weil das veraltete Einsatzleitsystem abstürzt, da Angelo neuerdings Ereignisse rapportiert, die voraussichtlich erst übermorgen passieren werden.</p>
             </article>
 
             <article class="article" style="border: none;">
                 <span class="kicker">Interaktiver Test</span>
                 <h2>Radar-Anlagen gehackt? Sünder kriegen Bambus-Tee!</h2>
                 <p><strong>URSERENTAL -</strong> Die Verkehrssünder im Kanton sind begeistert, die Staatskasse weint. Ein anonymer Insider berichtet, dass die Blitzer in der tiefsten Nacht umprogrammiert wurden. Statt teurer Bussen spuckt die Drucker-Infrastruktur der Kapo Uri plötzlich detaillierte Anleitungen für vegane Bambus-Smoothies und entspannende Tee-Rituale aus. "Ich bin gestern extra mit 120 km/h in die 80er-Zone gedonnert, weil mir noch das genaue Rezept für den Ingwer-Bambus-Aufguss gefehlt hat", gesteht ein Raser lachend vor laufender Kamera.</p>
-                <p>Die Techniker im SVZ sind völlig ratlos. Jeder Versuch, das System neu zu starten, endet damit, dass der Hauptbildschirm ein fröhliches Panda-Gesicht zeigt, das in Neongrün "Bleib entspannt, trink Tee!" blinkt. Teste hier live die neu programmierte Radaranlage (auf absolut eigene Gefahr und ohne Gewähr auf Erleuchtung):</p>
                 <button class="radar-btn" onclick="triggerRadar()" style="background: var(--red);">📸 RADAR MANUELL AUSLÖSEN</button>
             </article>
 
-            <!-- NEU: KOMMENTAR BEREICH -->
             <div class="comments-section">
                 <div class="comments-header">Community <span>(13 Kommentare)</span></div>
                 
@@ -217,6 +228,12 @@
                     <div class="comment-meta"><span class="user">SchlaflosInErstfeld</span> <span>Vor 12 Minuten</span></div>
                     <p class="comment-text">Hab gestern während der 12-Stunden-Schicht unter dem Kopierer geschlafen. War extrem gemütlich, bis T-Rex Gisler versucht hat, Papier nachzufüllen. Pures Chaos.</p>
                     <div class="comment-actions"><span>👍 45</span> <span>👎 2</span> <span>Antworten</span></div>
+                </div>
+
+                <div class="comment">
+                    <div class="comment-meta"><span class="user">Taser_Profi_99</span> <span>Vor 18 Minuten</span></div>
+                    <p class="comment-text">Sorry für den Router beim Taser-Training. War echt keine Absicht. Aber hey, 10 Schuss = 10 Treffer. Das Gerät ist geil!</p>
+                    <div class="comment-actions"><span>👍 112</span> <span>👎 0</span> <span>Antworten</span></div>
                 </div>
 
                 <div class="comment">
@@ -250,6 +267,12 @@
                 </div>
 
                 <div class="comment">
+                    <div class="comment-meta"><span class="user">Portfolio_Opfer</span> <span>Vor 2 Stunden</span></div>
+                    <p class="comment-text">Meine Tastatur brennt. Ich habe "Verhältnismässigkeit" heute 400-mal geschrieben. Word hasst mich. Bitte schickt Hilfe. Oder Red Bull.</p>
+                    <div class="comment-actions"><span>👍 312</span> <span>👎 2</span> <span>Antworten</span></div>
+                </div>
+
+                <div class="comment">
                     <div class="comment-meta"><span class="user">JustMarried2026</span> <span>Vor 2 Stunden</span></div>
                     <p class="comment-text">Seniorita Huber hat meine Hochzeit im Standesamt in exakt 42 Sekunden durchgezogen. Neue persönliche Bestzeit! Danke, so hatten wir viel mehr Zeit fürs Apéro.</p>
                     <div class="comment-actions"><span>👍 187</span> <span>👎 4</span> <span>Antworten</span></div>
@@ -268,18 +291,6 @@
                 </div>
 
                 <div class="comment">
-                    <div class="comment-meta"><span class="user">VW_Golf_Girl</span> <span>Vor 4 Stunden</span></div>
-                    <p class="comment-text">Bin gestern extra unangeschnallt und hupend an Freddi vorbeigefahren. Er hat mich nur sanft angelächelt. Mein Herz pocht immer noch! Das Ticket zahle ich gerne doppelt.</p>
-                    <div class="comment-actions"><span>👍 55</span> <span>👎 11</span> <span>Antworten</span></div>
-                </div>
-
-                <div class="comment">
-                    <div class="comment-meta"><span class="user">Wachtmeister_Z</span> <span>Vor 5 Stunden</span></div>
-                    <p class="comment-text">Tausche meinen exklusiven 12-Stunden-Schicht-Schlafplatz unter dem Kopierer gegen zwei Dosen Bambus-Energy-Drink. Seriöse Angebote bitte per Kapo-Funk.</p>
-                    <div class="comment-actions"><span>👍 88</span> <span>👎 3</span> <span>Antworten</span></div>
-                </div>
-
-                <div class="comment">
                     <div class="comment-meta"><span class="user">PostAuto_Driver</span> <span>Vor 5 Stunden</span></div>
                     <p class="comment-text">Die Schweizerische Post sucht händeringend Pöstler für den neuen 'Sektor Gnos'. Gute Bezahlung, aber Rückenschule und ein Gabelstapler-Ausweis zwingend nötig.</p>
                     <div class="comment-actions"><span>👍 199</span> <span>👎 2</span> <span>Antworten</span></div>
@@ -294,10 +305,8 @@
 
         </main>
 
-        <!-- SEITENLEISTE RECHTS (WERBUNG) -->
         <aside class="sidebar">
             
-            <!-- Content Creator Remo Tresch -->
             <div class="ad-space ad-remo">
                 <span class="ad-label">Anzeige / Social Media</span>
                 <h4>Kapo Uri Instagram Reels</h4>
@@ -307,7 +316,15 @@
                 <a href="https://www.bullenpower-uri.ch" target="_blank" class="ad-link-btn">JETZT REELS SCHAUEN!</a>
             </div>
 
-            <!-- Lothar Imhof (Seriöser) -->
+            <div class="ad-space ad-guesel" onclick="alert('☮️ Friedens-Modus aktiviert!\n\nAb sofort werden Verdächtige nur noch ganz streng angeschaut oder bei Bedarf in warme, weiche Decken gewickelt. Gewalt war gestern!')">
+                <span class="ad-label">Deeskalation Pur</span>
+                <h4>Fesseln in den Güsel!</h4>
+                <p>Schluss mit fiesen Druckstellen! Die Kapo Uri rüstet ab und schmeisst Hand- und Fussfesseln direkt in den Abfall. Niemand soll mehr verletzt werden.</p>
+                <p><strong>Die neue Taktik:</strong> Böse gucken und weiche Kissen werfen!</p>
+                <div style="font-size: 40px; text-align: center; margin: 10px 0;">🗑️🔗🕊️</div>
+                <button class="radar-btn" style="background: #8e44ad; font-size: 14px;">ZUM KUSCHEL-KURS</button>
+            </div>
+
             <div class="ad-space ad-lothar">
                 <span class="ad-label">Im Einsatz für Uri</span>
                 <h4>Kompetenz an vorderster Front</h4>
@@ -316,23 +333,21 @@
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">🦺🦅🚔</div>
             </div>
 
-            <!-- Stefan Gisler (T-Rex) Werbung -->
             <div class="ad-space ad-trex">
                 <span class="ad-label">Kapo Ausrüstungs-Shop</span>
                 <h4>Masshemden "Edition T-Rex"</h4>
                 <p>Exklusiv für <strong>Stefan Gisler</strong>: Uniformhemden mit extra kurzen Ärmeln. Inklusive Gratis-Greifzange für Ausweiskontrollen am LKW-Fenster!</p>
                 <div style="font-size: 40px; text-align: center; margin: 10px 0;">🦖🤏</div>
-                <button id="trexBtn" class="radar-btn" style="background: #27ae60; width: 100%; transition: all 0.2s; font-size: 14px;">HIER AUSWEIS GREIFEN!</button>
+                <button id="trexBtn" class="radar-btn" style="background: #27ae60; transition: all 0.2s; font-size: 14px;">HIER AUSWEIS GREIFEN!</button>
             </div>
 
-            <!-- Scheiber Werbung -->
             <div class="ad-space" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
                 <span class="ad-label">WANTED</span>
                 <h4 style="color: #8b4513;">DER DORF SHERIFF</h4>
                 <p>Er braucht kein Blaulicht. Er hat einen Hut und das Gesetz auf seiner Seite.</p>
                 <strong style="font-size: 16px;">SCHEIBER RÄUMT AUF.</strong>
                 <div style="font-size: 40px; text-align: center; margin: 10px 0;">🤠🐴</div>
-                <button class="radar-btn" style="background: #8b4513; width: 100%; font-size: 12px;">Stern polieren</button>
+                <button class="radar-btn" style="background: #8b4513; font-size: 12px;">Stern polieren</button>
             </div>
 
         </aside>
