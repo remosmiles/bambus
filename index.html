@@ -10,6 +10,19 @@
         :root { --red: #e00000; --dark: #000000; --bg: #ffffff; --gray: #f4f4f4; --border: #dddddd; }
         body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: var(--gray); color: #111; overflow-x: hidden; }
         
+        /* Body Locked für Login-Screen */
+        body.locked { overflow: hidden; height: 100vh; }
+
+        /* Login / Access Screen Overlay */
+        #login-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--dark); z-index: 100000; display: flex; justify-content: center; align-items: center; flex-direction: column; color: white; transition: opacity 0.5s ease; }
+        .login-box { background: #111; padding: 40px; border: 4px solid var(--red); text-align: center; box-shadow: 0 0 30px rgba(224, 0, 0, 0.4); max-width: 90%; }
+        .login-box h1 { color: var(--red); font-size: 45px; text-transform: uppercase; transform: skew(-5deg); margin-top: 0; margin-bottom: 10px; letter-spacing: -1px; }
+        .login-box p { font-size: 16px; margin-bottom: 30px; color: #ccc; }
+        .login-box input { padding: 15px; font-size: 24px; text-align: center; border: 2px solid var(--red); border-radius: 5px; margin-bottom: 20px; outline: none; font-weight: bold; width: 200px; background: #222; color: white; letter-spacing: 5px; }
+        .login-box button { background: var(--red); color: white; border: none; padding: 15px 30px; font-size: 18px; font-weight: 900; cursor: pointer; text-transform: uppercase; transition: 0.2s; width: 100%; }
+        .login-box button:hover { background: white; color: var(--red); }
+        #login-error { color: #ffcc00; margin-top: 20px; display: none; font-weight: bold; font-size: 14px; }
+
         /* Blitzer-Effekt Overlay */
         #flash-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 9999; opacity: 0; pointer-events: none; }
         .blitz-active { animation: blitzAnim 0.8s ease-out; }
@@ -118,10 +131,23 @@
         .reply-comment { margin-left: 40px; border-left: 3px solid #ff9900; background: #fafafa; margin-bottom: 10px; margin-top: 10px; }
     </style>
 </head>
-<body>
+<body class="locked">
+
+    <!-- ZUGANGS-FENSTER (PASSWORT 1291) -->
+    <div id="login-overlay">
+        <div class="login-box">
+            <h1>TOP SECRET</h1>
+            <p>Sicherheitsüberprüfung. Zutritt nur für autorisiertes Personal der Kapo Uri.</p>
+            <input type="password" id="accessCode" placeholder="CODE" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()">
+            <br>
+            <button onclick="checkAccess()">Zugang anfordern</button>
+            <p id="login-error">🚨 Falscher Code! Ein Rapport wird automatisch an den Schichtchef gesendet.</p>
+        </div>
+    </div>
 
     <div id="flash-overlay"></div>
 
+    <!-- Normales Radar-Zugriff-Verweigert Modal -->
     <div class="modal-overlay" id="myModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -132,6 +158,7 @@
         </div>
     </div>
 
+    <!-- Das Gedankenleser 15-Sekunden Modal -->
     <div class="modal-overlay" id="mindReaderModal">
         <div class="modal-content" style="border-color: #ff9900;">
             <span class="close-btn" onclick="closeMindReader()">&times;</span>
@@ -160,11 +187,22 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll: Alle Schweizer müssen das Land verlassen <span>+++</span> "Seniorita Huber" übernimmt Standesamt <span>+++</span> Post kollabiert wegen Gnos <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll <span>+++</span></div>
     </div>
 
     <div class="container">
+        <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
+
+            <!-- NEU: BULLENPOWER -->
+            <article class="article news-article">
+                <span class="kicker">Mythos Bullenpower</span>
+                <h2>Urner Polizisten umgarnt: Die begehrtesten Beamten der Zentralschweiz!</h2>
+                <p><strong>ALTDORF -</strong> Es ist offiziell: Die Uniformen sitzen straff, der Blick ist eisern und der Bizeps spannt. Die Kantonspolizei Uri erlebt derzeit einen nie dagewesenen Hype. Ob Spitalangestellte bei der routinemässigen Blutentnahme am Wochenende oder Polizisten aus den umliegenden Nachbarkorps Schwyz und Nidwalden – alle liegen den Urner Beamten reihenweise zu Füssen. Grund dafür ist die sogenannte "Bullenpower", von der auf den Wachen der gesamten Innerschweiz ehrfürchtig gemunkelt wird.</p>
+                <p>"Ein Spitalbesuch mit einem Verdächtigen gleicht mittlerweile einem Meet & Greet", verrät ein leicht erröteter Wachtmeister aus Erstfeld. "Die Krankenschwestern fragen fast schon nach Autogrammen, während wir eigentlich nur das Röhrchen für den Alkoholtest wollen." Auch intern platzt die Konkurrenz vor Neid: Es mehren sich die Fälle, in denen Polizisten aus anderen Kantonen heimlich versuchen, sich in die Innerschweiz versetzen zu lassen, nur um einen Funken der legendären Urner Aura abzubekommen. Die "Bullenpower" ist nicht länger nur ein Begriff für starke Einsätze, sie ist ein alpiner Lebensstil geworden.</p>
+                <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in den Olymp der Gerechtigkeit: <br>
+                <a href="https://www.ur.ch" target="_blank" style="color: var(--red); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
+            </article>
 
             <article class="article news-article">
                 <span class="kicker">G7-Gipfel-Desaster</span>
@@ -272,9 +310,12 @@
                 <button class="radar-btn" onclick="triggerRadar()" style="background: var(--red);">📸 RADAR MANUELL AUSLÖSEN</button>
             </article>
 
+            <!-- PAGINATION (SEITENBLÄTTERN) -->
             <div class="pagination" id="pagination-controls">
-                </div>
+                <!-- Buttons werden hier von Javascript eingefügt -->
+            </div>
 
+            <!-- KOMMENTAR BEREICH (MIT FIREBASE LIVE-FUNKTION) -->
             <div class="comments-section" id="community">
                 <div class="comments-header">Community <span>(Live!)</span></div>
                 
@@ -284,8 +325,10 @@
                     <button onclick="window.addLiveComment()">Senden</button>
                 </div>
 
+                <!-- Hier laden ab sofort die echten Firebase-Kommentare rein -->
                 <div id="liveCommentsContainer"></div>
 
+                <!-- Die 13 statischen Kult-Kommentare -->
                 <div class="comment" style="margin-top: 30px;">
                     <div class="comment-meta"><span class="user">SchlaflosInErstfeld</span> <span>09.06.2026, 06:15 Uhr</span></div>
                     <p class="comment-text">Hab gestern während der 12-Stunden-Schicht unter dem Kopierer geschlafen. War extrem gemütlich, bis T-Rex Gisler versucht hat, Papier nachzufüllen. Pures Chaos.</p>
@@ -419,8 +462,10 @@
 
         </main>
 
+        <!-- SEITENLEISTE RECHTS (WERBUNG) -->
         <aside class="sidebar">
             
+            <!-- Content Creator Remo Tresch -->
             <div class="ad-space ad-remo">
                 <span class="ad-label">Anzeige / Social Media</span>
                 <h4>Kapo Uri Instagram Reels</h4>
@@ -430,6 +475,7 @@
                 <a href="https://www.bullenpower-uri.ch" target="_blank" class="ad-link-btn">JETZT REELS SCHAUEN!</a>
             </div>
 
+            <!-- Hand- und Fussfesseln in den Güsel -->
             <div class="ad-space ad-guesel" onclick="alert('☮️ Friedens-Modus aktiviert!\n\nAb sofort werden Verdächtige nur noch ganz streng angeschaut oder bei Bedarf in warme, weiche Decken gewickelt. Gewalt war gestern!')">
                 <span class="ad-label">Deeskalation Pur</span>
                 <h4>Fesseln in den Güsel!</h4>
@@ -439,6 +485,7 @@
                 <button class="radar-btn" style="background: #8e44ad; font-size: 14px;">ZUM KUSCHEL-KURS</button>
             </div>
 
+            <!-- Lothar Imhof (Seriöser) -->
             <div class="ad-space ad-lothar">
                 <span class="ad-label">Im Einsatz für Uri</span>
                 <h4>Kompetenz an vorderster Front</h4>
@@ -447,6 +494,7 @@
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">🦺🦅🚔</div>
             </div>
 
+            <!-- Stefan Gisler (T-Rex) Werbung -->
             <div class="ad-space ad-trex">
                 <span class="ad-label">Kapo Ausrüstungs-Shop</span>
                 <h4>Masshemden "Edition T-Rex"</h4>
@@ -455,6 +503,7 @@
                 <button id="trexBtn" class="radar-btn" style="background: #27ae60; transition: all 0.2s; font-size: 14px;">HIER AUSWEIS GREIFEN!</button>
             </div>
 
+            <!-- Scheiber Werbung -->
             <div class="ad-space" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
                 <span class="ad-label">WANTED</span>
                 <h4 style="color: #8b4513;">DER DORF SHERIFF</h4>
@@ -467,7 +516,22 @@
         </aside>
     </div>
 
+    <!-- NORMALE JAVASCRIPT FUNKTIONEN & PAGINATION -->
     <script>
+        // -- LOGIN LOGIK --
+        function checkAccess() {
+            const code = document.getElementById('accessCode').value;
+            if(code === '1291') {
+                document.getElementById('login-overlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('login-overlay').style.display = 'none';
+                    document.body.classList.remove('locked');
+                }, 500);
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+
         // -- PAGINATION LOGIK --
         const articlesPerPage = 5;
         let currentPage = 1;
@@ -565,6 +629,7 @@
         function closeMindReader() { document.getElementById('mindReaderModal').classList.remove('active'); }
     </script>
 
+    <!-- FIREBASE LIVE-DATENBANK SCRIPT MIT ZEITSTEMPELN -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
