@@ -13,15 +13,17 @@
         /* Body Locked für Login-Screen */
         body.locked { overflow: hidden; height: 100vh; }
 
-        /* Login / Access Screen Overlay */
-        #login-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--dark); z-index: 100000; display: flex; justify-content: center; align-items: center; flex-direction: column; color: white; transition: opacity 0.5s ease; }
-        .login-box { background: #111; padding: 40px; border: 4px solid var(--red); text-align: center; box-shadow: 0 0 30px rgba(224, 0, 0, 0.4); max-width: 90%; }
-        .login-box h1 { color: var(--red); font-size: 45px; text-transform: uppercase; transform: skew(-5deg); margin-top: 0; margin-bottom: 10px; letter-spacing: -1px; }
-        .login-box p { font-size: 16px; margin-bottom: 30px; color: #ccc; }
-        .login-box input { padding: 15px; font-size: 24px; text-align: center; border: 2px solid var(--red); border-radius: 5px; margin-bottom: 20px; outline: none; font-weight: bold; width: 200px; background: #222; color: white; letter-spacing: 5px; }
-        .login-box button { background: var(--red); color: white; border: none; padding: 15px 30px; font-size: 18px; font-weight: 900; cursor: pointer; text-transform: uppercase; transition: 0.2s; width: 100%; }
-        .login-box button:hover { background: white; color: var(--red); }
-        #login-error { color: #ffcc00; margin-top: 20px; display: none; font-weight: bold; font-size: 14px; }
+        /* Login / Access Screen Overlay mit Matrix-Canvas */
+        #login-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 100000; display: flex; justify-content: center; align-items: center; flex-direction: column; transition: opacity 0.5s ease; }
+        #matrix-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        
+        .login-box { background: rgba(17, 17, 17, 0.9); padding: 40px; border: 4px solid var(--red); text-align: center; box-shadow: 0 0 30px rgba(224, 0, 0, 0.8); max-width: 90%; z-index: 2; position: relative; border-radius: 10px; backdrop-filter: blur(5px); }
+        .login-box h1 { color: var(--red); font-size: 45px; text-transform: uppercase; transform: skew(-5deg); margin-top: 0; margin-bottom: 10px; letter-spacing: -1px; text-shadow: 0 0 10px red; }
+        .login-box p { font-size: 16px; margin-bottom: 30px; color: #fff; font-weight: bold; }
+        .login-box input { padding: 15px; font-size: 24px; text-align: center; border: 2px solid var(--red); border-radius: 5px; margin-bottom: 20px; outline: none; font-weight: bold; width: 200px; background: #000; color: #0f0; letter-spacing: 5px; text-shadow: 0 0 5px #0f0; }
+        .login-box button { background: var(--red); color: white; border: none; padding: 15px 30px; font-size: 18px; font-weight: 900; cursor: pointer; text-transform: uppercase; transition: 0.2s; width: 100%; border-radius: 5px; }
+        .login-box button:hover { background: white; color: var(--red); box-shadow: 0 0 15px white; }
+        #login-error { color: #ffcc00; margin-top: 20px; display: none; font-weight: bold; font-size: 14px; text-shadow: 0 0 5px black; }
 
         /* Blitzer-Effekt Overlay */
         #flash-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 9999; opacity: 0; pointer-events: none; }
@@ -133,11 +135,12 @@
 </head>
 <body class="locked">
 
-    <!-- ZUGANGS-FENSTER (PASSWORT 1291) -->
+    <!-- ZUGANGS-FENSTER (PASSWORT 1291) MIT MATRIX HINTERGRUND -->
     <div id="login-overlay">
+        <canvas id="matrix-canvas"></canvas>
         <div class="login-box">
             <h1>TOP SECRET</h1>
-            <p>Sicherheitsüberprüfung. Zutritt nur für autorisiertes Personal der Kapo Uri.</p>
+            <p>Sicherheitsüberprüfung.<br>Zutritt nur für autorisiertes Personal der Kapo Uri.</p>
             <input type="password" id="accessCode" placeholder="CODE" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()">
             <br>
             <button onclick="checkAccess()">Zugang anfordern</button>
@@ -187,14 +190,23 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span> 10-Mio-Schweiz voll <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
     </div>
 
     <div class="container">
         <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
 
-            <!-- NEU: BULLENPOWER -->
+            <!-- NEU: HITZEMASSNAHMEN -->
+            <article class="article news-article">
+                <span class="kicker">Klima-Kollaps im Revier</span>
+                <h2>Alarmstufe Rot: Kapo Uri führt extreme Hitzemassnahmen ein – Borat-Tangas und endlose WC-Dramen!</h2>
+                <p><strong>ALTDORF -</strong> Die Sonne brennt gnadenlos auf den Urner Asphalt, und das Kommando der Kantonspolizei zieht die Reissleine: Bis zum <strong>29.06.2026</strong> gilt der absolute, offizielle Hitze-Notstand! Die neuen, drakonischen Massnahmen sind strikt: Vermehrte Zwangspausen im rettenden Schatten und eine rigorose, polizeilich überwachte Trinkpflicht für alle.</p>
+                <p>Doch das gut gemeinte Wasser-Regime hat katastrophale Nebenwirkungen. Die Beamten kippen so viel Flüssigkeit in sich hinein, dass die Schlangen vor den WCs im Polizeigebäude mittlerweile länger sind als der Rückstau vor dem Gotthard-Nordportal am Ostermontag. "Wir überlegen ernsthaft, mobile Dixi-Klos auf den Fluren aufzustellen", ächzt ein Beamter mit zusammengekniffenen Beinen und schweissnassem Gesicht, während er seit 20 Minuten verzweifelt vor der Herrentoilette wartet.</p>
+                <p>Der eigentliche Skandal spielt sich jedoch auf der Strasse bei den Zivilfahndern ab. Offiziell wurde das Tragen von "kurzen Hosen" grosszügig gestattet. Einige Kollegen haben das jedoch als Freifahrtschein für den totalen textilen Kontrollverlust interpretiert. Angeblich wurde ein Kripo-Mitarbeiter beim Observieren in einem neongrünen Borat-Tanga gesichtet – getarnt lediglich mit Dienstmarke um den Hals und Piloten-Sonnenbrille. Die Kapo-Leitung rudert nun verzweifelt zurück: "Die Verhaftungsquoten sind zwar massiv gestiegen, weil die Verdächtigen beim Anblick unserer Zivilen so traumatisiert sind, dass sie sich weinend freiwillig stellen. Aber ästhetisch stossen wir hier an unsere Grenzen!"</p>
+            </article>
+
+            <!-- BULLENPOWER -->
             <article class="article news-article">
                 <span class="kicker">Mythos Bullenpower</span>
                 <h2>Urner Polizisten umgarnt: Die begehrtesten Beamten der Zentralschweiz!</h2>
@@ -204,6 +216,7 @@
                 <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--red); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
             </article>
 
+            <!-- G7 EINSATZ -->
             <article class="article news-article">
                 <span class="kicker">G7-Gipfel-Desaster</span>
                 <h2>8 Urner Polizisten in Genf: Schlechter organisiert als ein Kindergeburtstag – Schlafen im Hasenstall!</h2>
@@ -545,10 +558,48 @@
 
     <!-- NORMALE JAVASCRIPT FUNKTIONEN & PAGINATION -->
     <script>
+        // -- MATRIX CANVAS LOGIK --
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブヅエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+        
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        
+        const rainDrops = [];
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+        
+        const drawMatrix = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+            
+            for(let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                
+                if(rainDrops[i] * fontSize > canvas.height && Math.random() > 0.97){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+        let matrixInterval = setInterval(drawMatrix, 30);
+
         // -- LOGIN LOGIK --
         function checkAccess() {
             const code = document.getElementById('accessCode').value;
             if(code === '1291') {
+                clearInterval(matrixInterval); // Stoppt die Matrix-Animation im Hintergrund
                 document.getElementById('login-overlay').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('login-overlay').style.display = 'none';
@@ -558,6 +609,12 @@
                 document.getElementById('login-error').style.display = 'block';
             }
         }
+
+        // Anpassung der Canvas-Grösse bei Fensteränderung
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
 
         // -- PAGINATION LOGIK --
         const articlesPerPage = 5;
