@@ -30,9 +30,11 @@
         .blitz-active { animation: blitzAnim 0.8s ease-out; }
         @keyframes blitzAnim { 0% { opacity: 1; } 100% { opacity: 0; } }
 
-        /* Magischer Bambus Regen */
-        .bamboo-drop { position: fixed; top: -50px; font-size: 2rem; z-index: 1000; animation: fall linear forwards; user-select: none; }
+        /* Magischer Bambus Regen & Muskeln */
+        .bamboo-drop, .muscle-drop { position: fixed; top: -50px; font-size: 2rem; z-index: 1000; animation: fall linear forwards; user-select: none; }
+        .muscle-drop { animation: flyUp 2s ease-out forwards; top: auto; bottom: 0; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        @keyframes flyUp { to { transform: translateY(-110vh) scale(1.5); opacity: 0; } }
 
         /* Funkel-Effekt für das Logo */
         @keyframes sparkle {
@@ -72,6 +74,10 @@
         /* Interaktiver Radar-Button */
         .radar-btn { background: var(--dark); color: white; border: none; padding: 12px 20px; font-size: 16px; font-weight: 900; cursor: pointer; margin-top: 15px; text-transform: uppercase; transition: 0.2s; display: inline-block; width: 100%; box-sizing: border-box; text-align: center; }
         .radar-btn:hover { background: var(--red); }
+
+        /* Spezifische Highlight-Klasse für Protein-Clicker */
+        .protein-clicker { color: var(--red); font-weight: bold; cursor: pointer; border-bottom: 1px dashed var(--red); transition: 0.2s; }
+        .protein-clicker:hover { background-color: var(--red); color: white; }
 
         /* Pagination Design */
         .pagination { text-align: center; margin: 20px 0 40px 0; border-top: 2px dashed #ccc; padding-top: 20px; }
@@ -190,7 +196,7 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Liebe, Flirts und Spital-Romanzen <span>+++</span> Hybrid-Athleten der Kapo: Sprints um 02:00 Uhr nachts <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
     </div>
 
     <div class="container">
@@ -206,14 +212,22 @@
                 <p>Der eigentliche Skandal spielt sich jedoch auf der Strasse bei den Zivilfahndern ab. Offiziell wurde das Tragen von "kurzen Hosen" grosszügig gestattet. Einige Kollegen haben das jedoch als Freifahrtschein für den totalen textilen Kontrollverlust interpretiert. Angeblich wurde ein Kripo-Mitarbeiter beim Observieren in einem neongrünen Borat-Tanga gesichtet – getarnt lediglich mit Dienstmarke um den Hals und Piloten-Sonnenbrille. Die Kapo-Leitung rudert nun verzweifelt zurück: "Die Verhaftungsquoten sind zwar massiv gestiegen, weil die Verdächtigen beim Anblick unserer Zivilen so traumatisiert sind, dass sie sich weinend freiwillig stellen. Aber ästhetisch stossen wir hier an unsere Grenzen!"</p>
             </article>
 
-            <!-- BULLENPOWER -->
+            <!-- BULLENPOWER (ANGEPASST MIT ROMANZEN) -->
             <article class="article news-article">
                 <span class="kicker">Mythos Bullenpower</span>
-                <h2>Urner Polizisten umgarnt: Die begehrtesten Beamten der Zentralschweiz!</h2>
-                <p><strong>ALTDORF -</strong> Es ist offiziell: Die Uniformen sitzen straff, der Blick ist eisern und der Bizeps spannt. Die Kantonspolizei Uri erlebt derzeit einen nie dagewesenen Hype. Ob Spitalangestellte bei der routinemässigen Blutentnahme am Wochenende oder Polizisten aus den umliegenden Nachbarkorps Schwyz und Nidwalden – alle liegen den Urner Beamten reihenweise zu Füssen. Grund dafür ist die sogenannte "Bullenpower", von der auf den Wachen der gesamten Innerschweiz ehrfürchtig gemunkelt wird.</p>
-                <p>"Ein Spitalbesuch mit einem Verdächtigen gleicht mittlerweile einem Meet & Greet", verrät ein leicht erröteter Wachtmeister aus Erstfeld. "Die Krankenschwestern fragen fast schon nach Autogrammen, während wir eigentlich nur das Röhrchen für den Alkoholtest wollen." Auch intern platzt die Konkurrenz vor Neid: Es mehren sich die Fälle, in denen Polizisten aus anderen Kantonen heimlich versuchen, sich in die Innerschweiz versetzen zu lassen, nur um einen Funken der legendären Urner Aura abzubekommen. Die "Bullenpower" ist nicht länger nur ein Begriff für starke Einsätze, sie ist ein alpiner Lebensstil geworden.</p>
+                <h2>Urner Polizisten umgarnt: Liebesdramen, Spital-Flirts und grenzübergreifende Romanzen!</h2>
+                <p><strong>ALTDORF -</strong> Es ist offiziell: Die Uniformen sitzen straff, der Blick ist eisern und der Bizeps spannt. Die Kantonspolizei Uri erlebt derzeit einen nie dagewesenen Hype. Das Konzept der legendären "Bullenpower" sorgt mittlerweile für handfeste zwischenmenschliche Verwicklungen – weit über die Kantonsgrenzen hinaus!</p>
+                <p>Ein absoluter Skandal erschüttert aktuell die Wandelgänge: Ein Nidwaldner Polizist hat es doch tatsächlich gewagt, unter dem Deckmantel der interkantonalen Zusammenarbeit eine junge, vielversprechende Urner Polizeiabsolventin zu verführen. "Das ist Fachkräfteabwerbung der untersten Schublade!", tobt ein alteingesessener Wachtmeister. Gleichzeitig spielen sich bei Blutentnahmen im Kantonsspital hollywoodreife Szenen ab. Erst letzte Woche angelte sich eine findige Krankenschwester während einer Routine-Blutabnahme am Wochenende zielstrebig einen waschechten Italo-Urner Polizisten. "Er wollte eigentlich nur das Röhrchen für den Alkoholtest, sie wollte sein Herz – und sein Rezept für Nonnas Pasta", berichtet ein Insider kopfschüttelnd. Die Bullenpower ist nicht länger nur ein Begriff für starke Einsätze, sie ist zur ultimativen Amor-Taktik geworden.</p>
                 <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in den Olymp der Gerechtigkeit: <br>
                 <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--red); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
+            </article>
+
+            <!-- NEUER ARTIKEL: FITTESTE POLIZISTEN / HYBRID ATHLETEN -->
+            <article class="article news-article">
+                <span class="kicker">Evolution der Terminatoren</span>
+                <h2>Fitness-Wahn auf dem Revier: Kapo Uri züchtet die fittesten Polizisten der Welt heran!</h2>
+                <p><strong>ALTDORF -</strong> Vergessen Sie die Navy SEALs, vergessen Sie die Spartaner – die wahre Elite trainiert im Kanton Uri! Ein beispielloser Fitness-Wahn hat die gesamte Belegschaft erfasst. Die Polizisten trainieren plötzlich wie von der Tarantel gestochen, als ginge es um das nackte Überleben. Das ehemals gemütliche Pausen-Büro gleicht mittlerweile einem High-Performance-Lager für Hybrid-Athleten.</p>
+                <p>Die Szenen sind absolut surreal: Beamte joggen völlig schmerzfrei nachts um 02:00 Uhr nach der Spätschicht mit Stirnlampen durch Altdorf, um sich akribisch auf den nächsten Halbmarathon in Luzern vorzubereiten. Andere sprinten in der brütenden Mittagssonne in voller Montur Hügel hinauf. Selbst der Nahkampf wird auf ein neues Level gehoben – statt einfachem Festhaltegriff wird neuerdings eifrig im MMA und Grappling auf den Matten geschwitzt. "Techniken wie <em>Harai Goshi</em> und <em>Kata Guruma</em> gehören jetzt zum Standard-Repertoire bei der Personenkontrolle", keucht ein völlig durchtrainierter Schichtchef, während er sich einen weiteren <span class="protein-clicker" onclick="flexMuscles()">Proteinriegel</span> reinzieht. Jeder will der Schnellste, der Stärkste und der Beste sein. Gerüchten zufolge flüchten Verdächtige im Kanton Uri gar nicht erst, weil die Beamten sie aus reinem Trainingszweck noch drei Extrarunden um den Block jagen würden, bevor die Handschellen klicken.</p>
             </article>
 
             <!-- G7 EINSATZ -->
@@ -221,7 +235,7 @@
                 <span class="kicker">G7-Gipfel-Desaster</span>
                 <h2>8 Urner Polizisten in Genf: Schlechter organisiert als ein Kindergeburtstag – Schlafen im Hasenstall!</h2>
                 <p><strong>GENF / URI -</strong> Da eilen acht hochmotivierte Urner Polizisten an den Genfersee, um rund um den G7-Gipfel in Evian für Recht, Ordnung und astreine Verkehrskontrollen zu sorgen, und was erwartet sie? Ein organisatorisches Fiasko, das selbst die Planung eines Kindergeburtstags im Waldkindergarten wie eine militärische Meisterleistung aussehen lässt. Die Genfer Behörden waren von der Ankunft der Zentralschweizer Verstärkung offenbar so überrascht, als fände der weltweite Gipfel völlig spontan und unangekündigt statt.</p>
-                <p>Doch der absolute Tiefpunkt wartete nach dem ohnehin schon chaotischen Dienstschluss: Die "Unterkünfte". "Hasenstall ist noch völlig geprahlt", fluchte ein Urner Wachtmeister leise, während er versuchte, seine Wirbelsäule nach einer Nacht auf einer zentimeterdünnen Pritsche wieder halbwegs geradezubiegen. Die bittere Ironie des Schicksals: Erst kürzlich wurde die 10-Millionen-Schweiz abgelehnt, angeblich um Platzmangel und Dichtestress zu vermeiden – doch bei den Schlafplätzen der eigenen Einsatzkräfte stapelt man die Beamten gnadenlos übereinander. "Wir werden hier schlimmer gehalten als Asylanten", knurrte ein Kollege beim morgendlichen Versuch, sich in der Besenkammer-grossen Zelle die Uniform anzuziehen. "Wenn ich noch einmal den Ellenbogen meines Nebenmanns beim Umdrehen im Gesicht habe, fordere ich politisches Asyl im Kanton Waadt!" Wenigstens, so heisst es aus gut unterrichteten Kreisen, hatte die Delegation ihre eigenen Proteinriegel dabei.</p>
+                <p>Doch der absolute Tiefpunkt wartete nach dem ohnehin schon chaotischen Dienstschluss: Die "Unterkünfte". "Hasenstall ist noch völlig geprahlt", fluchte ein Urner Wachtmeister leise, während er versuchte, seine Wirbelsäule nach einer Nacht auf einer zentimeterdünnen Pritsche wieder halbwegs geradezubiegen. Die bittere Ironie des Schicksals: Erst kürzlich wurde die 10-Millionen-Schweiz abgelehnt, angeblich um Platzmangel und Dichtestress zu vermeiden – doch bei den Schlafplätzen der eigenen Einsatzkräfte stapelt man die Beamten gnadenlos übereinander. "Wir werden hier schlimmer gehalten als Asylanten", knurrte ein Kollege beim morgendlichen Versuch, sich in der Besenkammer-grossen Zelle die Uniform anzuziehen. "Wenn ich noch einmal den Ellenbogen meines Nebenmanns beim Umdrehen im Gesicht habe, fordere ich politisches Asyl im Kanton Waadt!" Wenigstens, so heisst es aus gut unterrichteten Kreisen, hatte die Delegation ihre eigenen <span class="protein-clicker" onclick="flexMuscles()">Proteinriegel</span> dabei.</p>
             </article>
 
             <article class="article news-article">
@@ -241,7 +255,7 @@
             <article class="article news-article">
                 <span class="kicker">BVP Info Exklusiv</span>
                 <h2>Muskelaufbau im Dienst: Neu gibt es Proteinriegel für die Pausen!</h2>
-                <p><strong>ALTDORF -</strong> Die Führungsebene hat erkannt: Wer den Gotthard-Verkehr bändigen will, braucht mehr als nur wässrigen Kaffee. An der jüngsten BVP Info wurde eine revolutionäre Neuerung für die Bereitschafts- und Verkehrspolizei verkündet: Zur Stärkung der Truppe werden ab sofort in den offiziellen Pausen feinstaubgeprüfte Proteinriegel ausgegeben.</p>
+                <p><strong>ALTDORF -</strong> Die Führungsebene hat erkannt: Wer den Gotthard-Verkehr bändigen will, braucht mehr als nur wässrigen Kaffee. An der jüngsten BVP Info wurde eine revolutionäre Neuerung für die Bereitschafts- und Verkehrspolizei verkündet: Zur Stärkung der Truppe werden ab sofort in den offiziellen Pausen feinstaubgeprüfte <span class="protein-clicker" onclick="flexMuscles()">Proteinriegel</span> ausgegeben.</p>
                 <p>"Die trockenen Gipfeli von früher haben einfach nicht genug Masse gebracht", erklärt ein sichtlich aufgepumpter Wachtmeister. "Jetzt können wir zwischen den LKW-Kontrollen ordentlich Gains machen." Böse Zungen behaupten, die Neuerung sei primär deshalb eingeführt worden, damit die Kollegen die interne 500-Liegestütze-Challenge ohne kompletten Schwächeanfall überstehen. Die Uniformschneider der Kapo Uri sind jedenfalls bereits in Alarmbereitschaft versetzt worden, falls die blauen Hemden an den Ärmeln bald bedrohlich zu spannen beginnen.</p>
             </article>
 
@@ -682,6 +696,21 @@
                     document.body.appendChild(drop);
                     setTimeout(() => { drop.remove(); }, 5000);
                 }, i * 150);
+            }
+        }
+        
+        // Neues Spezial Feature: Muskeln flexen bei Protein-Klick
+        function flexMuscles() {
+            const emojis = ['💪', '🏋️‍♂️', '🔥', '🦍'];
+            for(let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const drop = document.createElement('div');
+                    drop.classList.add('muscle-drop');
+                    drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                    drop.style.left = (Math.random() * 80 + 10) + 'vw'; // Zufällig auf Bildschirmbreite
+                    document.body.appendChild(drop);
+                    setTimeout(() => { drop.remove(); }, 2000);
+                }, i * 100);
             }
         }
 
