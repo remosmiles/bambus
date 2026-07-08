@@ -7,34 +7,165 @@
     <title>Bambus News - Kanton Uri</title>
     <style>
         /* CSS Reset & Boulevard-Tabloid Variablen */
-        :root { --red: #e00000; --dark: #000000; --bg: #ffffff; --gray: #f4f4f4; --border: #dddddd; }
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: var(--gray); color: #111; overflow-x: hidden; }
+        :root { 
+            --red: #e00000; 
+            --dark: #000000; 
+            --bg: #ffffff; 
+            --gray: #f4f4f4; 
+            --border: #dddddd; 
+        }
+        
+        body { 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--gray); 
+            color: #111; 
+            overflow-x: hidden; 
+        }
         
         /* Body Locked für Login-Screen */
-        body.locked { overflow: hidden; height: 100vh; }
+        body.locked { 
+            overflow: hidden; 
+            height: 100vh; 
+        }
 
-        /* Login / Access Screen Overlay mit Matrix-Canvas */
-        #login-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 100000; display: flex; justify-content: center; align-items: center; flex-direction: column; transition: opacity 0.5s ease; }
-        #matrix-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        /* Login Screen Overlay mit Matrix-Canvas */
+        #login-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            background: black; 
+            z-index: 100000; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-direction: column; 
+            transition: opacity 0.5s ease; 
+        }
+
+        #matrix-canvas { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 1; 
+        }
         
-        .login-box { background: rgba(17, 17, 17, 0.9); padding: 40px; border: 4px solid var(--red); text-align: center; box-shadow: 0 0 30px rgba(224, 0, 0, 0.8); max-width: 90%; z-index: 2; position: relative; border-radius: 10px; backdrop-filter: blur(5px); }
-        .login-box h1 { color: var(--red); font-size: 45px; text-transform: uppercase; transform: skew(-5deg); margin-top: 0; margin-bottom: 10px; letter-spacing: -1px; text-shadow: 0 0 10px red; }
-        .login-box p { font-size: 16px; margin-bottom: 30px; color: #fff; font-weight: bold; }
-        .login-box input { padding: 15px; font-size: 24px; text-align: center; border: 2px solid var(--red); border-radius: 5px; margin-bottom: 20px; outline: none; font-weight: bold; width: 200px; background: #000; color: #0f0; letter-spacing: 5px; text-shadow: 0 0 5px #0f0; }
-        .login-box button { background: var(--red); color: white; border: none; padding: 15px 30px; font-size: 18px; font-weight: 900; cursor: pointer; text-transform: uppercase; transition: 0.2s; width: 100%; border-radius: 5px; }
-        .login-box button:hover { background: white; color: var(--red); box-shadow: 0 0 15px white; }
-        #login-error { color: #ffcc00; margin-top: 20px; display: none; font-weight: bold; font-size: 14px; text-shadow: 0 0 5px black; }
+        .login-box { 
+            background: rgba(17, 17, 17, 0.9); 
+            padding: 40px; 
+            border: 4px solid var(--red); 
+            text-align: center; 
+            box-shadow: 0 0 30px rgba(224, 0, 0, 0.8); 
+            max-width: 90%; 
+            z-index: 2; 
+            position: relative; 
+            border-radius: 10px; 
+            backdrop-filter: blur(5px); 
+        }
+
+        .login-box h1 { 
+            color: var(--red); 
+            font-size: 45px; 
+            text-transform: uppercase; 
+            transform: skew(-5deg); 
+            margin-top: 0; 
+            margin-bottom: 10px; 
+            letter-spacing: -1px; 
+            text-shadow: 0 0 10px red; 
+        }
+
+        .login-box p { 
+            font-size: 16px; 
+            margin-bottom: 30px; 
+            color: #fff; 
+            font-weight: bold; 
+        }
+
+        .login-box input { 
+            padding: 15px; 
+            font-size: 24px; 
+            text-align: center; 
+            border: 2px solid var(--red); 
+            border-radius: 5px; 
+            margin-bottom: 20px; 
+            outline: none; 
+            font-weight: bold; 
+            width: 200px; 
+            background: #000; 
+            color: #0f0; 
+            letter-spacing: 5px; 
+            text-shadow: 0 0 5px #0f0; 
+        }
+
+        .login-box button { 
+            background: var(--red); 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            font-size: 18px; 
+            font-weight: 900; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            transition: 0.2s; 
+            width: 100%; 
+            border-radius: 5px; 
+        }
+
+        .login-box button:hover { 
+            background: white; 
+            color: var(--red); 
+            box-shadow: 0 0 15px white; 
+        }
+
+        #login-error { 
+            color: #ffcc00; 
+            margin-top: 20px; 
+            display: none; 
+            font-weight: bold; 
+            font-size: 14px; 
+            text-shadow: 0 0 5px black; 
+        }
 
         /* Blitzer-Effekt Overlay */
-        #flash-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 9999; opacity: 0; pointer-events: none; }
-        .blitz-active { animation: blitzAnim 0.8s ease-out; }
-        @keyframes blitzAnim { 0% { opacity: 1; } 100% { opacity: 0; } }
+        #flash-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            background: white; 
+            z-index: 9999; 
+            opacity: 0; 
+            pointer-events: none; 
+        }
 
-        /* Magischer Bambus Regen & Muskeln */
-        .bamboo-drop, .muscle-drop { position: fixed; top: -50px; font-size: 2rem; z-index: 1000; animation: fall linear forwards; user-select: none; }
-        .muscle-drop { animation: flyUp 2s ease-out forwards; top: auto; bottom: 0; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-        @keyframes flyUp { to { transform: translateY(-110vh) scale(1.5); opacity: 0; } }
+        .blitz-active { 
+            animation: blitzAnim 0.8s ease-out; 
+        }
+
+        @keyframes blitzAnim { 
+            0% { opacity: 1; } 
+            100% { opacity: 0; } 
+        }
+
+        /* Magischer Bambus Regen */
+        .bamboo-drop { 
+            position: fixed; 
+            top: -50px; 
+            font-size: 2rem; 
+            z-index: 1000; 
+            animation: fall linear forwards; 
+            user-select: none; 
+        }
+
+        @keyframes fall { 
+            to { transform: translateY(110vh) rotate(360deg); } 
+        }
 
         /* Funkel-Effekt für das Logo */
         @keyframes sparkle {
@@ -43,60 +174,262 @@
         }
 
         /* Header BILD/20Min-Style */
-        header { background: var(--red); color: white; padding: 15px 20px; border-bottom: 4px solid var(--dark); text-align: center; }
-        .logo-container { display: inline-block; background: white; padding: 5px 15px; border: 3px solid var(--dark); transform: skew(-5deg); cursor: pointer; }
-        .logo { font-size: 48px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; color: var(--red); transform: skew(5deg); display: block; margin: 0; line-height: 1; animation: sparkle 2.5s ease-in-out infinite; }
+        header { 
+            background: var(--red); 
+            color: white; 
+            padding: 15px 20px; 
+            border-bottom: 4px solid var(--dark); 
+            text-align: center; 
+        }
+
+        .logo-container { 
+            display: inline-block; 
+            background: white; 
+            padding: 5px 15px; 
+            border: 3px solid var(--dark); 
+            transform: skew(-5deg); 
+            cursor: pointer; 
+        }
+
+        .logo { 
+            font-size: 48px; 
+            font-weight: 900; 
+            letter-spacing: -2px; 
+            text-transform: uppercase; 
+            color: var(--red); 
+            transform: skew(5deg); 
+            display: block; 
+            margin: 0; 
+            line-height: 1; 
+            animation: sparkle 2.5s ease-in-out infinite; 
+        }
         
         /* Echte Navigation mit Links */
-        nav { background: var(--dark); color: white; padding: 10px 0; text-align: center; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; cursor: pointer; display: inline-block; }
-        nav a:hover { color: var(--red); }
-        .nav-divider { color: #555; }
+        nav { 
+            background: var(--dark); 
+            color: white; 
+            padding: 10px 0; 
+            text-align: center; 
+        }
+
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            margin: 0 15px; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            font-size: 14px; 
+            letter-spacing: 1px; 
+            cursor: pointer; 
+            display: inline-block; 
+        }
+
+        nav a:hover { 
+            color: var(--red); 
+        }
+
+        .nav-divider { 
+            color: #555; 
+        }
 
         /* Roter Ticker */
-        .ticker { background: white; color: var(--dark); padding: 10px 20px; font-weight: 900; font-size: 16px; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--dark); }
-        .ticker span { color: var(--red); margin-right: 10px; }
-        .ticker-text { display: inline-block; animation: scroll 60s linear infinite; }
-        @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+        .ticker { 
+            background: white; 
+            color: var(--dark); 
+            padding: 10px 20px; 
+            font-weight: 900; 
+            font-size: 16px; 
+            overflow: hidden; 
+            white-space: nowrap; 
+            border-bottom: 2px solid var(--dark); 
+        }
+
+        .ticker span { 
+            color: var(--red); 
+            margin-right: 10px; 
+        }
+
+        .ticker-text { 
+            display: inline-block; 
+            animation: scroll 60s linear infinite; 
+        }
+
+        @keyframes scroll { 
+            0% { transform: translateX(100vw); } 
+            100% { transform: translateX(-100%); } 
+        }
 
         /* Layout */
-        .container { max-width: 1100px; margin: 20px auto; padding: 0 10px; display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; }
-        .main-content { flex: 3; min-width: 65%; background: white; border: 1px solid var(--border); padding: 20px; }
-        .sidebar { flex: 1; min-width: 300px; }
+        .container { 
+            max-width: 1100px; 
+            margin: 20px auto; 
+            padding: 0 10px; 
+            display: flex; 
+            gap: 20px; 
+            flex-wrap: wrap; 
+            align-items: flex-start; 
+        }
 
-        /* Artikel-Design (Harte Kanten, grosse Fonts) */
-        .article { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid var(--dark); }
-        .article:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .kicker { display: block; color: var(--red); font-size: 14px; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
-        .article h2 { margin: 0 0 10px 0; font-size: 38px; line-height: 1.05; letter-spacing: -1px; font-weight: 900; }
-        .article p { color: #333; line-height: 1.6; font-size: 17px; font-family: Georgia, serif; margin-top: 15px; }
+        .main-content { 
+            flex: 3; 
+            min-width: 65%; 
+            background: white; 
+            border: 1px solid var(--border); 
+            padding: 20px; 
+        }
+
+        .sidebar { 
+            flex: 1; 
+            min-width: 300px; 
+        }
+
+        /* Artikel-Design */
+        .article { 
+            margin-bottom: 40px; 
+            padding-bottom: 20px; 
+            border-bottom: 2px solid var(--dark); 
+        }
+
+        .article:last-child { 
+            border-bottom: none; 
+            margin-bottom: 0; 
+            padding-bottom: 0; 
+        }
+
+        .kicker { 
+            display: block; 
+            color: var(--red); 
+            font-size: 14px; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            margin-bottom: 5px; 
+        }
+
+        .article h2 { 
+            margin: 0 0 10px 0; 
+            font-size: 38px; 
+            line-height: 1.05; 
+            letter-spacing: -1px; 
+            font-weight: 900; 
+        }
+
+        .article p { 
+            color: #333; 
+            line-height: 1.6; 
+            font-size: 17px; 
+            font-family: Georgia, serif; 
+            margin-top: 15px; 
+        }
         
         /* Interaktiver Radar-Button */
-        .radar-btn { background: var(--dark); color: white; border: none; padding: 12px 20px; font-size: 16px; font-weight: 900; cursor: pointer; margin-top: 15px; text-transform: uppercase; transition: 0.2s; display: inline-block; width: 100%; box-sizing: border-box; text-align: center; }
-        .radar-btn:hover { background: var(--red); }
+        .radar-btn { 
+            background: var(--dark); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            font-size: 16px; 
+            font-weight: 900; 
+            cursor: pointer; 
+            margin-top: 15px; 
+            text-transform: uppercase; 
+            transition: 0.2s; 
+            display: inline-block; 
+            width: 100%; 
+            box-sizing: border-box; 
+            text-align: center; 
+        }
 
-        /* Spezifische Highlight-Klasse für Protein-Clicker */
-        .protein-clicker { color: var(--red); font-weight: bold; cursor: pointer; border-bottom: 1px dashed var(--red); transition: 0.2s; }
-        .protein-clicker:hover { background-color: var(--red); color: white; }
+        .radar-btn:hover { 
+            background: var(--red); 
+        }
 
         /* Pagination Design */
-        .pagination { text-align: center; margin: 20px 0 40px 0; border-top: 2px dashed #ccc; padding-top: 20px; }
-        .pagination button { background: var(--dark); color: white; border: none; padding: 10px 18px; margin: 0 5px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.2s; }
-        .pagination button:hover { background: var(--red); }
-        .pagination button.active { background: var(--red); transform: scale(1.1); }
-        .news-article { display: none; } /* Wird per JS gesteuert */
+        .pagination { 
+            text-align: center; 
+            margin: 20px 0 40px 0; 
+            border-top: 2px dashed #ccc; 
+            padding-top: 20px; 
+        }
+
+        .pagination button { 
+            background: var(--dark); 
+            color: white; 
+            border: none; 
+            padding: 10px 18px; 
+            margin: 0 5px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 16px; 
+            transition: 0.2s; 
+        }
+
+        .pagination button:hover { 
+            background: var(--red); 
+        }
+
+        .pagination button.active { 
+            background: var(--red); 
+            transform: scale(1.1); 
+        }
+
+        .news-article { 
+            display: none; 
+        }
 
         /* Sidebar Werbung Styling */
-        .ad-space { background: white; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; position: relative; border-top: 4px solid var(--dark); }
-        .ad-label { font-size: 10px; color: #999; display: block; text-align: left; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
-        .ad-space h4 { margin: 0 0 10px 0; font-size: 22px; font-weight: 900; text-transform: uppercase; line-height: 1.1; }
-        .ad-space p { font-size: 14px; color: #444; margin-bottom: 15px; line-height: 1.4; }
+        .ad-space { 
+            background: white; 
+            border: 1px solid var(--border); 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            position: relative; 
+            border-top: 4px solid var(--dark); 
+        }
+
+        .ad-label { 
+            font-size: 10px; 
+            color: #999; 
+            display: block; 
+            text-align: left; 
+            margin-bottom: 10px; 
+            text-transform: uppercase; 
+            font-weight: bold; 
+            letter-spacing: 1px; 
+        }
+
+        .ad-space h4 { 
+            margin: 0 0 10px 0; 
+            font-size: 22px; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            line-height: 1.1; 
+        }
+
+        .ad-space p { 
+            font-size: 14px; 
+            color: #444; 
+            margin-bottom: 15px; 
+            line-height: 1.4; 
+        }
 
         /* Spezifische Ads */
         .ad-remo { border-top-color: #e1306c; }
         .ad-remo h4 { color: #e1306c; }
-        .ad-link-btn { display: block; background: #e1306c; color: white; text-decoration: none; padding: 10px; font-weight: bold; text-transform: uppercase; text-align: center; }
-        .ad-link-btn:hover { background: var(--dark); }
+        
+        .ad-link-btn { 
+            display: block; 
+            background: #e1306c; 
+            color: white; 
+            text-decoration: none; 
+            padding: 10px; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            text-align: center; 
+        }
+
+        .ad-link-btn:hover { 
+            background: var(--dark); 
+        }
 
         .ad-lothar { border-top-color: #0044cc; background: #f0f5ff; }
         .ad-lothar h4 { color: #0044cc; }
@@ -108,43 +441,187 @@
         .ad-guesel h4 { color: #8e44ad; }
 
         /* Modernes Modal (Popup) */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: white; padding: 40px; border: 5px solid var(--red); max-width: 500px; text-align: center; position: relative; transform: scale(0.8); transition: transform 0.3s; }
-        .modal-overlay.active { display: flex; }
-        .modal-overlay.active .modal-content { transform: scale(1); }
-        .close-btn { position: absolute; top: 5px; right: 10px; font-size: 30px; cursor: pointer; color: var(--dark); font-weight: bold; line-height: 1; }
-        .close-btn:hover { color: var(--red); }
+        .modal-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.9); 
+            display: none; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1000; 
+        }
+
+        .modal-content { 
+            background: white; 
+            padding: 40px; 
+            border: 5px solid var(--red); 
+            max-width: 500px; 
+            text-align: center; 
+            position: relative; 
+            transform: scale(0.8); 
+            transition: transform 0.3s; 
+        }
+
+        .modal-overlay.active { 
+            display: flex; 
+        }
+
+        .modal-overlay.active .modal-content { 
+            transform: scale(1); 
+        }
+
+        .close-btn { 
+            position: absolute; 
+            top: 5px; 
+            right: 10px; 
+            font-size: 30px; 
+            cursor: pointer; 
+            color: var(--dark); 
+            font-weight: bold; 
+            line-height: 1; 
+        }
+
+        .close-btn:hover { 
+            color: var(--red); 
+        }
 
         /* Kommentar-Bereich */
-        .comments-section { margin-top: 40px; border-top: 6px solid var(--dark); padding-top: 30px; }
-        .comments-header { font-size: 28px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; color: var(--dark); }
-        .comments-header span { color: var(--red); }
-        .comment-input-box { background: #f9f9f9; border: 1px solid #ccc; padding: 15px; margin-bottom: 30px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .comment-input-box input { padding: 10px; border: 1px solid #ddd; font-family: inherit; font-size: 14px; }
-        .comment-input-box #newCommentUser { flex: 1; min-width: 150px; }
-        .comment-input-box #newCommentText { flex: 3; min-width: 250px; }
-        .comment-input-box button { background: var(--dark); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        .comment-input-box button:hover { background: var(--red); }
+        .comments-section { 
+            margin-top: 40px; 
+            border-top: 6px solid var(--dark); 
+            padding-top: 30px; 
+        }
+
+        .comments-header { 
+            font-size: 28px; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            margin-bottom: 20px; 
+            color: var(--dark); 
+        }
+
+        .comments-header span { 
+            color: var(--red); 
+        }
+
+        .comment-input-box { 
+            background: #f9f9f9; 
+            border: 1px solid #ccc; 
+            padding: 15px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            gap: 10px; 
+            flex-wrap: wrap; 
+        }
+
+        .comment-input-box input { 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            font-family: inherit; 
+            font-size: 14px; 
+        }
+
+        .comment-input-box #newCommentUser { 
+            flex: 1; 
+            min-width: 150px; 
+        }
+
+        .comment-input-box #newCommentText { 
+            flex: 3; 
+            min-width: 250px; 
+        }
+
+        .comment-input-box button { 
+            background: var(--dark); 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+        }
+
+        .comment-input-box button:hover { 
+            background: var(--red); 
+        }
         
-        .comment { background: #ffffff; border: 1px solid var(--border); padding: 15px; margin-bottom: 15px; border-left: 4px solid var(--red); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .comment-meta { font-size: 12px; color: #777; margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 5px; display: flex; justify-content: space-between; }
-        .comment-meta .user { color: var(--dark); font-size: 15px; font-weight: 900; }
-        .comment-text { font-size: 15px; color: #333; line-height: 1.5; margin: 0; }
-        .comment-actions { font-size: 13px; color: #999; margin-top: 10px; font-weight: bold; user-select: none; }
-        .comment-actions span { margin-right: 15px; transition: 0.2s; cursor: pointer; display: inline-block; }
-        .comment-actions span:hover { color: var(--red); transform: scale(1.1); }
-        .comment-actions span.no-action:hover { color: #999; transform: none; cursor: default; }
+        .comment { 
+            background: #ffffff; 
+            border: 1px solid var(--border); 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            border-left: 4px solid var(--red); 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+        }
+
+        .comment-meta { 
+            font-size: 12px; 
+            color: #777; 
+            margin-bottom: 8px; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 5px; 
+            display: flex; 
+            justify-content: space-between; 
+        }
+
+        .comment-meta .user { 
+            color: var(--dark); 
+            font-size: 15px; 
+            font-weight: 900; 
+        }
+
+        .comment-text { 
+            font-size: 15px; 
+            color: #333; 
+            line-height: 1.5; 
+            margin: 0; 
+        }
+
+        .comment-actions { 
+            font-size: 13px; 
+            color: #999; 
+            margin-top: 10px; 
+            font-weight: bold; 
+            user-select: none; 
+        }
+
+        .comment-actions span { 
+            margin-right: 15px; 
+            transition: 0.2s; 
+            cursor: pointer; 
+            display: inline-block; 
+        }
+
+        .comment-actions span:hover { 
+            color: var(--red); 
+            transform: scale(1.1); 
+        }
+
+        .comment-actions span.no-action:hover { 
+            color: #999; 
+            transform: none; 
+            cursor: default; 
+        }
         
         /* Spezielles Design für eingerückte Antworten */
-        .reply-comment { margin-left: 40px; border-left: 3px solid #ff9900; background: #fafafa; margin-bottom: 10px; margin-top: 10px; }
+        .reply-comment { 
+            margin-left: 40px; 
+            border-left: 3px solid #ff9900; 
+            background: #fafafa; 
+            margin-bottom: 10px; 
+            margin-top: 10px; 
+        }
     </style>
 </head>
 <body class="locked">
 
-    <!-- ZUGANGS-FENSTER (PASSWORT 1291) MIT MATRIX HINTERGRUND -->
     <div id="login-overlay">
         <canvas id="matrix-canvas"></canvas>
-        <div class="login-box">
+        
+        <div class="login-box" id="step-login">
             <h1>TOP SECRET</h1>
             <p>Sicherheitsüberprüfung.<br>Zutritt nur für autorisiertes Personal der Kapo Uri.</p>
             <input type="password" id="accessCode" placeholder="CODE" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()">
@@ -152,11 +629,17 @@
             <button onclick="checkAccess()">Zugang anfordern</button>
             <p id="login-error">🚨 Falscher Code! Ein Rapport wird automatisch an den Schichtchef gesendet.</p>
         </div>
+
+        <div class="login-box" id="step-warning" style="display: none; border-color: #ff9900; box-shadow: 0 0 30px rgba(255, 153, 0, 0.5);">
+            <h1 style="color: #ff9900; text-shadow: 0 0 10px #ff9900; font-size: 40px;">⚠️ ACHTUNG ⚠️</h1>
+            <p style="font-size: 18px; color: #fff;">Die folgenden Inhalte sind satirisch, masslos übertrieben und entsprechen oftmals nicht der Realität.</p>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 30px;">Personen ohne ausgeprägten Humor, chronische Nörgler und Spassbremsen werden dringend gebeten, dieses Fenster umgehend zu schliessen!</p>
+            <button onclick="enterSite()" style="background: #ff9900; color: #111;">Ich habe Humor – Weiter!</button>
+        </div>
     </div>
 
     <div id="flash-overlay"></div>
 
-    <!-- Normales Radar-Zugriff-Verweigert Modal -->
     <div class="modal-overlay" id="myModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -167,7 +650,6 @@
         </div>
     </div>
 
-    <!-- Das Gedankenleser 15-Sekunden Modal -->
     <div class="modal-overlay" id="mindReaderModal">
         <div class="modal-content" style="border-color: #ff9900;">
             <span class="close-btn" onclick="closeMindReader()">&times;</span>
@@ -196,14 +678,12 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Liebe, Flirts und Spital-Romanzen <span>+++</span> Hybrid-Athleten der Kapo: Sprints um 02:00 Uhr nachts <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
     </div>
 
     <div class="container">
-        <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
 
-            <!-- NEU: HITZEMASSNAHMEN -->
             <article class="article news-article">
                 <span class="kicker">Klima-Kollaps im Revier</span>
                 <h2>Alarmstufe Rot: Kapo Uri führt extreme Hitzemassnahmen ein – Borat-Tangas und endlose WC-Dramen!</h2>
@@ -212,30 +692,21 @@
                 <p>Der eigentliche Skandal spielt sich jedoch auf der Strasse bei den Zivilfahndern ab. Offiziell wurde das Tragen von "kurzen Hosen" grosszügig gestattet. Einige Kollegen haben das jedoch als Freifahrtschein für den totalen textilen Kontrollverlust interpretiert. Angeblich wurde ein Kripo-Mitarbeiter beim Observieren in einem neongrünen Borat-Tanga gesichtet – getarnt lediglich mit Dienstmarke um den Hals und Piloten-Sonnenbrille. Die Kapo-Leitung rudert nun verzweifelt zurück: "Die Verhaftungsquoten sind zwar massiv gestiegen, weil die Verdächtigen beim Anblick unserer Zivilen so traumatisiert sind, dass sie sich weinend freiwillig stellen. Aber ästhetisch stossen wir hier an unsere Grenzen!"</p>
             </article>
 
-            <!-- BULLENPOWER (ANGEPASST MIT ROMANZEN) -->
             <article class="article news-article">
                 <span class="kicker">Mythos Bullenpower</span>
                 <h2>Urner Polizisten umgarnt: Liebesdramen, Spital-Flirts und grenzübergreifende Romanzen!</h2>
-                <p><strong>ALTDORF -</strong> Es ist offiziell: Die Uniformen sitzen straff, der Blick ist eisern und der Bizeps spannt. Die Kantonspolizei Uri erlebt derzeit einen nie dagewesenen Hype. Das Konzept der legendären "Bullenpower" sorgt mittlerweile für handfeste zwischenmenschliche Verwicklungen – weit über die Kantonsgrenzen hinaus!</p>
-                <p>Ein absoluter Skandal erschüttert aktuell die Wandelgänge: Ein Nidwaldner Polizist hat es doch tatsächlich gewagt, unter dem Deckmantel der interkantonalen Zusammenarbeit eine junge, vielversprechende Urner Polizeiabsolventin zu verführen. "Das ist Fachkräfteabwerbung der untersten Schublade!", tobt ein alteingesessener Wachtmeister. Gleichzeitig spielen sich bei Blutentnahmen im Kantonsspital hollywoodreife Szenen ab. Erst letzte Woche angelte sich eine findige Krankenschwester während einer Routine-Blutabnahme am Wochenende zielstrebig einen waschechten Italo-Urner Polizisten. "Er wollte eigentlich nur das Röhrchen für den Alkoholtest, sie wollte sein Herz – und sein Rezept für Nonnas Pasta", berichtet ein Insider kopfschüttelnd. Die Bullenpower ist nicht länger nur ein Begriff für starke Einsätze, sie ist zur ultimativen Amor-Taktik geworden.</p>
-                <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in den Olymp der Gerechtigkeit: <br>
+                <p><strong>ALTDORF -</strong> Es ist offiziell: Die Uniformen sitzen straff, der Blick ist eisern und der Bizeps spannt. Die Kantonspolizei Uri erlebt derzeit einen nie dagewesenen Hype. Grund dafür ist die legendäre "Bullenpower", von der man auf den Wachen der gesamten Innerschweiz ehrfürchtig munkelt. Doch nun eskaliert die Lage: Die Urner Beamten sind so unwiderstehlich, dass sie mittlerweile um ihre eigene Sicherheit fürchten müssen!</p>
+                <p>"Ein harmloser Spitalbesuch für eine Blutentnahme gleicht mittlerweile einem absoluten Spiessrutenlauf", stöhnt ein völlig erschöpfter Urner Polizist. Kürzlich habe sich eine hochmotivierte Spitalangestellte bei der Übergabe der Blutröhrchen regelrecht an ihm vergangen. "Ich wollte eigentlich nur das Einsatzprotokoll unterschreiben, plötzlich riss sie mir die Dienst-Handschellen aus dem Gurt, kettete mich elegant ans Spitalbett und drohte, mich erst nach einem gemeinsamen Candle-Light-Dinner im Personalraum wieder loszumachen!" Die Kommandoebene prüft nun intern, ob für Spitalbesuche künftig das bewaffnete Sondereinsatzkommando als Begleitschutz für die eigenen, viel zu gutaussehenden Männer angefordert werden muss.</p>
+                <p>Doch nicht nur das medizinische Personal verliert jegliche Beherrschung. Bei einer interkantonalen Grossübung hat ein völlig verzauberter Kollege der Kapo Nidwalden kurzerhand eine Urner Polizistin "gefangen" genommen. Statt den fiktiven Täter zu jagen, packte er die verdutzte Beamtin kurzerhand in den Laderaum seines Patrouillenautos und bretterte mit heulender Sirene Richtung Stans. "Er funkte durch, wer so viel geballte Bullenpower ausstrahlt, werde ab sofort als kantonales Kulturgut der Zentralschweiz konfisziert", berichtet ein fassungsloser Augenzeuge. Die Urnerin konnte erst nach zähen Geiselverhandlungen gegen drei Laibe besten Nidwaldner Käse und eine unterschriebene Autogrammkarte unversehrt freigekauft werden.</p>
+                <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in den Olymp der Begierde: <br>
                 <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--red); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
             </article>
 
-            <!-- NEUER ARTIKEL: FITTESTE POLIZISTEN / HYBRID ATHLETEN -->
-            <article class="article news-article">
-                <span class="kicker">Evolution der Terminatoren</span>
-                <h2>Fitness-Wahn auf dem Revier: Kapo Uri züchtet die fittesten Polizisten der Welt heran!</h2>
-                <p><strong>ALTDORF -</strong> Vergessen Sie die Navy SEALs, vergessen Sie die Spartaner – die wahre Elite trainiert im Kanton Uri! Ein beispielloser Fitness-Wahn hat die gesamte Belegschaft erfasst. Die Polizisten trainieren plötzlich wie von der Tarantel gestochen, als ginge es um das nackte Überleben. Das ehemals gemütliche Pausen-Büro gleicht mittlerweile einem High-Performance-Lager für Hybrid-Athleten.</p>
-                <p>Die Szenen sind absolut surreal: Beamte joggen völlig schmerzfrei nachts um 02:00 Uhr nach der Spätschicht mit Stirnlampen durch Altdorf, um sich akribisch auf den nächsten Halbmarathon in Luzern vorzubereiten. Andere sprinten in der brütenden Mittagssonne in voller Montur Hügel hinauf. Selbst der Nahkampf wird auf ein neues Level gehoben – statt einfachem Festhaltegriff wird neuerdings eifrig im MMA und Grappling auf den Matten geschwitzt. "Techniken wie <em>Harai Goshi</em> und <em>Kata Guruma</em> gehören jetzt zum Standard-Repertoire bei der Personenkontrolle", keucht ein völlig durchtrainierter Schichtchef, während er sich einen weiteren <span class="protein-clicker" onclick="flexMuscles()">Proteinriegel</span> reinzieht. Jeder will der Schnellste, der Stärkste und der Beste sein. Gerüchten zufolge flüchten Verdächtige im Kanton Uri gar nicht erst, weil die Beamten sie aus reinem Trainingszweck noch drei Extrarunden um den Block jagen würden, bevor die Handschellen klicken.</p>
-            </article>
-
-            <!-- G7 EINSATZ -->
             <article class="article news-article">
                 <span class="kicker">G7-Gipfel-Desaster</span>
                 <h2>8 Urner Polizisten in Genf: Schlechter organisiert als ein Kindergeburtstag – Schlafen im Hasenstall!</h2>
                 <p><strong>GENF / URI -</strong> Da eilen acht hochmotivierte Urner Polizisten an den Genfersee, um rund um den G7-Gipfel in Evian für Recht, Ordnung und astreine Verkehrskontrollen zu sorgen, und was erwartet sie? Ein organisatorisches Fiasko, das selbst die Planung eines Kindergeburtstags im Waldkindergarten wie eine militärische Meisterleistung aussehen lässt. Die Genfer Behörden waren von der Ankunft der Zentralschweizer Verstärkung offenbar so überrascht, als fände der weltweite Gipfel völlig spontan und unangekündigt statt.</p>
-                <p>Doch der absolute Tiefpunkt wartete nach dem ohnehin schon chaotischen Dienstschluss: Die "Unterkünfte". "Hasenstall ist noch völlig geprahlt", fluchte ein Urner Wachtmeister leise, während er versuchte, seine Wirbelsäule nach einer Nacht auf einer zentimeterdünnen Pritsche wieder halbwegs geradezubiegen. Die bittere Ironie des Schicksals: Erst kürzlich wurde die 10-Millionen-Schweiz abgelehnt, angeblich um Platzmangel und Dichtestress zu vermeiden – doch bei den Schlafplätzen der eigenen Einsatzkräfte stapelt man die Beamten gnadenlos übereinander. "Wir werden hier schlimmer gehalten als Asylanten", knurrte ein Kollege beim morgendlichen Versuch, sich in der Besenkammer-grossen Zelle die Uniform anzuziehen. "Wenn ich noch einmal den Ellenbogen meines Nebenmanns beim Umdrehen im Gesicht habe, fordere ich politisches Asyl im Kanton Waadt!" Wenigstens, so heisst es aus gut unterrichteten Kreisen, hatte die Delegation ihre eigenen <span class="protein-clicker" onclick="flexMuscles()">Proteinriegel</span> dabei.</p>
+                <p>Doch der absolute Tiefpunkt wartete nach dem ohnehin schon chaotischen Dienstschluss: Die "Unterkünfte". "Hasenstall ist noch völlig geprahlt", fluchte ein Urner Wachtmeister leise, während er versuchte, seine Wirbelsäule nach einer Nacht auf einer zentimeterdünnen Pritsche wieder halbwegs geradezubiegen. Die bittere Ironie des Schicksals: Erst kürzlich wurde die 10-Millionen-Schweiz abgelehnt, angeblich um Platzmangel und Dichtestress zu vermeiden – doch bei den Schlafplätzen der eigenen Einsatzkräfte stapelt man die Beamten gnadenlos übereinander. "Wir werden hier schlimmer gehalten als Asylanten", knurrte ein Kollege beim morgendlichen Versuch, sich in der Besenkammer-grossen Zelle die Uniform anzuziehen. "Wenn ich noch einmal den Ellenbogen meines Nebenmanns beim Umdrehen im Gesicht habe, fordere ich politisches Asyl im Kanton Waadt!" Wenigstens, so heisst es aus gut unterrichteten Kreisen, hatte die Delegation ihre eigenen Proteinriegel dabei.</p>
             </article>
 
             <article class="article news-article">
@@ -255,7 +726,7 @@
             <article class="article news-article">
                 <span class="kicker">BVP Info Exklusiv</span>
                 <h2>Muskelaufbau im Dienst: Neu gibt es Proteinriegel für die Pausen!</h2>
-                <p><strong>ALTDORF -</strong> Die Führungsebene hat erkannt: Wer den Gotthard-Verkehr bändigen will, braucht mehr als nur wässrigen Kaffee. An der jüngsten BVP Info wurde eine revolutionäre Neuerung für die Bereitschafts- und Verkehrspolizei verkündet: Zur Stärkung der Truppe werden ab sofort in den offiziellen Pausen feinstaubgeprüfte <span class="protein-clicker" onclick="flexMuscles()">Proteinriegel</span> ausgegeben.</p>
+                <p><strong>ALTDORF -</strong> Die Führungsebene hat erkannt: Wer den Gotthard-Verkehr bändigen will, braucht mehr als nur wässrigen Kaffee. An der jüngsten BVP Info wurde eine revolutionäre Neuerung für die Bereitschafts- und Verkehrspolizei verkündet: Zur Stärkung der Truppe werden ab sofort in den offiziellen Pausen feinstaubgeprüfte Proteinriegel ausgegeben.</p>
                 <p>"Die trockenen Gipfeli von früher haben einfach nicht genug Masse gebracht", erklärt ein sichtlich aufgepumpter Wachtmeister. "Jetzt können wir zwischen den LKW-Kontrollen ordentlich Gains machen." Böse Zungen behaupten, die Neuerung sei primär deshalb eingeführt worden, damit die Kollegen die interne 500-Liegestütze-Challenge ohne kompletten Schwächeanfall überstehen. Die Uniformschneider der Kapo Uri sind jedenfalls bereits in Alarmbereitschaft versetzt worden, falls die blauen Hemden an den Ärmeln bald bedrohlich zu spannen beginnen.</p>
             </article>
 
@@ -284,7 +755,7 @@
                 <span class="kicker">Schlafentzug an der Front</span>
                 <h2>Neues 12-Stunden-Schichtmodell: Büros zu Matratzenlagern umfunktioniert!</h2>
                 <p><strong>ERSTFELD -</strong> Das neue 12-Stunden-Schichtmodell fordert seine ersten Opfer in der Bereitschafts- und Verkehrspolizei. Wer das Schwerverkehrszentrum betritt, muss neuerdings aufpassen, wo er hintritt: Überall liegen erschöpfte Beamte. Unter den Schreibtischen, hinter den Aktenregalen und sogar auf dem Kopierer wird mittlerweile geschlafen. Die Garderoben riechen nach Verzweiflung und kaltem Kaffee.</p>
-                <p>Ein anonymer Wachtmeister berichtet mit leerem Blick: "Wir haben bereits ein komplexes Rotationssystem für den Platz unter dem Kopierer eingeführt, weil es dort so schön warm ist." Der interne Schwarzmarkt für koffeinhaltige Kaltgetränke blüht auf beängstigende Weise. Die Kommandoebene überlegt angeblich bereits ernsthaft, taktische Schlafsäcke zur Standardausrüstung hinzuzufügen, nachdem ein Kollege versehentlich beim Morgenrapport im Stehen eingeschlafen und beinahe in den Papierschredder gefallen ist. Die Kaffeemaschine wurde offiziell zur kritischen Infrastruktur des Kantons Uri erklärt und wird nun rund um die Uhr von einer schwer bewaffneten Sondereinheit beschützt. Wer in der Pause blinzelt, hat schon verloren.</p>
+                <p>Ein anonymer Wachtmeister berichtet mit leerem Blick: "Wir haben bereits ein complex Rotationssystem für den Platz unter dem Kopierer eingeführt, weil es dort so schön warm ist." Der interne Schwarzmarkt für koffeinhaltige Kaltgetränke blüht auf beängstigende Weise. Die Kommandoebene überlegt angeblich bereits ernsthaft, taktische Schlafsäcke zur Standardausrüstung hinzuzufügen, nachdem ein Kollege versehentlich beim Morgenrapport im Stehen eingeschlafen und beinahe in den Papierschredder gefallen ist. Die Kaffeemaschine wurde offiziell zur kritischen Infrastruktur des Kantons Uri erklärt und wird nun rund um die Uhr von einer schwer bewaffneten Sondereinheit beschützt. Wer in der Pause blinzelt, hat schon verloren.</p>
             </article>
 
             <article class="article news-article">
@@ -337,12 +808,9 @@
                 <button class="radar-btn" onclick="triggerRadar()" style="background: var(--red);">📸 RADAR MANUELL AUSLÖSEN</button>
             </article>
 
-            <!-- PAGINATION (SEITENBLÄTTERN) -->
             <div class="pagination" id="pagination-controls">
-                <!-- Buttons werden hier von Javascript eingefügt -->
-            </div>
+                </div>
 
-            <!-- KOMMENTAR BEREICH (MIT FIREBASE LIVE-FUNKTION) -->
             <div class="comments-section" id="community">
                 <div class="comments-header">Community <span>(Live!)</span></div>
                 
@@ -352,10 +820,8 @@
                     <button onclick="window.addLiveComment()">Senden</button>
                 </div>
 
-                <!-- Hier laden ab sofort die echten Firebase-Kommentare rein -->
                 <div id="liveCommentsContainer"></div>
 
-                <!-- Die 13 statischen Kult-Kommentare -->
                 <div class="comment" style="margin-top: 30px;">
                     <div class="comment-meta"><span class="user">SchlaflosInErstfeld</span> <span>09.06.2026, 06:15 Uhr</span></div>
                     <p class="comment-text">Hab gestern während der 12-Stunden-Schicht unter dem Kopierer geschlafen. War extrem gemütlich, bis T-Rex Gisler versucht hat, Papier nachzufüllen. Pures Chaos.</p>
@@ -489,75 +955,61 @@
 
         </main>
 
-        <!-- SEITENLEISTE RECHTS (WERBUNG) -->
         <aside class="sidebar">
             
-            <!-- Content Creator Remo Tresch -->
             <div class="ad-space ad-remo">
                 <span class="ad-label">Anzeige / Social Media</span>
                 <h4>Kapo Uri Instagram Reels</h4>
                 <p>Erlebe den Schwerverkehr hautnah! Content Creator <strong>Remo Tresch</strong> bringt dir den echten Alltag aus dem SVZ Erstfeld direkt auf den Bildschirm.</p>
-                <p>Spannende Kontrollen, fesselnde Einsichten und bullenstarker Content.</p>
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">📱🚛🚓</div>
                 <a href="https://www.bullenpower-uri.ch" target="_blank" class="ad-link-btn">JETZT REELS SCHAUEN!</a>
             </div>
 
-            <!-- NEU: Werkhof Flüelen 2040 -->
             <div class="ad-space" style="border-top-color: #3498db; background: #eaf2f8;">
                 <span class="ad-label">Bauprojekt des Jahrhunderts</span>
                 <h4 style="color: #2980b9;">Werkhof Flüelen 2040</h4>
                 <p>Die Pläne stehen! Die feierliche Eröffnung des neuen Werkhofs in Flüelen ist offiziell für das Jahr <strong>2040</strong> geplant.</p>
-                <p><em>Pünktlich zur Neueröffnung des Hotel Reisers in Altdorf. Wir freuen uns auf die Einweihung im Rollstuhl!</em></p>
+                <p><em>Pünktlich zur Neueröffnung des Hotel Reisers in Altdorf.</em></p>
                 <div style="font-size: 35px; text-align: center; margin: 10px 0;">🏗️🐌🏢</div>
             </div>
 
-            <!-- NEU: Der neue Axentunnel -->
             <div class="ad-space" style="border-top-color: #7f8c8d; background: #f2f4f4;">
                 <span class="ad-label">Verkehrs-News</span>
                 <h4 style="color: #2c3e50;">Der Neue Axentunnel</h4>
                 <p>Endlich staufrei durch den Fels! Ab sofort prallen herabfallende Steine nur noch aussen an der Tunneldecke ab.</p>
-                <p><strong>Felssturz war gestern – unterirdisch rasen ist heute!</strong></p>
                 <div style="font-size: 35px; text-align: center; margin: 10px 0;">⛰️🚗💨</div>
             </div>
 
-            <!-- NEU: GPS Handschellen -->
             <div class="ad-space" style="border-top-color: #f39c12; background: #fef9e7;">
                 <span class="ad-label">Kapo Tech-Shop</span>
                 <h4 style="color: #d35400;">Smart-Fesseln mit GPS</h4>
                 <p>Verdächtiger weggelaufen? Entspann dich! Die neuen <strong>iCuffs Pro</strong> senden den Live-Standort direkt auf dein Dienst-Handy.</p>
-                <p><em>Inklusive Schrittzähler und Kalorienverbrauch für den Flüchtigen!</em></p>
                 <div style="font-size: 35px; text-align: center; margin: 10px 0;">🔗📍📱</div>
             </div>
 
-            <!-- Hand- und Fussfesseln in den Güsel -->
-            <div class="ad-space ad-guesel" onclick="alert('☮️ Friedens-Modus aktiviert!\n\nAb sofort werden Verdächtige nur noch ganz streng angeschaut oder bei Bedarf in warme, weiche Decken gewickelt. Gewalt war gestern!')">
+            <div class="ad-space ad-guesel" onclick="alert('☮️ Friedens-Modus aktiviert!\n\nGewalt war gestern!')">
                 <span class="ad-label">Deeskalation Pur</span>
                 <h4>Fesseln in den Güsel!</h4>
-                <p>Schluss mit fiesen Druckstellen! Die Kapo Uri rüstet ab und schmeisst Hand- und Fussfesseln direkt in den Abfall. Niemand soll mehr verletzt werden.</p>
-                <p><strong>Die neue Taktik:</strong> Böse gucken und weiche Kissen werfen!</p>
+                <p>Die neue Taktik: Böse gucken und weiche Kissen werfen!</p>
                 <div style="font-size: 40px; text-align: center; margin: 10px 0;">🗑️🔗🕊️</div>
                 <button class="radar-btn" style="background: #8e44ad; font-size: 14px;">ZUM KUSCHEL-KURS</button>
             </div>
 
-            <!-- Lothar Imhof (Seriöser) -->
             <div class="ad-space ad-lothar">
                 <span class="ad-label">Im Einsatz für Uri</span>
                 <h4>Kompetenz an vorderster Front</h4>
-                <p>Bereit, wenn es darauf ankommt. <strong>Lothar Imhof</strong> hat bereits sein Einsatzleitergilet übergestreift und sucht den nächsten Einsatzort.</p>
-                <p><em>Führung, Übersicht und absolute Einsatzbereitschaft für die Sicherheit im Kanton.</em></p>
+                <p>Bereit, wenn es darauf ankommt. <strong>Lothar Imhof</strong> hat bereits sein Einsatzleitergilet übergestreift.</p>
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">🦺🦅🚔</div>
             </div>
 
-            <!-- Stefan Gisler (T-Rex) Werbung -->
             <div class="ad-space ad-trex">
                 <span class="ad-label">Kapo Ausrüstungs-Shop</span>
                 <h4>Masshemden "Edition T-Rex"</h4>
-                <p>Exklusiv für <strong>Stefan Gisler</strong>: Uniformhemden mit extra kurzen Ärmeln. Inklusive Gratis-Greifzange für Ausweiskontrollen am LKW-Fenster!</p>
+                <p>Exklusiv für <strong>Stefan Gisler</strong>: Uniformhemden mit extra kurzen Ärmeln.</p>
                 <div style="font-size: 40px; text-align: center; margin: 10px 0;">🦖🤏</div>
                 <button id="trexBtn" class="radar-btn" style="background: #27ae60; transition: all 0.2s; font-size: 14px;">HIER AUSWEIS GREIFEN!</button>
             </div>
-
-            <!-- Scheiber Werbung -->
+            
             <div class="ad-space" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
                 <span class="ad-label">WANTED</span>
                 <h4 style="color: #8b4513;">DER DORF SHERIFF</h4>
@@ -566,30 +1018,20 @@
                 <div style="font-size: 40px; text-align: center; margin: 10px 0;">🤠🐴</div>
                 <button class="radar-btn" style="background: #8b4513; font-size: 12px;">Stern polieren</button>
             </div>
-
         </aside>
     </div>
 
-    <!-- NORMALE JAVASCRIPT FUNKTIONEN & PAGINATION -->
     <script>
-        // -- MATRIX CANVAS LOGIK --
+        // Matrix Background
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
-        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブヅエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const nums = '0123456789';
-        const alphabet = katakana + latin + nums;
-        
+        const alphabet = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブヅエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         const fontSize = 16;
         const columns = canvas.width / fontSize;
-        
-        const rainDrops = [];
-        for( let x = 0; x < columns; x++ ) {
-            rainDrops[x] = 1;
-        }
+        const rainDrops = Array(Math.floor(columns)).fill(1);
         
         const drawMatrix = () => {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -601,65 +1043,67 @@
                 const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
                 ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
                 
-                if(rainDrops[i] * fontSize > canvas.height && Math.random() > 0.97){
+                if(rainDrops[i] * fontSize > canvas.height && Math.random() > 0.97) {
                     rainDrops[i] = 0;
                 }
                 rainDrops[i]++;
             }
         };
         let matrixInterval = setInterval(drawMatrix, 30);
+        
+        window.addEventListener('resize', () => { 
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight; 
+        });
 
-        // -- LOGIN LOGIK --
+        // Access Check (Login -> Warning -> Site)
         function checkAccess() {
             const code = document.getElementById('accessCode').value;
             if(code === '1291') {
-                clearInterval(matrixInterval); // Stoppt die Matrix-Animation im Hintergrund
-                document.getElementById('login-overlay').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('login-overlay').style.display = 'none';
-                    document.body.classList.remove('locked');
-                }, 500);
+                document.getElementById('step-login').style.display = 'none';
+                document.getElementById('step-warning').style.display = 'block';
             } else {
                 document.getElementById('login-error').style.display = 'block';
             }
         }
 
-        // Anpassung der Canvas-Grösse bei Fensteränderung
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+        // Seite final betreten
+        function enterSite() {
+            clearInterval(matrixInterval);
+            document.getElementById('login-overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.body.classList.remove('locked');
+                setTimeout(() => document.getElementById('mindReaderModal').classList.add('active'), 15000);
+            }, 500);
+        }
 
-        // -- PAGINATION LOGIK --
+        // Pagination
         const articlesPerPage = 5;
         let currentPage = 1;
-
+        
         function renderArticles() {
             const articles = document.querySelectorAll('.news-article');
-            const totalArticles = articles.length;
-            const totalPages = Math.ceil(totalArticles / articlesPerPage);
-
-            // Container leeren und Buttons neu aufbauen
+            const totalPages = Math.ceil(articles.length / articlesPerPage);
             const paginationContainer = document.getElementById('pagination-controls');
             paginationContainer.innerHTML = '';
             
             for(let i = 1; i <= totalPages; i++) {
                 const btn = document.createElement('button');
                 btn.innerText = "Seite " + i;
-                if(i === currentPage) btn.classList.add('active');
-                btn.onclick = () => {
-                    currentPage = i;
-                    renderArticles();
-                    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrollt sanft nach oben beim Blättern
+                if(i === currentPage) {
+                    btn.classList.add('active');
+                }
+                btn.onclick = () => { 
+                    currentPage = i; 
+                    renderArticles(); 
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
                 };
                 paginationContainer.appendChild(btn);
             }
-
-            // Artikel ein- und ausblenden
+            
             articles.forEach((art, index) => {
-                const start = (currentPage - 1) * articlesPerPage;
-                const end = start + articlesPerPage;
-                if (index >= start && index < end) {
+                if (index >= (currentPage - 1) * articlesPerPage && index < currentPage * articlesPerPage) {
                     art.style.display = 'block';
                 } else {
                     art.style.display = 'none';
@@ -667,23 +1111,22 @@
             });
         }
         
-        // Pagination beim Start laden
         document.addEventListener('DOMContentLoaded', renderArticles);
 
-
-        // -- WEITERE FUNKTIONEN --
+        // UI Interactions
         function triggerRadar() {
             const overlay = document.getElementById('flash-overlay');
             overlay.classList.remove('blitz-active');
-            setTimeout(() => {
-                overlay.classList.add('blitz-active');
+            setTimeout(() => { 
+                overlay.classList.add('blitz-active'); 
                 setTimeout(openModal, 800); 
             }, 10);
         }
-
+        
         function openModal() { document.getElementById('myModal').classList.add('active'); }
         function closeModal() { document.getElementById('myModal').classList.remove('active'); }
-
+        function closeMindReader() { document.getElementById('mindReaderModal').classList.remove('active'); }
+        
         function makeItRain() {
             const emojis = ['🎋', '🐼', '🚨', '📰'];
             for(let i = 0; i < 30; i++) {
@@ -694,23 +1137,8 @@
                     drop.style.left = Math.random() * 100 + 'vw';
                     drop.style.animationDuration = (Math.random() * 3 + 2) + 's';
                     document.body.appendChild(drop);
-                    setTimeout(() => { drop.remove(); }, 5000);
+                    setTimeout(() => drop.remove(), 5000);
                 }, i * 150);
-            }
-        }
-        
-        // Neues Spezial Feature: Muskeln flexen bei Protein-Klick
-        function flexMuscles() {
-            const emojis = ['💪', '🏋️‍♂️', '🔥', '🦍'];
-            for(let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    const drop = document.createElement('div');
-                    drop.classList.add('muscle-drop');
-                    drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                    drop.style.left = (Math.random() * 80 + 10) + 'vw'; // Zufällig auf Bildschirmbreite
-                    document.body.appendChild(drop);
-                    setTimeout(() => { drop.remove(); }, 2000);
-                }, i * 100);
             }
         }
 
@@ -726,23 +1154,14 @@
         });
         
         trexBtn.addEventListener('mouseout', function() {
-            setTimeout(() => {
-                this.style.transform = `translate(0px, 0px) scale(1)`;
-                this.innerText = 'HIER AUSWEIS GREIFEN!';
-                this.style.background = '#27ae60';
+            setTimeout(() => { 
+                this.style.transform = 'translate(0, 0) scale(1)'; 
+                this.innerText = 'HIER AUSWEIS GREIFEN!'; 
+                this.style.background = '#27ae60'; 
             }, 1000);
         });
-
-        trexBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            alert('Unglaublich! Du hast es trotz der kurzen Arme geschafft!');
-        });
-
-        setTimeout(() => { document.getElementById('mindReaderModal').classList.add('active'); }, 15000);
-        function closeMindReader() { document.getElementById('mindReaderModal').classList.remove('active'); }
     </script>
 
-    <!-- FIREBASE LIVE-DATENBANK SCRIPT MIT ZEITSTEMPELN -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
@@ -753,15 +1172,15 @@
             projectId: "bambus-news",
             storageBucket: "bambus-news.firebasestorage.app",
             messagingSenderId: "401445127639",
-            appId: "1:401445127639:web:925c3f5aa64ebce28eb792",
-            measurementId: "G-5R1H9DL0TY"
+            appId: "1:401445127639:web:925c3f5aa64ebce28eb792"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const q = query(collection(db, "bambus_comments"), orderBy("timestamp", "desc"));
-        onSnapshot(q, (snapshot) => {
+        const commentsQuery = query(collection(db, "bambus_comments"), orderBy("timestamp", "desc"));
+        
+        onSnapshot(commentsQuery, (snapshot) => {
             const container = document.getElementById('liveCommentsContainer');
             container.innerHTML = ''; 
             
@@ -772,165 +1191,174 @@
                 const data = firebaseDoc.data();
                 data.id = firebaseDoc.id;
                 
-                if (data.parentId) {
-                    if (!replies[data.parentId]) replies[data.parentId] = [];
-                    replies[data.parentId].push(data);
+                if (data.parentId) { 
+                    if(!replies[data.parentId]) {
+                        replies[data.parentId] = [];
+                    }
+                    replies[data.parentId].push(data); 
                 } else {
                     parents.push(data);
                 }
             });
 
-            // Antworten chronologisch aufsteigend sortieren
             for (let pid in replies) {
                 replies[pid].sort((a, b) => {
-                    const ta = a.timestamp ? a.timestamp.toMillis() : 0;
-                    const tb = b.timestamp ? b.timestamp.toMillis() : 0;
-                    return ta - tb;
+                    const timeA = a.timestamp ? a.timestamp.toMillis() : 0;
+                    const timeB = b.timestamp ? b.timestamp.toMillis() : 0;
+                    return timeA - timeB;
                 });
             }
 
-            // Eltern-Kommentare zeichnen
             parents.forEach((data) => {
-                const newComment = document.createElement('div');
-                newComment.className = 'comment';
-                newComment.style.borderLeftColor = '#ffcc00';
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment'; 
+                commentDiv.style.borderLeftColor = '#ffcc00';
                 
-                const likes = data.likes || 0; 
-                const dislikes = data.dislikes || 0; 
-                
-                // Formatiertes Datum generieren
-                let timeString = "Gerade eben";
-                if (data.timestamp) {
-                    const dateObj = data.timestamp.toDate();
-                    timeString = dateObj.toLocaleDateString('de-CH') + ', ' + dateObj.toLocaleTimeString('de-CH', {hour: '2-digit', minute:'2-digit'}) + ' Uhr';
+                let timeStr = "Gerade eben";
+                if (data.timestamp) { 
+                    const dateObj = data.timestamp.toDate(); 
+                    timeStr = dateObj.toLocaleDateString('de-CH') + ', ' + dateObj.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'}) + ' Uhr'; 
                 }
                 
+                const likesCount = data.likes || 0;
+                const dislikesCount = data.dislikes || 0;
+
                 let html = `
-                    <div class="comment-meta"><span class="user" style="color: #ff9900;">${data.user}</span> <span>${timeString}</span></div>
+                    <div class="comment-meta">
+                        <span class="user" style="color:#ff9900;">${data.user}</span> 
+                        <span>${timeStr}</span>
+                    </div>
                     <p class="comment-text">${data.text}</p>
                     <div class="comment-actions">
-                        <span onclick="window.likeLiveComment('${data.id}')" title="Like">👍 <b style="color: var(--dark);">${likes}</b></span> 
-                        <span onclick="window.dislikeLiveComment('${data.id}')" title="Dislike">👎 <b style="color: var(--dark);">${dislikes}</b></span> 
-                        <span onclick="window.replyToComment('${data.id}', '${data.user}')" title="Antworten">Antworten</span>
+                        <span onclick="window.likeLiveComment('${data.id}')" title="Like">👍 <b>${likesCount}</b></span> 
+                        <span onclick="window.dislikeLiveComment('${data.id}')" title="Dislike">👎 <b>${dislikesCount}</b></span> 
+                        <span onclick="window.replyToComment('${data.id}', '${data.user}')">Antworten</span>
                     </div>
                 `;
 
                 if (replies[data.id]) {
                     html += `<div style="margin-top: 15px;">`;
-                    replies[data.id].forEach(reply => {
-                        const rLikes = reply.likes || 0;
-                        const rDislikes = reply.dislikes || 0;
-                        
-                        let rTimeString = "Gerade eben";
-                        if (reply.timestamp) {
-                            const rDateObj = reply.timestamp.toDate();
-                            rTimeString = rDateObj.toLocaleDateString('de-CH') + ', ' + rDateObj.toLocaleTimeString('de-CH', {hour: '2-digit', minute:'2-digit'}) + ' Uhr';
+                    replies[data.id].forEach(replyData => {
+                        let replyTimeStr = "Gerade eben";
+                        if (replyData.timestamp) { 
+                            const rDateObj = replyData.timestamp.toDate(); 
+                            replyTimeStr = rDateObj.toLocaleDateString('de-CH') + ', ' + rDateObj.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'}) + ' Uhr'; 
                         }
+                        
+                        const rLikesCount = replyData.likes || 0;
+                        const rDislikesCount = replyData.dislikes || 0;
 
                         html += `
                         <div class="comment reply-comment">
-                            <div class="comment-meta"><span class="user" style="color: #ff9900;">${reply.user}</span> <span>${rTimeString}</span></div>
-                            <p class="comment-text">${reply.text}</p>
+                            <div class="comment-meta">
+                                <span class="user" style="color:#ff9900;">${replyData.user}</span> 
+                                <span>${replyTimeStr}</span>
+                            </div>
+                            <p class="comment-text">${replyData.text}</p>
                             <div class="comment-actions">
-                                <span onclick="window.likeLiveComment('${reply.id}')" title="Like">👍 <b style="color: var(--dark);">${rLikes}</b></span> 
-                                <span onclick="window.dislikeLiveComment('${reply.id}')" title="Dislike">👎 <b style="color: var(--dark);">${rDislikes}</b></span> 
+                                <span onclick="window.likeLiveComment('${replyData.id}')">👍 <b>${rLikesCount}</b></span> 
+                                <span onclick="window.dislikeLiveComment('${replyData.id}')">👎 <b>${rDislikesCount}</b></span> 
                             </div>
                         </div>`;
                     });
                     html += `</div>`;
                 }
-
-                newComment.innerHTML = html;
-                container.appendChild(newComment);
+                commentDiv.innerHTML = html;
+                container.appendChild(commentDiv);
             });
         });
 
         window.addLiveComment = async function() {
-            const userBox = document.getElementById('newCommentUser');
-            const textBox = document.getElementById('newCommentText');
+            const userNameInput = document.getElementById('newCommentUser').value.trim();
+            const userName = userNameInput !== '' ? userNameInput : 'Unbekannter Polizist';
+            const commentText = document.getElementById('newCommentText').value.trim();
             
-            let userName = userBox.value.trim();
-            const text = textBox.value.trim();
-            
-            if(text === '') {
-                alert('Leere Kommentare werden sofort zur Fahndung ausgeschrieben!');
+            if(commentText === '') {
+                alert('Leere Kommentare werden zur Fahndung ausgeschrieben!');
                 return;
             }
-            if(userName === '') userName = 'Unbekannter Polizist'; 
-
-            try {
+            
+            try { 
                 await addDoc(collection(db, "bambus_comments"), {
-                    text: text,
-                    user: userName,
+                    text: commentText, 
+                    user: userName, 
                     likes: 0, 
-                    dislikes: 0,
+                    dislikes: 0, 
                     timestamp: serverTimestamp()
-                });
-                textBox.value = ''; 
-            } catch (e) {
-                alert("Fehler beim Senden!");
+                }); 
+                document.getElementById('newCommentText').value = ''; 
+            } catch (error) { 
+                alert("Fehler beim Senden des Kommentars!"); 
+                console.error(error);
             }
         };
 
         window.replyToComment = async function(parentId, replyToUser) {
-            let defaultName = document.getElementById('newCommentUser').value.trim();
-            if(defaultName === '') defaultName = 'Unbekannter Polizist';
+            const defaultNameInput = document.getElementById('newCommentUser').value.trim();
+            const defaultName = defaultNameInput !== '' ? defaultNameInput : 'Unbekannter Polizist';
 
-            const userName = prompt("Dein Deckname für die Antwort:", defaultName);
-            if(userName === null) return; 
-
-            const replyText = prompt("Deine Antwort an " + replyToUser + ":");
+            const userName = prompt("Dein Deckname:", defaultName);
+            if(userName === null) return;
+            
+            const replyText = prompt("Antwort an " + replyToUser + ":");
             if(replyText && replyText.trim() !== '') {
-                try {
+                try { 
                     await addDoc(collection(db, "bambus_comments"), {
-                        text: "<strong>@" + replyToUser + "</strong> " + replyText.trim(),
-                        user: userName.trim() === '' ? 'Unbekannter Polizist' : userName.trim(),
+                        text: "<strong>@" + replyToUser + "</strong> " + replyText.trim(), 
+                        user: userName.trim() === '' ? 'Unbekannter Polizist' : userName.trim(), 
                         likes: 0, 
-                        dislikes: 0,
+                        dislikes: 0, 
                         parentId: parentId, 
                         timestamp: serverTimestamp()
-                    });
-                } catch (e) {
-                    alert("Fehler beim Senden der Antwort!");
+                    }); 
+                } catch (error) { 
+                    alert("Fehler beim Senden der Antwort!"); 
+                    console.error(error);
                 }
             }
         };
 
         window.replyToStatic = async function(replyToUser) {
-            let defaultName = document.getElementById('newCommentUser').value.trim();
-            if(defaultName === '') defaultName = 'Unbekannter Polizist';
+            const defaultNameInput = document.getElementById('newCommentUser').value.trim();
+            const defaultName = defaultNameInput !== '' ? defaultNameInput : 'Unbekannter Polizist';
 
-            const userName = prompt("Dein Deckname für die Antwort:", defaultName);
-            if(userName === null) return; 
-
-            const replyText = prompt("Deine Antwort an Kult-User " + replyToUser + ":");
+            const userName = prompt("Dein Deckname:", defaultName);
+            if(userName === null) return;
+            
+            const replyText = prompt("Antwort an Kult-User " + replyToUser + ":");
             if(replyText && replyText.trim() !== '') {
-                try {
+                try { 
                     await addDoc(collection(db, "bambus_comments"), {
-                        text: "<strong>@" + replyToUser + "</strong> " + replyText.trim(),
-                        user: userName.trim() === '' ? 'Unbekannter Polizist' : userName.trim(),
+                        text: "<strong>@" + replyToUser + "</strong> " + replyText.trim(), 
+                        user: userName.trim() === '' ? 'Unbekannter Polizist' : userName.trim(), 
                         likes: 0, 
-                        dislikes: 0,
+                        dislikes: 0, 
                         timestamp: serverTimestamp()
-                    });
-                } catch (e) {
-                    alert("Fehler beim Senden!");
+                    }); 
+                } catch (error) { 
+                    alert("Fehler beim Senden der Antwort!"); 
+                    console.error(error);
                 }
             }
         };
 
-        window.likeLiveComment = async function(commentId) {
-            try {
-                await updateDoc(doc(db, "bambus_comments", commentId), { likes: increment(1) });
-            } catch (e) { console.error(e); }
+        window.likeLiveComment = async function(commentId) { 
+            try { 
+                const commentRef = doc(db, "bambus_comments", commentId);
+                await updateDoc(commentRef, { likes: increment(1) }); 
+            } catch(error) {
+                console.error("Fehler beim Liken", error);
+            } 
         };
-
-        window.dislikeLiveComment = async function(commentId) {
-            try {
-                await updateDoc(doc(db, "bambus_comments", commentId), { dislikes: increment(1) });
-            } catch (e) { console.error(e); }
+        
+        window.dislikeLiveComment = async function(commentId) { 
+            try { 
+                const commentRef = doc(db, "bambus_comments", commentId);
+                await updateDoc(commentRef, { dislikes: increment(1) }); 
+            } catch(error) {
+                console.error("Fehler beim Disliken", error);
+            } 
         };
     </script>
-
 </body>
 </html>
