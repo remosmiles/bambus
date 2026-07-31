@@ -682,7 +682,7 @@
             <!-- Feld für den Namen -->
             <input type="text" id="loginName" placeholder="DEIN DECKNAME" maxlength="25" onkeydown="if(event.key === 'Enter') document.getElementById('accessCode').focus()" style="display:block; margin: 0 auto 10px auto;">
             
-            <input type="password" id="accessCode" placeholder="CODE (1291)" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()" style="display:block; margin: 0 auto 20px auto;">
+            <input type="password" id="accessCode" placeholder="CODE" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()" style="display:block; margin: 0 auto 20px auto;">
             
             <button onclick="checkAccess()">Zugang anfordern</button>
             <p id="login-error">🚨 Fehler! Ein Rapport wird automatisch an den Schichtchef gesendet.</p>
