@@ -135,6 +135,56 @@
             text-shadow: 0 0 5px black; 
         }
 
+        /* Admin Überwachungsraum */
+        #admin-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0a0a0a;
+            z-index: 200000;
+            color: white;
+            padding: 40px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+
+        #admin-overlay h1 {
+            color: var(--red);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--red);
+            margin-top: 0;
+        }
+
+        .admin-table {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 30px;
+            border-collapse: collapse;
+            background: #111;
+            border: 2px solid #333;
+        }
+
+        .admin-table th {
+            background: #222;
+            color: var(--red);
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid var(--red);
+        }
+
+        .admin-table td {
+            padding: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .admin-table tr:hover {
+            background: #1a1a1a;
+        }
+
         /* Blitzer-Effekt Overlay */
         #flash-overlay { 
             position: fixed; 
@@ -629,7 +679,7 @@
             <h1>TOP SECRET</h1>
             <p>Sicherheitsüberprüfung.<br>Zutritt nur für autorisiertes Personal der Kapo Uri.</p>
             
-            <!-- Neues Feld für den Namen -->
+            <!-- Feld für den Namen -->
             <input type="text" id="loginName" placeholder="DEIN DECKNAME" maxlength="25" onkeydown="if(event.key === 'Enter') document.getElementById('accessCode').focus()" style="display:block; margin: 0 auto 10px auto;">
             
             <input type="password" id="accessCode" placeholder="CODE (1291)" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()" style="display:block; margin: 0 auto 20px auto;">
@@ -644,6 +694,25 @@
             <p style="font-size: 14px; color: #aaa; margin-bottom: 30px;">Personen ohne ausgeprägten Humor, chronische Nörgler und Spassbremsen werden dringend gebeten, dieses Fenster umgehend zu schliessen!</p>
             <button onclick="enterSite()" style="background: #ff9900; color: #111;">Ich habe Humor – Weiter!</button>
         </div>
+    </div>
+
+    <!-- Geheimes Admin-Panel (Schichtchef Ansicht) -->
+    <div id="admin-overlay">
+        <h1>🚨 SCHICHTCHEF-PROTOKOLL 🚨</h1>
+        <p>Live-Überwachung: Wer hat sich auf Bambus-News eingeloggt?</p>
+        <button onclick="closeAdminPanel()" style="background:var(--red); color:white; border:none; padding:10px 20px; font-weight:bold; cursor:pointer; margin-bottom: 20px;">Zurück zum Login</button>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Zeitpunkt</th>
+                    <th>Deckname</th>
+                </tr>
+            </thead>
+            <tbody id="adminTableBody">
+                <!-- Wird per JavaScript aus Firebase befüllt -->
+            </tbody>
+        </table>
     </div>
 
     <div id="flash-overlay"></div>
@@ -722,7 +791,7 @@
                 <p><strong>ALTDORF -</strong> Es ist offiziell: Die Uniformen sitzen straff, der Blick ist eisern und der Bizeps spannt. Die Kantonspolizei Uri erlebt derzeit einen nie dagewesenen Hype. Grund dafür ist die legendäre "Bullenpower", von der man auf den Wachen der gesamten Innerschweiz ehrfürchtig munkelt. Doch nun eskaliert die Lage: Die Urner Beamten sind so unwiderstehlich, dass sie mittlerweile um ihre eigene Sicherheit fürchten müssen!</p>
                 <p>"Ein harmloser Spitalbesuch für eine Blutentnahme gleicht mittlerweile einem absoluten Spiessrutenlauf", stöhnt ein völlig erschöpfter Urner Polizist. Kürzlich habe sich eine hochmotivierte Spitalangestellte bei der Übergabe der Blutröhrchen regelrecht an ihm vergangen. "Ich wollte eigentlich nur das Einsatzprotokoll unterschreiben, plötzlich riss sie mir die Dienst-Handschellen aus dem Gurt, kettete mich elegant ans Spitalbett und drohte, mich erst nach einem gemeinsamen Candle-Light-Dinner im Personalraum wieder loszumachen!" Die Kommandoebene prüft nun intern, ob für Spitalbesuche künftig das bewaffnete Sondereinsatzkommando als Begleitschutz für die eigenen, viel zu gutaussehenden Männer angefordert werden muss.</p>
                 <p>Doch nicht nur das medizinische Personal verliert jegliche Beherrschung. Bei einer interkantonalen Grossübung hat ein völlig verzauberter Kollege der Kapo Nidwalden kurzerhand eine Urner Polizistin "gefangen" genommen. Statt den fiktiven Täter zu jagen, packte er die verdutzte Beamtin kurzerhand in den Laderaum seines Patrouillenautos und bretterte mit heulender Sirene Richtung Stans. "Er funkte durch, wer so viel geballte Bullenpower ausstrahlt, werde ab sofort als kantonales Kulturgut der Zentralschweiz konfisziert", berichtet ein fassungsloser Augenzeuge. Die Urnerin konnte erst nach zähen Geiselverhandlungen gegen drei Laibe besten Nidwaldner Käse und eine unterschriebene Autogrammkarte unversehrt freigekauft werden.</p>
-                <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in Olymp der Begierde: <br>
+                <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in den Olymp der Begierde: <br>
                 <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--red); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
             </article>
 
@@ -1080,9 +1149,6 @@
             canvas.height = window.innerHeight; 
         });
 
-        // Die checkAccess() Funktion wurde in den unteren Modul-Scriptblock verschoben, 
-        // damit sie dort direkt in die Firebase-Datenbank schreiben kann!
-
         // Seite final betreten
         function enterSite() {
             clearInterval(matrixInterval);
@@ -1092,6 +1158,12 @@
                 document.body.classList.remove('locked');
                 setTimeout(() => document.getElementById('mindReaderModal').classList.add('active'), 15000);
             }, 500);
+        }
+
+        // Admin Panel schliessen
+        function closeAdminPanel() {
+            document.getElementById('admin-overlay').style.display = 'none';
+            document.getElementById('step-login').style.display = 'block';
         }
 
         // Pagination
@@ -1194,7 +1266,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // --- NEUE LOGIN FUNKTION MIT FIREBASE SPEICHERUNG ---
+        // --- VERSTECKTES ADMIN LOGIN ---
         window.checkAccess = async function() {
             const code = document.getElementById('accessCode').value;
             const nameInput = document.getElementById('loginName').value.trim();
@@ -1205,6 +1277,38 @@
                 return;
             }
 
+            // DER GEHEIME ADMIN CODE!
+            if (code === '9999') {
+                document.getElementById('step-login').style.display = 'none';
+                document.getElementById('login-error').style.display = 'none';
+                document.getElementById('admin-overlay').style.display = 'block';
+                
+                // Lade alle bisherigen Logins live aus der Datenbank in die Tabelle
+                const loginQuery = query(collection(db, "bambus_logins"), orderBy("timestamp", "desc"));
+                onSnapshot(loginQuery, (snapshot) => {
+                    const tableBody = document.getElementById('adminTableBody');
+                    tableBody.innerHTML = ''; 
+                    
+                    snapshot.forEach((firebaseDoc) => {
+                        const data = firebaseDoc.data();
+                        let timeStr = "Gerade eben";
+                        if (data.timestamp) { 
+                            const dateObj = data.timestamp.toDate(); 
+                            timeStr = dateObj.toLocaleDateString('de-CH') + ', ' + dateObj.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'}) + ' Uhr'; 
+                        }
+                        
+                        tableBody.innerHTML += `
+                            <tr>
+                                <td>${timeStr}</td>
+                                <td style="color:#0f0; font-weight:bold;">${data.deckname}</td>
+                            </tr>
+                        `;
+                    });
+                });
+                return;
+            }
+
+            // Normaler Login für die Kollegen
             if(code === '1291') {
                 document.getElementById('login-error').style.display = 'none';
                 document.getElementById('step-login').style.display = 'none';
@@ -1213,12 +1317,11 @@
                 // Name in den Kommentaren vorausfüllen
                 document.getElementById('newCommentUser').value = nameInput;
 
-                // In Firebase speichern, damit du es in der Konsole siehst!
+                // Heimlich in Firebase speichern!
                 try { 
                     await addDoc(collection(db, "bambus_logins"), {
                         deckname: nameInput, 
-                        timestamp: serverTimestamp(),
-                        userAgent: navigator.userAgent
+                        timestamp: serverTimestamp()
                     }); 
                 } catch (error) { 
                     console.error("Fehler beim Speichern des Logins:", error);
