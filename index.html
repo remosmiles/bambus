@@ -95,11 +95,15 @@
             margin-bottom: 20px; 
             outline: none; 
             font-weight: bold; 
-            width: 200px; 
+            width: 250px; 
             background: #000; 
             color: #0f0; 
-            letter-spacing: 5px; 
+            letter-spacing: 2px; 
             text-shadow: 0 0 5px #0f0; 
+        }
+        
+        .login-box input::placeholder {
+            color: rgba(0, 255, 0, 0.3);
         }
 
         .login-box button { 
@@ -624,10 +628,14 @@
         <div class="login-box" id="step-login">
             <h1>TOP SECRET</h1>
             <p>Sicherheitsüberprüfung.<br>Zutritt nur für autorisiertes Personal der Kapo Uri.</p>
-            <input type="password" id="accessCode" placeholder="CODE" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()">
-            <br>
+            
+            <!-- Neues Feld für den Namen -->
+            <input type="text" id="loginName" placeholder="DEIN DECKNAME" maxlength="25" onkeydown="if(event.key === 'Enter') document.getElementById('accessCode').focus()" style="display:block; margin: 0 auto 10px auto;">
+            
+            <input type="password" id="accessCode" placeholder="CODE (1291)" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()" style="display:block; margin: 0 auto 20px auto;">
+            
             <button onclick="checkAccess()">Zugang anfordern</button>
-            <p id="login-error">🚨 Falscher Code! Ein Rapport wird automatisch an den Schichtchef gesendet.</p>
+            <p id="login-error">🚨 Fehler! Ein Rapport wird automatisch an den Schichtchef gesendet.</p>
         </div>
 
         <div class="login-box" id="step-warning" style="display: none; border-color: #ff9900; box-shadow: 0 0 30px rgba(255, 153, 0, 0.5);">
@@ -714,7 +722,7 @@
                 <p><strong>ALTDORF -</strong> Es ist offiziell: Die Uniformen sitzen straff, der Blick ist eisern und der Bizeps spannt. Die Kantonspolizei Uri erlebt derzeit einen nie dagewesenen Hype. Grund dafür ist die legendäre "Bullenpower", von der man auf den Wachen der gesamten Innerschweiz ehrfürchtig munkelt. Doch nun eskaliert die Lage: Die Urner Beamten sind so unwiderstehlich, dass sie mittlerweile um ihre eigene Sicherheit fürchten müssen!</p>
                 <p>"Ein harmloser Spitalbesuch für eine Blutentnahme gleicht mittlerweile einem absoluten Spiessrutenlauf", stöhnt ein völlig erschöpfter Urner Polizist. Kürzlich habe sich eine hochmotivierte Spitalangestellte bei der Übergabe der Blutröhrchen regelrecht an ihm vergangen. "Ich wollte eigentlich nur das Einsatzprotokoll unterschreiben, plötzlich riss sie mir die Dienst-Handschellen aus dem Gurt, kettete mich elegant ans Spitalbett und drohte, mich erst nach einem gemeinsamen Candle-Light-Dinner im Personalraum wieder loszumachen!" Die Kommandoebene prüft nun intern, ob für Spitalbesuche künftig das bewaffnete Sondereinsatzkommando als Begleitschutz für die eigenen, viel zu gutaussehenden Männer angefordert werden muss.</p>
                 <p>Doch nicht nur das medizinische Personal verliert jegliche Beherrschung. Bei einer interkantonalen Grossübung hat ein völlig verzauberter Kollege der Kapo Nidwalden kurzerhand eine Urner Polizistin "gefangen" genommen. Statt den fiktiven Täter zu jagen, packte er die verdutzte Beamtin kurzerhand in den Laderaum seines Patrouillenautos und bretterte mit heulender Sirene Richtung Stans. "Er funkte durch, wer so viel geballte Bullenpower ausstrahlt, werde ab sofort als kantonales Kulturgut der Zentralschweiz konfisziert", berichtet ein fassungsloser Augenzeuge. Die Urnerin konnte erst nach zähen Geiselverhandlungen gegen drei Laibe besten Nidwaldner Käse und eine unterschriebene Autogrammkarte unversehrt freigekauft werden.</p>
-                <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in den Olymp der Begierde: <br>
+                <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in Olymp der Begierde: <br>
                 <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--red); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
             </article>
 
@@ -1072,16 +1080,8 @@
             canvas.height = window.innerHeight; 
         });
 
-        // Access Check (Login -> Warning -> Site)
-        function checkAccess() {
-            const code = document.getElementById('accessCode').value;
-            if(code === '1291') {
-                document.getElementById('step-login').style.display = 'none';
-                document.getElementById('step-warning').style.display = 'block';
-            } else {
-                document.getElementById('login-error').style.display = 'block';
-            }
-        }
+        // Die checkAccess() Funktion wurde in den unteren Modul-Scriptblock verschoben, 
+        // damit sie dort direkt in die Firebase-Datenbank schreiben kann!
 
         // Seite final betreten
         function enterSite() {
@@ -1193,6 +1193,43 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        // --- NEUE LOGIN FUNKTION MIT FIREBASE SPEICHERUNG ---
+        window.checkAccess = async function() {
+            const code = document.getElementById('accessCode').value;
+            const nameInput = document.getElementById('loginName').value.trim();
+
+            if (nameInput === '') {
+                document.getElementById('login-error').style.display = 'block';
+                document.getElementById('login-error').innerText = "🚨 Deckname fehlt! Identifiziere dich!";
+                return;
+            }
+
+            if(code === '1291') {
+                document.getElementById('login-error').style.display = 'none';
+                document.getElementById('step-login').style.display = 'none';
+                document.getElementById('step-warning').style.display = 'block';
+                
+                // Name in den Kommentaren vorausfüllen
+                document.getElementById('newCommentUser').value = nameInput;
+
+                // In Firebase speichern, damit du es in der Konsole siehst!
+                try { 
+                    await addDoc(collection(db, "bambus_logins"), {
+                        deckname: nameInput, 
+                        timestamp: serverTimestamp(),
+                        userAgent: navigator.userAgent
+                    }); 
+                } catch (error) { 
+                    console.error("Fehler beim Speichern des Logins:", error);
+                }
+
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+                document.getElementById('login-error').innerText = "🚨 Falscher Code! Ein Rapport wird an den Schichtchef gesendet.";
+            }
+        };
+        // ----------------------------------------------------
 
         const commentsQuery = query(collection(db, "bambus_comments"), orderBy("timestamp", "desc"));
         
