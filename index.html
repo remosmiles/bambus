@@ -30,6 +30,83 @@
             height: 100vh; 
         }
 
+        /* ----------------------------------------------------
+           NEU: WARTUNGSARBEITEN OVERLAY (EWIGES LADEN)
+           ---------------------------------------------------- */
+        #maintenance-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #0a0a0a;
+            z-index: 9999999; /* Über allem anderen */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-family: monospace;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 80px; height: 80px;
+            border: 8px solid #333;
+            border-top: 8px solid var(--red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 30px;
+            cursor: crosshair; /* Kleiner Hinweis, dass man hier klicken kann */
+        }
+
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+
+        .maintenance-title {
+            color: var(--red);
+            font-size: 32px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(224, 0, 0, 0.8);
+        }
+
+        .maintenance-text {
+            font-size: 16px;
+            color: #ccc;
+            max-width: 500px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .progress-container {
+            width: 80%;
+            max-width: 400px;
+            height: 25px;
+            border: 2px solid #444;
+            border-radius: 12px;
+            background: #111;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--red);
+            transition: width 0.4s ease-out;
+            box-shadow: 0 0 10px var(--red);
+        }
+
+        #progress-text {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #0f0;
+            font-weight: bold;
+            text-shadow: 0 0 5px #0f0;
+        }
+
         /* Login Screen Overlay mit Matrix-Canvas */
         #login-overlay { 
             position: fixed; 
@@ -672,7 +749,24 @@
 </head>
 <body class="locked">
 
-    <div id="login-overlay">
+    <!-- NEU: WARTUNGSARBEITEN OVERLAY (Start-Bildschirm) -->
+    <div id="maintenance-overlay">
+        <!-- GEHEIMTIPP: Doppelklick auf den Spinner überspringt den Wartungsbildschirm! -->
+        <div class="spinner" ondblclick="bypassMaintenance()" title="System lädt..."></div>
+        <div class="maintenance-title">Polizei-IT: Wartungsarbeiten</div>
+        <div class="maintenance-text">
+            Das System führt aktuell ein kritisches Update auf <strong>Kapo-OS 2.0</strong> durch. <br>
+            Alle Zugriffe auf die Datenbanken sind temporär blockiert. Bitte warten...
+        </div>
+        
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <div id="progress-text">0% geladen...</div>
+    </div>
+
+    <!-- DAS ALTE MATRIX LOGIN (wird erst nach Bypass sichtbar) -->
+    <div id="login-overlay" style="display: none; opacity: 0;">
         <canvas id="matrix-canvas"></canvas>
         
         <div class="login-box" id="step-login">
@@ -1115,6 +1209,50 @@
     </div>
 
     <script>
+        // -------------------------------------------------------------------
+        // NEU: WARTUNGSARBEITEN TROLL-LOGIK
+        // -------------------------------------------------------------------
+        let progress = 0;
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        
+        const trollInterval = setInterval(() => {
+            if (progress < 80) {
+                // Schneller Anstieg am Anfang
+                progress += Math.random() * 15;
+            } else if (progress < 99) {
+                // Extrem langsame Quälerei am Ende
+                progress += Math.random() * 2;
+            } else {
+                // Bei 99.9% für immer blockieren
+                progress = 99.9;
+                progressText.style.color = "var(--red)";
+                progressText.innerText = "99.9% - Schwerer Ausnahmefehler in 'Gotthard_Traffic.exe'... System blockiert.";
+                clearInterval(trollInterval);
+                return;
+            }
+            
+            if (progress <= 99) {
+                progressBar.style.width = progress + '%';
+                progressText.innerText = Math.floor(progress) + '% geladen...';
+            }
+        }, 800);
+
+        // Der versteckte Bypass für den Admin / Ersteller!
+        function bypassMaintenance() {
+            clearInterval(trollInterval);
+            document.getElementById('maintenance-overlay').style.display = 'none';
+            
+            // Matrix Login sichtbar machen
+            const loginOverlay = document.getElementById('login-overlay');
+            loginOverlay.style.display = 'flex';
+            setTimeout(() => {
+                loginOverlay.style.opacity = '1';
+            }, 50);
+        }
+        // -------------------------------------------------------------------
+
+
         // Matrix Background
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
