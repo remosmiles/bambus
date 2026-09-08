@@ -31,30 +31,30 @@
         }
 
         /* ----------------------------------------------------
-           NEU: WARTUNGSARBEITEN OVERLAY (EWIGES LADEN)
+           NEU: WINDOWS UPDATE OVERLAY (Realistisch)
            ---------------------------------------------------- */
         #maintenance-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #0a0a0a;
-            z-index: 9999999; /* Über allem anderen */
+            background: #0078D7; /* Original Windows Blau */
+            z-index: 9999999; 
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: #fff;
-            font-family: monospace;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
+            cursor: default; /* Manuell auf default, damit der Doppelklick-Bypass klappt */
         }
 
-        .spinner {
-            width: 80px; height: 80px;
-            border: 8px solid #333;
-            border-top: 8px solid var(--red);
+        .win-spinner {
+            width: 48px; height: 48px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid #fff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 30px;
-            cursor: crosshair; /* Kleiner Hinweis, dass man hier klicken kann */
+            margin-bottom: 25px;
         }
 
         @keyframes spin { 
@@ -62,49 +62,43 @@
             100% { transform: rotate(360deg); } 
         }
 
-        .maintenance-title {
-            color: var(--red);
-            font-size: 32px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(224, 0, 0, 0.8);
+        .win-text-large {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
-        .maintenance-text {
-            font-size: 16px;
-            color: #ccc;
-            max-width: 500px;
-            line-height: 1.5;
-            margin-bottom: 30px;
+        .win-text-small {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            line-height: 1.6;
         }
 
-        .progress-container {
-            width: 80%;
-            max-width: 400px;
-            height: 25px;
-            border: 2px solid #444;
-            border-radius: 12px;
-            background: #111;
-            overflow: hidden;
-            position: relative;
+        /* Popup nach dem 100% Laden */
+        #work-popup {
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            background: rgba(0,0,0,0.85); 
+            z-index: 10000000; 
+            justify-content: center; 
+            align-items: center;
         }
 
-        #progress-bar {
-            width: 0%;
-            height: 100%;
-            background: var(--red);
-            transition: width 0.4s ease-out;
-            box-shadow: 0 0 10px var(--red);
-        }
-
-        #progress-text {
-            margin-top: 15px;
-            font-size: 18px;
-            color: #0f0;
-            font-weight: bold;
-            text-shadow: 0 0 5px #0f0;
+        .work-popup-content {
+            background: white; 
+            padding: 40px; 
+            border: 4px solid #0078d7; 
+            text-align: center; 
+            max-width: 550px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 5px;
         }
 
         /* Login Screen Overlay mit Matrix-Canvas */
@@ -749,23 +743,34 @@
 </head>
 <body class="locked">
 
-    <!-- NEU: WARTUNGSARBEITEN OVERLAY (Start-Bildschirm) -->
-    <div id="maintenance-overlay">
-        <!-- GEHEIMTIPP: Doppelklick auf den Spinner überspringt den Wartungsbildschirm! -->
-        <div class="spinner" ondblclick="bypassMaintenance()" title="System lädt..."></div>
-        <div class="maintenance-title">Polizei-IT: Wartungsarbeiten</div>
-        <div class="maintenance-text">
-            Das System führt aktuell ein kritisches Update auf <strong>Kapo-OS 2.0</strong> durch. <br>
-            Alle Zugriffe auf die Datenbanken sind temporär blockiert. Bitte warten...
+    <!-- NEU: WINDOWS UPDATE OVERLAY (Start-Bildschirm) -->
+    <!-- Doppelklick auf den ganzen Screen bricht das Warten sofort ab! -->
+    <div id="maintenance-overlay" ondblclick="bypassMaintenance()">
+        <div class="win-spinner"></div>
+        <div class="win-text-large">Arbeiten an Updates <span id="progress-percent">0</span> % abgeschlossen.</div>
+        <div class="win-text-small">
+            Schalten Sie Ihren PC nicht aus. Dies nimmt einen Moment in Anspruch.<br>
+            Ihr PC wird mehrere Male neu gestartet.
         </div>
-        
-        <div class="progress-container">
-            <div id="progress-bar"></div>
-        </div>
-        <div id="progress-text">0% geladen...</div>
     </div>
 
-    <!-- DAS ALTE MATRIX LOGIN (wird erst nach Bypass sichtbar) -->
+    <!-- NEU: DAS "ZURÜCK AN DIE ARBEIT" POPUP (Erscheint bei 100%) -->
+    <div id="work-popup">
+        <div class="work-popup-content">
+            <h2 style="color: #e00000; font-weight: 900; font-size: 28px; margin-top: 0;">⚠️ SYSTEM-MELDUNG ⚠️</h2>
+            <p style="font-size: 22px; font-weight: bold; color: #111;">Du sollst jetzt wieder arbeiten gehen!</p>
+            <hr style="margin: 20px 0; border: 1px solid #ccc;">
+            <p style="font-style: italic; font-size: 17px; color: #444; line-height: 1.5;">
+                «Wissen ist von zweierlei Art: Entweder wir wissen etwas selbst, oder wir wissen, wo wir die Information darüber finden können.»
+            </p>
+            <p style="font-weight: bold; color: #777; margin-bottom: 30px;">– Samuel Johnson (Dichter und Gelehrter)</p>
+            <button onclick="bypassMaintenance()" style="background: #0078d7; color: white; border: none; padding: 12px 25px; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 4px; transition: 0.2s;">
+                Ausnahmsweise einloggen
+            </button>
+        </div>
+    </div>
+
+    <!-- DAS ALTE MATRIX LOGIN (wird erst nach Bypass / Popup sichtbar) -->
     <div id="login-overlay" style="display: none; opacity: 0;">
         <canvas id="matrix-canvas"></canvas>
         
@@ -773,9 +778,7 @@
             <h1>TOP SECRET</h1>
             <p>Sicherheitsüberprüfung.<br>Zutritt nur für autorisiertes Personal der Kapo Uri.</p>
             
-            <!-- Feld für den Namen -->
             <input type="text" id="loginName" placeholder="DEIN DECKNAME" maxlength="25" onkeydown="if(event.key === 'Enter') document.getElementById('accessCode').focus()" style="display:block; margin: 0 auto 10px auto;">
-            
             <input type="password" id="accessCode" placeholder="CODE" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()" style="display:block; margin: 0 auto 20px auto;">
             
             <button onclick="checkAccess()">Zugang anfordern</button>
@@ -1210,38 +1213,32 @@
 
     <script>
         // -------------------------------------------------------------------
-        // NEU: WARTUNGSARBEITEN TROLL-LOGIK
+        // NEU: WINDOWS UPDATE TROLL-LOGIK (3 Minuten Ladezeit)
         // -------------------------------------------------------------------
         let progress = 0;
-        const progressText = document.getElementById('progress-text');
-        const progressBar = document.getElementById('progress-bar');
+        const progressPercent = document.getElementById('progress-percent');
         
+        // 180 Sekunden (3 Min) / 100 Schritte = exakt 1.8 Sekunden (1800ms) pro Prozent.
         const trollInterval = setInterval(() => {
-            if (progress < 80) {
-                // Schneller Anstieg am Anfang
-                progress += Math.random() * 15;
-            } else if (progress < 99) {
-                // Extrem langsame Quälerei am Ende
-                progress += Math.random() * 2;
-            } else {
-                // Bei 99.9% für immer blockieren
-                progress = 99.9;
-                progressText.style.color = "var(--red)";
-                progressText.innerText = "99.9% - Schwerer Ausnahmefehler in 'Gotthard_Traffic.exe'... System blockiert.";
-                clearInterval(trollInterval);
-                return;
+            if (progress < 100) {
+                progress++;
+                progressPercent.innerText = progress;
             }
             
-            if (progress <= 99) {
-                progressBar.style.width = progress + '%';
-                progressText.innerText = Math.floor(progress) + '% geladen...';
+            if (progress >= 100) {
+                clearInterval(trollInterval);
+                document.getElementById('maintenance-overlay').style.display = 'none';
+                
+                // Öffne das Popup, um die Kollegen zurück an die Arbeit zu schicken!
+                document.getElementById('work-popup').style.display = 'flex';
             }
-        }, 800);
+        }, 1800);
 
-        // Der versteckte Bypass für den Admin / Ersteller!
+        // Der versteckte Bypass für dich (oder extrem ungeduldige Schichtchefs!)
         function bypassMaintenance() {
             clearInterval(trollInterval);
             document.getElementById('maintenance-overlay').style.display = 'none';
+            document.getElementById('work-popup').style.display = 'none';
             
             // Matrix Login sichtbar machen
             const loginOverlay = document.getElementById('login-overlay');
