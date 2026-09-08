@@ -745,7 +745,7 @@
 
     <!-- NEU: WINDOWS UPDATE OVERLAY (Start-Bildschirm) -->
     <!-- Doppelklick auf den ganzen Screen bricht das Warten sofort ab! -->
-    <div id="maintenance-overlay" ondblclick="bypassMaintenance()">
+    <div id="maintenance-overlay" ondblclick="window.bypassMaintenance()">
         <div class="win-spinner"></div>
         <div class="win-text-large">Arbeiten an Updates <span id="progress-percent">0</span> % abgeschlossen.</div>
         <div class="win-text-small">
@@ -764,7 +764,7 @@
                 «Wissen ist von zweierlei Art: Entweder wir wissen etwas selbst, oder wir wissen, wo wir die Information darüber finden können.»
             </p>
             <p style="font-weight: bold; color: #777; margin-bottom: 30px;">– Samuel Johnson (Dichter und Gelehrter)</p>
-            <button onclick="bypassMaintenance()" style="background: #0078d7; color: white; border: none; padding: 12px 25px; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 4px; transition: 0.2s;">
+            <button onclick="window.bypassMaintenance()" style="background: #0078d7; color: white; border: none; padding: 12px 25px; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 4px; transition: 0.2s;">
                 Ausnahmsweise einloggen
             </button>
         </div>
@@ -782,7 +782,7 @@
             <input type="password" id="accessCode" placeholder="CODE" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()" style="display:block; margin: 0 auto 20px auto;">
             
             <button onclick="checkAccess()">Zugang anfordern</button>
-            <p id="login-error">🚨 Fehler! Ein Rapport wird automatisch an den Schichtchef gesendet.</p>
+            <p id="login-error" style="display: none;"></p>
         </div>
 
         <div class="login-box" id="step-warning" style="display: none; border-color: #ff9900; box-shadow: 0 0 30px rgba(255, 153, 0, 0.5);">
@@ -1217,25 +1217,45 @@
         // -------------------------------------------------------------------
         let progress = 0;
         const progressPercent = document.getElementById('progress-percent');
-        
-        // 180 Sekunden (3 Min) / 100 Schritte = exakt 1.8 Sekunden (1800ms) pro Prozent.
-        const trollInterval = setInterval(() => {
-            if (progress < 100) {
-                progress++;
-                progressPercent.innerText = progress;
-            }
+        let trollInterval;
+
+        window.startMaintenance = function() {
+            progress = 0;
+            progressPercent.innerText = "0";
             
-            if (progress >= 100) {
-                clearInterval(trollInterval);
-                document.getElementById('maintenance-overlay').style.display = 'none';
+            // Wartungsscreen zeigen, Popup verstecken
+            document.getElementById('maintenance-overlay').style.display = 'flex';
+            document.getElementById('work-popup').style.display = 'none';
+            
+            // Login verstecken
+            const loginOverlay = document.getElementById('login-overlay');
+            loginOverlay.style.display = 'none';
+            loginOverlay.style.opacity = '0';
+            
+            clearInterval(trollInterval);
+            
+            // 180 Sekunden (3 Min) / 100 Schritte = exakt 1.8 Sekunden (1800ms) pro Prozent.
+            trollInterval = setInterval(() => {
+                if (progress < 100) {
+                    progress++;
+                    progressPercent.innerText = progress;
+                }
                 
-                // Öffne das Popup, um die Kollegen zurück an die Arbeit zu schicken!
-                document.getElementById('work-popup').style.display = 'flex';
-            }
-        }, 1800);
+                if (progress >= 100) {
+                    clearInterval(trollInterval);
+                    document.getElementById('maintenance-overlay').style.display = 'none';
+                    
+                    // Öffne das Popup, um die Kollegen zurück an die Arbeit zu schicken!
+                    document.getElementById('work-popup').style.display = 'flex';
+                }
+            }, 1800);
+        };
+
+        // Sofort beim Öffnen der Seite starten
+        window.startMaintenance();
 
         // Der versteckte Bypass für dich (oder extrem ungeduldige Schichtchefs!)
-        function bypassMaintenance() {
+        window.bypassMaintenance = function() {
             clearInterval(trollInterval);
             document.getElementById('maintenance-overlay').style.display = 'none';
             document.getElementById('work-popup').style.display = 'none';
@@ -1246,7 +1266,7 @@
             setTimeout(() => {
                 loginOverlay.style.opacity = '1';
             }, 50);
-        }
+        };
         // -------------------------------------------------------------------
 
 
@@ -1401,7 +1421,10 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // --- VERSTECKTES ADMIN LOGIN ---
+        // FEHLVERSUCHE ZÄHLER
+        let failedAttempts = 0;
+
+        // --- VERSTECKTES ADMIN LOGIN & NORMALER LOGIN ---
         window.checkAccess = async function() {
             const code = document.getElementById('accessCode').value;
             const nameInput = document.getElementById('loginName').value.trim();
@@ -1414,6 +1437,7 @@
 
             // DER GEHEIME ADMIN CODE!
             if (code === '9999') {
+                failedAttempts = 0; // Fehler-Reset
                 document.getElementById('step-login').style.display = 'none';
                 document.getElementById('login-error').style.display = 'none';
                 document.getElementById('admin-overlay').style.display = 'block';
@@ -1443,8 +1467,9 @@
                 return;
             }
 
-            // Normaler Login für die Kollegen
-            if(code === '1291') {
+            // Normaler Login für die Kollegen - NEUER CODE IST 1122
+            if(code === '1122') {
+                failedAttempts = 0; // Fehler-Reset
                 document.getElementById('login-error').style.display = 'none';
                 document.getElementById('step-login').style.display = 'none';
                 document.getElementById('step-warning').style.display = 'block';
@@ -1463,8 +1488,20 @@
                 }
 
             } else {
-                document.getElementById('login-error').style.display = 'block';
-                document.getElementById('login-error').innerText = "🚨 Falscher Code! Ein Rapport wird an den Schichtchef gesendet.";
+                // FALSCHER CODE EINGEGEBEN
+                failedAttempts++;
+                
+                if (failedAttempts >= 3) {
+                    failedAttempts = 0; // Zähler wieder auf null für den nächsten Versuch
+                    document.getElementById('login-error').style.display = 'none';
+                    document.getElementById('accessCode').value = '';
+                    
+                    // STRAFE: ZURÜCK ZUM WINDOWS UPDATE!
+                    window.startMaintenance();
+                } else {
+                    document.getElementById('login-error').style.display = 'block';
+                    document.getElementById('login-error').innerText = "🚨 Falscher Code! Versuch " + failedAttempts + " von 3. Danach System-Sperre!";
+                }
             }
         };
         // ----------------------------------------------------
