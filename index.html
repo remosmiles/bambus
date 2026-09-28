@@ -19,9 +19,25 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
             margin: 0; 
             padding: 0; 
-            background-color: var(--gray); 
             color: #111; 
             overflow-x: hidden; 
+            
+            /* NEU: DYNAMISCHER BEWEGTER HINTERGRUND */
+            background-color: var(--gray);
+            background: repeating-linear-gradient(
+                -45deg,
+                rgba(0, 85, 164, 0.03),
+                rgba(0, 85, 164, 0.03) 20px,
+                rgba(0, 0, 0, 0.015) 20px,
+                rgba(0, 0, 0, 0.015) 40px
+            );
+            background-size: 56.57px 56.57px;
+            animation: moveStripes 2s linear infinite;
+        }
+
+        @keyframes moveStripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 56.57px 56.57px; }
         }
         
         /* Body Locked für Login-Screen */
@@ -30,7 +46,7 @@
             height: 100vh; 
         }
 
-        /* Login Screen Overlay mit Matrix-Canvas */
+        /* Login Screen Overlay mit Canvas für optische Täuschung */
         #login-overlay { 
             position: fixed; 
             top: 0; 
@@ -56,11 +72,11 @@
         }
         
         .login-box { 
-            background: rgba(17, 17, 17, 0.9); 
+            background: rgba(17, 17, 17, 0.95); 
             padding: 40px; 
             border: 4px solid var(--blue); 
             text-align: center; 
-            box-shadow: 0 0 30px rgba(0, 85, 164, 0.8); 
+            box-shadow: 0 0 40px rgba(0, 85, 164, 1); 
             max-width: 90%; 
             z-index: 2; 
             position: relative; 
@@ -213,6 +229,9 @@
             color: white; 
             padding: 10px 0; 
             text-align: center; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 10;
         }
 
         nav a { 
@@ -235,7 +254,7 @@
             color: #555; 
         }
 
-        /* Ticker */
+        /* Roter Ticker */
         .ticker { 
             background: white; 
             color: var(--dark); 
@@ -245,6 +264,7 @@
             overflow: hidden; 
             white-space: nowrap; 
             border-bottom: 2px solid var(--dark); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .ticker span { 
@@ -279,6 +299,7 @@
             background: white; 
             border: 1px solid var(--border); 
             padding: 20px; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Schatten für Abhebung vom Hintergrund */
         }
 
         .sidebar { 
@@ -387,6 +408,7 @@
             margin-bottom: 20px; 
             position: relative; 
             border-top: 4px solid var(--dark); 
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Schatten */
         }
 
         .ad-label { 
@@ -609,6 +631,7 @@
             cursor: default; 
         }
         
+        /* Spezielles Design für eingerückte Antworten */
         .reply-comment { 
             margin-left: 40px; 
             border-left: 3px solid #ff9900; 
@@ -620,7 +643,7 @@
 </head>
 <body class="locked">
 
-    <!-- ZUGANGS-FENSTER MIT MATRIX HINTERGRUND -->
+    <!-- ZUGANGS-FENSTER (PASSWORT 1291) MIT OPTISCHER TÄUSCHUNG -->
     <div id="login-overlay">
         <canvas id="matrix-canvas"></canvas>
         <div class="login-box" id="step-login">
@@ -641,7 +664,7 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <h2 style="color: var(--blue); font-weight: 900; font-size: 30px; margin-top: 0;">🚨 ZUGRIFF VERWEIGERT</h2>
-            <p style="font-family: Arial, sans-serif; font-size: 18px;">Dieser Artikel ist streng geheim. Nur für den autorisierten Schichtchef freigegeben!</p>
+            <p style="font-family: Arial, sans-serif; font-size: 18px;">Dieser Artikel ist streng geheim. Nur für den autorisierten Schichtchef des Schwerverkehrszentrums Erstfeld freigegeben!</p>
             <p style="font-size: 50px; margin: 20px 0;">🐼🚫</p>
             <button class="radar-btn" onclick="closeModal()">VERSTANDEN</button>
         </div>
@@ -1042,34 +1065,50 @@
 
     <!-- JS LOGIK -->
     <script>
-        // Matrix Background
+        // NEU: OPTISCHE TÄUSCHUNG (Spirale) statt Matrix
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
-        const alphabet = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブヅエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const rainDrops = Array(Math.floor(columns)).fill(1);
-        
-        const drawMatrix = () => {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#0F0';
-            ctx.font = fontSize + 'px monospace';
+        let illusionTime = 0;
+        const drawIllusion = () => {
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const maxRadius = Math.sqrt(cx*cx + cy*cy);
             
-            for(let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-                
-                if(rainDrops[i] * fontSize > canvas.height && Math.random() > 0.97) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
+            // Leichter Schweif-Effekt für Hypnose
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(illusionTime * 0.02);
+            
+            // Rotierende Strahlen
+            for (let i = 0; i < 30; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(Math.cos(i * Math.PI / 15) * maxRadius, Math.sin(i * Math.PI / 15) * maxRadius);
+                ctx.lineTo(Math.cos((i + 0.5) * Math.PI / 15) * maxRadius, Math.sin((i + 0.5) * Math.PI / 15) * maxRadius);
+                ctx.fillStyle = i % 2 === 0 ? '#0055a4' : '#ffffff';
+                ctx.fill();
             }
+            
+            // Pulsierende Ringe
+            for (let j = 1; j < 15; j++) {
+                ctx.beginPath();
+                let radius = (j * 40 + (Math.sin(illusionTime * 0.05) * 20));
+                ctx.arc(0, 0, radius, 0, Math.PI * 2);
+                ctx.strokeStyle = j % 2 === 0 ? '#ffffff' : '#000000';
+                ctx.lineWidth = 8;
+                ctx.stroke();
+            }
+            
+            ctx.restore();
+            illusionTime++;
         };
-        let matrixInterval = setInterval(drawMatrix, 30);
+        let matrixInterval = setInterval(drawIllusion, 30);
         
         window.addEventListener('resize', () => { 
             canvas.width = window.innerWidth; 
@@ -1104,7 +1143,7 @@
                     window.logVisit(nameInput);
                 }
 
-                // Animation beenden & Seite freigeben
+                // Animation beenden & Seite freigeben (Kein Warnfenster mehr)
                 clearInterval(matrixInterval);
                 document.getElementById('login-overlay').style.opacity = '0';
                 setTimeout(() => {
