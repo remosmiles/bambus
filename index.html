@@ -274,7 +274,7 @@
 
         .ticker-text { 
             display: inline-block; 
-            animation: scroll 70s linear infinite; 
+            animation: scroll 90s linear infinite; 
         }
 
         @keyframes scroll { 
@@ -642,12 +642,24 @@
 </head>
 <body class="locked">
 
-    <!-- ZUGANGS-FENSTER (CODE 1291) MIT OPTISCHER TÄUSCHUNG HINTERGRUND -->
+    <!-- ZUGANGS-FENSTER MIT OPTISCHER TÄUSCHUNG HINTERGRUND -->
     <div id="login-overlay">
         <canvas id="matrix-canvas"></canvas>
-        <div class="login-box" id="step-login">
+        
+        <!-- STEP 0: RANG ABFRAGE -->
+        <div class="login-box" id="step-rank">
+            <h1>SICHERHEITS-SCHLEUSE</h1>
+            <p>Bitte Dienstgrad zur Verifizierung auswählen:</p>
+            <button onclick="selectRank('LT')" style="margin-bottom: 10px;">LT (Leitungsteam)</button>
+            <button onclick="selectRank('Dienstchef')" style="margin-bottom: 10px;">Dienstchef</button>
+            <button onclick="selectRank('Gruppenchef')" style="margin-bottom: 10px;">Gruppenchef</button>
+            <button onclick="selectRank('Mannschaft')">Mannschaft</button>
+        </div>
+
+        <!-- STEP 1: EIGENTLICHER LOGIN (versteckt) -->
+        <div class="login-box" id="step-login" style="display: none;">
             <h1>TOP SECRET</h1>
-            <p>Sicherheitsüberprüfung.<br>Zutritt nur für autorisiertes Personal der Kapo Uri.</p>
+            <p>Erweiterte Sicherheitsüberprüfung.<br>Zutritt nur für berechtigtes Personal.</p>
             <input type="text" id="visitorName" placeholder="DEIN DECKNAME" maxlength="20">
             <input type="password" id="accessCode" placeholder="CODE" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()">
             <br>
@@ -697,22 +709,14 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> Ohne Konzept zum Welthit: Kapo Uri rockt den 1. Social Media Marathon! <span>+++</span> Fresskoma in Andermatt: Vier Polizisten vernichten Wildbestände in der Alphittä! <span>+++</span> 1. Miär Kontrolle: Kripo bricht sich lieber die Knochen als zu kontrollieren! <span>+++</span> Jahresrapport: Apéro-Notstand führt zu Tupperware-Pflicht! <span>+++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> 1. Miär Kontrolle: Kripo bricht sich lieber die Knochen als zu kontrollieren! <span>+++</span> Jahresrapport: Apéro-Notstand führt zu Tupperware-Pflicht! <span>+++</span> Ohne Konzept zum Welthit: Kapo Uri rockt den 1. Social Media Marathon! <span>+++</span> Fresskoma in Andermatt: Vier Polizisten vernichten Wildbestände in der Alphittä! <span>+++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
     </div>
 
     <div class="container">
         <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
 
-            <!-- NEUER ARTIKEL: SOCIAL MEDIA MARATHON -->
-            <article class="article news-article">
-                <span class="kicker">Digitales Chaos mit Charme</span>
-                <h2>1. Social Media Marathon: Ohne Konzept zum viralen Welthit der Kapo Uri!</h2>
-                <p><strong>ALTDORF -</strong> Man nehme eine Prise Ahnungslosigkeit, mische sie mit grottenschlechter Kommunikation und verzichte komplett auf jegliches Konzept. Das Resultat? Der absolute Quoten-Hit! Der erste Social Media Marathon der Kantonspolizei Uri geht in die Geschichte ein. Bis zur letzten Minute wusste intern niemand, was eigentlich genau passiert, und der Bevölkerung wurde als einzige Info vorab lediglich trocken das Einsatzjournal vor die Füsse geworfen. Kommunikations-Profis würden bei dieser Strategie weinend zusammenbrechen, aber bei der Kapo Uri nennt man das charmant "taktische Überraschung".</p>
-                <p>Doch dann passierte das Unfassbare: Das Feedback war schlichtweg grandios! Die Server glühten und die Kommentarspalten explodierten vor Begeisterung. Der Grund dafür war allerdings weniger die filmreife Action, sondern vielmehr die kollektive Fassungslosigkeit der Bürger. Alle waren komplett schockiert darüber, für welch bodenlosen Schwachsinn die tapferen Beamten tagtäglich ausrücken müssen. Von "Der Nachbar hat meinen Gartenzwerg schief angeschaut" bis hin zu "Ein Fuchs hat meinen linken Crocs-Schuh geklaut" – die Bevölkerung feierte die absurde Realität des Urner Polizei-Alltags. "Endlich sehen wir, dass ihr nicht nur Raser blitzt, sondern primär als schwer bewaffnete Paartherapeuten und Müll-Detektive arbeitet", schrieb ein begeisterter Fan. Ein absoluter, unorganisierter Triumph auf ganzer Linie!</p>
-            </article>
-
-            <!-- ARTIKEL: 1. MIÄR KONTROLLE & KRIPO -->
+            <!-- ARTIKEL 1: 1. MIÄR KONTROLLE & KRIPO -->
             <article class="article news-article">
                 <span class="kicker">Einsatzverweigerung Extrem</span>
                 <h2>1. Miär Kontrolle: Kripo-Ermittler brechen sich lieber die Knochen, als in Uniform draussen zu stehen!</h2>
@@ -720,7 +724,7 @@
                 <p>Wenige Stunden vor Dienstantritt ereigneten sich auf wundersame Weise tragische, aber äusserst präzise Unfälle. Ein Ermittler liess "versehentlich" einen zentnerschweren Tresor genau auf seinen grossen Zeh fallen. Der zweite Kollege war sogar noch motivierter: Er stürzte sich Berichten zufolge praktisch im Hechtsprung eine Treppe hinab, um sich gleich mehrere Rippen und das Schlüsselbein auf einmal zu brechen. "Die Hingabe, mit der die Kripo den Verkehrsdienst meidet, ist wirklich beeindruckend", lobt ein Verkehrspolizist ironisch. "Das nächste Mal, wenn wir Unterstützung anfordern, müssen wir wohl die Polsterung im Kripo-Büro entfernen." Der Einsatzwille der Kriminalpolizei ist jedenfalls ungebrochen – ganz im Gegensatz zu ihren Knochen.</p>
             </article>
 
-            <!-- ARTIKEL: JAHRESRAPPORT APÉRO -->
+            <!-- ARTIKEL 2: JAHRESRAPPORT APÉRO -->
             <article class="article news-article">
                 <span class="kicker">Kulinarischer Notstand</span>
                 <h2>Jahresrapport: Nach Hunger-Drama im Vorjahr gilt nun knallharte Tupperware-Pflicht!</h2>
@@ -728,7 +732,15 @@
                 <p>Die revolutionäre neue Regel für den kommenden Jahresrapport: BYOA – Bring Your Own Apéro! Ab sofort muss jeder Polizist sein Essen und seine Häppchen selbst in Tupperware-Dosen mitbringen. Das Finanzdepartement lobt die gigantischen Kosteneinsparungen, doch auf den Wachen bricht Panik aus. "Ich weiss nicht, ob mein Kollege seine Fleischkäse-Sandwiches mit mir teilt oder ob ich ihn dafür formell festnehmen muss", sorgt sich ein Anwärter. Erste Tauschbörsen für Käsewürfel und Capri-Sonne haben sich im Intranet bereits gebildet. Wer ohne eigene Chips aufkreuzt, muss den Rapport angeblich auf dem Korridor durch die Schlüsselloch-Perspektive mitverfolgen.</p>
             </article>
 
-            <!-- ARTIKEL: ALPHITTÄ ANDERMATT -->
+            <!-- ARTIKEL 3: SOCIAL MEDIA MARATHON -->
+            <article class="article news-article">
+                <span class="kicker">Digitales Chaos mit Charme</span>
+                <h2>1. Social Media Marathon: Ohne Konzept zum viralen Welthit der Kapo Uri!</h2>
+                <p><strong>ALTDORF -</strong> Man nehme eine Prise Ahnungslosigkeit, mische sie mit grottenschlechter Kommunikation und verzichte komplett auf jegliches Konzept. Das Resultat? Der absolute Quoten-Hit! Der erste Social Media Marathon der Kantonspolizei Uri geht in die Geschichte ein. Bis zur letzten Minute wusste intern niemand, was eigentlich genau passiert, und der Bevölkerung wurde als einzige Info vorab lediglich trocken das Einsatzjournal vor die Füsse geworfen. Kommunikations-Profis würden bei dieser Strategie weinend zusammenbrechen, aber bei der Kapo Uri nennt man das charmant "taktische Überraschung".</p>
+                <p>Doch dann passierte das Unfassbare: Das Feedback war schlichtweg grandios! Die Server glühten und die Kommentarspalten explodierten vor Begeisterung. Der Grund dafür war allerdings weniger die filmreife Action, sondern vielmehr die kollektive Fassungslosigkeit der Bürger. Alle waren komplett schockiert darüber, für welch bodenlosen Schwachsinn die tapferen Beamten tagtäglich ausrücken müssen. Von "Der Nachbar hat meinen Gartenzwerg schief angeschaut" bis hin zu "Ein Fuchs hat meinen linken Crocs-Schuh geklaut" – die Bevölkerung feierte die absurde Realität des Urner Polizei-Alltags. "Endlich sehen wir, dass ihr nicht nur Raser blitzt, sondern primär als schwer bewaffnete Paartherapeuten und Müll-Detektive arbeitet", schrieb ein begeisterter Fan. Ein absoluter, unorganisierter Triumph auf ganzer Linie!</p>
+            </article>
+
+            <!-- ARTIKEL 4: ALPHITTÄ ANDERMATT -->
             <article class="article news-article">
                 <span class="kicker">Fresskoma am Berg</span>
                 <h2>Wild à discrétion in der Alphittä: Vier Urner Polizisten drohen, Andermatt leerzufressen!</h2>
@@ -736,7 +748,7 @@
                 <p>"Wir rechnen mit dem Schlimmsten", zittert der Küchenchef, während er hektisch einen weiteren Lastwagen mit Rehpfeffer bestellt. "Wenn das Fleisch ausgeht, fressen die uns noch die Massivholztische, die Tellerständer und die Deko-Geweihe von den Wänden!" Angeblich hat der Kanton Uri für diesen Abend Sonderkredite gesprochen, um die gewaltige Fleischrechnung zu decken. Die Verkehrspolizei hat die Strassen rund um Andermatt für den 10. Oktober vorsorglich gesperrt – nicht etwa wegen Schnee, sondern wegen der akuten Gefahr von platzenden Uniformknöpfen, die nach dem Dessert wie ballistische Querschläger durchs Dorf fliegen könnten. Ein Care-Team für die völlig überlasteten Kellner steht auf Abruf bereit.</p>
             </article>
 
-            <!-- ARTIKEL: HITZEMASSNAHMEN -->
+            <!-- ARTIKEL 5: HITZEMASSNAHMEN -->
             <article class="article news-article">
                 <span class="kicker">Klima-Kollaps im Revier</span>
                 <h2>Alarmstufe Rot: Kapo Uri führt extreme Hitzemassnahmen ein – Borat-Tangas und endlose WC-Dramen!</h2>
@@ -745,7 +757,7 @@
                 <p>Der eigentliche Skandal spielt sich jedoch auf der Strasse bei den Zivilfahndern ab. Offiziell wurde das Tragen von "kurzen Hosen" grosszügig gestattet. Einige Kollegen haben das jedoch als Freifahrtschein für den totalen textilen Kontrollverlust interpretiert. Angeblich wurde ein Kripo-Mitarbeiter beim Observieren in einem neongrünen Borat-Tanga gesichtet – getarnt lediglich mit Dienstmarke um den Hals und Piloten-Sonnenbrille. Die Kapo-Leitung rudert nun verzweifelt zurück: "Die Verhaftungsquoten sind zwar massiv gestiegen, weil die Verdächtigen beim Anblick unserer Zivilen so traumatisiert sind, dass sie sich weinend freiwillig stellen. Aber ästhetisch stossen wir hier an unsere Grenzen!"</p>
             </article>
 
-            <!-- ARTIKEL: BULLENPOWER (HUMORVOLL AUSGEBAUT) -->
+            <!-- ARTIKEL 6: BULLENPOWER -->
             <article class="article news-article">
                 <span class="kicker">Mythos Bullenpower</span>
                 <h2>Urner Polizisten umgarnt: Liebesdramen, Spital-Flirts und grenzübergreifende Romanzen!</h2>
@@ -756,7 +768,7 @@
                 <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--blue); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
             </article>
 
-            <!-- ARTIKEL: G7 EINSATZ -->
+            <!-- ARTIKEL 7: G7 EINSATZ -->
             <article class="article news-article">
                 <span class="kicker">G7-Gipfel-Desaster</span>
                 <h2>8 Urner Polizisten in Genf: Schlechter organisiert als ein Kindergeburtstag – Schlafen im Hasenstall!</h2>
@@ -764,7 +776,7 @@
                 <p>Doch der absolute Tiefpunkt wartete nach dem ohnehin schon chaotischen Dienstschluss: Die "Unterkünfte". "Hasenstall ist noch völlig geprahlt", fluchte ein Urner Wachtmeister leise, während er versuchte, seine Wirbelsäule nach einer Nacht auf einer zentimeterdünnen Pritsche wieder halbwegs geradezubiegen. Die bittere Ironie des Schicksals: Erst kürzlich wurde die 10-Millionen-Schweiz abgelehnt, angeblich um Platzmangel und Dichtestress zu vermeiden – doch bei den Schlafplätzen der eigenen Einsatzkräfte stapelt man die Beamten gnadenlos übereinander. "Wir werden hier schlimmer gehalten als Asylanten", knurrte ein Kollege beim morgendlichen Versuch, sich in der Besenkammer-grossen Zelle die Uniform anzuziehen. "Wenn ich noch einmal den Ellenbogen meines Nebenmanns beim Umdrehen im Gesicht habe, fordere ich politisches Asyl im Kanton Waadt!" Wenigstens, so heisst es aus gut unterrichteten Kreisen, hatte die Delegation ihre eigenen Proteinriegel dabei.</p>
             </article>
 
-            <!-- ARTIKEL: KRIPO JURA-WAHN -->
+            <!-- ARTIKEL 8: KRIPO JURA-WAHN -->
             <article class="article news-article">
                 <span class="kicker">Akademische Aufrüstung</span>
                 <h2>Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton!</h2>
@@ -772,7 +784,7 @@
                 <p>"Verhöre dauern mittlerweile drei Stunden länger", klagt ein genervter Kollege aus der Bereitschaftspolizei. "Die beiden zitieren dem Verdächtigen neuerdings zuerst sämtliche Bundesgerichtsentscheide auf Latein und diskutieren danach über die philosophische Bedeutung des Tatmotivs." Gerüchten zufolge wurde neulich intern debattiert, ob man einen flüchtenden Einbrecher nicht wegen Unverhältnismässigkeit des Fluchtwegs verklagen könne, statt ihm einfach nachzurennen. Der Pausenraum im Polizeigebäude gleicht derweil immer mehr einem Gerichtssaal – wer hier den letzten Kaffee aus der Maschine nimmt, hört statt einem "Hey!" nur noch ein lautes: "Einspruch, Euer Ehren!"</p>
             </article>
 
-            <!-- ARTIKEL: KRIPO-STEINER -->
+            <!-- ARTIKEL 9: KRIPO-STEINER -->
             <article class="article news-article">
                 <span class="kicker">Weltschmerz im Büro</span>
                 <h2>Zurück von der Weltreise: Kripo-Ermittler kämpft sich durch den Akten-Dschungel!</h2>
@@ -780,7 +792,7 @@
                 <p>"Im Amazonas-Regenwald wusste ich wenigstens, dass die Piranhas mich fressen wollen. Hier im Büro lauern die wahren Gefahren im defekten Locher und bei plötzlichen Papierstaus im Drucker", jammert der einst entspannte Weltenbummler, der nach wenigen Wochen bereits wieder die typische Kapo-Kellerbräune angenommen hat. Anstelle von Macheten nutzt er nun dicke Textmarker, um sich mühsam einen Weg durch die dichten Fallakten zu bahnen. Kollegen berichten besorgt, dass er in der Kantine neulich versucht habe, mit zwei Kugelschreibern ein Feuer zu machen, weil er in der Wildnis die Bedienung der Mikrowelle verlernt hat. Die Kripo-Leitung zeigt sich gnädig und hat ihm vorübergehend eine kleine Plastikpalme und etwas Sand auf den Schreibtisch gestellt, um den harten Kulturschock abzufedern.</p>
             </article>
 
-            <!-- ARTIKEL: PROTEINRIEGEL -->
+            <!-- ARTIKEL 10: PROTEINRIEGEL -->
             <article class="article news-article">
                 <span class="kicker">BVP Info Exklusiv</span>
                 <h2>Muskelaufbau im Dienst: Neu gibt es Proteinriegel für die Pausen!</h2>
@@ -788,7 +800,7 @@
                 <p>"Die trockenen Gipfeli von früher haben einfach nicht genug Masse gebracht", erklärt ein sichtlich aufgepumpter Wachtmeister. "Jetzt können wir zwischen den LKW-Kontrollen ordentlich Gains machen." Böse Zungen behaupten, die Neuerung sei primär deshalb eingeführt worden, damit die Kollegen die interne 500-Liegestütze-Challenge ohne kompletten Schwächeanfall überstehen. Die Uniformschneider der Kapo Uri sind jedenfalls bereits in Alarmbereitschaft versetzt worden, falls die blauen Hemden an den Ärmeln bald bedrohlich zu spannen beginnen.</p>
             </article>
 
-            <!-- ARTIKEL: UBER -->
+            <!-- ARTIKEL 11: UBER -->
             <article class="article news-article">
                 <span class="kicker">Phantomjagd im Kanton</span>
                 <h2>Grossangelegte UBER-Kontrollen auf Urner Strassen: Bisher exakt null Treffer!</h2>
@@ -796,7 +808,7 @@
                 <p>"Wir haben jeden dunklen Kombi und jeden verdächtig freundlich winkenden Fahrer herausgewinkt", berichtet ein leicht desillusionierter Beamter. "Aber hier fährt schlichtweg niemand UBER." Verkehrsexperten gehen stark davon aus, dass sich in absehbarer Zukunft daran auch absolut nichts ändern wird, da die meisten Urner im Zweifelsfall lieber den Traktor des Nachbarn nehmen. Die Einsatzkräfte überlegen nun, die Ressourcen umzuverteilen und stattdessen verstärkt nach Einhörnern oder Yetis zu fahnden – die Trefferquote dürfte in etwa gleich hoch ausfallen.</p>
             </article>
 
-            <!-- ARTIKEL: TASER 10 -->
+            <!-- ARTIKEL 12: TASER 10 -->
             <article class="article news-article">
                 <span class="kicker">Hochspannung im WK</span>
                 <h2>Kapo Uri brilliert am Taser 10 Wiederholungskurs: "Wir haben einfach alles getroffen!"</h2>
@@ -804,7 +816,7 @@
                 <p>"Der Taser hat 10 Schuss, aber einige Kollegen haben gefühlt 12 Treffer gelandet", staunt ein Instruktor. Die Euphorie war so gross, dass nicht nur die Zielscheiben erfolgreich neutralisiert wurden, sondern im Eifer des Gefechts auch zwei Kaffeetassen, ein flüchtender Bürostuhl und versehentlich der WLAN-Router im Schulungsraum eine Ladung abbekamen. "Die Energie im Raum war sprichwörtlich elektrisierend", so ein sichtlich geladener Teilnehmer. Da der Taser 10 über eine massiv grössere Reichweite verfügt, wird nun auf Direktionsebene geprüft, ob man flüchtige Verkehrssünder künftig ganz bequem und ressourcenschonend direkt aus dem Pausenraumfenster stoppen kann.</p>
             </article>
 
-            <!-- ARTIKEL: PORTFOLIO-WAHN -->
+            <!-- ARTIKEL 13: PORTFOLIO-WAHN -->
             <article class="article news-article">
                 <span class="kicker">Tastatur-Elite am Limit</span>
                 <h2>Polizeianwärter im Portfolio-Wahn: Unermüdliches Tippen bis die Finger bluten!</h2>
@@ -812,7 +824,7 @@
                 <p>Die Rekruten versuchen verzweifelt, ihre heldenhaften Praxiseinsätze in perfekt formatiertem, juristisch wasserdichtem Beamtendeutsch auf Papier zu bringen. "Wir trainieren sie hart für den Strassenkampf, für Takedowns und Pfeffersprayeinsätze. Aber der wahre, unbarmherzige Endgegner ist und bleibt MS Word", seufzt ein Ausbildungsleiter, während er einem weinenden Anwärter bei der Inhaltsverzeichnis-Formatierung hilft. Gerüchten zufolge hat ein besonders eifriger Rekrut bereits seine dritte Tastatur durchgeschmort, weil er den Begriff "Verhältnismässigkeitsprinzip" mit über 200 Anschlägen pro Minute in sein Fazit gehämmert hat.</p>
             </article>
             
-            <!-- ARTIKEL: 12-STUNDEN-SCHICHTEN -->
+            <!-- ARTIKEL 14: 12-STUNDEN-SCHICHTEN -->
             <article class="article news-article">
                 <span class="kicker">Schlafentzug an der Front</span>
                 <h2>Neues 12-Stunden-Schichtmodell: Büros zu Matratzenlagern umfunktioniert!</h2>
@@ -820,7 +832,7 @@
                 <p>Ein anonymer Wachtmeister berichtet mit leerem Blick: "Wir haben bereits ein komplexes Rotationssystem für den Platz unter dem Kopierer eingeführt, weil es dort so schön warm ist." Der interne Schwarzmarkt für koffeinhaltige Kaltgetränke blüht auf beängstigende Weise. Die Kommandoebene überlegt angeblich bereits ernsthaft, taktische Schlafsäcke zur Standardausrüstung hinzuzufügen, nachdem ein Kollege versehentlich beim Morgenrapport im Stehen eingeschlafen und beinahe in den Papierschredder gefallen ist. Die Kaffeemaschine wurde offiziell zur kritischen Infrastruktur des Kantons Uri erklärt und wird nun rund um die Uhr von einer schwer bewaffneten Sondereinheit beschützt. Wer in der Pause blinzelt, hat schon verloren.</p>
             </article>
 
-            <!-- ARTIKEL: FREDDI IN FLÜELEN -->
+            <!-- ARTIKEL 15: FREDDI IN FLÜELEN -->
             <article class="article news-article">
                 <span class="kicker">Herzklopfen am Strassenrand</span>
                 <h2>Verkehrschaos in Flüelen: Alle wollen vom Werkhof-Schönling kontrolliert werden!</h2>
@@ -829,7 +841,7 @@
                 <button class="radar-btn" onclick="openModal()">Einsatzprotokoll & Liebesbriefe lesen</button>
             </article>
 
-            <!-- ARTIKEL: HAMSTER MONATSFOTO -->
+            <!-- ARTIKEL 16: HAMSTER MONATSFOTO -->
             <article class="article news-article">
                 <span class="kicker">Kapo-interner Skandal</span>
                 <h2>Fassungslosigkeit bei Preisverleihung: Ein Hamster gewinnt das Monatsfoto!</h2>
@@ -837,7 +849,7 @@
                 <p>Der kleine Nager namens "Wachtmeister Krümel" posierte im perfekten Licht auf dem Armaturenbrett und degradierte damit alle knallharten Verkehrspolizisten zu Verlierern. Die Hundestaffel der Kantonspolizei hat bereits rechtliche Schritte gegen die Wertung eingeleitet. "Das ist ein Affront für jeden hart arbeitenden Diensthund", bellte ein sichtlich empörter Hundeführer ins Mikrofon. Krümel hingegen nahm den Sieg gelassen und knabberte während der feierlichen Siegerehrung genüsslich an einem unbezahlten Strafzettel. Die Kapo Uri prüft nun, ob Hamster künftig ganz offiziell für Radarkontrollen in engen Röhren eingesetzt werden können.</p>
             </article>
 
-            <!-- ARTIKEL: GNOS LIEBESBRIEFE -->
+            <!-- ARTIKEL 17: GNOS LIEBESBRIEFE -->
             <article class="article news-article">
                 <span class="kicker">Herzensbrecher am Limit</span>
                 <h2>Post-Logistik kollabiert: Die Einsatzstelle ertrinkt in anonymen Liebesbriefen!</h2>
@@ -845,7 +857,7 @@
                 <p>Die Postfilialen im Kanton melden offiziell "Land unter". Pöstler klagen über chronische Rückenschmerzen, da die Pakete mit handgestrickten Polizei-Socken und edlen Pralinen epische Ausmasse annehmen. "Wir mussten extra Rollwagen anfordern, weil der Briefträger die Fanpost nicht mehr auf dem Velo balancieren konnte", seufzt ein Kollege kopfschüttelnd. Das Büro des Beamten duftet mittlerweile nach einer wilden Mischung aus 15 verschiedenen Luxus-Damenparfüms. Der Kollege selbst gibt sich bescheiden: "Ich komme gar nicht mehr zum Lesen. Ich nutze das dicke, rosa Parfümpapier momentan primär, um wackelige Bürotische im Pausenraum auszugleichen." Die Kapo-Leitung überlegt nun, ihn als offizielle Touristenattraktion anzumelden.</p>
             </article>
 
-            <!-- ARTIKEL: 10-MIO-SCHWEIZ -->
+            <!-- ARTIKEL 18: 10-MIO-SCHWEIZ -->
             <article class="article news-article">
                 <span class="kicker">Bevölkerungslimit erreicht</span>
                 <h2>10-Millionen-Schweiz ist voll: Alle Einheimischen müssen das Land verlassen!</h2>
@@ -853,7 +865,7 @@
                 <p>Am Gotthard spielen sich seit den frühen Morgenstunden dramatische Szenen ab. Das Schwerverkehrszentrum Erstfeld wurde kurzerhand umfunktioniert, um den beispiellosen Massenexodus der Eidgenossen Richtung Italien zu kanalisieren. Am Strassenrand werden derzeit die letzten verbliebenen Alphörner, Kuckucksuhren und gusseisernen Fondue-Caquelons auf eilig angemietete LKWs verladen, um sie weinend ins Exil zu transportieren. "Wer noch illegale Bestände von Cervelat oder Aromat im Kofferraum hat, muss an der Grenze harten Strafzoll zahlen", ruft ein Polizist durchs Megafon, während er selbst eine Träne wegdrückt. Wo die Schweizer nun hinziehen, ist unklar – erste diplomatische Gerüchte besagen, dass Mallorca zum 27. Kanton ernannt wird und das Wallis künftig auf Teneriffa angesiedelt ist.</p>
             </article>
 
-            <!-- ARTIKEL: SENIORITA HUBER -->
+            <!-- ARTIKEL 19: SENIORITA HUBER -->
             <article class="article news-article">
                 <span class="kicker">Das Standesamt in besten Händen</span>
                 <h2>Verwaltungs-Coup: Eine neue Super-Beamtin übernimmt die absolute Leitung!</h2>
@@ -861,7 +873,7 @@
                 <p>Termine werden auf die Millisekunde genau eingehalten. Wer beim entscheidenden "Ja"-Wort vor dem Altar stottert, wird ohne Vorwarnung sofort wieder hinten in die Warteschlange im Korridor eingereiht. "Es ist hart, aber absolut fair", berichtet ein frisch vermählter Bräutigam, der nach der Zeremonie noch immer leicht zittert. Dank dem gnadenlosen Optimierungswahn dauern Eheschliessungen nur noch genau 45 Sekunden – inklusive Unterschrift, Ringwechsel und einem kurzen, offiziell abgesegneten Kuss. Kollegen und Bürger sind sich einig: Erste Stimmen fordern bereits vehement, ihr direkt das gesamte Gebäude zu unterstellen und sie zur obersten Diktatorin aller Papierkram-Abteilungen zu befördern.</p>
             </article>
 
-            <!-- ARTIKEL: ANGELO TELEPATHIE -->
+            <!-- ARTIKEL 20: ANGELO TELEPATHIE -->
             <article class="article news-article">
                 <span class="kicker">Held der Hotline</span>
                 <h2>Der telepathische Mozart der Zentrale: Unser Kollege revolutioniert das Telefon-Game</h2>
@@ -869,7 +881,7 @@
                 <p>"Gestern rief ein nervöser Mann an, um einen Einbruch zu melden. Er hatte die Handschellen beim Täter schon klicken lassen, bevor der Anrufer überhaupt seine Adresse gestammelt hat", flüstert ein sichtlich verängstigter Kollege. Einige behaupten sogar, er könne durch reines, intensives Anstarren des Telefons einen Notruf bei der Gegenseite auslösen. Seine Reaktionszeit ist mittlerweile offiziell in den negativen Bereich gerutscht. Gerüchten zufolge tippt er mit 400 Anschlägen pro Minute, bestellt parallel Pizza für Anrufer, bevor diese überhaupt wissen, dass sie Hunger haben, und hat vier Bildschirme gleichzeitig im Blick. Die IT-Abteilung ist völlig überfordert, weil das veraltete Einsatzleitsystem abstürzt, da er neuerdings Ereignisse rapportiert, die voraussichtlich erst übermorgen passieren werden.</p>
             </article>
 
-            <!-- ARTIKEL: RADAR HACK -->
+            <!-- ARTIKEL 21: RADAR HACK -->
             <article class="article news-article" style="border: none;">
                 <span class="kicker">Interaktiver Test</span>
                 <h2>Radar-Anlagen gehackt? Sünder kriegen Bambus-Tee!</h2>
@@ -1138,7 +1150,16 @@
             canvas.height = window.innerHeight; 
         });
 
-        // Access Check (Direkter Zugang nach Login)
+        // Access Check (Rang -> Login -> Site)
+        function selectRank(rank) {
+            if (rank === 'LT' || rank === 'Dienstchef') {
+                window.location.href = 'https://www.bullenpower-uri.ch';
+            } else {
+                document.getElementById('step-rank').style.display = 'none';
+                document.getElementById('step-login').style.display = 'block';
+            }
+        }
+
         function checkAccess() {
             const nameInput = document.getElementById('visitorName').value.trim();
             const codeInput = document.getElementById('accessCode').value;
