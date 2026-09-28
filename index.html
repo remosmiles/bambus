@@ -8,7 +8,7 @@
     <style>
         /* CSS Reset & Boulevard-Tabloid Variablen */
         :root { 
-            --red: #e00000; 
+            --blue: #0055a4; /* POLIZEI BLAU */
             --dark: #000000; 
             --bg: #ffffff; 
             --gray: #f4f4f4; 
@@ -58,9 +58,9 @@
         .login-box { 
             background: rgba(17, 17, 17, 0.9); 
             padding: 40px; 
-            border: 4px solid var(--red); 
+            border: 4px solid var(--blue); 
             text-align: center; 
-            box-shadow: 0 0 30px rgba(224, 0, 0, 0.8); 
+            box-shadow: 0 0 30px rgba(0, 85, 164, 0.8); 
             max-width: 90%; 
             z-index: 2; 
             position: relative; 
@@ -69,14 +69,14 @@
         }
 
         .login-box h1 { 
-            color: var(--red); 
+            color: var(--blue); 
             font-size: 45px; 
             text-transform: uppercase; 
             transform: skew(-5deg); 
             margin-top: 0; 
             margin-bottom: 10px; 
             letter-spacing: -1px; 
-            text-shadow: 0 0 10px red; 
+            text-shadow: 0 0 10px var(--blue); 
         }
 
         .login-box p { 
@@ -88,22 +88,25 @@
 
         .login-box input { 
             padding: 15px; 
-            font-size: 24px; 
+            font-size: 20px; 
             text-align: center; 
-            border: 2px solid var(--red); 
+            border: 2px solid var(--blue); 
             border-radius: 5px; 
-            margin-bottom: 20px; 
+            margin-bottom: 15px; 
             outline: none; 
             font-weight: bold; 
-            width: 200px; 
+            width: 250px; 
             background: #000; 
             color: #0f0; 
-            letter-spacing: 5px; 
+            letter-spacing: 2px; 
             text-shadow: 0 0 5px #0f0; 
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .login-box button { 
-            background: var(--red); 
+            background: var(--blue); 
             color: white; 
             border: none; 
             padding: 15px 30px; 
@@ -118,7 +121,7 @@
 
         .login-box button:hover { 
             background: white; 
-            color: var(--red); 
+            color: var(--blue); 
             box-shadow: 0 0 15px white; 
         }
 
@@ -170,12 +173,12 @@
         /* Funkel-Effekt für das Logo */
         @keyframes sparkle {
             0%, 100% { text-shadow: none; }
-            50% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #e00000; }
+            50% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px var(--blue); }
         }
 
         /* Header BILD/20Min-Style */
         header { 
-            background: var(--red); 
+            background: var(--blue); 
             color: white; 
             padding: 15px 20px; 
             border-bottom: 4px solid var(--dark); 
@@ -196,7 +199,7 @@
             font-weight: 900; 
             letter-spacing: -2px; 
             text-transform: uppercase; 
-            color: var(--red); 
+            color: var(--blue); 
             transform: skew(5deg); 
             display: block; 
             margin: 0; 
@@ -225,14 +228,14 @@
         }
 
         nav a:hover { 
-            color: var(--red); 
+            color: var(--blue); 
         }
 
         .nav-divider { 
             color: #555; 
         }
 
-        /* Roter Ticker */
+        /* Ticker */
         .ticker { 
             background: white; 
             color: var(--dark); 
@@ -245,7 +248,7 @@
         }
 
         .ticker span { 
-            color: var(--red); 
+            color: var(--blue); 
             margin-right: 10px; 
         }
 
@@ -298,7 +301,7 @@
 
         .kicker { 
             display: block; 
-            color: var(--red); 
+            color: var(--blue); 
             font-size: 14px; 
             font-weight: 900; 
             text-transform: uppercase; 
@@ -340,7 +343,7 @@
         }
 
         .radar-btn:hover { 
-            background: var(--red); 
+            background: var(--blue); 
         }
 
         /* Pagination Design */
@@ -364,11 +367,11 @@
         }
 
         .pagination button:hover { 
-            background: var(--red); 
+            background: var(--blue); 
         }
 
         .pagination button.active { 
-            background: var(--red); 
+            background: var(--blue); 
             transform: scale(1.1); 
         }
 
@@ -413,12 +416,12 @@
         }
 
         /* Spezifische Ads */
-        .ad-remo { border-top-color: #e1306c; }
-        .ad-remo h4 { color: #e1306c; }
+        .ad-remo { border-top-color: #0044cc; }
+        .ad-remo h4 { color: #0044cc; }
         
         .ad-link-btn { 
             display: block; 
-            background: #e1306c; 
+            background: #0044cc; 
             color: white; 
             text-decoration: none; 
             padding: 10px; 
@@ -457,7 +460,7 @@
         .modal-content { 
             background: white; 
             padding: 40px; 
-            border: 5px solid var(--red); 
+            border: 5px solid var(--blue); 
             max-width: 500px; 
             text-align: center; 
             position: relative; 
@@ -485,7 +488,7 @@
         }
 
         .close-btn:hover { 
-            color: var(--red); 
+            color: var(--blue); 
         }
 
         /* Kommentar-Bereich */
@@ -504,7 +507,7 @@
         }
 
         .comments-header span { 
-            color: var(--red); 
+            color: var(--blue); 
         }
 
         .comment-input-box { 
@@ -545,7 +548,7 @@
         }
 
         .comment-input-box button:hover { 
-            background: var(--red); 
+            background: var(--blue); 
         }
         
         .comment { 
@@ -553,7 +556,7 @@
             border: 1px solid var(--border); 
             padding: 15px; 
             margin-bottom: 15px; 
-            border-left: 4px solid var(--red); 
+            border-left: 4px solid var(--blue); 
             box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
         }
 
@@ -596,7 +599,7 @@
         }
 
         .comment-actions span:hover { 
-            color: var(--red); 
+            color: var(--blue); 
             transform: scale(1.1); 
         }
 
@@ -606,7 +609,6 @@
             cursor: default; 
         }
         
-        /* Spezielles Design für eingerückte Antworten */
         .reply-comment { 
             margin-left: 40px; 
             border-left: 3px solid #ff9900; 
@@ -618,33 +620,28 @@
 </head>
 <body class="locked">
 
+    <!-- ZUGANGS-FENSTER MIT MATRIX HINTERGRUND -->
     <div id="login-overlay">
         <canvas id="matrix-canvas"></canvas>
-        
         <div class="login-box" id="step-login">
             <h1>TOP SECRET</h1>
             <p>Sicherheitsüberprüfung.<br>Zutritt nur für autorisiertes Personal der Kapo Uri.</p>
+            <input type="text" id="visitorName" placeholder="DEIN DECKNAME" maxlength="20">
             <input type="password" id="accessCode" placeholder="CODE" maxlength="4" onkeydown="if(event.key === 'Enter') checkAccess()">
             <br>
             <button onclick="checkAccess()">Zugang anfordern</button>
-            <p id="login-error">🚨 Falscher Code! Ein Rapport wird automatisch an den Schichtchef gesendet.</p>
-        </div>
-
-        <div class="login-box" id="step-warning" style="display: none; border-color: #ff9900; box-shadow: 0 0 30px rgba(255, 153, 0, 0.5);">
-            <h1 style="color: #ff9900; text-shadow: 0 0 10px #ff9900; font-size: 40px;">⚠️ ACHTUNG ⚠️</h1>
-            <p style="font-size: 18px; color: #fff;">Die folgenden Inhalte sind satirisch, masslos übertrieben und entsprechen oftmals nicht der Realität.</p>
-            <p style="font-size: 14px; color: #aaa; margin-bottom: 30px;">Personen ohne ausgeprägten Humor, chronische Nörgler und Spassbremsen werden dringend gebeten, dieses Fenster umgehend zu schliessen!</p>
-            <button onclick="enterSite()" style="background: #ff9900; color: #111;">Ich habe Humor – Weiter!</button>
+            <p id="login-error">🚨 Name fehlt oder falscher Code!</p>
         </div>
     </div>
 
+    <!-- Modals -->
     <div id="flash-overlay"></div>
 
     <div class="modal-overlay" id="myModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 style="color: var(--red); font-weight: 900; font-size: 30px; margin-top: 0;">🚨 ZUGRIFF VERWEIGERT</h2>
-            <p style="font-family: Arial, sans-serif; font-size: 18px;">Dieser Artikel ist streng geheim. Nur für den autorisierten Schichtchef des Schwerverkehrszentrums Erstfeld freigegeben!</p>
+            <h2 style="color: var(--blue); font-weight: 900; font-size: 30px; margin-top: 0;">🚨 ZUGRIFF VERWEIGERT</h2>
+            <p style="font-family: Arial, sans-serif; font-size: 18px;">Dieser Artikel ist streng geheim. Nur für den autorisierten Schichtchef freigegeben!</p>
             <p style="font-size: 50px; margin: 20px 0;">🐼🚫</p>
             <button class="radar-btn" onclick="closeModal()">VERSTANDEN</button>
         </div>
@@ -678,12 +675,22 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> Fresskoma in Andermatt: Vier Polizisten vernichten Wildbestände in der Alphittä! <span>+++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
     </div>
 
     <div class="container">
+        <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
 
+            <!-- NEUER ARTIKEL: ALPHITTÄ ANDERMATT -->
+            <article class="article news-article">
+                <span class="kicker">Fresskoma am Berg</span>
+                <h2>Wild à discrétion in der Alphittä: Vier Urner Polizisten drohen, Andermatt leerzufressen!</h2>
+                <p><strong>ANDERMATT -</strong> Am 10. Oktober herrscht in der legendären Alphittä in Andermatt absoluter Ausnahmezustand. Die Wirte wurden bereits vorgewarnt und haben vorsorglich die nationalen Wildreserven angezapft. Der Grund? Vier schwergewichtige (zumindest nach dem Essen) Urner Polizisten haben sich zum "Wild à discrétion" angemeldet. Insidern zufolge haben die Beamten seit drei Tagen auf feste Nahrung verzichtet und das Kauen an alten Traktorreifen trainiert, um die Kiefermuskulatur auf das epische Festmahl vorzubereiten.</p>
+                <p>"Wir rechnen mit dem Schlimmsten", zittert der Küchenchef, während er hektisch einen weiteren Lastwagen mit Rehpfeffer bestellt. "Wenn das Fleisch ausgeht, fressen die uns noch die Massivholztische, die Tellerständer und die Deko-Geweihe von den Wänden!" Angeblich hat der Kanton Uri für diesen Abend Sonderkredite gesprochen, um die gewaltige Fleischrechnung zu decken. Die Verkehrspolizei hat die Strassen rund um Andermatt für den 10. Oktober vorsorglich gesperrt – nicht etwa wegen Schnee, sondern wegen der akuten Gefahr von platzenden Uniformknöpfen, die nach dem Dessert wie ballistische Querschläger durchs Dorf fliegen könnten. Ein Care-Team für die völlig überlasteten Kellner steht auf Abruf bereit.</p>
+            </article>
+
+            <!-- ARTIKEL: HITZEMASSNAHMEN -->
             <article class="article news-article">
                 <span class="kicker">Klima-Kollaps im Revier</span>
                 <h2>Alarmstufe Rot: Kapo Uri führt extreme Hitzemassnahmen ein – Borat-Tangas und endlose WC-Dramen!</h2>
@@ -692,6 +699,7 @@
                 <p>Der eigentliche Skandal spielt sich jedoch auf der Strasse bei den Zivilfahndern ab. Offiziell wurde das Tragen von "kurzen Hosen" grosszügig gestattet. Einige Kollegen haben das jedoch als Freifahrtschein für den totalen textilen Kontrollverlust interpretiert. Angeblich wurde ein Kripo-Mitarbeiter beim Observieren in einem neongrünen Borat-Tanga gesichtet – getarnt lediglich mit Dienstmarke um den Hals und Piloten-Sonnenbrille. Die Kapo-Leitung rudert nun verzweifelt zurück: "Die Verhaftungsquoten sind zwar massiv gestiegen, weil die Verdächtigen beim Anblick unserer Zivilen so traumatisiert sind, dass sie sich weinend freiwillig stellen. Aber ästhetisch stossen wir hier an unsere Grenzen!"</p>
             </article>
 
+            <!-- ARTIKEL: BULLENPOWER (HUMORVOLL AUSGEBAUT) -->
             <article class="article news-article">
                 <span class="kicker">Mythos Bullenpower</span>
                 <h2>Urner Polizisten umgarnt: Liebesdramen, Spital-Flirts und grenzübergreifende Romanzen!</h2>
@@ -699,9 +707,10 @@
                 <p>"Ein harmloser Spitalbesuch für eine Blutentnahme gleicht mittlerweile einem absoluten Spiessrutenlauf", stöhnt ein völlig erschöpfter Urner Polizist. Kürzlich habe sich eine hochmotivierte Spitalangestellte bei der Übergabe der Blutröhrchen regelrecht an ihm vergangen. "Ich wollte eigentlich nur das Einsatzprotokoll unterschreiben, plötzlich riss sie mir die Dienst-Handschellen aus dem Gurt, kettete mich elegant ans Spitalbett und drohte, mich erst nach einem gemeinsamen Candle-Light-Dinner im Personalraum wieder loszumachen!" Die Kommandoebene prüft nun intern, ob für Spitalbesuche künftig das bewaffnete Sondereinsatzkommando als Begleitschutz für die eigenen, viel zu gutaussehenden Männer angefordert werden muss.</p>
                 <p>Doch nicht nur das medizinische Personal verliert jegliche Beherrschung. Bei einer interkantonalen Grossübung hat ein völlig verzauberter Kollege der Kapo Nidwalden kurzerhand eine Urner Polizistin "gefangen" genommen. Statt den fiktiven Täter zu jagen, packte er die verdutzte Beamtin kurzerhand in den Laderaum seines Patrouillenautos und bretterte mit heulender Sirene Richtung Stans. "Er funkte durch, wer so viel geballte Bullenpower ausstrahlt, werde ab sofort als kantonales Kulturgut der Zentralschweiz konfisziert", berichtet ein fassungsloser Augenzeuge. Die Urnerin konnte erst nach zähen Geiselverhandlungen gegen drei Laibe besten Nidwaldner Käse und eine unterschriebene Autogrammkarte unversehrt freigekauft werden.</p>
                 <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in den Olymp der Begierde: <br>
-                <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--red); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
+                <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--blue); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
             </article>
 
+            <!-- ARTIKEL: G7 EINSATZ -->
             <article class="article news-article">
                 <span class="kicker">G7-Gipfel-Desaster</span>
                 <h2>8 Urner Polizisten in Genf: Schlechter organisiert als ein Kindergeburtstag – Schlafen im Hasenstall!</h2>
@@ -709,6 +718,7 @@
                 <p>Doch der absolute Tiefpunkt wartete nach dem ohnehin schon chaotischen Dienstschluss: Die "Unterkünfte". "Hasenstall ist noch völlig geprahlt", fluchte ein Urner Wachtmeister leise, während er versuchte, seine Wirbelsäule nach einer Nacht auf einer zentimeterdünnen Pritsche wieder halbwegs geradezubiegen. Die bittere Ironie des Schicksals: Erst kürzlich wurde die 10-Millionen-Schweiz abgelehnt, angeblich um Platzmangel und Dichtestress zu vermeiden – doch bei den Schlafplätzen der eigenen Einsatzkräfte stapelt man die Beamten gnadenlos übereinander. "Wir werden hier schlimmer gehalten als Asylanten", knurrte ein Kollege beim morgendlichen Versuch, sich in der Besenkammer-grossen Zelle die Uniform anzuziehen. "Wenn ich noch einmal den Ellenbogen meines Nebenmanns beim Umdrehen im Gesicht habe, fordere ich politisches Asyl im Kanton Waadt!" Wenigstens, so heisst es aus gut unterrichteten Kreisen, hatte die Delegation ihre eigenen Proteinriegel dabei.</p>
             </article>
 
+            <!-- ARTIKEL: KRIPO JURA-WAHN -->
             <article class="article news-article">
                 <span class="kicker">Akademische Aufrüstung</span>
                 <h2>Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton!</h2>
@@ -716,13 +726,15 @@
                 <p>"Verhöre dauern mittlerweile drei Stunden länger", klagt ein genervter Kollege aus der Bereitschaftspolizei. "Die beiden zitieren dem Verdächtigen neuerdings zuerst sämtliche Bundesgerichtsentscheide auf Latein und diskutieren danach über die philosophische Bedeutung des Tatmotivs." Gerüchten zufolge wurde neulich intern debattiert, ob man einen flüchtenden Einbrecher nicht wegen Unverhältnismässigkeit des Fluchtwegs verklagen könne, statt ihm einfach nachzurennen. Der Pausenraum im Polizeigebäude gleicht derweil immer mehr einem Gerichtssaal – wer hier den letzten Kaffee aus der Maschine nimmt, hört statt einem "Hey!" nur noch ein lautes: "Einspruch, Euer Ehren!"</p>
             </article>
 
+            <!-- ARTIKEL: KRIPO-STEINER -->
             <article class="article news-article">
                 <span class="kicker">Weltschmerz im Büro</span>
-                <h2>Zurück von der Weltreise: Kripo-Steiner kämpft sich durch den Akten-Dschungel!</h2>
-                <p><strong>ALTDORF -</strong> Ein Jahr lang kannte Silvio Steiner nur unberührte Strände, exotische Cocktails und die grenzenlose Freiheit der grossen weiten Welt. Doch nun hat die harte Realität den Kripo-Mitarbeiter wieder gnadenlos eingeholt. Seit seiner Rückkehr in die Schweiz steckt Steiner bis zum Hals in verstaubten Aktenbergen und kämpft einen täglichen Überlebenskampf gegen die heimische Polizei-Bürokratie.</p>
-                <p>"Im Amazonas-Regenwald wusste ich wenigstens, dass die Piranhas mich fressen wollen. Hier im Büro lauern die wahren Gefahren im defekten Locher und bei plötzlichen Papierstaus im Drucker", jammert der einst sonnengebräunte Ermittler, der nach wenigen Wochen bereits wieder die typische Kapo-Kellerbräune angenommen hat. Anstelle von Macheten nutzt Steiner nun dicke Textmarker, um sich mühsam einen Weg durch die dichten Fallakten zu bahnen. Kollegen berichten besorgt, dass er in der Kantine neulich versucht habe, mit zwei Kugelschreibern ein Feuer zu machen, weil er in der Wildnis die Bedienung der Mikrowelle verlernt hat. Die Kripo-Leitung zeigt sich gnädig und hat ihm vorübergehend eine kleine Plastikpalme und etwas Sand auf den Schreibtisch gestellt, um den harten Kulturschock abzufedern.</p>
+                <h2>Zurück von der Weltreise: Kripo-Ermittler kämpft sich durch den Akten-Dschungel!</h2>
+                <p><strong>ALTDORF -</strong> Ein Jahr lang kannte unser braungebrannter Kollege von der Kripo nur unberührte Strände, exotische Cocktails und die grenzenlose Freiheit der grossen weiten Welt. Doch nun hat die harte Realität ihn wieder gnadenlos eingeholt. Seit seiner Rückkehr in die Schweiz steckt er bis zum Hals in verstaubten Aktenbergen und kämpft einen täglichen Überlebenskampf gegen die heimische Polizei-Bürokratie.</p>
+                <p>"Im Amazonas-Regenwald wusste ich wenigstens, dass die Piranhas mich fressen wollen. Hier im Büro lauern die wahren Gefahren im defekten Locher und bei plötzlichen Papierstaus im Drucker", jammert der einst entspannte Weltenbummler, der nach wenigen Wochen bereits wieder die typische Kapo-Kellerbräune angenommen hat. Anstelle von Macheten nutzt er nun dicke Textmarker, um sich mühsam einen Weg durch die dichten Fallakten zu bahnen. Kollegen berichten besorgt, dass er in der Kantine neulich versucht habe, mit zwei Kugelschreibern ein Feuer zu machen, weil er in der Wildnis die Bedienung der Mikrowelle verlernt hat. Die Kripo-Leitung zeigt sich gnädig und hat ihm vorübergehend eine kleine Plastikpalme und etwas Sand auf den Schreibtisch gestellt, um den harten Kulturschock abzufedern.</p>
             </article>
 
+            <!-- ARTIKEL: PROTEINRIEGEL -->
             <article class="article news-article">
                 <span class="kicker">BVP Info Exklusiv</span>
                 <h2>Muskelaufbau im Dienst: Neu gibt es Proteinriegel für die Pausen!</h2>
@@ -730,6 +742,7 @@
                 <p>"Die trockenen Gipfeli von früher haben einfach nicht genug Masse gebracht", erklärt ein sichtlich aufgepumpter Wachtmeister. "Jetzt können wir zwischen den LKW-Kontrollen ordentlich Gains machen." Böse Zungen behaupten, die Neuerung sei primär deshalb eingeführt worden, damit die Kollegen die interne 500-Liegestütze-Challenge ohne kompletten Schwächeanfall überstehen. Die Uniformschneider der Kapo Uri sind jedenfalls bereits in Alarmbereitschaft versetzt worden, falls die blauen Hemden an den Ärmeln bald bedrohlich zu spannen beginnen.</p>
             </article>
 
+            <!-- ARTIKEL: UBER -->
             <article class="article news-article">
                 <span class="kicker">Phantomjagd im Kanton</span>
                 <h2>Grossangelegte UBER-Kontrollen auf Urner Strassen: Bisher exakt null Treffer!</h2>
@@ -737,6 +750,7 @@
                 <p>"Wir haben jeden dunklen Kombi und jeden verdächtig freundlich winkenden Fahrer herausgewinkt", berichtet ein leicht desillusionierter Beamter. "Aber hier fährt schlichtweg niemand UBER." Verkehrsexperten gehen stark davon aus, dass sich in absehbarer Zukunft daran auch absolut nichts ändern wird, da die meisten Urner im Zweifelsfall lieber den Traktor des Nachbarn nehmen. Die Einsatzkräfte überlegen nun, die Ressourcen umzuverteilen und stattdessen verstärkt nach Einhörnern oder Yetis zu fahnden – die Trefferquote dürfte in etwa gleich hoch ausfallen.</p>
             </article>
 
+            <!-- ARTIKEL: TASER 10 -->
             <article class="article news-article">
                 <span class="kicker">Hochspannung im WK</span>
                 <h2>Kapo Uri brilliert am Taser 10 Wiederholungskurs: "Wir haben einfach alles getroffen!"</h2>
@@ -744,6 +758,7 @@
                 <p>"Der Taser hat 10 Schuss, aber einige Kollegen haben gefühlt 12 Treffer gelandet", staunt ein Instruktor. Die Euphorie war so gross, dass nicht nur die Zielscheiben erfolgreich neutralisiert wurden, sondern im Eifer des Gefechts auch zwei Kaffeetassen, ein flüchtender Bürostuhl und versehentlich der WLAN-Router im Schulungsraum eine Ladung abbekamen. "Die Energie im Raum war sprichwörtlich elektrisierend", so ein sichtlich geladener Teilnehmer. Da der Taser 10 über eine massiv grössere Reichweite verfügt, wird nun auf Direktionsebene geprüft, ob man flüchtige Verkehrssünder künftig ganz bequem und ressourcenschonend direkt aus dem Pausenraumfenster stoppen kann.</p>
             </article>
 
+            <!-- ARTIKEL: PORTFOLIO-WAHN -->
             <article class="article news-article">
                 <span class="kicker">Tastatur-Elite am Limit</span>
                 <h2>Polizeianwärter im Portfolio-Wahn: Unermüdliches Tippen bis die Finger bluten!</h2>
@@ -751,21 +766,24 @@
                 <p>Die Rekruten versuchen verzweifelt, ihre heldenhaften Praxiseinsätze in perfekt formatiertem, juristisch wasserdichtem Beamtendeutsch auf Papier zu bringen. "Wir trainieren sie hart für den Strassenkampf, für Takedowns und Pfeffersprayeinsätze. Aber der wahre, unbarmherzige Endgegner ist und bleibt MS Word", seufzt ein Ausbildungsleiter, während er einem weinenden Anwärter bei der Inhaltsverzeichnis-Formatierung hilft. Gerüchten zufolge hat ein besonders eifriger Rekrut bereits seine dritte Tastatur durchgeschmort, weil er den Begriff "Verhältnismässigkeitsprinzip" mit über 200 Anschlägen pro Minute in sein Fazit gehämmert hat.</p>
             </article>
             
+            <!-- ARTIKEL: 12-STUNDEN-SCHICHTEN -->
             <article class="article news-article">
                 <span class="kicker">Schlafentzug an der Front</span>
                 <h2>Neues 12-Stunden-Schichtmodell: Büros zu Matratzenlagern umfunktioniert!</h2>
                 <p><strong>ERSTFELD -</strong> Das neue 12-Stunden-Schichtmodell fordert seine ersten Opfer in der Bereitschafts- und Verkehrspolizei. Wer das Schwerverkehrszentrum betritt, muss neuerdings aufpassen, wo er hintritt: Überall liegen erschöpfte Beamte. Unter den Schreibtischen, hinter den Aktenregalen und sogar auf dem Kopierer wird mittlerweile geschlafen. Die Garderoben riechen nach Verzweiflung und kaltem Kaffee.</p>
-                <p>Ein anonymer Wachtmeister berichtet mit leerem Blick: "Wir haben bereits ein complex Rotationssystem für den Platz unter dem Kopierer eingeführt, weil es dort so schön warm ist." Der interne Schwarzmarkt für koffeinhaltige Kaltgetränke blüht auf beängstigende Weise. Die Kommandoebene überlegt angeblich bereits ernsthaft, taktische Schlafsäcke zur Standardausrüstung hinzuzufügen, nachdem ein Kollege versehentlich beim Morgenrapport im Stehen eingeschlafen und beinahe in den Papierschredder gefallen ist. Die Kaffeemaschine wurde offiziell zur kritischen Infrastruktur des Kantons Uri erklärt und wird nun rund um die Uhr von einer schwer bewaffneten Sondereinheit beschützt. Wer in der Pause blinzelt, hat schon verloren.</p>
+                <p>Ein anonymer Wachtmeister berichtet mit leerem Blick: "Wir haben bereits ein komplexes Rotationssystem für den Platz unter dem Kopierer eingeführt, weil es dort so schön warm ist." Der interne Schwarzmarkt für koffeinhaltige Kaltgetränke blüht auf beängstigende Weise. Die Kommandoebene überlegt angeblich bereits ernsthaft, taktische Schlafsäcke zur Standardausrüstung hinzuzufügen, nachdem ein Kollege versehentlich beim Morgenrapport im Stehen eingeschlafen und beinahe in den Papierschredder gefallen ist. Die Kaffeemaschine wurde offiziell zur kritischen Infrastruktur des Kantons Uri erklärt und wird nun rund um die Uhr von einer schwer bewaffneten Sondereinheit beschützt. Wer in der Pause blinzelt, hat schon verloren.</p>
             </article>
 
+            <!-- ARTIKEL: FREDDI IN FLÜELEN -->
             <article class="article news-article">
                 <span class="kicker">Herzklopfen am Strassenrand</span>
-                <h2>Verkehrschaos in Flüelen: Alle wollen von "Schönling" Freddi kontrolliert werden!</h2>
-                <p><strong>FLÜELEN -</strong> Es herrschen absurde Zustände rund um den Werkhof in Flüelen. Seit bekannt ist, dass Fabio Freddi dort arbeitet, staut es sich auf den Zufahrtsstrassen. Verkehrspsychologen stehen vor einem Rätsel. Die Bereiche um den Werkhof gleichen zeitweise einem gut besuchten VIP-Wartebereich, weil alle Autofahrer hoffen, einen Blick auf ihn zu erhaschen.</p>
-                <p>"Ich bin heute schon dreimal mit einem absichtlich defekten Blinker am Werkhof vorbeigefahren, in der Hoffnung, dass er mich für eine Kontrolle rausnimmt", gesteht eine 25-jährige Autofahrerin, die bereits eine beeindruckende Sammlung an Bussen hortet. Der Werkhof musste bereits zusätzliche Ausweichflächen schaffen, weil simulierte Fahrzeugpannen in der Umgebung drastisch zugenommen haben. Es wird derzeit auf höchster Ebene geprüft, ob Freddi künftig nur noch mit einer verdunkelten Sturmmaske arbeiten darf, um den Verkehrsfluss in Flüelen zu gewährleisten.</p>
+                <h2>Verkehrschaos in Flüelen: Alle wollen vom Werkhof-Schönling kontrolliert werden!</h2>
+                <p><strong>FLÜELEN -</strong> Es herrschen absurde Zustände rund um den Werkhof in Flüelen. Seit bekannt ist, dass dort ein besonders charmanter Kollege arbeitet, staut es sich auf den Zufahrtsstrassen. Verkehrspsychologen stehen vor einem Rätsel. Die Bereiche um den Werkhof gleichen zeitweise einem gut besuchten VIP-Wartebereich, weil alle Autofahrer hoffen, einen Blick auf ihn zu erhaschen.</p>
+                <p>"Ich bin heute schon dreimal mit einem absichtlich defekten Blinker am Werkhof vorbeigefahren, in der Hoffnung, dass er mich für eine Kontrolle rausnimmt", gesteht eine 25-jährige Autofahrerin, die bereits eine beeindruckende Sammlung an Bussen hortet. Der Werkhof musste bereits zusätzliche Ausweichflächen schaffen, weil simulierte Fahrzeugpannen in der Umgebung drastisch zugenommen haben. Es wird derzeit auf höchster Ebene geprüft, ob der Kollege künftig nur noch mit einer verdunkelten Sturmmaske arbeiten darf, um den Verkehrsfluss in Flüelen zu gewährleisten.</p>
                 <button class="radar-btn" onclick="openModal()">Einsatzprotokoll & Liebesbriefe lesen</button>
             </article>
 
+            <!-- ARTIKEL: HAMSTER MONATSFOTO -->
             <article class="article news-article">
                 <span class="kicker">Kapo-interner Skandal</span>
                 <h2>Fassungslosigkeit bei Preisverleihung: Ein Hamster gewinnt das Monatsfoto!</h2>
@@ -773,13 +791,15 @@
                 <p>Der kleine Nager namens "Wachtmeister Krümel" posierte im perfekten Licht auf dem Armaturenbrett und degradierte damit alle knallharten Verkehrspolizisten zu Verlierern. Die Hundestaffel der Kantonspolizei hat bereits rechtliche Schritte gegen die Wertung eingeleitet. "Das ist ein Affront für jeden hart arbeitenden Diensthund", bellte ein sichtlich empörter Hundeführer ins Mikrofon. Krümel hingegen nahm den Sieg gelassen und knabberte während der feierlichen Siegerehrung genüsslich an einem unbezahlten Strafzettel. Die Kapo Uri prüft nun, ob Hamster künftig ganz offiziell für Radarkontrollen in engen Röhren eingesetzt werden können.</p>
             </article>
 
+            <!-- ARTIKEL: GNOS LIEBESBRIEFE -->
             <article class="article news-article">
                 <span class="kicker">Herzensbrecher am Limit</span>
-                <h2>Post-Logistik kollabiert: Gnos ertrinkt in anonymen Liebesbriefen!</h2>
-                <p><strong>ERSTFELD -</strong> Daniel Gnos bringt die Schweizerische Post an den Rand des logistischen Ruins. Wie gut unterrichtete Insider der Verteilerzentrale berichten, wird der charmante Beamte täglich von einer regelrechten Flut an anonymen Grüssen, handgeschriebenen Gedichten und parfümierten Liebesbotschaften bedrängt.</p>
-                <p>Die Postfilialen im Kanton melden offiziell "Land unter". Pöstler klagen über chronische Rückenschmerzen, da die Pakete mit handgestrickten Polizei-Socken und edlen Pralinen für Gnos epische Ausmasse annehmen. "Wir mussten extra Rollwagen anfordern, weil der Briefträger die Fanpost nicht mehr auf dem Velo balancieren konnte. Gnos hat jetzt einen eigenen Postleitzahlen-Bereich bekommen", seufzt ein Kollege kopfschüttelnd. Das Büro des Beamten duftet mittlerweile nach einer wilden Mischung aus 15 verschiedenen Luxus-Damenparfüms. Gnos selbst gibt sich bescheiden: "Ich komme gar nicht mehr zum Lesen. Ich nutze das dicke, rosa Parfümpapier momentan primär, um wackelige Bürotische im Pausenraum auszugleichen." Die Kapo-Leitung überlegt nun, Gnos als offizielle Touristenattraktion anzumelden.</p>
+                <h2>Post-Logistik kollabiert: Die Einsatzstelle ertrinkt in anonymen Liebesbriefen!</h2>
+                <p><strong>ERSTFELD -</strong> Ein charmanter Beamter bringt die Schweizerische Post an den Rand des logistischen Ruins. Wie gut unterrichtete Insider der Verteilerzentrale berichten, wird der Kollege täglich von einer regelrechten Flut an anonymen Grüssen, handgeschriebenen Gedichten und parfümierten Liebesbotschaften bedrängt.</p>
+                <p>Die Postfilialen im Kanton melden offiziell "Land unter". Pöstler klagen über chronische Rückenschmerzen, da die Pakete mit handgestrickten Polizei-Socken und edlen Pralinen epische Ausmasse annehmen. "Wir mussten extra Rollwagen anfordern, weil der Briefträger die Fanpost nicht mehr auf dem Velo balancieren konnte", seufzt ein Kollege kopfschüttelnd. Das Büro des Beamten duftet mittlerweile nach einer wilden Mischung aus 15 verschiedenen Luxus-Damenparfüms. Der Kollege selbst gibt sich bescheiden: "Ich komme gar nicht mehr zum Lesen. Ich nutze das dicke, rosa Parfümpapier momentan primär, um wackelige Bürotische im Pausenraum auszugleichen." Die Kapo-Leitung überlegt nun, ihn als offizielle Touristenattraktion anzumelden.</p>
             </article>
 
+            <!-- ARTIKEL: 10-MIO-SCHWEIZ -->
             <article class="article news-article">
                 <span class="kicker">Bevölkerungslimit erreicht</span>
                 <h2>10-Millionen-Schweiz ist voll: Alle Einheimischen müssen das Land verlassen!</h2>
@@ -787,30 +807,36 @@
                 <p>Am Gotthard spielen sich seit den frühen Morgenstunden dramatische Szenen ab. Das Schwerverkehrszentrum Erstfeld wurde kurzerhand umfunktioniert, um den beispiellosen Massenexodus der Eidgenossen Richtung Italien zu kanalisieren. Am Strassenrand werden derzeit die letzten verbliebenen Alphörner, Kuckucksuhren und gusseisernen Fondue-Caquelons auf eilig angemietete LKWs verladen, um sie weinend ins Exil zu transportieren. "Wer noch illegale Bestände von Cervelat oder Aromat im Kofferraum hat, muss an der Grenze harten Strafzoll zahlen", ruft ein Polizist durchs Megafon, während er selbst eine Träne wegdrückt. Wo die Schweizer nun hinziehen, ist unklar – erste diplomatische Gerüchte besagen, dass Mallorca zum 27. Kanton ernannt wird und das Wallis künftig auf Teneriffa angesiedelt ist.</p>
             </article>
 
+            <!-- ARTIKEL: SENIORITA HUBER -->
             <article class="article news-article">
                 <span class="kicker">Das Standesamt in besten Händen</span>
-                <h2>Verwaltungs-Coup: "Seniorita Huber" übernimmt die absolute Leitung!</h2>
-                <p><strong>ALTDORF -</strong> Die kantonale Verwaltung bebt! Das Standesamt wird ab sofort von niemand Geringerem als der besten Kantonsangestellten aller Zeiten geleitet: Seniorita Huber übernimmt das Ruder. Seit sie im Amt ist, herrscht dort eine Effizienz, die selbst Schweizer Uhrmacher vor blankem Neid erblassen lässt. Mit ihrer jahrelangen Erfahrung und einem stets wachsamen Auge sorgt sie dafür, dass in Sachen Zivilstand im Kanton Uri alles reibungslos läuft.</p>
-                <p>Termine werden auf die Millisekunde genau eingehalten. Wer beim entscheidenden "Ja"-Wort vor dem Altar stottert, wird ohne Vorwarnung sofort wieder hinten in die Warteschlange im Korridor eingereiht. "Es ist hart, aber absolut fair", berichtet ein frisch vermählter Bräutigam, der nach der Zeremonie noch immer leicht zittert. Dank Hubers gnadenlosem Optimierungswahn dauern Eheschliessungen nur noch genau 45 Sekunden – inklusive Unterschrift, Ringwechsel und einem kurzen, offiziell abgesegneten Kuss. Kollegen und Bürger sind sich einig: Erste Stimmen fordern bereits vehement, ihr direkt das gesamte Gebäude zu unterstellen und sie zur obersten Diktatorin aller Papierkram-Abteilungen zu befördern.</p>
+                <h2>Verwaltungs-Coup: Eine neue Super-Beamtin übernimmt die absolute Leitung!</h2>
+                <p><strong>ALTDORF -</strong> Die kantonale Verwaltung bebt! Das Standesamt wird ab sofort von niemand Geringerem als der besten Kantonsangestellten aller Zeiten geleitet. Seit sie im Amt ist, herrscht dort eine Effizienz, die selbst Schweizer Uhrmacher vor blankem Neid erblassen lässt. Mit ihrer jahrelangen Erfahrung und einem stets wachsamen Auge sorgt sie dafür, dass in Sachen Zivilstand im Kanton Uri alles reibungslos läuft.</p>
+                <p>Termine werden auf die Millisekunde genau eingehalten. Wer beim entscheidenden "Ja"-Wort vor dem Altar stottert, wird ohne Vorwarnung sofort wieder hinten in die Warteschlange im Korridor eingereiht. "Es ist hart, aber absolut fair", berichtet ein frisch vermählter Bräutigam, der nach der Zeremonie noch immer leicht zittert. Dank dem gnadenlosen Optimierungswahn dauern Eheschliessungen nur noch genau 45 Sekunden – inklusive Unterschrift, Ringwechsel und einem kurzen, offiziell abgesegneten Kuss. Kollegen und Bürger sind sich einig: Erste Stimmen fordern bereits vehement, ihr direkt das gesamte Gebäude zu unterstellen und sie zur obersten Diktatorin aller Papierkram-Abteilungen zu befördern.</p>
             </article>
 
+            <!-- ARTIKEL: ANGELO TELEPATHIE -->
             <article class="article news-article">
                 <span class="kicker">Held der Hotline</span>
-                <h2>Der telepathische Mozart der Zentrale: Angelo revolutioniert das Telefon-Game</h2>
-                <p><strong>ALTDORF -</strong> Die Telepathie hat still und heimlich Einzug in die Polizeiarbeit der Kapo Uri gehalten. Wenn auf der Einsatzzentrale das Telefon noch gar nicht geklingelt hat, hat Angelo den Hörer bereits in der Hand und das Problem souverän gelöst. Der Zentralist, intern nur noch ehrfürchtig "der Überflieger" genannt, setzt völlig neue Massstäbe, die selbst Science-Fiction-Autoren blass aussehen lassen.</p>
-                <p>"Gestern rief ein nervöser Mann an, um einen Einbruch zu melden. Angelo hatte die Handschellen beim Täter schon klicken lassen, bevor der Anrufer überhaupt seine Adresse gestammelt hat", flüstert ein sichtlich verängstigter Kollege. Einige behaupten sogar, Angelo könne durch reines, intensives Anstarren des Telefons einen Notruf bei der Gegenseite auslösen. Seine Reaktionszeit ist mittlerweile offiziell in den negativen Bereich gerutscht. Gerüchten zufolge tippt Angelo mit 400 Anschlägen pro Minute, bestellt parallel Pizza für Anrufer, bevor diese überhaupt wissen, dass sie Hunger haben, und hat vier Bildschirme gleichzeitig im Blick. Die IT-Abteilung ist völlig überfordert, weil das veraltete Einsatzleitsystem abstürzt, da Angelo neuerdings Ereignisse rapportiert, die voraussichtlich erst übermorgen passieren werden.</p>
+                <h2>Der telepathische Mozart der Zentrale: Unser Kollege revolutioniert das Telefon-Game</h2>
+                <p><strong>ALTDORF -</strong> Die Telepathie hat still und heimlich Einzug in die Polizeiarbeit der Kapo Uri gehalten. Wenn auf der Einsatzzentrale das Telefon noch gar nicht geklingelt hat, hat unser bester Mann den Hörer bereits in der Hand und das Problem souverän gelöst. Der Zentralist, intern nur noch ehrfürchtig "der Überflieger" genannt, setzt völlig neue Massstäbe, die selbst Science-Fiction-Autoren blass aussehen lassen.</p>
+                <p>"Gestern rief ein nervöser Mann an, um einen Einbruch zu melden. Er hatte die Handschellen beim Täter schon klicken lassen, bevor der Anrufer überhaupt seine Adresse gestammelt hat", flüstert ein sichtlich verängstigter Kollege. Einige behaupten sogar, er könne durch reines, intensives Anstarren des Telefons einen Notruf bei der Gegenseite auslösen. Seine Reaktionszeit ist mittlerweile offiziell in den negativen Bereich gerutscht. Gerüchten zufolge tippt er mit 400 Anschlägen pro Minute, bestellt parallel Pizza für Anrufer, bevor diese überhaupt wissen, dass sie Hunger haben, und hat vier Bildschirme gleichzeitig im Blick. Die IT-Abteilung ist völlig überfordert, weil das veraltete Einsatzleitsystem abstürzt, da er neuerdings Ereignisse rapportiert, die voraussichtlich erst übermorgen passieren werden.</p>
             </article>
 
+            <!-- ARTIKEL: RADAR HACK -->
             <article class="article news-article" style="border: none;">
                 <span class="kicker">Interaktiver Test</span>
                 <h2>Radar-Anlagen gehackt? Sünder kriegen Bambus-Tee!</h2>
                 <p><strong>URSERENTAL -</strong> Die Verkehrssünder im Kanton sind begeistert, die Staatskasse weint. Ein anonymer Insider berichtet, dass die Blitzer in der tiefsten Nacht umprogrammiert wurden. Statt teurer Bussen spuckt die Drucker-Infrastruktur der Kapo Uri plötzlich detaillierte Anleitungen für vegane Bambus-Smoothies und entspannende Tee-Rituale aus. "Ich bin gestern extra mit 120 km/h in die 80er-Zone gedonnert, weil mir noch das genaue Rezept für den Ingwer-Bambus-Aufguss gefehlt hat", gesteht ein Raser lachend vor laufender Kamera.</p>
-                <button class="radar-btn" onclick="triggerRadar()" style="background: var(--red);">📸 RADAR MANUELL AUSLÖSEN</button>
+                <button class="radar-btn" onclick="triggerRadar()" style="background: var(--blue);">📸 RADAR MANUELL AUSLÖSEN</button>
             </article>
 
+            <!-- PAGINATION (SEITENBLÄTTERN) -->
             <div class="pagination" id="pagination-controls">
-                </div>
+                <!-- Buttons werden hier von Javascript eingefügt -->
+            </div>
 
+            <!-- KOMMENTAR BEREICH (MIT FIREBASE LIVE-FUNKTION) -->
             <div class="comments-section" id="community">
                 <div class="comments-header">Community <span>(Live!)</span></div>
                 
@@ -820,11 +846,13 @@
                     <button onclick="window.addLiveComment()">Senden</button>
                 </div>
 
+                <!-- Hier laden ab sofort die echten Firebase-Kommentare rein -->
                 <div id="liveCommentsContainer"></div>
 
+                <!-- Die statischen Kult-Kommentare -->
                 <div class="comment" style="margin-top: 30px;">
                     <div class="comment-meta"><span class="user">SchlaflosInErstfeld</span> <span>09.06.2026, 06:15 Uhr</span></div>
-                    <p class="comment-text">Hab gestern während der 12-Stunden-Schicht unter dem Kopierer geschlafen. War extrem gemütlich, bis T-Rex Gisler versucht hat, Papier nachzufüllen. Pures Chaos.</p>
+                    <p class="comment-text">Hab gestern während der 12-Stunden-Schicht unter dem Kopierer geschlafen. War extrem gemütlich, bis ein übereifriger Kollege versucht hat, Papier nachzufüllen. Pures Chaos.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 45</span> 
                         <span onclick="alert('Wie kannst du es wagen, einen Kult-Kommentar zu disliken?! Das gibt einen Rapport!')">👎 2</span> 
@@ -844,7 +872,7 @@
 
                 <div class="comment">
                     <div class="comment-meta"><span class="user">Lisa_M_89</span> <span>09.06.2026, 07:05 Uhr</span></div>
-                    <p class="comment-text">Wo genau im Werkhof in Flüelen steht Freddi heute? Frage für eine Freundin. Sie hat rein zufällig 4 komplett abgefahrene Reifen montiert.</p>
+                    <p class="comment-text">Wo genau im Werkhof in Flüelen steht der Schönling heute? Frage für eine Freundin. Sie hat rein zufällig 4 komplett abgefahrene Reifen montiert.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 128</span> 
                         <span onclick="alert('Wie kannst du es wagen, einen Kult-Kommentar zu disliken?! Das gibt einen Rapport!')">👎 5</span> 
@@ -874,7 +902,7 @@
 
                 <div class="comment">
                     <div class="comment-meta"><span class="user">SecretAdmirer_Uri</span> <span>09.06.2026, 08:12 Uhr</span></div>
-                    <p class="comment-text">Daniel Gnos, falls du das hier liest: Der rosa Brief mit dem extra viel Glitzerstaub war von mir! Ruf mich endlich an, mein Herz brennt wie ein Blaulicht!</p>
+                    <p class="comment-text">An den Post-Casanova, falls du das hier liest: Der rosa Brief mit dem extra viel Glitzerstaub war von mir! Ruf mich endlich an, mein Herz brennt wie ein Blaulicht!</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 15</span> 
                         <span onclick="alert('Wie kannst du es wagen, einen Kult-Kommentar zu disliken?! Das gibt einen Rapport!')">👎 34</span> 
@@ -884,7 +912,7 @@
 
                 <div class="comment">
                     <div class="comment-meta"><span class="user">KaffeeJunkie_Kapo</span> <span>09.06.2026, 08:45 Uhr</span></div>
-                    <p class="comment-text">Angelo hat mir heute Morgen einen Kaffee an den Schreibtisch gebracht, bevor ich überhaupt wusste, dass ich müde bin. Der Typ macht mir langsam echt Angst. Aber der Kaffee war super.</p>
+                    <p class="comment-text">Der Telepathie-Zentralist hat mir heute Morgen einen Kaffee an den Schreibtisch gebracht, bevor ich überhaupt wusste, dass ich müde bin. Der Typ macht mir langsam echt Angst. Aber der Kaffee war super.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 304</span> 
                         <span onclick="alert('Wie kannst du es wagen, einen Kult-Kommentar zu disliken?! Das gibt einen Rapport!')">👎 1</span> 
@@ -904,7 +932,7 @@
 
                 <div class="comment">
                     <div class="comment-meta"><span class="user">JustMarried2026</span> <span>09.06.2026, 09:15 Uhr</span></div>
-                    <p class="comment-text">Seniorita Huber hat meine Hochzeit im Standesamt in exakt 42 Sekunden durchgezogen. Neue persönliche Bestzeit! Danke, so hatten wir viel mehr Zeit fürs Apéro.</p>
+                    <p class="comment-text">Die neue Leiterin hat meine Hochzeit im Standesamt in exakt 42 Sekunden durchgezogen. Neue persönliche Bestzeit! Danke, so hatten wir viel mehr Zeit fürs Apéro.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 187</span> 
                         <span onclick="alert('Wie kannst du es wagen, einen Kult-Kommentar zu disliken?! Das gibt einen Rapport!')">👎 4</span> 
@@ -924,7 +952,7 @@
 
                 <div class="comment">
                     <div class="comment-meta"><span class="user">BüroGummi_007</span> <span>09.06.2026, 09:35 Uhr</span></div>
-                    <p class="comment-text">Lothar Imhof hat heute das Delegieren delegiert. Ein absolutes Mastermind der modernen Polizeiführung. Davon können wir alle noch was lernen.</p>
+                    <p class="comment-text">Die Chefetage hat heute das Delegieren delegiert. Ein absolutes Mastermind der modernen Polizeiführung. Davon können wir alle noch was lernen.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 142</span> 
                         <span onclick="alert('Wie kannst du es wagen, einen Kult-Kommentar zu disliken?! Das gibt einen Rapport!')">👎 0</span> 
@@ -934,33 +962,24 @@
 
                 <div class="comment">
                     <div class="comment-meta"><span class="user">PostAuto_Driver</span> <span>09.06.2026, 09:48 Uhr</span></div>
-                    <p class="comment-text">Die Schweizerische Post sucht händeringend Pöstler für den neuen 'Sektor Gnos'. Gute Bezahlung, aber Rückenschule und ein Gabelstapler-Ausweis zwingend nötig.</p>
+                    <p class="comment-text">Die Schweizerische Post sucht händeringend Pöstler für die Zentrale. Gute Bezahlung, aber Rückenschule und ein Gabelstapler-Ausweis zwingend nötig.</p>
                     <div class="comment-actions">
                         <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 199</span> 
                         <span onclick="alert('Wie kannst du es wagen, einen Kult-Kommentar zu disliken?! Das gibt einen Rapport!')">👎 2</span> 
                         <span onclick="window.replyToStatic('PostAuto_Driver')">Antworten</span>
                     </div>
                 </div>
-
-                <div class="comment">
-                    <div class="comment-meta"><span class="user">UriGeller_Real</span> <span>09.06.2026, 09:55 Uhr</span></div>
-                    <p class="comment-text">Die informativste und härteste News-Seite, die Uri je gesehen hat. Blick und 20 Minuten können endgültig einpacken! Weiter so, Bambus News!</p>
-                    <div class="comment-actions">
-                        <span onclick="alert('Kult-Kommentare sind legendär und können nicht bewertet werden!')">👍 420</span> 
-                        <span onclick="alert('Wie kannst du es wagen, einen Kult-Kommentar zu disliken?! Das gibt einen Rapport!')">👎 5</span> 
-                        <span onclick="window.replyToStatic('UriGeller_Real')">Antworten</span>
-                    </div>
-                </div>
             </div>
 
         </main>
 
+        <!-- SEITENLEISTE RECHTS (WERBUNG ANONYMISIERT) -->
         <aside class="sidebar">
             
             <div class="ad-space ad-remo">
                 <span class="ad-label">Anzeige / Social Media</span>
-                <h4>Kapo Uri Instagram Reels</h4>
-                <p>Erlebe den Schwerverkehr hautnah! Content Creator <strong>Remo Tresch</strong> bringt dir den echten Alltag aus dem SVZ Erstfeld direkt auf den Bildschirm.</p>
+                <h4>Polizei Insider Reels</h4>
+                <p>Erlebe den Schwerverkehr hautnah! Unser <strong>geheimer Content Creator</strong> bringt dir den echten Alltag aus dem SVZ direkt auf den Bildschirm.</p>
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">📱🚛🚓</div>
                 <a href="https://www.bullenpower-uri.ch" target="_blank" class="ad-link-btn">JETZT REELS SCHAUEN!</a>
             </div>
@@ -969,7 +988,7 @@
                 <span class="ad-label">Bauprojekt des Jahrhunderts</span>
                 <h4 style="color: #2980b9;">Werkhof Flüelen 2040</h4>
                 <p>Die Pläne stehen! Die feierliche Eröffnung des neuen Werkhofs in Flüelen ist offiziell für das Jahr <strong>2040</strong> geplant.</p>
-                <p><em>Pünktlich zur Neueröffnung des Hotel Reisers in Altdorf.</em></p>
+                <p><em>Pünktlich zur Neueröffnung des grossen Hotels in Altdorf.</em></p>
                 <div style="font-size: 35px; text-align: center; margin: 10px 0;">🏗️🐌🏢</div>
             </div>
 
@@ -998,29 +1017,30 @@
             <div class="ad-space ad-lothar">
                 <span class="ad-label">Im Einsatz für Uri</span>
                 <h4>Kompetenz an vorderster Front</h4>
-                <p>Bereit, wenn es darauf ankommt. <strong>Lothar Imhof</strong> hat bereits sein Einsatzleitergilet übergestreift.</p>
+                <p>Bereit, wenn es darauf ankommt. <strong>Unser Top-Einsatzleiter</strong> hat bereits sein Gilet übergestreift.</p>
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">🦺🦅🚔</div>
             </div>
 
             <div class="ad-space ad-trex">
                 <span class="ad-label">Kapo Ausrüstungs-Shop</span>
                 <h4>Masshemden "Edition T-Rex"</h4>
-                <p>Exklusiv für <strong>Stefan Gisler</strong>: Uniformhemden mit extra kurzen Ärmeln.</p>
+                <p>Exklusiv für <strong>den Kollegen mit den kurzen Armen</strong>: Uniformhemden in Massanfertigung.</p>
                 <div style="font-size: 40px; text-align: center; margin: 10px 0;">🦖🤏</div>
                 <button id="trexBtn" class="radar-btn" style="background: #27ae60; transition: all 0.2s; font-size: 14px;">HIER AUSWEIS GREIFEN!</button>
             </div>
             
-            <div class="ad-space" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff Scheiber hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
+            <div class="ad-space" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
                 <span class="ad-label">WANTED</span>
                 <h4 style="color: #8b4513;">DER DORF SHERIFF</h4>
                 <p>Er braucht kein Blaulicht. Er hat einen Hut und das Gesetz auf seiner Seite.</p>
-                <strong style="font-size: 16px;">SCHEIBER RÄUMT AUF.</strong>
+                <strong style="font-size: 16px;">DER SHERIFF RÄUMT AUF.</strong>
                 <div style="font-size: 40px; text-align: center; margin: 10px 0;">🤠🐴</div>
                 <button class="radar-btn" style="background: #8b4513; font-size: 12px;">Stern polieren</button>
             </div>
         </aside>
     </div>
 
+    <!-- JS LOGIK -->
     <script>
         // Matrix Background
         const canvas = document.getElementById('matrix-canvas');
@@ -1056,26 +1076,46 @@
             canvas.height = window.innerHeight; 
         });
 
-        // Access Check (Login -> Warning -> Site)
+        // Access Check mit Log-Funktion und Admin Panel
         function checkAccess() {
-            const code = document.getElementById('accessCode').value;
-            if(code === '1291') {
-                document.getElementById('step-login').style.display = 'none';
-                document.getElementById('step-warning').style.display = 'block';
+            const nameInput = document.getElementById('visitorName').value.trim();
+            const codeInput = document.getElementById('accessCode').value;
+
+            // ADMIN ZUGANG (Geheimcode 9999)
+            if (codeInput === '9999') {
+                if(window.fetchVisits) {
+                    window.fetchVisits();
+                } else {
+                    alert("Datenbank noch nicht bereit. Bitte 2 Sekunden warten.");
+                }
+                return;
+            }
+
+            // NORMALER ZUGANG (Code 1291)
+            if (codeInput === '1291') {
+                if (nameInput === '') {
+                    document.getElementById('login-error').innerText = "🚨 Bitte gib einen Decknamen ein!";
+                    document.getElementById('login-error').style.display = 'block';
+                    return;
+                }
+                
+                // Logging in Firebase
+                if (window.logVisit) {
+                    window.logVisit(nameInput);
+                }
+
+                // Animation beenden & Seite freigeben
+                clearInterval(matrixInterval);
+                document.getElementById('login-overlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('login-overlay').style.display = 'none';
+                    document.body.classList.remove('locked');
+                    setTimeout(() => document.getElementById('mindReaderModal').classList.add('active'), 15000);
+                }, 500);
             } else {
+                document.getElementById('login-error').innerText = "🚨 Falscher Code! Rapport ist raus.";
                 document.getElementById('login-error').style.display = 'block';
             }
-        }
-
-        // Seite final betreten
-        function enterSite() {
-            clearInterval(matrixInterval);
-            document.getElementById('login-overlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('login-overlay').style.display = 'none';
-                document.body.classList.remove('locked');
-                setTimeout(() => document.getElementById('mindReaderModal').classList.add('active'), 15000);
-            }, 500);
         }
 
         // Pagination
@@ -1149,7 +1189,7 @@
                 const randomY = Math.floor(Math.random() * 60) - 30; 
                 this.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
                 this.innerText = '🦖 ZU KURZE ARME! 🦖';
-                this.style.background = 'var(--red)';
+                this.style.background = 'var(--blue)';
             }
         });
         
@@ -1162,9 +1202,10 @@
         });
     </script>
 
+    <!-- FIREBASE & GLOBAL LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, increment, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyA7rsjJ-YwVxvEtLz0ya4k6ARFVSZq_Xj4",
@@ -1178,6 +1219,41 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // -- BESUCHER TRACKING FUNKTIONEN (Sichtbar für Main Script) --
+        window.logVisit = async function(visitorName) {
+            try {
+                await addDoc(collection(db, "bambus_visits"), {
+                    name: visitorName,
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                console.error("Tracking Fehler:", error);
+            }
+        };
+
+        window.fetchVisits = async function() {
+            try {
+                const visitsQuery = query(collection(db, "bambus_visits"), orderBy("timestamp", "desc"));
+                const querySnapshot = await getDocs(visitsQuery);
+                
+                let html = "<h2 style='color:var(--blue); margin-top:0;'>ÜBERWACHUNGS-PROTOKOLL</h2>";
+                html += "<ul style='list-style:none; padding:0; color:#0f0; max-height: 300px; overflow-y: auto; text-align:left; font-size:16px; background:#111; border:1px solid #333; padding:10px;'>";
+                
+                querySnapshot.forEach((doc) => {
+                    const d = doc.data();
+                    const t = d.timestamp ? d.timestamp.toDate().toLocaleString('de-CH') : "Gerade eben";
+                    html += `<li style="border-bottom: 1px dashed #333; padding: 5px 0;">[${t}] - <strong>${d.name}</strong></li>`;
+                });
+                html += "</ul><button onclick='location.reload()' style='margin-top:20px; background:var(--blue);'>System Schliessen</button>";
+                
+                document.getElementById('step-login').innerHTML = html;
+            } catch (error) {
+                alert("Fehler beim Laden des Protokolls!");
+                console.error(error);
+            }
+        };
+
+        // -- KOMMENTAR LOGIK --
         const commentsQuery = query(collection(db, "bambus_comments"), orderBy("timestamp", "desc"));
         
         onSnapshot(commentsQuery, (snapshot) => {
