@@ -1954,4 +1954,382 @@
                 return;
             }
 
-            // NORMALER ZUGANG (
+            // NORMALER ZUGANG (Code 1291)
+            if (codeInput === '1291') {
+                if (nameInput === '') {
+                    document.getElementById('login-error').innerText = "🚨 Bitte gib einen Decknamen ein!";
+                    document.getElementById('login-error').style.display = 'block';
+                    return;
+                }
+                
+                // Logging in Firebase
+                if (window.logVisit) {
+                    window.logVisit(nameInput);
+                }
+
+                // Zeige Haftungsausschluss anstatt direkt reinzulassen
+                document.getElementById('step-login').style.display = 'none';
+                document.getElementById('step-warning').style.display = 'block';
+                
+            } else {
+                document.getElementById('login-error').innerText = "🚨 Falscher Code! Rapport ist raus.";
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+
+        // Seite final betreten nach dem Warnhinweis
+        function enterSite() {
+            clearInterval(matrixInterval);
+            document.getElementById('login-overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.body.classList.remove('locked');
+                wakeUpBambooAmbient();
+                observeReveals();
+                setTimeout(() => document.getElementById('mindReaderModal').classList.add('active'), 15000);
+            }, 500);
+        }
+
+        /* --------------------------------------------------------------------------
+           7. PAGINATION & ARTIKEL-RENDERING (INKL. SCROLL-REVEAL UPGRADE)
+           -------------------------------------------------------------------------- */
+        const articlesPerPage = 5;
+        let currentPage = 1;
+        
+        function renderArticles() {
+            const articles = document.querySelectorAll('.news-article');
+            const totalPages = Math.ceil(articles.length / articlesPerPage);
+            const paginationContainer = document.getElementById('pagination-controls');
+            paginationContainer.innerHTML = '';
+            
+            for(let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = "Seite " + i;
+                if(i === currentPage) {
+                    btn.classList.add('active');
+                }
+                btn.onclick = () => { 
+                    playBambooTock(660, 0.07);
+                    currentPage = i; 
+                    renderArticles(); 
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                };
+                paginationContainer.appendChild(btn);
+            }
+            
+            articles.forEach((art, index) => {
+                if (index >= (currentPage - 1) * articlesPerPage && index < currentPage * articlesPerPage) {
+                    art.style.display = 'block';
+                    art.classList.remove('revealed');
+                    art.classList.add('reveal-item');
+                    // Gestaffeltes weiches Einfedern beim Seitenwechsel
+                    const staggerDelay = (index % articlesPerPage) * 75;
+                    setTimeout(() => {
+                        art.classList.add('revealed');
+                    }, staggerDelay + 30);
+                } else {
+                    art.style.display = 'none';
+                }
+            });
+
+            initCardEffects();
+            observeReveals();
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initBambooCanvas();
+            renderArticles();
+            initCardEffects();
+            observeReveals();
+        });
+
+        /* --------------------------------------------------------------------------
+           8. UI INTERACTIONS (RADAR, MODALS, BAMBUS-REGEN, T-REX)
+           -------------------------------------------------------------------------- */
+        function triggerRadar() {
+            playBambooTock(880, 0.09);
+            const overlay = document.getElementById('flash-overlay');
+            overlay.classList.remove('blitz-active');
+            setTimeout(() => { 
+                overlay.classList.add('blitz-active'); 
+                setTimeout(openModal, 800); 
+            }, 10);
+        }
+        
+        function openModal() { document.getElementById('myModal').classList.add('active'); }
+        function closeModal() { document.getElementById('myModal').classList.remove('active'); }
+        function closeMindReader() { document.getElementById('mindReaderModal').classList.remove('active'); }
+        
+        function makeItRain() {
+            const emojis = ['🎋', '🐼', '🚨', '📰', '🍃'];
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const drop = document.createElement('div');
+                    drop.classList.add('bamboo-drop');
+                    drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                    drop.style.left = Math.random() * 100 + 'vw';
+                    drop.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(drop);
+                    setTimeout(() => drop.remove(), 5000);
+                }, i * 150);
+            }
+        }
+
+        const trexBtn = document.getElementById('trexBtn');
+        trexBtn.addEventListener('mouseover', function() {
+            if(window.innerWidth > 768) {
+                const randomX = Math.floor(Math.random() * 100) - 50; 
+                const randomY = Math.floor(Math.random() * 60) - 30; 
+                this.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
+                this.innerText = '🦖 ZU KURZE ARME! 🦖';
+                this.style.background = 'var(--blue)';
+            }
+        });
+        
+        trexBtn.addEventListener('mouseout', function() {
+            setTimeout(() => { 
+                this.style.transform = 'translate(0, 0) scale(1)'; 
+                this.innerText = 'HIER AUSWEIS GREIFEN!'; 
+                this.style.background = '#27ae60'; 
+            }, 1000);
+        });
+    </script>
+
+    <!-- ==========================================================================
+         FIREBASE & GLOBAL LOGIC (100% ORIGINAL ERHALTEN)
+         ========================================================================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, increment, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7rsjJ-YwVxvEtLz0ya4k6ARFVSZq_Xj4",
+            authDomain: "bambus-news.firebaseapp.com",
+            projectId: "bambus-news",
+            storageBucket: "bambus-news.firebasestorage.app",
+            messagingSenderId: "401445127639",
+            appId: "1:401445127639:web:925c3f5aa64ebce28eb792"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // -- BESUCHER TRACKING FUNKTIONEN (Sichtbar für Main Script) --
+        window.logVisit = async function(visitorName) {
+            try {
+                await addDoc(collection(db, "bambus_visits"), {
+                    name: visitorName,
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                console.error("Tracking Fehler:", error);
+            }
+        };
+
+        window.fetchVisits = async function() {
+            try {
+                const visitsQuery = query(collection(db, "bambus_visits"), orderBy("timestamp", "desc"));
+                const querySnapshot = await getDocs(visitsQuery);
+                
+                let html = "<h2 style='color:var(--blue); margin-top:0;'>ÜBERWACHUNGS-PROTOKOLL</h2>";
+                html += "<ul style='list-style:none; padding:0; color:#0f0; max-height: 300px; overflow-y: auto; text-align:left; font-size:16px; background:#111; border:1px solid #333; padding:10px; border-radius:8px;'>";
+                
+                querySnapshot.forEach((doc) => {
+                    const d = doc.data();
+                    const t = d.timestamp ? d.timestamp.toDate().toLocaleString('de-CH') : "Gerade eben";
+                    html += `<li style="border-bottom: 1px dashed #333; padding: 5px 0;">[${t}] - <strong>${d.name}</strong></li>`;
+                });
+                html += "</ul><button onclick='location.reload()' style='margin-top:20px; background:var(--blue);'>System Schliessen</button>";
+                
+                document.getElementById('step-login').innerHTML = html;
+            } catch (error) {
+                alert("Fehler beim Laden des Protokolls!");
+                console.error(error);
+            }
+        };
+
+        // -- KOMMENTAR LOGIK --
+        const commentsQuery = query(collection(db, "bambus_comments"), orderBy("timestamp", "desc"));
+        
+        onSnapshot(commentsQuery, (snapshot) => {
+            const container = document.getElementById('liveCommentsContainer');
+            container.innerHTML = ''; 
+            
+            const parents = [];
+            const replies = {};
+
+            snapshot.forEach((firebaseDoc) => {
+                const data = firebaseDoc.data();
+                data.id = firebaseDoc.id;
+                
+                if (data.parentId) { 
+                    if(!replies[data.parentId]) {
+                        replies[data.parentId] = [];
+                    }
+                    replies[data.parentId].push(data); 
+                } else {
+                    parents.push(data);
+                }
+            });
+
+            for (let pid in replies) {
+                replies[pid].sort((a, b) => {
+                    const timeA = a.timestamp ? a.timestamp.toMillis() : 0;
+                    const timeB = b.timestamp ? b.timestamp.toMillis() : 0;
+                    return timeA - timeB;
+                });
+            }
+
+            parents.forEach((data) => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment reveal-item revealed'; 
+                commentDiv.style.borderLeftColor = '#ffcc00';
+                
+                let timeStr = "Gerade eben";
+                if (data.timestamp) { 
+                    const dateObj = data.timestamp.toDate(); 
+                    timeStr = dateObj.toLocaleDateString('de-CH') + ', ' + dateObj.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'}) + ' Uhr'; 
+                }
+                
+                const likesCount = data.likes || 0;
+                const dislikesCount = data.dislikes || 0;
+
+                let html = `
+                    <div class="comment-meta">
+                        <span class="user" style="color:#ff9900;">${data.user}</span> 
+                        <span>${timeStr}</span>
+                    </div>
+                    <p class="comment-text">${data.text}</p>
+                    <div class="comment-actions">
+                        <span onclick="window.likeLiveComment('${data.id}')" title="Like">👍 <b>${likesCount}</b></span> 
+                        <span onclick="window.dislikeLiveComment('${data.id}')" title="Dislike">👎 <b>${dislikesCount}</b></span> 
+                        <span onclick="window.replyToComment('${data.id}', '${data.user}')">Antworten</span>
+                    </div>
+                `;
+
+                if (replies[data.id]) {
+                    html += `<div style="margin-top: 15px;">`;
+                    replies[data.id].forEach(replyData => {
+                        let replyTimeStr = "Gerade eben";
+                        if (replyData.timestamp) { 
+                            const rDateObj = replyData.timestamp.toDate(); 
+                            replyTimeStr = rDateObj.toLocaleDateString('de-CH') + ', ' + rDateObj.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'}) + ' Uhr'; 
+                        }
+                        
+                        const rLikesCount = replyData.likes || 0;
+                        const rDislikesCount = replyData.dislikes || 0;
+
+                        html += `
+                        <div class="comment reply-comment">
+                            <div class="comment-meta">
+                                <span class="user" style="color:#ff9900;">${replyData.user}</span> 
+                                <span>${replyTimeStr}</span>
+                            </div>
+                            <p class="comment-text">${replyData.text}</p>
+                            <div class="comment-actions">
+                                <span onclick="window.likeLiveComment('${replyData.id}')">👍 <b>${rLikesCount}</b></span> 
+                                <span onclick="window.dislikeLiveComment('${replyData.id}')">👎 <b>${rDislikesCount}</b></span> 
+                            </div>
+                        </div>`;
+                    });
+                    html += `</div>`;
+                }
+                commentDiv.innerHTML = html;
+                container.appendChild(commentDiv);
+            });
+        });
+
+        window.addLiveComment = async function() {
+            const userNameInput = document.getElementById('newCommentUser').value.trim();
+            const userName = userNameInput !== '' ? userNameInput : 'Unbekannter Polizist';
+            const commentText = document.getElementById('newCommentText').value.trim();
+            
+            if(commentText === '') {
+                alert('Leere Kommentare werden zur Fahndung ausgeschrieben!');
+                return;
+            }
+            
+            try { 
+                await addDoc(collection(db, "bambus_comments"), {
+                    text: commentText, 
+                    user: userName, 
+                    likes: 0, 
+                    dislikes: 0, 
+                    timestamp: serverTimestamp()
+                }); 
+                document.getElementById('newCommentText').value = ''; 
+            } catch (error) { 
+                alert("Fehler beim Senden des Kommentars!"); 
+                console.error(error);
+            }
+        };
+
+        window.replyToComment = async function(parentId, replyToUser) {
+            const defaultNameInput = document.getElementById('newCommentUser').value.trim();
+            const defaultName = defaultNameInput !== '' ? defaultNameInput : 'Unbekannter Polizist';
+
+            const userName = prompt("Dein Deckname:", defaultName);
+            if(userName === null) return;
+            
+            const replyText = prompt("Antwort an " + replyToUser + ":");
+            if(replyText && replyText.trim() !== '') {
+                try { 
+                    await addDoc(collection(db, "bambus_comments"), {
+                        text: "<strong>@" + replyToUser + "</strong> " + replyText.trim(), 
+                        user: userName.trim() === '' ? 'Unbekannter Polizist' : userName.trim(), 
+                        likes: 0, 
+                        dislikes: 0, 
+                        parentId: parentId, 
+                        timestamp: serverTimestamp()
+                    }); 
+                } catch (error) { 
+                    alert("Fehler beim Senden der Antwort!"); 
+                    console.error(error);
+                }
+            }
+        };
+
+        window.replyToStatic = async function(replyToUser) {
+            const defaultNameInput = document.getElementById('newCommentUser').value.trim();
+            const defaultName = defaultNameInput !== '' ? defaultNameInput : 'Unbekannter Polizist';
+
+            const userName = prompt("Dein Deckname:", defaultName);
+            if(userName === null) return;
+            
+            const replyText = prompt("Antwort an Kult-User " + replyToUser + ":");
+            if(replyText && replyText.trim() !== '') {
+                try { 
+                    await addDoc(collection(db, "bambus_comments"), {
+                        text: "<strong>@" + replyToUser + "</strong> " + replyText.trim(), 
+                        user: userName.trim() === '' ? 'Unbekannter Polizist' : userName.trim(), 
+                        likes: 0, 
+                        dislikes: 0, 
+                        timestamp: serverTimestamp()
+                    }); 
+                } catch (error) { 
+                    alert("Fehler beim Senden der Antwort!"); 
+                    console.error(error);
+                }
+            }
+        };
+
+        window.likeLiveComment = async function(commentId) { 
+            try { 
+                const commentRef = doc(db, "bambus_comments", commentId);
+                await updateDoc(commentRef, { likes: increment(1) }); 
+            } catch(error) {
+                console.error("Fehler beim Liken", error);
+            } 
+        };
+        
+        window.dislikeLiveComment = async function(commentId) { 
+            try { 
+                const commentRef = doc(db, "bambus_comments", commentId);
+                await updateDoc(commentRef, { dislikes: increment(1) }); 
+            } catch(error) {
+                console.error("Fehler beim Disliken", error);
+            } 
+        };
+    </script>
+</body>
+</html>
