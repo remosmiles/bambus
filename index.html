@@ -6,38 +6,57 @@
     <meta name="google-site-verification" content="lpC5UFg-F-NuCDcK772ug_2DA0eiwj32Pa2uATUb8Rc" />
     <title>Bambus News - Kanton Uri</title>
     <style>
-        /* CSS Reset & Boulevard-Tabloid Variablen */
+        /* ==========================================================================
+           1. CSS RESET, VARIABLEN & BAMBUS-ATMOSPHÄRE
+           ========================================================================== */
         :root { 
-            --blue: #0055a4; /* POLIZEI BLAU */
-            --dark: #000000; 
+            --blue: #0055a4; /* POLIZEI BLAU (Original erhalten) */
+            --blue-glow: rgba(0, 85, 164, 0.35);
+            --bamboo-dark: #064e3b; /* Tiefes Waldgrün */
+            --bamboo-primary: #059669; /* Jadegrün */
+            --bamboo-light: #10b981; /* Frisches Smaragdgrün */
+            --bamboo-Mist: rgba(16, 185, 129, 0.08);
+            --sunlight: #f59e0b; /* Warmes Sonnenlicht */
+            --dark: #0f172a; 
             --bg: #ffffff; 
-            --gray: #f4f4f4; 
-            --border: #dddddd; 
+            --gray: #f1f5f3; /* Leicht organischer Grünschimmer im Grau */
+            --border: #dce5e0; 
+            --card-radius: 12px;
+            --spring-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --smooth-easing: cubic-bezier(0.22, 1, 0.36, 1);
         }
         
+        * {
+            box-sizing: border-box;
+        }
+
         body { 
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
             margin: 0; 
             padding: 0; 
             color: #111; 
             overflow-x: hidden; 
-            
-            /* NEU: DYNAMISCHER BEWEGTER HINTERGRUND */
             background-color: var(--gray);
-            background: repeating-linear-gradient(
-                -45deg,
-                rgba(0, 85, 164, 0.03),
-                rgba(0, 85, 164, 0.03) 20px,
-                rgba(0, 0, 0, 0.015) 20px,
-                rgba(0, 0, 0, 0.015) 40px
-            );
-            background-size: 56.57px 56.57px;
-            animation: moveStripes 2s linear infinite;
+            
+            /* UPGRADE: Organischer Bambus-Sonnenlicht-Hintergrund + feine Streifen */
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.09) 0%, transparent 45%),
+                radial-gradient(circle at 85% 30%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(0, 85, 164, 0.06) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(0, 85, 164, 0.025),
+                    rgba(0, 85, 164, 0.025) 20px,
+                    rgba(5, 150, 105, 0.02) 20px,
+                    rgba(5, 150, 105, 0.02) 40px
+                );
+            background-size: 100% 100%, 100% 100%, 100% 100%, 56.57px 56.57px;
+            animation: moveStripes 3s linear infinite;
         }
 
         @keyframes moveStripes {
-            0% { background-position: 0 0; }
-            100% { background-position: 56.57px 56.57px; }
+            0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+            100% { background-position: 0 0, 0 0, 0 0, 56.57px 56.57px; }
         }
         
         /* Body Locked für Login-Screen */
@@ -46,7 +65,34 @@
             height: 100vh; 
         }
 
-        /* Login Screen Overlay mit Canvas für mystischen Hintergrund */
+        /* NEU: AMBIENT BAMBUS-BLÄTTER CANVAS (60 FPS Background Layer) */
+        #bamboo-ambient-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.75;
+        }
+
+        /* NEU: LESEFORTSCHRITTS-BALKEN IM BAMBUS-LOOK */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--blue), var(--bamboo-light), var(--sunlight));
+            z-index: 99999;
+            box-shadow: 0 0 10px var(--bamboo-light);
+            transition: width 0.1s ease-out;
+        }
+
+        /* ==========================================================================
+           2. LOGIN OVERLAY & SICHERHEITS-SCHLEUSE
+           ========================================================================== */
         #login-overlay { 
             position: fixed; 
             top: 0; 
@@ -59,7 +105,7 @@
             justify-content: center; 
             align-items: center; 
             flex-direction: column; 
-            transition: opacity 0.5s ease; 
+            transition: opacity 0.6s var(--smooth-easing); 
         }
 
         #matrix-canvas { 
@@ -72,34 +118,43 @@
         }
         
         .login-box { 
-            background: rgba(10, 15, 28, 0.78); 
+            background: rgba(10, 18, 28, 0.82); 
             padding: 40px; 
-            border: 2px solid rgba(0, 136, 255, 0.6); 
+            border: 2px solid rgba(16, 185, 129, 0.45); 
             text-align: center; 
-            box-shadow: 0 0 50px rgba(0, 85, 164, 0.7), inset 0 0 20px rgba(0, 136, 255, 0.2); 
+            box-shadow: 0 20px 60px rgba(0, 85, 164, 0.5), 0 0 30px rgba(16, 185, 129, 0.2), inset 0 0 20px rgba(0, 136, 255, 0.15); 
             max-width: 90%; 
+            width: 440px;
             z-index: 2; 
             position: relative; 
-            border-radius: 12px; 
-            backdrop-filter: blur(12px); 
+            border-radius: 16px; 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            animation: floatBox 6s ease-in-out infinite;
+        }
+
+        @keyframes floatBox {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
         }
 
         .login-box h1 { 
             color: var(--blue); 
-            font-size: 45px; 
+            font-size: 42px; 
             text-transform: uppercase; 
             transform: skew(-5deg); 
             margin-top: 0; 
             margin-bottom: 10px; 
             letter-spacing: -1px; 
-            text-shadow: 0 0 15px rgba(0, 136, 255, 0.8); 
+            text-shadow: 0 0 20px rgba(0, 136, 255, 0.8); 
         }
 
         .login-box p { 
             font-size: 16px; 
             margin-bottom: 30px; 
-            color: #fff; 
+            color: #e2e8f0; 
             font-weight: bold; 
+            line-height: 1.5;
         }
 
         .login-box input { 
@@ -107,38 +162,53 @@
             font-size: 20px; 
             text-align: center; 
             border: 2px solid var(--blue); 
-            border-radius: 5px; 
+            border-radius: 8px; 
             margin-bottom: 15px; 
             outline: none; 
             font-weight: bold; 
-            width: 250px; 
-            background: rgba(0, 0, 0, 0.8); 
-            color: #0f0; 
+            width: 260px; 
+            max-width: 100%;
+            background: rgba(0, 0, 0, 0.85); 
+            color: #10b981; 
             letter-spacing: 2px; 
-            text-shadow: 0 0 5px #0f0; 
+            text-shadow: 0 0 8px rgba(16, 185, 129, 0.8); 
             display: block;
             margin-left: auto;
             margin-right: auto;
+            transition: all 0.3s var(--smooth-easing);
+        }
+
+        .login-box input:focus {
+            border-color: var(--bamboo-light);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            transform: scale(1.02);
         }
 
         .login-box button { 
-            background: var(--blue); 
+            background: linear-gradient(135deg, var(--blue) 0%, #003d7a 100%); 
             color: white; 
-            border: none; 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
             padding: 15px 30px; 
             font-size: 18px; 
             font-weight: 900; 
             cursor: pointer; 
             text-transform: uppercase; 
-            transition: 0.2s; 
+            transition: all 0.25s var(--spring-easing); 
             width: 100%; 
-            border-radius: 5px; 
+            border-radius: 8px; 
+            position: relative;
+            overflow: hidden;
         }
 
         .login-box button:hover { 
-            background: white; 
-            color: var(--blue); 
-            box-shadow: 0 0 15px white; 
+            background: linear-gradient(135deg, var(--bamboo-primary) 0%, var(--bamboo-dark) 100%); 
+            color: white; 
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5); 
+            transform: translateY(-2px) scale(1.01);
+        }
+
+        .login-box button:active {
+            transform: translateY(1px) scale(0.99);
         }
 
         #login-error { 
@@ -150,7 +220,9 @@
             text-shadow: 0 0 5px black; 
         }
 
-        /* Blitzer-Effekt Overlay */
+        /* ==========================================================================
+           3. SPEZIAL-OVERLAYS (BLITZER & BAMBUS-REGEN)
+           ========================================================================== */
         #flash-overlay { 
             position: fixed; 
             top: 0; 
@@ -172,42 +244,72 @@
             100% { opacity: 0; } 
         }
 
-        /* Magischer Bambus Regen */
         .bamboo-drop { 
             position: fixed; 
             top: -50px; 
-            font-size: 2rem; 
+            font-size: 2.2rem; 
             z-index: 1000; 
             animation: fall linear forwards; 
             user-select: none; 
+            pointer-events: none;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
         }
 
         @keyframes fall { 
             to { transform: translateY(110vh) rotate(360deg); } 
         }
 
-        /* Funkel-Effekt für das Logo */
         @keyframes sparkle {
             0%, 100% { text-shadow: none; }
-            50% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px var(--blue); }
+            50% { text-shadow: 0 0 12px var(--bamboo-light), 0 0 22px var(--sunlight), 0 0 32px var(--blue); }
         }
 
-        /* Header BILD/20Min-Style */
+        /* ==========================================================================
+           4. HEADER, NAVIGATION & BAMBUS-TICKER
+           ========================================================================== */
         header { 
-            background: var(--blue); 
+            background: linear-gradient(135deg, #004488 0%, var(--blue) 55%, #046c4e 100%); 
             color: white; 
-            padding: 15px 20px; 
+            padding: 18px 20px; 
             border-bottom: 4px solid var(--dark); 
             text-align: center; 
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Subtiler Sonnenschein-Schimmer im Header */
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.12) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         .logo-container { 
             display: inline-block; 
             background: white; 
-            padding: 5px 15px; 
+            padding: 6px 20px; 
             border: 3px solid var(--dark); 
             transform: skew(-5deg); 
             cursor: pointer; 
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.35);
+            transition: transform 0.3s var(--spring-easing), box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .logo-container:hover {
+            transform: skew(-5deg) scale(1.05) rotate(-1deg);
+            box-shadow: 10px 10px 0px rgba(16, 185, 129, 0.5);
+        }
+
+        .logo-container:active {
+            transform: skew(-5deg) scale(0.97);
         }
 
         .logo { 
@@ -220,18 +322,22 @@
             display: block; 
             margin: 0; 
             line-height: 1; 
-            animation: sparkle 2.5s ease-in-out infinite; 
+            animation: sparkle 3s ease-in-out infinite; 
         }
         
-        /* Echte Navigation mit Links */
+        /* Navigation mit organischem Bambus-Underline-Effekt */
         nav { 
-            background: var(--dark); 
+            background: rgba(15, 23, 42, 0.95); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: white; 
-            padding: 10px 0; 
+            padding: 12px 0; 
             text-align: center; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
         }
 
         nav a { 
@@ -244,62 +350,135 @@
             letter-spacing: 1px; 
             cursor: pointer; 
             display: inline-block; 
+            position: relative;
+            padding: 4px 2px;
+            transition: color 0.25s ease, transform 0.25s var(--spring-easing);
+        }
+
+        /* Bambus-Spross Unterstreichung */
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--bamboo-light), var(--sunlight));
+            border-radius: 4px;
+            transition: width 0.3s var(--smooth-easing), left 0.3s var(--smooth-easing);
         }
 
         nav a:hover { 
-            color: var(--blue); 
+            color: #34d399; 
+            transform: translateY(-2px);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
         }
 
         .nav-divider { 
-            color: #555; 
+            color: #475569; 
+            user-select: none;
         }
 
-        /* Roter Ticker */
+        /* UPGRADED: Dynamischer Breaking-News Ticker im Bambus-Look */
         .ticker { 
-            background: white; 
+            background: rgba(255, 255, 255, 0.92); 
+            backdrop-filter: blur(8px);
             color: var(--dark); 
-            padding: 10px 20px; 
+            padding: 10px 20px 10px 145px; 
             font-weight: 900; 
-            font-size: 16px; 
+            font-size: 15px; 
             overflow: hidden; 
             white-space: nowrap; 
             border-bottom: 2px solid var(--dark); 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            position: relative;
+            z-index: 9;
+        }
+
+        /* Feststehendes Live-Badge links am Ticker */
+        .ticker::before {
+            content: '🎋 LIVE TICKER';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--bamboo-dark), var(--bamboo-primary));
+            color: white;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 1px;
+            z-index: 3;
+            box-shadow: 4px 0 12px rgba(0,0,0,0.15);
+        }
+
+        /* Sanfter Fade-Out am rechten Rand */
+        .ticker::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 60px;
+            height: 100%;
+            background: linear-gradient(to left, white, transparent);
+            z-index: 2;
+            pointer-events: none;
         }
 
         .ticker span { 
-            color: var(--blue); 
-            margin-right: 10px; 
+            color: var(--bamboo-primary); 
+            margin: 0 8px; 
+            padding: 2px 6px;
+            background: var(--bamboo-Mist);
+            border-radius: 4px;
         }
 
         .ticker-text { 
             display: inline-block; 
             animation: scroll 90s linear infinite; 
+            will-change: transform;
+        }
+
+        /* Ticker pausiert beim Drüberfahren zum entspannten Lesen */
+        .ticker:hover .ticker-text {
+            animation-play-state: paused;
         }
 
         @keyframes scroll { 
-            0% { transform: translateX(100vw); } 
+            0% { transform: translateX(60vw); } 
             100% { transform: translateX(-100%); } 
         }
 
-        /* Layout */
+        /* ==========================================================================
+           5. HAUPTLAYOUT, 3D-TILT CARDS & SHINE-EFFEKT
+           ========================================================================== */
         .container { 
-            max-width: 1100px; 
-            margin: 20px auto; 
-            padding: 0 10px; 
+            max-width: 1120px; 
+            margin: 28px auto; 
+            padding: 0 15px; 
             display: flex; 
-            gap: 20px; 
+            gap: 24px; 
             flex-wrap: wrap; 
             align-items: flex-start; 
+            position: relative;
+            z-index: 2;
         }
 
         .main-content { 
             flex: 3; 
-            min-width: 65%; 
-            background: white; 
-            border: 1px solid var(--border); 
-            padding: 20px; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+            min-width: 64%; 
+            background: rgba(255, 255, 255, 0.88); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.7); 
+            border-radius: 16px;
+            padding: 28px; 
+            box-shadow: 0 12px 35px -5px rgba(0, 40, 20, 0.08), 0 0 1px rgba(0,0,0,0.1); 
         }
 
         .sidebar { 
@@ -307,72 +486,184 @@
             min-width: 300px; 
         }
 
-        /* Artikel-Design */
+        /* UPGRADED: Artikel-Design mit 3D-Tilt & Glanz-Reflexion */
         .article { 
-            margin-bottom: 40px; 
-            padding-bottom: 20px; 
-            border-bottom: 2px solid var(--dark); 
+            margin-bottom: 35px; 
+            padding: 24px; 
+            border-radius: var(--card-radius);
+            background: linear-gradient(180deg, #ffffff 0%, #fafdfb 100%);
+            border: 1px solid #e2ece7;
+            border-left: 5px solid var(--blue);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            will-change: transform, box-shadow;
+            transition: transform 0.2s ease-out, box-shadow 0.3s ease, border-left-color 0.3s ease;
         }
 
-        .article:last-child { 
-            border-bottom: none; 
-            margin-bottom: 0; 
-            padding-bottom: 0; 
+        .article:hover {
+            box-shadow: 0 18px 38px -10px rgba(5, 150, 105, 0.14), 0 8px 20px -6px rgba(0, 85, 164, 0.1);
+            border-left-color: var(--bamboo-primary);
         }
 
+        .article:last-of-type { 
+            margin-bottom: 20px; 
+        }
+
+        /* Dynamischer Glanz-Layer (wird per Maus-Koordinaten gesteuert) */
+        .shine-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(
+                500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(16, 185, 129, 0.09), 
+                rgba(245, 158, 11, 0.04) 40%, 
+                transparent 70%
+            );
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            z-index: 1;
+        }
+
+        .article:hover .shine-layer,
+        .ad-space:hover .shine-layer {
+            opacity: 1;
+        }
+
+        /* Kicker mit pulsierender Bambus-Lesemarke */
         .kicker { 
-            display: block; 
+            display: inline-flex; 
+            align-items: center;
+            gap: 8px;
             color: var(--blue); 
-            font-size: 14px; 
+            background: linear-gradient(90deg, rgba(0, 85, 164, 0.08), rgba(16, 185, 129, 0.08));
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px; 
             font-weight: 900; 
             text-transform: uppercase; 
-            margin-bottom: 5px; 
+            letter-spacing: 0.6px;
+            margin-bottom: 12px; 
+            position: relative;
+            z-index: 2;
+            transition: transform 0.25s var(--spring-easing), background 0.3s ease;
+        }
+
+        /* Pulsierender Smaragd-Punkt vor jedem Kicker */
+        .kicker::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: var(--bamboo-light);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulseDot 2s infinite;
+        }
+
+        @keyframes pulseDot {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .article:hover .kicker {
+            transform: translateX(4px);
+            color: var(--bamboo-dark);
         }
 
         .article h2 { 
-            margin: 0 0 10px 0; 
-            font-size: 38px; 
-            line-height: 1.05; 
-            letter-spacing: -1px; 
+            margin: 0 0 12px 0; 
+            font-size: 34px; 
+            line-height: 1.12; 
+            letter-spacing: -0.8px; 
             font-weight: 900; 
+            color: var(--dark);
+            position: relative;
+            z-index: 2;
+            transition: color 0.25s ease;
+        }
+
+        .article:hover h2 {
+            color: #003d7a;
         }
 
         .article p { 
-            color: #333; 
-            line-height: 1.6; 
+            color: #2d3748; 
+            line-height: 1.68; 
             font-size: 17px; 
             font-family: Georgia, serif; 
-            margin-top: 15px; 
+            margin-top: 14px; 
+            margin-bottom: 0;
+            position: relative;
+            z-index: 2;
         }
         
-        /* Interaktiver Radar-Button */
+        /* ==========================================================================
+           6. ORGANISCHE BUTTONS & PAGINATION
+           ========================================================================== */
         .radar-btn { 
             background: var(--dark); 
             color: white; 
             border: none; 
-            padding: 12px 20px; 
-            font-size: 16px; 
+            padding: 13px 20px; 
+            font-size: 15px; 
             font-weight: 900; 
             cursor: pointer; 
-            margin-top: 15px; 
+            margin-top: 18px; 
             text-transform: uppercase; 
-            transition: 0.2s; 
+            letter-spacing: 0.5px;
+            border-radius: 8px;
+            transition: transform 0.3s var(--spring-easing), background 0.25s ease, box-shadow 0.25s ease; 
             display: inline-block; 
             width: 100%; 
             box-sizing: border-box; 
             text-align: center; 
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        /* Licht-Reflexion auf Buttons */
+        .radar-btn::after,
+        .ad-link-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.5s ease;
+        }
+
+        .radar-btn:hover::after,
+        .ad-link-btn:hover::after {
+            left: 140%;
         }
 
         .radar-btn:hover { 
             background: var(--blue); 
+            transform: translateY(-2px) rotate(-0.4deg);
+            box-shadow: 0 8px 20px rgba(0, 85, 164, 0.3);
+        }
+
+        .radar-btn:active {
+            transform: translateY(1px);
         }
 
         /* Pagination Design */
         .pagination { 
             text-align: center; 
-            margin: 20px 0 40px 0; 
-            border-top: 2px dashed #ccc; 
-            padding-top: 20px; 
+            margin: 30px 0 40px 0; 
+            border-top: 2px dashed #cbd5e1; 
+            padding-top: 25px; 
         }
 
         .pagination button { 
@@ -380,46 +671,77 @@
             color: white; 
             border: none; 
             padding: 10px 18px; 
-            margin: 0 5px; 
+            margin: 4px 5px; 
             font-weight: bold; 
             cursor: pointer; 
-            font-size: 16px; 
-            transition: 0.2s; 
+            font-size: 15px; 
+            border-radius: 8px;
+            transition: all 0.25s var(--spring-easing); 
         }
 
         .pagination button:hover { 
-            background: var(--blue); 
+            background: var(--bamboo-primary); 
+            transform: translateY(-3px) rotate(-2deg);
+            box-shadow: 0 6px 15px rgba(5, 150, 105, 0.3);
         }
 
         .pagination button.active { 
-            background: var(--blue); 
+            background: linear-gradient(135deg, var(--blue), var(--bamboo-primary)); 
             transform: scale(1.1); 
+            box-shadow: 0 6px 18px rgba(0, 85, 164, 0.35);
         }
 
         .news-article { 
             display: none; 
         }
 
-        /* Sidebar Werbung Styling */
+        /* ==========================================================================
+           7. SCROLL-REVEAL ANIMATIONEN
+           ========================================================================== */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(28px) scale(0.98);
+            transition: opacity 0.6s var(--smooth-easing), transform 0.6s var(--spring-easing);
+        }
+
+        .reveal-item.revealed {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ==========================================================================
+           8. SIDEBAR WERBUNG STYLING (MIT 3D HOVER)
+           ========================================================================== */
         .ad-space { 
-            background: white; 
+            background: rgba(255, 255, 255, 0.94); 
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border); 
-            padding: 15px; 
-            margin-bottom: 20px; 
+            border-radius: var(--card-radius);
+            padding: 18px; 
+            margin-bottom: 22px; 
             position: relative; 
-            border-top: 4px solid var(--dark); 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+            border-top: 5px solid var(--dark); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06); 
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+        }
+
+        .ad-space:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
         }
 
         .ad-label { 
             font-size: 10px; 
-            color: #999; 
+            color: #64748b; 
             display: block; 
             text-align: left; 
             margin-bottom: 10px; 
             text-transform: uppercase; 
             font-weight: bold; 
             letter-spacing: 1px; 
+            position: relative;
+            z-index: 2;
         }
 
         .ad-space h4 { 
@@ -427,14 +749,18 @@
             font-size: 22px; 
             font-weight: 900; 
             text-transform: uppercase; 
-            line-height: 1.1; 
+            line-height: 1.15; 
+            position: relative;
+            z-index: 2;
         }
 
         .ad-space p { 
             font-size: 14px; 
-            color: #444; 
+            color: #334155; 
             margin-bottom: 15px; 
-            line-height: 1.4; 
+            line-height: 1.45; 
+            position: relative;
+            z-index: 2;
         }
 
         /* Spezifische Ads */
@@ -446,48 +772,63 @@
             background: #0044cc; 
             color: white; 
             text-decoration: none; 
-            padding: 10px; 
+            padding: 12px; 
             font-weight: bold; 
             text-transform: uppercase; 
             text-align: center; 
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            transition: transform 0.25s var(--spring-easing), background 0.25s ease, box-shadow 0.25s ease;
         }
 
         .ad-link-btn:hover { 
-            background: var(--dark); 
+            background: var(--bamboo-primary); 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(5, 150, 105, 0.3);
         }
 
-        .ad-lothar { border-top-color: #0044cc; background: #f0f5ff; }
+        .ad-lothar { border-top-color: #0044cc; background: linear-gradient(180deg, #f0f5ff 0%, #ffffff 100%); }
         .ad-lothar h4 { color: #0044cc; }
         
         .ad-trex { border-top-color: #27ae60; }
         .ad-trex h4 { color: #27ae60; }
 
-        .ad-guesel { border-top-color: #8e44ad; background: #fdfaef; cursor: pointer; }
+        .ad-guesel { border-top-color: #8e44ad; background: linear-gradient(180deg, #fdfaef 0%, #ffffff 100%); cursor: pointer; }
         .ad-guesel h4 { color: #8e44ad; }
 
-        /* Modernes Modal (Popup) */
+        /* ==========================================================================
+           9. MODALS (POPUPS)
+           ========================================================================== */
         .modal-overlay { 
             position: fixed; 
             top: 0; 
             left: 0; 
             width: 100%; 
             height: 100%; 
-            background: rgba(0,0,0,0.9); 
+            background: rgba(2, 6, 23, 0.85); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: none; 
             justify-content: center; 
             align-items: center; 
-            z-index: 1000; 
+            z-index: 10000; 
+            padding: 15px;
         }
 
         .modal-content { 
             background: white; 
             padding: 40px; 
-            border: 5px solid var(--blue); 
+            border: 4px solid var(--blue); 
+            border-radius: 16px;
             max-width: 500px; 
+            width: 100%;
             text-align: center; 
             position: relative; 
             transform: scale(0.8); 
-            transition: transform 0.3s; 
+            transition: transform 0.35s var(--spring-easing); 
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
         }
 
         .modal-overlay.active { 
@@ -500,20 +841,24 @@
 
         .close-btn { 
             position: absolute; 
-            top: 5px; 
-            right: 10px; 
+            top: 10px; 
+            right: 15px; 
             font-size: 30px; 
             cursor: pointer; 
             color: var(--dark); 
             font-weight: bold; 
             line-height: 1; 
+            transition: transform 0.2s ease, color 0.2s ease;
         }
 
         .close-btn:hover { 
-            color: var(--blue); 
+            color: var(--bamboo-primary); 
+            transform: rotate(90deg) scale(1.1);
         }
 
-        /* Kommentar-Bereich */
+        /* ==========================================================================
+           10. KOMMENTAR-BEREICH (COMMUNITY LIVE)
+           ========================================================================== */
         .comments-section { 
             margin-top: 40px; 
             border-top: 6px solid var(--dark); 
@@ -526,27 +871,56 @@
             text-transform: uppercase; 
             margin-bottom: 20px; 
             color: var(--dark); 
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .comments-header span { 
-            color: var(--blue); 
+            color: var(--bamboo-primary); 
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 20px;
+            background: var(--bamboo-Mist);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .comments-header span::before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            background: var(--bamboo-light);
+            border-radius: 50%;
+            animation: pulseDot 1.8s infinite;
         }
 
         .comment-input-box { 
-            background: #f9f9f9; 
-            border: 1px solid #ccc; 
-            padding: 15px; 
+            background: #f8faf9; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 12px;
+            padding: 16px; 
             margin-bottom: 30px; 
             display: flex; 
             gap: 10px; 
             flex-wrap: wrap; 
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .comment-input-box input { 
-            padding: 10px; 
-            border: 1px solid #ddd; 
+            padding: 12px 14px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 8px;
             font-family: inherit; 
             font-size: 14px; 
+            outline: none;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .comment-input-box input:focus {
+            border-color: var(--bamboo-primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
         }
 
         .comment-input-box #newCommentUser { 
@@ -556,40 +930,53 @@
 
         .comment-input-box #newCommentText { 
             flex: 3; 
-            min-width: 250px; 
+            min-width: 240px; 
         }
 
         .comment-input-box button { 
             background: var(--dark); 
             color: white; 
             border: none; 
-            padding: 10px 20px; 
+            border-radius: 8px;
+            padding: 12px 24px; 
             font-weight: bold; 
             cursor: pointer; 
             text-transform: uppercase; 
+            transition: all 0.25s var(--spring-easing);
         }
 
         .comment-input-box button:hover { 
-            background: var(--blue); 
+            background: var(--bamboo-primary); 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(5, 150, 105, 0.25);
         }
         
         .comment { 
             background: #ffffff; 
             border: 1px solid var(--border); 
-            padding: 15px; 
-            margin-bottom: 15px; 
+            border-radius: 10px;
+            padding: 16px; 
+            margin-bottom: 16px; 
             border-left: 4px solid var(--blue); 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04); 
+            transition: transform 0.25s var(--smooth-easing), box-shadow 0.25s ease, border-left-color 0.25s ease;
+        }
+
+        .comment:hover {
+            transform: translateX(4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.07);
+            border-left-color: var(--bamboo-light);
         }
 
         .comment-meta { 
             font-size: 12px; 
-            color: #777; 
+            color: #64748b; 
             margin-bottom: 8px; 
-            border-bottom: 1px solid #eee; 
-            padding-bottom: 5px; 
+            border-bottom: 1px solid #f1f5f9; 
+            padding-bottom: 6px; 
             display: flex; 
             justify-content: space-between; 
+            align-items: center;
         }
 
         .comment-meta .user { 
@@ -600,29 +987,33 @@
 
         .comment-text { 
             font-size: 15px; 
-            color: #333; 
-            line-height: 1.5; 
+            color: #334155; 
+            line-height: 1.55; 
             margin: 0; 
         }
 
         .comment-actions { 
             font-size: 13px; 
-            color: #999; 
-            margin-top: 10px; 
+            color: #64748b; 
+            margin-top: 12px; 
             font-weight: bold; 
             user-select: none; 
         }
 
         .comment-actions span { 
-            margin-right: 15px; 
-            transition: 0.2s; 
+            margin-right: 16px; 
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: #f8fafc;
+            transition: all 0.2s var(--spring-easing); 
             cursor: pointer; 
             display: inline-block; 
         }
 
         .comment-actions span:hover { 
-            color: var(--blue); 
-            transform: scale(1.1); 
+            color: var(--bamboo-dark); 
+            background: var(--bamboo-Mist);
+            transform: scale(1.08); 
         }
 
         .comment-actions span.no-action:hover { 
@@ -632,15 +1023,89 @@
         }
         
         .reply-comment { 
-            margin-left: 40px; 
+            margin-left: 35px; 
             border-left: 3px solid #ff9900; 
-            background: #fafafa; 
+            background: #fcfdfd; 
             margin-bottom: 10px; 
             margin-top: 10px; 
+        }
+
+        /* ==========================================================================
+           11. WEB AUDIO BAMBOO SOUND TOGGLE (EASTER EGG FLOATING BUTTON)
+           ========================================================================== */
+        #sound-toggle-btn {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            z-index: 9990;
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            border: 2px solid rgba(16, 185, 129, 0.5);
+            border-radius: 50px;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s var(--spring-easing);
+            user-select: none;
+        }
+
+        #sound-toggle-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            border-color: var(--bamboo-light);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.35);
+        }
+
+        #sound-toggle-btn.sound-on {
+            background: linear-gradient(135deg, var(--bamboo-dark), var(--bamboo-primary));
+            border-color: #a7f3d0;
+        }
+
+        /* ==========================================================================
+           12. RESPONSIVE & ACCESSIBILITY (PREFERS-REDUCED-MOTION)
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .logo { font-size: 36px; }
+            .article h2 { font-size: 26px; }
+            .main-content { padding: 18px; min-width: 100%; }
+            .sidebar { min-width: 100%; }
+            .ticker { padding-left: 130px; font-size: 14px; }
+            .reply-comment { margin-left: 15px; }
+            nav a { margin: 4px 8px; font-size: 13px; }
+            #sound-toggle-btn { bottom: 14px; right: 14px; padding: 8px 12px; font-size: 12px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            #bamboo-ambient-canvas { display: none !important; }
+            .reveal-item { opacity: 1 !important; transform: none !important; }
         }
     </style>
 </head>
 <body class="locked">
+
+    <!-- NEU: LESEFORTSCHRITTS-ANZEIGE OBEN -->
+    <div id="scroll-progress"></div>
+
+    <!-- NEU: HINTERGRUND-CANVAS FÜR SCHWEBENDE BAMBUSBLÄTTER -->
+    <canvas id="bamboo-ambient-canvas"></canvas>
+
+    <!-- NEU: WEB AUDIO BAMBUS-AKUSTIK TOGGLE (Standardmässig Stumm) -->
+    <button id="sound-toggle-btn" onclick="toggleBambooSound()" title="Organische Bambus-Klickgeräusche aktivieren/deaktivieren">
+        <span id="sound-icon">🔇</span>
+        <span id="sound-label">Bambus-FX: Aus</span>
+    </button>
 
     <!-- ZUGANGS-FENSTER MIT MYSTISCHEM HINTERGRUND -->
     <div id="login-overlay">
@@ -703,7 +1168,7 @@
     </div>
 
     <header>
-        <div class="logo-container" onclick="makeItRain()">
+        <div class="logo-container" onclick="makeItRain()" title="Klick für magischen Bambus-Regen!">
             <h1 class="logo">Bambus News</h1>
         </div>
     </header>
@@ -731,7 +1196,7 @@
                 <p><strong>SEEDORF / ALTDORF -</strong> Wer glaubt, der heutige Polizeialltag im Kanton Uri sei verrückt, hat noch nie einen Blick in die verstaubten Geheimarchive im hintersten Kellergewölbe geworfen. Bambus News ist auf vergilbte Einsatzakten gestossen, die beweisen: Schon früher wurden bei der Kapo Uri Legenden geschrieben, die jede Hollywood-Komödie mühelos in den Schatten stellen.</p>
                 <p>Unvergessen bleibt etwa das bis heute physikalisch völlig unerklärliche „Wunder von Seedorf“. Damals gelang es einer hochmotivierten Patrouille beim Seerestaurant, den schweren Streifenwagen mit chirurgischer Präzision derart mittig auf einem massiven Betonpflock aufzubocken, dass sämtliche Räder frei in der Luft schwebten. Das Fahrzeug thronte dort wie ein modernes Kunstwerk am Seeufer – vorwärts ging nichts, rückwärts noch weniger. Während sich die Sonntagsausflügler auf der Terrasse köstlich amüsierten und auf den Kaffeetischen bereits erste Wetten abschlossen, versuchten die Beamten mit hochrotem Kopf so zu tun, als handle es sich um einen geheimen Unterboden-Belastungstest. Erst ein diskret herbeigerufener Bergungstrupp konnte das gestrandete Polizeischiff unter den spöttischen Blicken der Badegäste wieder von seinem steinernen Sockel heben.</p>
                 <p>Mindestens genauso viel Schweiss floss seinerzeit in den Amtsstuben, als die Führungsetage das Konzept „konstruktives Feedback“ völlig neu interpretierte. Für ein besonders heikles Mitarbeitergespräch traute man den reinen Worten offenbar nicht ganz über den Weg und liess vorsorglich die komplette Interventionseinheit (IE) in voller Kampfmontur im stockdunklen Nebenraum antreten. Während drinnen am Tisch höflich über Jahresziele und Arbeitsklima geplaudert wurde, schwitzten nebenan schwer gepanzerte Kollegen mit Schild, Helm und gezücktem Rammbock hinter der dünnen Bürotür und warteten nur auf das Codewort „Kaffeepause“. Bis heute gilt dies als das weltweit einzige Personalgespräch, bei dem ein falsches Räuspern eine sofortige Blendgranaten-Erstürmung durch die Wand ausgelöst hätte.</p>
-                <p>Für Schnappatmung auf allen Etagen sorgte zudem ein bis heute beispielloser Akt von furchtloser Gesetzestreue: Ein junger, völlig schmerzbefreiter Polizist kannte bei einer Kontrolle schlichtweg weder Freund noch Feind – und erst recht keine Dienstgrade. Kurzerhand nötigte der mutige Beamte den damaligen Kommandanten höchstpersönlich zu einer Atemalkoholprobe! Augenzeugen berichten noch heute mit ehrfürchtigem Zittern in der Stimme, dass die Zeit im gesamten Kanton Uri für exakt fünf Sekunden komplett stillstand, als das Röhrchen gezückt wurde. Selbst die Vögel im Reusstal hörten auf zu zwitschern. Ob der unerschrockene Polizist für diese legendäre Aktion eine Tapferkeitsmedaille erhielt oder noch am selben Abend zur lebenslangen Gletscher-Patrouille auf den Sustenpass strafversetzt wurde, unterliegt bis heute der höchsten Geheimhaltungsstufe.</p>
+                <p>Für Schnappatmung auf allen Etagen sorgte zudem ein bis heute beispielloser Akt von furchtloser Gesetzestreue: Ein junger, völlig schmerzbefreiter Polizist kannte bei einer Kontrolle schlichtweg weder Freund noch Feind – und erst recht keine Dienstgrade. Kurzerhand nötigte der mutige Beamte den damaligen Kommandanten höchstpersönlich zu einer Atemalkoholprobe! Augenzeugen berichten noch heute mit ehrfürchtigem Zittern in der Stimme, dass die Zeit im gesamten Kanton Uri für exakt fünf Sekunden komplett stillstand, als das Röhrchen gezückt wurde. Selbst die Vögel im Reusstal hörten auf zu zwitschern. Ob der unerschrockene Polizist für diese legendäre Aktion eine Tapederkeitsmedaille erhielt oder noch am selben Abend zur lebenslangen Gletscher-Patrouille auf den Sustenpass strafversetzt wurde, unterliegt bis heute der höchsten Geheimhaltungsstufe.</p>
                 <p>Doch das wohl grösste Mysterium der Urner Polizeigeschichte bleibt weiterhin ungelöst: Wer zum Teufel war eigentlich der legendäre „Polizist XY“? Sein Name geistert wie ein Phantom durch sämtliche alten Rapporte, auf sein Konto gehen die kuriosesten Anekdoten des Jahrzehnts, und jedes Mal, wenn im Stützpunkt ein Kaffee verschüttet wird oder ein Formular verschwindet, fällt sein Name. Trotz modernster Forensik, DNA-Analysen an alten Kaffeetassen und endlosen Spekulationen in der Nachtschicht tappt selbst die Kripo völlig im Dunkeln. Eines ist jedoch sicher: Der Geist von Polizist XY wacht noch immer über das Urnerland!</p>
             </article>
 
@@ -784,7 +1249,7 @@
                 <p>"Ein harmloser Spitalbesuch für eine Blutentnahme gleicht mittlerweile einem absoluten Spiessrutenlauf", stöhnt ein völlig erschöpfter Urner Polizist. Kürzlich habe sich eine hochmotivierte Spitalangestellte bei der Übergabe der Blutröhrchen regelrecht an ihm vergangen. "Ich wollte eigentlich nur das Einsatzprotokoll unterschreiben, plötzlich riss sie mir die Dienst-Handschellen aus dem Gurt, kettete mich elegant ans Spitalbett und drohte, mich erst nach einem gemeinsamen Candle-Light-Dinner im Personalraum wieder loszumachen!" Die Kommandoebene prüft nun intern, ob für Spitalbesuche künftig das bewaffnete Sondereinsatzkommando als Begleitschutz für die eigenen, viel zu gutaussehenden Männer angefordert werden muss.</p>
                 <p>Doch nicht nur das medizinische Personal verliert jegliche Beherrschung. Bei einer interkantonalen Grossübung hat ein völlig verzauberter Kollege der Kapo Nidwalden kurzerhand eine Urner Polizistin "gefangen" genommen. Statt den fiktiven Täter zu jagen, packte er die verdutzte Beamtin kurzerhand in den Laderaum seines Patrouillenautos und bretterte mit heulender Sirene Richtung Stans. "Er funkte durch, wer so viel geballte Bullenpower ausstrahlt, werde ab sofort als kantonales Kulturgut der Zentralschweiz konfisziert", berichtet ein fassungsloser Augenzeuge. Die Urnerin konnte erst nach zähen Geiselverhandlungen gegen drei Laibe besten Nidwaldner Käse und eine unterschriebene Autogrammkarte unversehrt freigekauft werden.</p>
                 <p style="margin-top: 20px;">Wer selbst Teil dieses unwiderstehlichen Teams werden will, findet hier den direkten Weg in den Olymp der Begierde: <br>
-                <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--blue); font-weight: 900; text-decoration: none; font-size: 18px;">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
+                <a href="https://www.bullenpower-uri.ch" target="_blank" style="color: var(--blue); font-weight: 900; text-decoration: none; font-size: 18px; display: inline-block; margin-top: 6px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateX(6px)'" onmouseout="this.style.transform='translateX(0)'">➔ Kantonspolizei Uri | Dü fir yys - Miär fir Üri</a></p>
             </article>
 
             <!-- ARTIKEL 7: G7 EINSATZ -->
@@ -864,7 +1329,7 @@
             <article class="article news-article">
                 <span class="kicker">Kapo-interner Skandal</span>
                 <h2>Fassungslosigkeit bei Preisverleihung: Ein Hamster gewinnt das Monatsfoto!</h2>
-                <p><strong>ALTDORF -</strong> Die Spannung bei der Wahl zum prestigeträchtigen "Patrouillen-Foto des Monats" war greifbar. Die Kollegen reichten spektakuläre Helikopter-Aufnahmen, epische Blitzer-Bilder und dramatische Festnahmen bei Sonnenuntergang ein. Doch als der Gewinner beim grossen Rapport verkündet wurde, herrschte absolute, schockierte Stille im Saal: Platz 1 ging an einen leicht unscharfen Hamster, der entspannt auf dem Lenkrad eines Streifenwagens sitzt.</p>
+                <p><strong>ALTDORF -</strong> Die Spannung bei der Wahl zum prestigeträchtigen "Patrouillen-Foto des Monats" war greifbar. Die Kollegen reichten spektakuläre Helikopter-Aufnahmen, epische Blitzer-Bilder und dramatische Festnahmen bei Sonnenuntergang ein. Doch als der Gewinner beim grossen Rapport verkündet wurde, herrscht absolute, schockierte Stille im Saal: Platz 1 ging an einen leicht unscharfen Hamster, der entspannt auf dem Lenkrad eines Streifenwagens sitzt.</p>
                 <p>Der kleine Nager namens "Wachtmeister Krümel" posierte im perfekten Licht auf dem Armaturenbrett und degradierte damit alle knallharten Verkehrspolizisten zu Verlierern. Die Hundestaffel der Kantonspolizei hat bereits rechtliche Schritte gegen die Wertung eingeleitet. "Das ist ein Affront für jeden hart arbeitenden Diensthund", bellte ein sichtlich empörter Hundeführer ins Mikrofon. Krümel hingegen nahm den Sieg gelassen und knabberte während der feierlichen Siegerehrung genüsslich an einem unbezahlten Strafzettel. Die Kapo Uri prüft nun, ob Hamster künftig ganz offiziell für Radarkontrollen in engen Röhren eingesetzt werden können.</p>
             </article>
 
@@ -901,7 +1366,7 @@
             </article>
 
             <!-- ARTIKEL 21: RADAR HACK -->
-            <article class="article news-article" style="border: none;">
+            <article class="article news-article" style="border-bottom: 1px solid #e2ece7;">
                 <span class="kicker">Interaktiver Test</span>
                 <h2>Radar-Anlagen gehackt? Sünder kriegen Bambus-Tee!</h2>
                 <p><strong>URSERENTAL -</strong> Die Verkehrssünder im Kanton sind begeistert, die Staatskasse weint. Ein anonymer Insider berichtet, dass die Blitzer in der tiefsten Nacht umprogrammiert wurden. Statt teurer Bussen spuckt die Drucker-Infrastruktur der Kapo Uri plötzlich detaillierte Anleitungen für vegane Bambus-Smoothies und entspannende Tee-Rituale aus. "Ich bin gestern extra mit 120 km/h in die 80er-Zone gedonnert, weil mir noch das genaue Rezept für den Ingwer-Bambus-Aufguss gefehlt hat", gesteht ein Raser lachend vor laufender Kamera.</p>
@@ -915,11 +1380,11 @@
 
             <!-- KOMMENTAR BEREICH (MIT FIREBASE LIVE-FUNKTION) -->
             <div class="comments-section" id="community">
-                <div class="comments-header">Community <span>(Live!)</span></div>
+                <div class="comments-header">Community <span>Live!</span></div>
                 
                 <div class="comment-input-box">
                     <input type="text" id="newCommentUser" placeholder="Dein Deckname..." maxlength="20">
-                    <input type="text" id="newCommentText" placeholder="Schreibe einen Live-Kommentar...">
+                    <input type="text" id="newCommentText" placeholder="Schreibe einen Live-Kommentar..." onkeydown="if(event.key === 'Enter') window.addLiveComment()">
                     <button onclick="window.addLiveComment()">Senden</button>
                 </div>
 
@@ -927,7 +1392,7 @@
                 <div id="liveCommentsContainer"></div>
 
                 <!-- Die statischen Kult-Kommentare -->
-                <div class="comment" style="margin-top: 30px;">
+                <div class="comment reveal-item" style="margin-top: 30px;">
                     <div class="comment-meta"><span class="user">SchlaflosInErstfeld</span> <span>09.06.2026, 06:15 Uhr</span></div>
                     <p class="comment-text">Hab gestern während der 12-Stunden-Schicht unter dem Kopierer geschlafen. War extrem gemütlich, bis ein übereifriger Kollege versucht hat, Papier nachzufüllen. Pures Chaos.</p>
                     <div class="comment-actions">
@@ -937,7 +1402,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">Taser_Profi_99</span> <span>09.06.2026, 06:42 Uhr</span></div>
                     <p class="comment-text">Sorry für den Router beim Taser-WK. War echt keine Absicht. Aber hey, 10 Schuss = 10 Treffer. Das Gerät ist geil!</p>
                     <div class="comment-actions">
@@ -947,7 +1412,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">Lisa_M_89</span> <span>09.06.2026, 07:05 Uhr</span></div>
                     <p class="comment-text">Wo genau im Werkhof in Flüelen steht der Schönling heute? Frage für eine Freundin. Sie hat rein zufällig 4 komplett abgefahrene Reifen montiert.</p>
                     <div class="comment-actions">
@@ -957,7 +1422,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">Gotthard_Griller</span> <span>09.06.2026, 07:30 Uhr</span></div>
                     <p class="comment-text">Mallorca als 27. Kanton? Endlich! Weiss jemand, ob das SVZ dorthin verlegt wird? Nehme mein Aromat auf jeden Fall mit in den Süden!</p>
                     <div class="comment-actions">
@@ -967,7 +1432,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">HundeFührer_Max</span> <span>09.06.2026, 07:55 Uhr</span></div>
                     <p class="comment-text">Wachtmeister Krümel (der Hamster) hat mehr Autorität als mein aktueller Schichtchef. Wann kriegt der kleine Kerl endlich seinen ersten offiziellen Stern?</p>
                     <div class="comment-actions">
@@ -977,7 +1442,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">SecretAdmirer_Uri</span> <span>09.06.2026, 08:12 Uhr</span></div>
                     <p class="comment-text">An den Post-Casanova, falls du das hier liest: Der rosa Brief mit dem extra viel Glitzerstaub war von mir! Ruf mich endlich an, mein Herz brennt wie ein Blaulicht!</p>
                     <div class="comment-actions">
@@ -987,7 +1452,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">KaffeeJunkie_Kapo</span> <span>09.06.2026, 08:45 Uhr</span></div>
                     <p class="comment-text">Der Telepathie-Zentralist hat mir heute Morgen einen Kaffee an den Schreibtisch gebracht, bevor ich überhaupt wusste, dass ich müde bin. Der Typ macht mir langsam echt Angst. Aber der Kaffee war super.</p>
                     <div class="comment-actions">
@@ -997,7 +1462,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">Portfolio_Opfer</span> <span>09.06.2026, 09:02 Uhr</span></div>
                     <p class="comment-text">Meine Tastatur brennt. Ich habe "Verhältnismässigkeit" heute 400-mal geschrieben. Word hasst mich. Bitte schickt Hilfe. Oder Red Bull.</p>
                     <div class="comment-actions">
@@ -1007,7 +1472,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">JustMarried2026</span> <span>09.06.2026, 09:15 Uhr</span></div>
                     <p class="comment-text">Die neue Leiterin hat meine Hochzeit im Standesamt in exakt 42 Sekunden durchgezogen. Neue persönliche Bestzeit! Danke, so hatten wir viel mehr Zeit fürs Apéro.</p>
                     <div class="comment-actions">
@@ -1017,7 +1482,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">RaserRole</span> <span>09.06.2026, 09:22 Uhr</span></div>
                     <p class="comment-text">Habe den Bambus-Tee vom Radar probiert. Schmeckt wie nasses Gras, aber die Beratung bei 120 km/h im 80er-Bereich war echt top. 5 Sterne, gerne wieder geblitzt.</p>
                     <div class="comment-actions">
@@ -1027,7 +1492,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">BüroGummi_007</span> <span>09.06.2026, 09:35 Uhr</span></div>
                     <p class="comment-text">Die Chefetage hat heute das Delegieren delegiert. Ein absolutes Mastermind der modernen Polizeiführung. Davon können wir alle noch was lernen.</p>
                     <div class="comment-actions">
@@ -1037,7 +1502,7 @@
                     </div>
                 </div>
 
-                <div class="comment">
+                <div class="comment reveal-item">
                     <div class="comment-meta"><span class="user">PostAuto_Driver</span> <span>09.06.2026, 09:48 Uhr</span></div>
                     <p class="comment-text">Die Schweizerische Post sucht händeringend Pöstler für die Zentrale. Gute Bezahlung, aber Rückenschule und ein Gabelstapler-Ausweis zwingend nötig.</p>
                     <div class="comment-actions">
@@ -1054,16 +1519,16 @@
         <aside class="sidebar">
 
             <!-- NEU: BAMBUS AI WERBUNG GANZ OBEN -->
-            <div class="ad-space" style="border: 3px solid #0f0; background: #000; color: #0f0; text-align: center; box-shadow: 0 0 15px #0f0;">
-                <span class="ad-label" style="color: #000; background: #0f0; padding: 3px 6px; display: inline-block; font-weight: bold; border-radius: 3px;">++ NEUE TECHNOLOGIE ++</span>
+            <div class="ad-space reveal-item" style="border: 3px solid #0f0; background: #050a07; color: #0f0; text-align: center; box-shadow: 0 0 20px rgba(0, 255, 0, 0.35);">
+                <span class="ad-label" style="color: #000; background: #0f0; padding: 3px 8px; display: inline-block; font-weight: bold; border-radius: 4px;">++ NEUE TECHNOLOGIE ++</span>
                 <h4 style="color: #0f0; font-size: 28px; margin-top: 15px; text-shadow: 0 0 10px #0f0;">BAMBUS AI</h4>
                 <p style="color: #fff; font-size: 16px;">Die revolutionäre, allwissende KI-Suche ist endlich online!</p>
                 <p style="color: #ccc; font-size: 13px; line-height: 1.5;">Vergiss das mühsame Suchen in dicken Bundesordnern. BAMBUS AI löst jeden Fall in 0.4 Sekunden, schreibt den Rapport in 0.2 Sekunden und verurteilt den Täter direkt online. Sie ist so intelligent, dass sie bereits heute weiss, wer nächste Woche im Kanton Uri einen Einbruch begeht. Mit integriertem Lügendetektor und einer Suchfunktion, die sogar verlorene Kaffeetassen im Pausenraum ortet.</p>
                 <div style="font-size: 60px; margin: 15px 0;">🧠🤖⚡</div>
-                <a href="https://bambusai.vercel.app" target="_blank" class="ad-link-btn" style="background: #0f0; color: #000; font-size: 20px; padding: 15px; border-radius: 5px; box-shadow: 0 0 10px #0f0;">🚨 ZUR SUPER-KI 🚨</a>
+                <a href="https://bambusai.vercel.app" target="_blank" class="ad-link-btn" style="background: #0f0; color: #000; font-size: 20px; padding: 15px; border-radius: 8px; box-shadow: 0 0 12px #0f0;">🚨 ZUR SUPER-KI 🚨</a>
             </div>
             
-            <div class="ad-space ad-remo">
+            <div class="ad-space ad-remo reveal-item">
                 <span class="ad-label">Anzeige / Social Media</span>
                 <h4>Polizei Insider Reels</h4>
                 <p>Erlebe den Schwerverkehr hautnah! Unser <strong>geheimer Content Creator</strong> bringt dir den echten Alltag aus dem SVZ direkt auf den Bildschirm.</p>
@@ -1071,7 +1536,7 @@
                 <a href="https://www.bullenpower-uri.ch" target="_blank" class="ad-link-btn">JETZT REELS SCHAUEN!</a>
             </div>
 
-            <div class="ad-space" style="border-top-color: #3498db; background: #eaf2f8;">
+            <div class="ad-space reveal-item" style="border-top-color: #3498db; background: #eaf2f8;">
                 <span class="ad-label">Bauprojekt des Jahrhunderts</span>
                 <h4 style="color: #2980b9;">Werkhof Flüelen 2040</h4>
                 <p>Die Pläne stehen! Die feierliche Eröffnung des neuen Werkhofs in Flüelen ist offiziell für das Jahr <strong>2040</strong> geplant.</p>
@@ -1079,21 +1544,21 @@
                 <div style="font-size: 35px; text-align: center; margin: 10px 0;">🏗️🐌🏢</div>
             </div>
 
-            <div class="ad-space" style="border-top-color: #7f8c8d; background: #f2f4f4;">
+            <div class="ad-space reveal-item" style="border-top-color: #7f8c8d; background: #f2f4f4;">
                 <span class="ad-label">Verkehrs-News</span>
                 <h4 style="color: #2c3e50;">Der Neue Axentunnel</h4>
                 <p>Endlich staufrei durch den Fels! Ab sofort prallen herabfallende Steine nur noch aussen an der Tunneldecke ab.</p>
                 <div style="font-size: 35px; text-align: center; margin: 10px 0;">⛰️🚗💨</div>
             </div>
 
-            <div class="ad-space" style="border-top-color: #f39c12; background: #fef9e7;">
+            <div class="ad-space reveal-item" style="border-top-color: #f39c12; background: #fef9e7;">
                 <span class="ad-label">Kapo Tech-Shop</span>
                 <h4 style="color: #d35400;">Smart-Fesseln mit GPS</h4>
                 <p>Verdächtiger weggelaufen? Entspann dich! Die neuen <strong>iCuffs Pro</strong> senden den Live-Standort direkt auf dein Dienst-Handy.</p>
                 <div style="font-size: 35px; text-align: center; margin: 10px 0;">🔗📍📱</div>
             </div>
 
-            <div class="ad-space ad-guesel" onclick="alert('☮️ Friedens-Modus aktiviert!\n\nGewalt war gestern!')">
+            <div class="ad-space ad-guesel reveal-item" onclick="alert('☮️ Friedens-Modus aktiviert!\n\nGewalt war gestern!')">
                 <span class="ad-label">Deeskalation Pur</span>
                 <h4>Fesseln in den Güsel!</h4>
                 <p>Die neue Taktik: Böse gucken und weiche Kissen werfen!</p>
@@ -1101,14 +1566,14 @@
                 <button class="radar-btn" style="background: #8e44ad; font-size: 14px;">ZUM KUSCHEL-KURS</button>
             </div>
 
-            <div class="ad-space ad-lothar">
+            <div class="ad-space ad-lothar reveal-item">
                 <span class="ad-label">Im Einsatz für Uri</span>
                 <h4>Kompetenz an vorderster Front</h4>
                 <p>Bereit, wenn es darauf ankommt. <strong>Unser Top-Einsatzleiter</strong> hat bereits sein Gilet übergestreift.</p>
                 <div style="font-size: 30px; text-align: center; margin: 10px 0;">🦺🦅🚔</div>
             </div>
 
-            <div class="ad-space ad-trex">
+            <div class="ad-space ad-trex reveal-item">
                 <span class="ad-label">Kapo Ausrüstungs-Shop</span>
                 <h4>Masshemden "Edition T-Rex"</h4>
                 <p>Exklusiv für <strong>den Kollegen mit den kurzen Armen</strong>: Uniformhemden in Massanfertigung.</p>
@@ -1116,7 +1581,7 @@
                 <button id="trexBtn" class="radar-btn" style="background: #27ae60; transition: all 0.2s; font-size: 14px;">HIER AUSWEIS GREIFEN!</button>
             </div>
             
-            <div class="ad-space" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
+            <div class="ad-space reveal-item" style="border-top-color: #8b4513;" onclick="alert('🤠 PENG!\n\nHände hoch! Der Dorf-Sheriff hat deinen Klick konfisziert. Weitergehen, hier gibt es nichts zu sehen!')">
                 <span class="ad-label">WANTED</span>
                 <h4 style="color: #8b4513;">DER DORF SHERIFF</h4>
                 <p>Er braucht kein Blaulicht. Er hat einen Hut und das Gesetz auf seiner Seite.</p>
@@ -1127,9 +1592,13 @@
         </aside>
     </div>
 
-    <!-- JS LOGIK -->
+    <!-- ==========================================================================
+         JS LOGIK (ORIGINAL + HIGH-END CREATIVE UPGRADES)
+         ========================================================================== -->
     <script>
-        // MODERNER, MYSTISCHER & ÄSTHETISCHER HINTERGRUND (Aurora Glow & Schwebende Partikel)
+        /* --------------------------------------------------------------------------
+           1. LOGIN-CANVAS: MYSTISCHER HINTERGRUND (Original + RequestAnimationFrame)
+           -------------------------------------------------------------------------- */
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -1137,15 +1606,13 @@
         
         let mysticTime = 0;
 
-        // Sanft schwebende Leucht-Sphären (Nebula/Aurora)
         const orbs = [
             { x: 0.2, y: 0.3, r: 0.45, color: 'rgba(0, 85, 164, 0.35)', speedX: 0.0003, speedY: 0.0002, phase: 0 },
-            { x: 0.8, y: 0.7, r: 0.50, color: 'rgba(0, 180, 216, 0.22)', speedX: -0.0002, speedY: 0.0004, phase: 2 },
+            { x: 0.8, y: 0.7, r: 0.50, color: 'rgba(16, 185, 129, 0.22)', speedX: -0.0002, speedY: 0.0004, phase: 2 },
             { x: 0.5, y: 0.2, r: 0.40, color: 'rgba(72, 12, 168, 0.25)', speedX: 0.0004, speedY: -0.0003, phase: 4 },
             { x: 0.3, y: 0.8, r: 0.35, color: 'rgba(0, 119, 182, 0.28)', speedX: -0.0003, speedY: -0.0002, phase: 1 }
         ];
 
-        // Mystische Glühpartikel
         const particles = Array.from({ length: 70 }, () => ({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
@@ -1154,7 +1621,7 @@
             speedY: -Math.random() * 0.4 - 0.1,
             alpha: Math.random(),
             pulseSpeed: Math.random() * 0.02 + 0.005,
-            hue: Math.random() > 0.3 ? 205 : 175
+            hue: Math.random() > 0.3 ? 160 : 205
         }));
 
         const drawIllusion = () => {
@@ -1162,10 +1629,9 @@
             const h = canvas.height;
             const maxDim = Math.max(w, h);
 
-            // Tiefer, mystischer Nachthimmel-Verlauf
             const bgGrad = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, maxDim * 0.8);
-            bgGrad.addColorStop(0, '#071326');
-            bgGrad.addColorStop(0.6, '#030914');
+            bgGrad.addColorStop(0, '#071826');
+            bgGrad.addColorStop(0.6, '#030b14');
             bgGrad.addColorStop(1, '#010308');
             ctx.fillStyle = bgGrad;
             ctx.fillRect(0, 0, w, h);
@@ -1173,7 +1639,6 @@
             ctx.save();
             ctx.globalCompositeOperation = 'screen';
 
-            // Zeichne sanft wabernde Licht-Nebel
             orbs.forEach(orb => {
                 const currentX = (orb.x + Math.sin(mysticTime * orb.speedX * 40 + orb.phase) * 0.18) * w;
                 const currentY = (orb.y + Math.cos(mysticTime * orb.speedY * 40 + orb.phase) * 0.18) * h;
@@ -1189,7 +1654,6 @@
                 ctx.fill();
             });
 
-            // Zeichne leuchtende, schwebende Partikel
             particles.forEach(p => {
                 p.x += p.speedX;
                 p.y += p.speedY;
@@ -1214,13 +1678,259 @@
             mysticTime++;
         };
         let matrixInterval = setInterval(drawIllusion, 30);
-        
+
+        /* --------------------------------------------------------------------------
+           2. NEU: AMBIENT BAMBUS-BLÄTTER IM HINTERGRUND (60 FPS + SMART-PAUSE)
+           -------------------------------------------------------------------------- */
+        const bambooCanvas = document.getElementById('bamboo-ambient-canvas');
+        const bCtx = bambooCanvas.getContext('2d');
+        let bambooLeaves = [];
+        let bambooAnimId = null;
+        let isUserActive = true;
+        let inactivityTimer = null;
+
+        function initBambooCanvas() {
+            bambooCanvas.width = window.innerWidth;
+            bambooCanvas.height = window.innerHeight;
+
+            const leafCount = window.innerWidth < 768 ? 12 : 22;
+            bambooLeaves = Array.from({ length: leafCount }, () => ({
+                x: Math.random() * bambooCanvas.width,
+                y: Math.random() * bambooCanvas.height,
+                size: Math.random() * 14 + 10,
+                speedY: Math.random() * 0.45 + 0.2,
+                speedX: Math.random() * 0.3 - 0.15,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.008,
+                swayPhase: Math.random() * Math.PI * 2,
+                opacity: Math.random() * 0.22 + 0.08,
+                hue: Math.random() > 0.5 ? '#10b981' : '#059669'
+            }));
+        }
+
+        function drawBambooLeaf(ctx, leaf) {
+            ctx.save();
+            ctx.translate(leaf.x, leaf.y);
+            ctx.rotate(leaf.angle + Math.sin(leaf.swayPhase) * 0.3);
+            ctx.globalAlpha = leaf.opacity;
+            ctx.fillStyle = leaf.hue;
+
+            // Organische Bambusblatt-Vektorform
+            ctx.beginPath();
+            ctx.moveTo(0, -leaf.size);
+            ctx.quadraticCurveTo(leaf.size * 0.45, 0, 0, leaf.size);
+            ctx.quadraticCurveTo(-leaf.size * 0.45, 0, 0, -leaf.size);
+            ctx.closePath();
+            ctx.fill();
+
+            // Feine Blattader in der Mitte
+            ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(0, -leaf.size * 0.8);
+            ctx.lineTo(0, leaf.size * 0.8);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function renderBambooAmbient() {
+            if (!isUserActive) {
+                bambooAnimId = null;
+                return; // Stoppt den Loop bei Scroll-/Maus-Inaktivität für 0% CPU-Last!
+            }
+
+            bCtx.clearRect(0, 0, bambooCanvas.width, bambooCanvas.height);
+
+            bambooLeaves.forEach(leaf => {
+                leaf.swayPhase += 0.015;
+                leaf.y += leaf.speedY;
+                leaf.x += leaf.speedX + Math.sin(leaf.swayPhase) * 0.35;
+                leaf.angle += leaf.spin;
+
+                if (leaf.y > bambooCanvas.height + 30) {
+                    leaf.y = -30;
+                    leaf.x = Math.random() * bambooCanvas.width;
+                }
+                if (leaf.x > bambooCanvas.width + 30) leaf.x = -30;
+                if (leaf.x < -30) leaf.x = bambooCanvas.width + 30;
+
+                drawBambooLeaf(bCtx, leaf);
+            });
+
+            bambooAnimId = requestAnimationFrame(renderBambooAmbient);
+        }
+
+        function wakeUpBambooAmbient() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            isUserActive = true;
+            if (!bambooAnimId) {
+                bambooAnimId = requestAnimationFrame(renderBambooAmbient);
+            }
+            clearTimeout(inactivityTimer);
+            // Pausiert sanft nach 3.5 Sekunden ohne Scrollen/Mausbewegung
+            inactivityTimer = setTimeout(() => {
+                isUserActive = false;
+            }, 3500);
+        }
+
+        window.addEventListener('scroll', () => {
+            wakeUpBambooAmbient();
+            updateScrollProgress();
+        }, { passive: true });
+
+        window.addEventListener('mousemove', wakeUpBambooAmbient, { passive: true });
         window.addEventListener('resize', () => { 
             canvas.width = window.innerWidth; 
             canvas.height = window.innerHeight; 
+            initBambooCanvas();
+            wakeUpBambooAmbient();
         });
 
-        // Access Check (Rang -> Login -> Warning -> Site)
+        /* --------------------------------------------------------------------------
+           3. NEU: LESEFORTSCHRITTS-BALKEN
+           -------------------------------------------------------------------------- */
+        function updateScrollProgress() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+            const bar = document.getElementById('scroll-progress');
+            if (bar) bar.style.width = scrolled + "%";
+        }
+
+        /* --------------------------------------------------------------------------
+           4. NEU: WEB AUDIO API BAMBUS-PERCUSSION SYNTHESIZER (OHNE EXTERNE FILES)
+           -------------------------------------------------------------------------- */
+        let soundEnabled = false;
+        let audioCtx = null;
+
+        function toggleBambooSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('sound-toggle-btn');
+            const icon = document.getElementById('sound-icon');
+            const label = document.getElementById('sound-label');
+
+            if (soundEnabled) {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') audioCtx.state = 'running';
+                btn.classList.add('sound-on');
+                icon.innerText = '🎋';
+                label.innerText = 'Bambus-FX: An';
+                playBambooTock(620, 0.08); // Bestätigungs-Klang
+            } else {
+                btn.classList.remove('sound-on');
+                icon.innerText = '🔇';
+                label.innerText = 'Bambus-FX: Aus';
+            }
+        }
+
+        // Erzeugt einen warmen, hohlen Bambus-Holzklang via Web Audio API
+        function playBambooTock(freq = 480, volume = 0.045) {
+            if (!soundEnabled || !audioCtx) return;
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                // Triangle-Welle + schneller Pitch-Drop klingt wie hohles Bambusholz
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, now);
+                osc.frequency.exponentialRampToValueAtTime(freq * 0.42, now + 0.065);
+
+                gain.gain.setValueAtTime(0.001, now);
+                gain.gain.linearRampToValueAtTime(volume, now + 0.006);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.075);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } catch (e) {}
+        }
+
+        /* --------------------------------------------------------------------------
+           5. NEU: 3D-TILT, GLANZ-EFFEKT & SCROLL-REVEAL OBSERVER
+           -------------------------------------------------------------------------- */
+        function initCardEffects() {
+            const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+            const cards = document.querySelectorAll('.article, .ad-space');
+
+            cards.forEach(card => {
+                // Shine-Layer einmalig einfügen
+                if (!card.querySelector('.shine-layer')) {
+                    const shine = document.createElement('div');
+                    shine.className = 'shine-layer';
+                    card.appendChild(shine);
+                }
+
+                // 3D-Tilt nur auf Desktop mit Maus
+                if (!isTouchDevice && !card.dataset.tiltAttached) {
+                    card.dataset.tiltAttached = 'true';
+
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+
+                        // Sanfte Neigung (max 2.5 Grad für optimale Lesbarkeit)
+                        const rotateX = ((y - centerY) / centerY) * -2.2;
+                        const rotateY = ((x - centerX) / centerX) * 2.2;
+
+                        card.style.setProperty('--mouse-x', `${x}px`);
+                        card.style.setProperty('--mouse-y', `${y}px`);
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px)`;
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                    });
+
+                    card.addEventListener('mouseenter', () => {
+                        playBambooTock(420, 0.025);
+                    });
+                }
+            });
+
+            // Audio-Feedback auf Buttons & Links
+            document.querySelectorAll('button, nav a, .ad-link-btn, .logo-container').forEach(el => {
+                if (!el.dataset.soundAttached) {
+                    el.dataset.soundAttached = 'true';
+                    el.addEventListener('mouseenter', () => playBambooTock(540, 0.03));
+                    el.addEventListener('click', () => playBambooTock(720, 0.07));
+                }
+            });
+        }
+
+        // IntersectionObserver für weiches Einfedern beim Scrollen
+        let revealObserver = null;
+        function observeReveals() {
+            if (!('IntersectionObserver' in window)) {
+                document.querySelectorAll('.reveal-item').forEach(el => el.classList.add('revealed'));
+                return;
+            }
+            if (!revealObserver) {
+                revealObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('revealed');
+                        }
+                    });
+                }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+            }
+
+            document.querySelectorAll('.reveal-item:not(.revealed)').forEach(el => {
+                revealObserver.observe(el);
+            });
+        }
+
+        /* --------------------------------------------------------------------------
+           6. ACCESS CHECK (RANG -> LOGIN -> WARNING -> SITE) - 100% ORIGINAL ERHALTEN
+           -------------------------------------------------------------------------- */
         function selectRank(rank) {
             if (rank === 'LT' || rank === 'Dienstchef') {
                 window.location.href = 'https://www.bullenpower-uri.ch';
@@ -1244,357 +1954,4 @@
                 return;
             }
 
-            // NORMALER ZUGANG (Code 1291)
-            if (codeInput === '1291') {
-                if (nameInput === '') {
-                    document.getElementById('login-error').innerText = "🚨 Bitte gib einen Decknamen ein!";
-                    document.getElementById('login-error').style.display = 'block';
-                    return;
-                }
-                
-                // Logging in Firebase
-                if (window.logVisit) {
-                    window.logVisit(nameInput);
-                }
-
-                // Zeige Haftungsausschluss anstatt direkt reinzulassen
-                document.getElementById('step-login').style.display = 'none';
-                document.getElementById('step-warning').style.display = 'block';
-                
-            } else {
-                document.getElementById('login-error').innerText = "🚨 Falscher Code! Rapport ist raus.";
-                document.getElementById('login-error').style.display = 'block';
-            }
-        }
-
-        // Seite final betreten nach dem Warnhinweis
-        function enterSite() {
-            clearInterval(matrixInterval);
-            document.getElementById('login-overlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('login-overlay').style.display = 'none';
-                document.body.classList.remove('locked');
-                setTimeout(() => document.getElementById('mindReaderModal').classList.add('active'), 15000);
-            }, 500);
-        }
-
-        // Pagination
-        const articlesPerPage = 5;
-        let currentPage = 1;
-        
-        function renderArticles() {
-            const articles = document.querySelectorAll('.news-article');
-            const totalPages = Math.ceil(articles.length / articlesPerPage);
-            const paginationContainer = document.getElementById('pagination-controls');
-            paginationContainer.innerHTML = '';
-            
-            for(let i = 1; i <= totalPages; i++) {
-                const btn = document.createElement('button');
-                btn.innerText = "Seite " + i;
-                if(i === currentPage) {
-                    btn.classList.add('active');
-                }
-                btn.onclick = () => { 
-                    currentPage = i; 
-                    renderArticles(); 
-                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
-                };
-                paginationContainer.appendChild(btn);
-            }
-            
-            articles.forEach((art, index) => {
-                if (index >= (currentPage - 1) * articlesPerPage && index < currentPage * articlesPerPage) {
-                    art.style.display = 'block';
-                } else {
-                    art.style.display = 'none';
-                }
-            });
-        }
-        
-        document.addEventListener('DOMContentLoaded', renderArticles);
-
-        // UI Interactions
-        function triggerRadar() {
-            const overlay = document.getElementById('flash-overlay');
-            overlay.classList.remove('blitz-active');
-            setTimeout(() => { 
-                overlay.classList.add('blitz-active'); 
-                setTimeout(openModal, 800); 
-            }, 10);
-        }
-        
-        function openModal() { document.getElementById('myModal').classList.add('active'); }
-        function closeModal() { document.getElementById('myModal').classList.remove('active'); }
-        function closeMindReader() { document.getElementById('mindReaderModal').classList.remove('active'); }
-        
-        function makeItRain() {
-            const emojis = ['🎋', '🐼', '🚨', '📰'];
-            for(let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const drop = document.createElement('div');
-                    drop.classList.add('bamboo-drop');
-                    drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                    drop.style.left = Math.random() * 100 + 'vw';
-                    drop.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                    document.body.appendChild(drop);
-                    setTimeout(() => drop.remove(), 5000);
-                }, i * 150);
-            }
-        }
-
-        const trexBtn = document.getElementById('trexBtn');
-        trexBtn.addEventListener('mouseover', function() {
-            if(window.innerWidth > 768) {
-                const randomX = Math.floor(Math.random() * 100) - 50; 
-                const randomY = Math.floor(Math.random() * 60) - 30; 
-                this.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
-                this.innerText = '🦖 ZU KURZE ARME! 🦖';
-                this.style.background = 'var(--blue)';
-            }
-        });
-        
-        trexBtn.addEventListener('mouseout', function() {
-            setTimeout(() => { 
-                this.style.transform = 'translate(0, 0) scale(1)'; 
-                this.innerText = 'HIER AUSWEIS GREIFEN!'; 
-                this.style.background = '#27ae60'; 
-            }, 1000);
-        });
-    </script>
-
-    <!-- FIREBASE & GLOBAL LOGIC -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, increment, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyA7rsjJ-YwVxvEtLz0ya4k6ARFVSZq_Xj4",
-            authDomain: "bambus-news.firebaseapp.com",
-            projectId: "bambus-news",
-            storageBucket: "bambus-news.firebasestorage.app",
-            messagingSenderId: "401445127639",
-            appId: "1:401445127639:web:925c3f5aa64ebce28eb792"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // -- BESUCHER TRACKING FUNKTIONEN (Sichtbar für Main Script) --
-        window.logVisit = async function(visitorName) {
-            try {
-                await addDoc(collection(db, "bambus_visits"), {
-                    name: visitorName,
-                    timestamp: serverTimestamp()
-                });
-            } catch (error) {
-                console.error("Tracking Fehler:", error);
-            }
-        };
-
-        window.fetchVisits = async function() {
-            try {
-                const visitsQuery = query(collection(db, "bambus_visits"), orderBy("timestamp", "desc"));
-                const querySnapshot = await getDocs(visitsQuery);
-                
-                let html = "<h2 style='color:var(--blue); margin-top:0;'>ÜBERWACHUNGS-PROTOKOLL</h2>";
-                html += "<ul style='list-style:none; padding:0; color:#0f0; max-height: 300px; overflow-y: auto; text-align:left; font-size:16px; background:#111; border:1px solid #333; padding:10px;'>";
-                
-                querySnapshot.forEach((doc) => {
-                    const d = doc.data();
-                    const t = d.timestamp ? d.timestamp.toDate().toLocaleString('de-CH') : "Gerade eben";
-                    html += `<li style="border-bottom: 1px dashed #333; padding: 5px 0;">[${t}] - <strong>${d.name}</strong></li>`;
-                });
-                html += "</ul><button onclick='location.reload()' style='margin-top:20px; background:var(--blue);'>System Schliessen</button>";
-                
-                document.getElementById('step-login').innerHTML = html;
-            } catch (error) {
-                alert("Fehler beim Laden des Protokolls!");
-                console.error(error);
-            }
-        };
-
-        // -- KOMMENTAR LOGIK --
-        const commentsQuery = query(collection(db, "bambus_comments"), orderBy("timestamp", "desc"));
-        
-        onSnapshot(commentsQuery, (snapshot) => {
-            const container = document.getElementById('liveCommentsContainer');
-            container.innerHTML = ''; 
-            
-            const parents = [];
-            const replies = {};
-
-            snapshot.forEach((firebaseDoc) => {
-                const data = firebaseDoc.data();
-                data.id = firebaseDoc.id;
-                
-                if (data.parentId) { 
-                    if(!replies[data.parentId]) {
-                        replies[data.parentId] = [];
-                    }
-                    replies[data.parentId].push(data); 
-                } else {
-                    parents.push(data);
-                }
-            });
-
-            for (let pid in replies) {
-                replies[pid].sort((a, b) => {
-                    const timeA = a.timestamp ? a.timestamp.toMillis() : 0;
-                    const timeB = b.timestamp ? b.timestamp.toMillis() : 0;
-                    return timeA - timeB;
-                });
-            }
-
-            parents.forEach((data) => {
-                const commentDiv = document.createElement('div');
-                commentDiv.className = 'comment'; 
-                commentDiv.style.borderLeftColor = '#ffcc00';
-                
-                let timeStr = "Gerade eben";
-                if (data.timestamp) { 
-                    const dateObj = data.timestamp.toDate(); 
-                    timeStr = dateObj.toLocaleDateString('de-CH') + ', ' + dateObj.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'}) + ' Uhr'; 
-                }
-                
-                const likesCount = data.likes || 0;
-                const dislikesCount = data.dislikes || 0;
-
-                let html = `
-                    <div class="comment-meta">
-                        <span class="user" style="color:#ff9900;">${data.user}</span> 
-                        <span>${timeStr}</span>
-                    </div>
-                    <p class="comment-text">${data.text}</p>
-                    <div class="comment-actions">
-                        <span onclick="window.likeLiveComment('${data.id}')" title="Like">👍 <b>${likesCount}</b></span> 
-                        <span onclick="window.dislikeLiveComment('${data.id}')" title="Dislike">👎 <b>${dislikesCount}</b></span> 
-                        <span onclick="window.replyToComment('${data.id}', '${data.user}')">Antworten</span>
-                    </div>
-                `;
-
-                if (replies[data.id]) {
-                    html += `<div style="margin-top: 15px;">`;
-                    replies[data.id].forEach(replyData => {
-                        let replyTimeStr = "Gerade eben";
-                        if (replyData.timestamp) { 
-                            const rDateObj = replyData.timestamp.toDate(); 
-                            replyTimeStr = rDateObj.toLocaleDateString('de-CH') + ', ' + rDateObj.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'}) + ' Uhr'; 
-                        }
-                        
-                        const rLikesCount = replyData.likes || 0;
-                        const rDislikesCount = replyData.dislikes || 0;
-
-                        html += `
-                        <div class="comment reply-comment">
-                            <div class="comment-meta">
-                                <span class="user" style="color:#ff9900;">${replyData.user}</span> 
-                                <span>${replyTimeStr}</span>
-                            </div>
-                            <p class="comment-text">${replyData.text}</p>
-                            <div class="comment-actions">
-                                <span onclick="window.likeLiveComment('${replyData.id}')">👍 <b>${rLikesCount}</b></span> 
-                                <span onclick="window.dislikeLiveComment('${replyData.id}')">👎 <b>${rDislikesCount}</b></span> 
-                            </div>
-                        </div>`;
-                    });
-                    html += `</div>`;
-                }
-                commentDiv.innerHTML = html;
-                container.appendChild(commentDiv);
-            });
-        });
-
-        window.addLiveComment = async function() {
-            const userNameInput = document.getElementById('newCommentUser').value.trim();
-            const userName = userNameInput !== '' ? userNameInput : 'Unbekannter Polizist';
-            const commentText = document.getElementById('newCommentText').value.trim();
-            
-            if(commentText === '') {
-                alert('Leere Kommentare werden zur Fahndung ausgeschrieben!');
-                return;
-            }
-            
-            try { 
-                await addDoc(collection(db, "bambus_comments"), {
-                    text: commentText, 
-                    user: userName, 
-                    likes: 0, 
-                    dislikes: 0, 
-                    timestamp: serverTimestamp()
-                }); 
-                document.getElementById('newCommentText').value = ''; 
-            } catch (error) { 
-                alert("Fehler beim Senden des Kommentars!"); 
-                console.error(error);
-            }
-        };
-
-        window.replyToComment = async function(parentId, replyToUser) {
-            const defaultNameInput = document.getElementById('newCommentUser').value.trim();
-            const defaultName = defaultNameInput !== '' ? defaultNameInput : 'Unbekannter Polizist';
-
-            const userName = prompt("Dein Deckname:", defaultName);
-            if(userName === null) return;
-            
-            const replyText = prompt("Antwort an " + replyToUser + ":");
-            if(replyText && replyText.trim() !== '') {
-                try { 
-                    await addDoc(collection(db, "bambus_comments"), {
-                        text: "<strong>@" + replyToUser + "</strong> " + replyText.trim(), 
-                        user: userName.trim() === '' ? 'Unbekannter Polizist' : userName.trim(), 
-                        likes: 0, 
-                        dislikes: 0, 
-                        parentId: parentId, 
-                        timestamp: serverTimestamp()
-                    }); 
-                } catch (error) { 
-                    alert("Fehler beim Senden der Antwort!"); 
-                    console.error(error);
-                }
-            }
-        };
-
-        window.replyToStatic = async function(replyToUser) {
-            const defaultNameInput = document.getElementById('newCommentUser').value.trim();
-            const defaultName = defaultNameInput !== '' ? defaultNameInput : 'Unbekannter Polizist';
-
-            const userName = prompt("Dein Deckname:", defaultName);
-            if(userName === null) return;
-            
-            const replyText = prompt("Antwort an Kult-User " + replyToUser + ":");
-            if(replyText && replyText.trim() !== '') {
-                try { 
-                    await addDoc(collection(db, "bambus_comments"), {
-                        text: "<strong>@" + replyToUser + "</strong> " + replyText.trim(), 
-                        user: userName.trim() === '' ? 'Unbekannter Polizist' : userName.trim(), 
-                        likes: 0, 
-                        dislikes: 0, 
-                        timestamp: serverTimestamp()
-                    }); 
-                } catch (error) { 
-                    alert("Fehler beim Senden der Antwort!"); 
-                    console.error(error);
-                }
-            }
-        };
-
-        window.likeLiveComment = async function(commentId) { 
-            try { 
-                const commentRef = doc(db, "bambus_comments", commentId);
-                await updateDoc(commentRef, { likes: increment(1) }); 
-            } catch(error) {
-                console.error("Fehler beim Liken", error);
-            } 
-        };
-        
-        window.dislikeLiveComment = async function(commentId) { 
-            try { 
-                const commentRef = doc(db, "bambus_comments", commentId);
-                await updateDoc(commentRef, { dislikes: increment(1) }); 
-            } catch(error) {
-                console.error("Fehler beim Disliken", error);
-            } 
-        };
-    </script>
-</body>
-</html>
+            // NORMALER ZUGANG (
