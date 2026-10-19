@@ -279,7 +279,6 @@
             overflow: hidden;
         }
 
-        /* Subtiler Sonnenschein-Schimmer im Header */
         header::before {
             content: '';
             position: absolute;
@@ -355,7 +354,6 @@
             transition: color 0.25s ease, transform 0.25s var(--spring-easing);
         }
 
-        /* Bambus-Spross Unterstreichung */
         nav a::after {
             content: '';
             position: absolute;
@@ -399,7 +397,6 @@
             z-index: 9;
         }
 
-        /* Feststehendes Live-Badge links am Ticker */
         .ticker::before {
             content: '🎋 LIVE TICKER';
             position: absolute;
@@ -417,7 +414,6 @@
             box-shadow: 4px 0 12px rgba(0,0,0,0.15);
         }
 
-        /* Sanfter Fade-Out am rechten Rand */
         .ticker::after {
             content: '';
             position: absolute;
@@ -440,11 +436,10 @@
 
         .ticker-text { 
             display: inline-block; 
-            animation: scroll 90s linear infinite; 
+            animation: scroll 95s linear infinite; 
             will-change: transform;
         }
 
-        /* Ticker pausiert beim Drüberfahren zum entspannten Lesen */
         .ticker:hover .ticker-text {
             animation-play-state: paused;
         }
@@ -511,7 +506,7 @@
             margin-bottom: 20px; 
         }
 
-        /* Dynamischer Glanz-Layer (wird per Maus-Koordinaten gesteuert) */
+        /* Dynamischer Glanz-Layer */
         .shine-layer {
             position: absolute;
             top: 0;
@@ -554,7 +549,6 @@
             transition: transform 0.25s var(--spring-easing), background 0.3s ease;
         }
 
-        /* Pulsierender Smaragd-Punkt vor jedem Kicker */
         .kicker::before {
             content: '';
             width: 8px;
@@ -629,7 +623,6 @@
             z-index: 2;
         }
 
-        /* Licht-Reflexion auf Buttons */
         .radar-btn::after,
         .ad-link-btn::after {
             content: '';
@@ -710,7 +703,7 @@
         }
 
         /* ==========================================================================
-           8. SIDEBAR WERBUNG STYLING (MIT 3D HOVER)
+           8. SIDEBAR WERBUNG STYLING & NEUE INTERAKTIVE WIDGETS
            ========================================================================== */
         .ad-space { 
             background: rgba(255, 255, 255, 0.94); 
@@ -797,6 +790,134 @@
 
         .ad-guesel { border-top-color: #8e44ad; background: linear-gradient(180deg, #fdfaef 0%, #ffffff 100%); cursor: pointer; }
         .ad-guesel h4 { color: #8e44ad; }
+
+        /* NEU: INTERAKTIVE SIDEBAR INPUTS (Google-Frage & Marathon 2027) */
+        .ad-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            margin-bottom: 10px;
+            outline: none;
+            position: relative;
+            z-index: 2;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .ad-input:focus {
+            border-color: var(--bamboo-primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+        }
+
+        /* NEU: MARATHON 2027 TEILNEHMER-LISTE */
+        .marathon-list {
+            list-style: none;
+            padding: 8px 10px;
+            margin: 12px 0 0 0;
+            max-height: 150px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+        }
+
+        .marathon-list li {
+            padding: 5px 4px;
+            border-bottom: 1px dashed #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .marathon-list li:last-child {
+            border-bottom: none;
+        }
+
+        .marathon-badge {
+            background: var(--bamboo-Mist);
+            color: var(--bamboo-dark);
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 800;
+        }
+
+        /* NEU: MINI-GAME: BLITZER-REAKTIONSTEST */
+        .game-track {
+            position: relative;
+            width: 100%;
+            height: 64px;
+            background: #1e293b;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 12px 0;
+            border: 2px solid #0f172a;
+            z-index: 2;
+            box-shadow: inset 0 3px 8px rgba(0,0,0,0.5);
+        }
+
+        /* Gestrichelte Strassen-Mittellinie */
+        .game-track::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            border-top: 2px dashed rgba(255, 255, 255, 0.35);
+            transform: translateY(-50%);
+        }
+
+        /* Grüne Ziel-Zone (Messbereich) */
+        .game-target-zone {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 54px;
+            height: 100%;
+            background: rgba(16, 185, 129, 0.28);
+            border-left: 2px dashed #10b981;
+            border-right: 2px dashed #10b981;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            color: #a7f3d0;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .game-car {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(-50%, -50%) scaleX(-1);
+            font-size: 28px;
+            user-select: none;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            will-change: left;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 2;
+        }
 
         /* ==========================================================================
            9. MODALS (POPUPS)
@@ -1095,13 +1216,13 @@
 </head>
 <body class="locked">
 
-    <!-- NEU: LESEFORTSCHRITTS-ANZEIGE OBEN -->
+    <!-- LESEFORTSCHRITTS-ANZEIGE OBEN -->
     <div id="scroll-progress"></div>
 
-    <!-- NEU: HINTERGRUND-CANVAS FÜR SCHWEBENDE BAMBUSBLÄTTER -->
+    <!-- HINTERGRUND-CANVAS FÜR SCHWEBENDE BAMBUSBLÄTTER -->
     <canvas id="bamboo-ambient-canvas"></canvas>
 
-    <!-- NEU: WEB AUDIO BAMBUS-AKUSTIK TOGGLE (Standardmässig Stumm) -->
+    <!-- WEB AUDIO BAMBUS-AKUSTIK TOGGLE (Standardmässig Stumm) -->
     <button id="sound-toggle-btn" onclick="toggleBambooSound()" title="Organische Bambus-Klickgeräusche aktivieren/deaktivieren">
         <span id="sound-icon">🔇</span>
         <span id="sound-label">Bambus-FX: Aus</span>
@@ -1182,21 +1303,30 @@
     </nav>
 
     <div class="ticker">
-        <div class="ticker-text"><span>+++ BREAKING +++</span> Akte X der Kapo Uri: Aufgebockte Streifenwagen, IE im Nebenraum & Kommandant beim Alkoholtest – Wer ist Polizist XY?! <span>+++</span> Ohne Konzept zum Welthit: Kapo Uri rockt den 1. Social Media Marathon! <span>+++</span> 1. Miär Kontrolle: Kripo bricht sich lieber die Knochen als zu kontrollieren! <span>+++</span> Jahresrapport: Apéro-Notstand führt zu Tupperware-Pflicht! <span>+++</span> Fresskoma in Andermatt: Vier Polizisten vernichten Wildbestände in der Alphittä! <span>+++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
+        <div class="ticker-text"><span>+++ BREAKING +++</span> Operation Hasenjagd: Junge Kapo-Überflieger erobern die Frauenwelt im Sturm! <span>+++</span> Akte X der Kapo Uri: Aufgebockte Streifenwagen, IE im Nebenraum & Kommandant beim Alkoholtest – Wer ist Polizist XY?! <span>+++</span> Ohne Konzept zum Welthit: Kapo Uri rockt den 1. Social Media Marathon! <span>+++</span> 1. Miär Kontrolle: Kripo bricht sich lieber die Knochen als zu kontrollieren! <span>+++</span> Jahresrapport: Apéro-Notstand führt zu Tupperware-Pflicht! <span>+++</span> Fresskoma in Andermatt: Vier Polizisten vernichten Wildbestände in der Alphittä! <span>+++</span> Alarmstufe Rot: Borat-Tangas und WC-Dramen wegen Hitzemassnahmen! <span>+++</span> Mythos Bullenpower: Urner Polizisten sind die begehrtesten Beamten der Zentralschweiz <span>+++</span> G7-Gipfel in Genf: Urner Polizisten schlafen im Hasenstall <span>+++</span> Kripo im Jura-Wahn: Bald mehr Anwälte als Polizisten im Kanton! <span>+++</span> Kripo-Steiner: Akten-Dschungel statt Weltreise <span>+++</span> BVP Info: Proteinriegel für alle <span>+++</span> UBER-Kontrollen in Uri: Exakt null Treffer <span>+++</span> Taser 10 WK: Trefferquote bei 150%! <span>+++</span> Polizeianwärter im Portfolio-Wahn tippen sich die Finger blutig <span>+++</span> 12-Stunden-Schichten: Kapo schläft unter Schreibtischen <span>+++</span> Wachtmeister Freddi legt Verkehr in Flüelen lahm <span>+++</span> Patrouillen-Hamster gewinnt Fotowettbewerb <span>+++</span></div>
     </div>
 
     <div class="container">
         <!-- HAUPTSPALTE LINKS -->
         <main class="main-content">
 
-            <!-- NEU: ARTIKEL 0: AKTE X DER KAPO URI / VERGANGENE LEGENDEN -->
+            <!-- NEU: ARTIKEL HASENJAGD DER KAPO MITARBEITER -->
+            <article class="article news-article">
+                <span class="kicker">Herzensbrecher auf Streife</span>
+                <h2>Operation „Hasenjagd“: Junge Urner Polizisten erobern die Frauenwelt im Sturm – Blaulicht-Charme legt das Reusstal lahm!</h2>
+                <p><strong>ALTDORF / FLÜELEN -</strong> Vergessen Sie Tinder, Parship oder romantische Spaziergänge am Vierwaldstättersee: Das erfolgreichste Dating-Portal der Zentralschweiz trägt aktuell dunkelblau, hat Funkgerät am Revers und fährt mit 200 PS durch den Kanton Uri. Unter dem inoffiziellen Decknamen „Operation Hasenjagd“ sorgt derzeit eine neue Generation junger, blendend gelaunter Kapo-Mitarbeiter für akute Herzrhythmusstörungen in der weiblichen Bevölkerung.</p>
+                <p>Vorbei sind die Zeiten, in denen vor einer Verkehrskontrolle gezittert wurde. Heute wird vor dem Spiegel auf dem Beifahrersitz noch schnell der Lippenstift nachgezogen, sobald im Rückspiegel die magischen Buchstaben „POLIZEI“ auftauchen. „Früher haben die Leute bei einer Kelle gebremst, heute werfen die jungen Damen freiwillig den Anker, kurbeln das Fenster herunter und fragen mit klimpernden Wimpern, ob sie zur Strafe nicht gleich die Handynummer des Wachtmeisters diktieren dürfen“, berichtet ein sichtlich amüsierter Schichtchef. Die Jungspunde im Korps haben das Flirt-Handwerk perfektioniert: Die Sonnenbrille wird im exakt berechneten 45-Grad-Winkel von der Nase gezogen, das Lächeln sitzt weisser als die Markierungslinie auf der A2 und die Gel-Frisur hält dank aerodynamischem Haarspray selbst bei Gegenwind am Gotthardpass stand.</p>
+                <p>Besonders am Wochenende nimmt die charmante „Hasenjagd“ im Ausgang fast schon absurde Züge an. Kaum betritt das junge Kapo-Rudel nach Feierabend die lokale Bar-Szene, sinkt die Erfolgsquote aller anwesenden Zivilisten augenblicklich auf den absoluten Gefrierpunkt. „Man hat schlichtweg keine Chance mehr“, klagt ein verzweifelter Junggeselle aus Bürglen. „Ich erzähle einer Frau zwanzig Minuten lang von meinem neuen Leasing-Auto, und dann läuft einer dieser durchtrainierten Jungpolizisten vorbei, zieht nur kurz eine Augenbraue hoch, murmelt etwas von ‚Sicherheit und Ordnung‘ – und zack, ist sie weg!“ Gerüchten zufolge prüfen erste Urner Gemeinden bereits, ob die jungen Herzensbrecher im Ausgang künftig eine offizielle Warnweste mit der Aufschrift „Achtung: Akute Verliebensgefahr!“ tragen müssen, um das emotionale Gleichgewicht im Kanton wiederherzustellen.</p>
+            </article>
+
+            <!-- ARTIKEL 0: AKTE X DER KAPO URI / VERGANGENE LEGENDEN -->
             <article class="article news-article">
                 <span class="kicker">Streng geheime Historie gelüftet</span>
                 <h2>Akte X der Kapo Uri: Schwebende Streifenwagen, die IE im Wandschrank und als der Kommandant ins Röhrchen blasen musste!</h2>
                 <p><strong>SEEDORF / ALTDORF -</strong> Wer glaubt, der heutige Polizeialltag im Kanton Uri sei verrückt, hat noch nie einen Blick in die verstaubten Geheimarchive im hintersten Kellergewölbe geworfen. Bambus News ist auf vergilbte Einsatzakten gestossen, die beweisen: Schon früher wurden bei der Kapo Uri Legenden geschrieben, die jede Hollywood-Komödie mühelos in den Schatten stellen.</p>
                 <p>Unvergessen bleibt etwa das bis heute physikalisch völlig unerklärliche „Wunder von Seedorf“. Damals gelang es einer hochmotivierten Patrouille beim Seerestaurant, den schweren Streifenwagen mit chirurgischer Präzision derart mittig auf einem massiven Betonpflock aufzubocken, dass sämtliche Räder frei in der Luft schwebten. Das Fahrzeug thronte dort wie ein modernes Kunstwerk am Seeufer – vorwärts ging nichts, rückwärts noch weniger. Während sich die Sonntagsausflügler auf der Terrasse köstlich amüsierten und auf den Kaffeetischen bereits erste Wetten abschlossen, versuchten die Beamten mit hochrotem Kopf so zu tun, als handle es sich um einen geheimen Unterboden-Belastungstest. Erst ein diskret herbeigerufener Bergungstrupp konnte das gestrandete Polizeischiff unter den spöttischen Blicken der Badegäste wieder von seinem steinernen Sockel heben.</p>
                 <p>Mindestens genauso viel Schweiss floss seinerzeit in den Amtsstuben, als die Führungsetage das Konzept „konstruktives Feedback“ völlig neu interpretierte. Für ein besonders heikles Mitarbeitergespräch traute man den reinen Worten offenbar nicht ganz über den Weg und liess vorsorglich die komplette Interventionseinheit (IE) in voller Kampfmontur im stockdunklen Nebenraum antreten. Während drinnen am Tisch höflich über Jahresziele und Arbeitsklima geplaudert wurde, schwitzten nebenan schwer gepanzerte Kollegen mit Schild, Helm und gezücktem Rammbock hinter der dünnen Bürotür und warteten nur auf das Codewort „Kaffeepause“. Bis heute gilt dies als das weltweit einzige Personalgespräch, bei dem ein falsches Räuspern eine sofortige Blendgranaten-Erstürmung durch die Wand ausgelöst hätte.</p>
-                <p>Für Schnappatmung auf allen Etagen sorgte zudem ein bis heute beispielloser Akt von furchtloser Gesetzestreue: Ein junger, völlig schmerzbefreiter Polizist kannte bei einer Kontrolle schlichtweg weder Freund noch Feind – und erst recht keine Dienstgrade. Kurzerhand nötigte der mutige Beamte den damaligen Kommandanten höchstpersönlich zu einer Atemalkoholprobe! Augenzeugen berichten noch heute mit ehrfürchtigem Zittern in der Stimme, dass die Zeit im gesamten Kanton Uri für exakt fünf Sekunden komplett stillstand, als das Röhrchen gezückt wurde. Selbst die Vögel im Reusstal hörten auf zu zwitschern. Ob der unerschrockene Polizist für diese legendäre Aktion eine Tapederkeitsmedaille erhielt oder noch am selben Abend zur lebenslangen Gletscher-Patrouille auf den Sustenpass strafversetzt wurde, unterliegt bis heute der höchsten Geheimhaltungsstufe.</p>
+                <p>Für Schnappatmung auf allen Etagen sorgte zudem ein bis heute beispielloser Akt von furchtloser Gesetzestreue: Ein junger, völlig schmerzbefreiter Polizist kannte bei einer Kontrolle schlichtweg weder Freund noch Feind – und erst recht keine Dienstgrade. Kurzerhand nötigte der mutige Beamte den damaligen Kommandanten höchstpersönlich zu einer Atemalkoholprobe! Augenzeugen berichten noch heute mit ehrfürchtigem Zittern in der Stimme, dass die Zeit im gesamten Kanton Uri für exakt fünf Sekunden komplett stillstand, als das Röhrchen gezückt wurde. Selbst die Vögel im Reusstal hörten auf zu zwitschern. Ob der unerschrockene Polizist für diese legendäre Aktion eine Tapferkeitsmedaille erhielt oder noch am selben Abend zur lebenslangen Gletscher-Patrouille auf den Sustenpass strafversetzt wurde, unterliegt bis heute der höchsten Geheimhaltungsstufe.</p>
                 <p>Doch das wohl grösste Mysterium der Urner Polizeigeschichte bleibt weiterhin ungelöst: Wer zum Teufel war eigentlich der legendäre „Polizist XY“? Sein Name geistert wie ein Phantom durch sämtliche alten Rapporte, auf sein Konto gehen die kuriosesten Anekdoten des Jahrzehnts, und jedes Mal, wenn im Stützpunkt ein Kaffee verschüttet wird oder ein Formular verschwindet, fällt sein Name. Trotz modernster Forensik, DNA-Analysen an alten Kaffeetassen und endlosen Spekulationen in der Nachtschicht tappt selbst die Kripo völlig im Dunkeln. Eines ist jedoch sicher: Der Geist von Polizist XY wacht noch immer über das Urnerland!</p>
             </article>
 
@@ -1515,10 +1645,10 @@
 
         </main>
 
-        <!-- SEITENLEISTE RECHTS (WERBUNG ANONYMISIERT) -->
+        <!-- SEITENLEISTE RECHTS (WERBUNG & NEUE INTERAKTIVE WIDGETS) -->
         <aside class="sidebar">
 
-            <!-- NEU: BAMBUS AI WERBUNG GANZ OBEN -->
+            <!-- BAMBUS AI WERBUNG GANZ OBEN -->
             <div class="ad-space reveal-item" style="border: 3px solid #0f0; background: #050a07; color: #0f0; text-align: center; box-shadow: 0 0 20px rgba(0, 255, 0, 0.35);">
                 <span class="ad-label" style="color: #000; background: #0f0; padding: 3px 8px; display: inline-block; font-weight: bold; border-radius: 4px;">++ NEUE TECHNOLOGIE ++</span>
                 <h4 style="color: #0f0; font-size: 28px; margin-top: 15px; text-shadow: 0 0 10px #0f0;">BAMBUS AI</h4>
@@ -1526,6 +1656,45 @@
                 <p style="color: #ccc; font-size: 13px; line-height: 1.5;">Vergiss das mühsame Suchen in dicken Bundesordnern. BAMBUS AI löst jeden Fall in 0.4 Sekunden, schreibt den Rapport in 0.2 Sekunden und verurteilt den Täter direkt online. Sie ist so intelligent, dass sie bereits heute weiss, wer nächste Woche im Kanton Uri einen Einbruch begeht. Mit integriertem Lügendetektor und einer Suchfunktion, die sogar verlorene Kaffeetassen im Pausenraum ortet.</p>
                 <div style="font-size: 60px; margin: 15px 0;">🧠🤖⚡</div>
                 <a href="https://bambusai.vercel.app" target="_blank" class="ad-link-btn" style="background: #0f0; color: #000; font-size: 20px; padding: 15px; border-radius: 8px; box-shadow: 0 0 12px #0f0;">🚨 ZUR SUPER-KI 🚨</a>
+            </div>
+
+            <!-- NEU 1: HAST DU EINE FRAGE? (GOOGLE DIREKT-WEITERLEITUNG) -->
+            <div class="ad-space reveal-item" style="border-top-color: #4285F4; background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);">
+                <span class="ad-label" style="color: #4285F4;">Interaktives Kapo-Orakel</span>
+                <h4 style="color: #1a73e8;">Hast du eine Frage? 🤔</h4>
+                <p>Dienstvorschrift vergessen? Keine Ahnung, wie man einen Reifen wechselt oder wo das nächste Schinkengipfeli wartet? Tipp deine Frage ein – wir übergeben den Fall direkt an Google!</p>
+                <input type="text" id="googleQuestionInput" class="ad-input" placeholder="Deine Frage hier eintippen..." onkeydown="if(event.key === 'Enter') askGoogleNow()">
+                <button class="radar-btn" style="background: linear-gradient(135deg, #4285F4, #1a73e8); margin-top: 4px;" onclick="askGoogleNow()">🔍 JETZT GOOGELN</button>
+            </div>
+
+            <!-- NEU 2: MARATHON 2027 ANMELDUNG (INKL. LIVE-LISTE) -->
+            <div class="ad-space reveal-item" style="border-top-color: var(--bamboo-primary); background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);">
+                <span class="ad-label" style="color: var(--bamboo-dark);">Sport-Event des Jahres</span>
+                <h4 style="color: var(--bamboo-dark);">🏃‍♂️ Marathon 2027</h4>
+                <p>Schluss mit Ausreden! Wer vertritt die Urner Farben beim grossen <strong>Marathon 2027</strong>? Trag dich hier verbindlich in die Startliste ein (Achtung: Rückzieher kosten eine Runde Proteinriegel!):</p>
+                <input type="text" id="marathonRunnerInput" class="ad-input" placeholder="Dein Name / Deckname..." maxlength="22" onkeydown="if(event.key === 'Enter') window.registerMarathonRunner()">
+                <button class="radar-btn" style="background: linear-gradient(135deg, var(--bamboo-primary), var(--bamboo-dark)); margin-top: 4px;" onclick="window.registerMarathonRunner()">👟 IN DIE LISTE EINTRAGEN</button>
+                <div style="margin-top: 12px; font-size: 11px; font-weight: 800; color: var(--bamboo-dark); text-transform: uppercase; letter-spacing: 0.5px; position: relative; z-index: 2;">Offizielle Startliste 2027:</div>
+                <ul class="marathon-list" id="marathonRunnersList">
+                    <!-- Läufer werden live geladen -->
+                </ul>
+            </div>
+
+            <!-- NEU 3: MINI-GAME: BAMBUS-BLITZER-REAKTIONSTEST -->
+            <div class="ad-space reveal-item" style="border-top-color: #e11d48; background: linear-gradient(180deg, #fff1f2 0%, #ffffff 100%);">
+                <span class="ad-label" style="color: #e11d48;">Mini-Game / Reaktionstest</span>
+                <h4 style="color: #be123c;">📸 Blitzer-Training</h4>
+                <p>Drücke auf <strong>BLITZEN!</strong>, sobald der Raser exakt durch die grüne Mess-Zone in der Mitte brettert!</p>
+                <div class="game-stats">
+                    <span>Treffer: <b id="gameScore">0</b></span>
+                    <span>Rekord: <b id="gameHighscore">0</b></span>
+                </div>
+                <div class="game-track">
+                    <div class="game-target-zone">ZONE</div>
+                    <div class="game-car" id="speedingCar">🏎️</div>
+                </div>
+                <div id="gameFeedback" style="font-size: 12px; font-weight: bold; text-align: center; min-height: 18px; color: #be123c; position: relative; z-index: 2;">Bereit für die Messung...</div>
+                <button class="radar-btn" style="background: linear-gradient(135deg, #e11d48, #9f1239); margin-top: 8px;" onclick="snapSpeeder()">📸 JETZT BLITZEN!</button>
             </div>
             
             <div class="ad-space ad-remo reveal-item">
@@ -1593,11 +1762,11 @@
     </div>
 
     <!-- ==========================================================================
-         JS LOGIK (ORIGINAL + HIGH-END CREATIVE UPGRADES)
+         JS LOGIK (ORIGINAL + HIGH-END CREATIVE UPGRADES + NEUE WIDGETS)
          ========================================================================== -->
     <script>
         /* --------------------------------------------------------------------------
-           1. LOGIN-CANVAS: MYSTISCHER HINTERGRUND (Original + RequestAnimationFrame)
+           1. LOGIN-CANVAS: MYSTISCHER HINTERGRUND
            -------------------------------------------------------------------------- */
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
@@ -1680,7 +1849,7 @@
         let matrixInterval = setInterval(drawIllusion, 30);
 
         /* --------------------------------------------------------------------------
-           2. NEU: AMBIENT BAMBUS-BLÄTTER IM HINTERGRUND (60 FPS + SMART-PAUSE)
+           2. AMBIENT BAMBUS-BLÄTTER IM HINTERGRUND (60 FPS + SMART-PAUSE)
            -------------------------------------------------------------------------- */
         const bambooCanvas = document.getElementById('bamboo-ambient-canvas');
         const bCtx = bambooCanvas.getContext('2d');
@@ -1715,7 +1884,6 @@
             ctx.globalAlpha = leaf.opacity;
             ctx.fillStyle = leaf.hue;
 
-            // Organische Bambusblatt-Vektorform
             ctx.beginPath();
             ctx.moveTo(0, -leaf.size);
             ctx.quadraticCurveTo(leaf.size * 0.45, 0, 0, leaf.size);
@@ -1723,7 +1891,6 @@
             ctx.closePath();
             ctx.fill();
 
-            // Feine Blattader in der Mitte
             ctx.strokeStyle = 'rgba(255,255,255,0.35)';
             ctx.lineWidth = 0.6;
             ctx.beginPath();
@@ -1737,7 +1904,7 @@
         function renderBambooAmbient() {
             if (!isUserActive) {
                 bambooAnimId = null;
-                return; // Stoppt den Loop bei Scroll-/Maus-Inaktivität für 0% CPU-Last!
+                return;
             }
 
             bCtx.clearRect(0, 0, bambooCanvas.width, bambooCanvas.height);
@@ -1768,7 +1935,6 @@
                 bambooAnimId = requestAnimationFrame(renderBambooAmbient);
             }
             clearTimeout(inactivityTimer);
-            // Pausiert sanft nach 3.5 Sekunden ohne Scrollen/Mausbewegung
             inactivityTimer = setTimeout(() => {
                 isUserActive = false;
             }, 3500);
@@ -1788,7 +1954,7 @@
         });
 
         /* --------------------------------------------------------------------------
-           3. NEU: LESEFORTSCHRITTS-BALKEN
+           3. LESEFORTSCHRITTS-BALKEN
            -------------------------------------------------------------------------- */
         function updateScrollProgress() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -1799,7 +1965,7 @@
         }
 
         /* --------------------------------------------------------------------------
-           4. NEU: WEB AUDIO API BAMBUS-PERCUSSION SYNTHESIZER (OHNE EXTERNE FILES)
+           4. WEB AUDIO API BAMBUS-PERCUSSION SYNTHESIZER
            -------------------------------------------------------------------------- */
         let soundEnabled = false;
         let audioCtx = null;
@@ -1814,11 +1980,11 @@
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 }
-                if (audioCtx.state === 'suspended') audioCtx.state = 'running';
+                if (audioCtx.state === 'suspended') audioCtx.resume();
                 btn.classList.add('sound-on');
                 icon.innerText = '🎋';
                 label.innerText = 'Bambus-FX: An';
-                playBambooTock(620, 0.08); // Bestätigungs-Klang
+                playBambooTock(620, 0.08);
             } else {
                 btn.classList.remove('sound-on');
                 icon.innerText = '🔇';
@@ -1826,7 +1992,6 @@
             }
         }
 
-        // Erzeugt einen warmen, hohlen Bambus-Holzklang via Web Audio API
         function playBambooTock(freq = 480, volume = 0.045) {
             if (!soundEnabled || !audioCtx) return;
             try {
@@ -1834,7 +1999,6 @@
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
 
-                // Triangle-Welle + schneller Pitch-Drop klingt wie hohles Bambusholz
                 osc.type = 'triangle';
                 osc.frequency.setValueAtTime(freq, now);
                 osc.frequency.exponentialRampToValueAtTime(freq * 0.42, now + 0.065);
@@ -1852,21 +2016,19 @@
         }
 
         /* --------------------------------------------------------------------------
-           5. NEU: 3D-TILT, GLANZ-EFFEKT & SCROLL-REVEAL OBSERVER
+           5. 3D-TILT, GLANZ-EFFEKT & SCROLL-REVEAL OBSERVER
            -------------------------------------------------------------------------- */
         function initCardEffects() {
             const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
             const cards = document.querySelectorAll('.article, .ad-space');
 
             cards.forEach(card => {
-                // Shine-Layer einmalig einfügen
                 if (!card.querySelector('.shine-layer')) {
                     const shine = document.createElement('div');
                     shine.className = 'shine-layer';
                     card.appendChild(shine);
                 }
 
-                // 3D-Tilt nur auf Desktop mit Maus
                 if (!isTouchDevice && !card.dataset.tiltAttached) {
                     card.dataset.tiltAttached = 'true';
 
@@ -1877,7 +2039,6 @@
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
 
-                        // Sanfte Neigung (max 2.5 Grad für optimale Lesbarkeit)
                         const rotateX = ((y - centerY) / centerY) * -2.2;
                         const rotateY = ((x - centerX) / centerX) * 2.2;
 
@@ -1896,7 +2057,6 @@
                 }
             });
 
-            // Audio-Feedback auf Buttons & Links
             document.querySelectorAll('button, nav a, .ad-link-btn, .logo-container').forEach(el => {
                 if (!el.dataset.soundAttached) {
                     el.dataset.soundAttached = 'true';
@@ -1906,7 +2066,6 @@
             });
         }
 
-        // IntersectionObserver für weiches Einfedern beim Scrollen
         let revealObserver = null;
         function observeReveals() {
             if (!('IntersectionObserver' in window)) {
@@ -1929,7 +2088,78 @@
         }
 
         /* --------------------------------------------------------------------------
-           6. ACCESS CHECK (RANG -> LOGIN -> WARNING -> SITE) - 100% ORIGINAL ERHALTEN
+           6. NEU: LOGIK FÜR DIE 3 NEUEN WERBE-FEATURES
+           -------------------------------------------------------------------------- */
+        
+        // FEATURE A: "Hast du eine Frage?" -> Direkt zu Google mit der Frage
+        function askGoogleNow() {
+            const input = document.getElementById('googleQuestionInput');
+            const query = input.value.trim();
+            if (!query) {
+                alert('🚨 Bitte gib zuerst eine Frage ein, sonst weiss selbst Google nicht weiter!');
+                input.focus();
+                return;
+            }
+            playBambooTock(780, 0.08);
+            const googleUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+            window.open(googleUrl, '_blank');
+            input.value = '';
+        }
+
+        // FEATURE B: Mini-Game "Bambus-Blitzer-Reaktionstest"
+        let carPos = 0;
+        let carSpeed = 1.6;
+        let gameScore = 0;
+        let gameHighscore = parseInt(localStorage.getItem('bambus_blitzer_highscore') || '0', 10);
+        document.getElementById('gameHighscore').innerText = gameHighscore;
+
+        function animateSpeedingCar() {
+            const carEl = document.getElementById('speedingCar');
+            if (carEl) {
+                carPos += carSpeed;
+                if (carPos > 108) {
+                    carPos = -8;
+                }
+                carEl.style.left = carPos + '%';
+            }
+            requestAnimationFrame(animateSpeedingCar);
+        }
+        requestAnimationFrame(animateSpeedingCar);
+
+        function snapSpeeder() {
+            const feedback = document.getElementById('gameFeedback');
+            const overlay = document.getElementById('flash-overlay');
+            
+            // Kurzer Blitz-Effekt
+            overlay.classList.remove('blitz-active');
+            setTimeout(() => overlay.classList.add('blitz-active'), 10);
+
+            // Ziel-Zone liegt in der Mitte zwischen 37% und 63%
+            if (carPos >= 37 && carPos <= 63) {
+                gameScore++;
+                carSpeed = Math.min(4.2, 1.6 + gameScore * 0.22); // Wird mit jedem Treffer schneller!
+                const kmh = Math.floor(115 + gameScore * 9 + Math.random() * 12);
+                feedback.style.color = '#059669';
+                feedback.innerText = `🎯 VOLltreffer! (${kmh} km/h im 80er!)`;
+                playBambooTock(880, 0.09);
+
+                if (gameScore > gameHighscore) {
+                    gameHighscore = gameScore;
+                    localStorage.setItem('bambus_blitzer_highscore', gameHighscore);
+                    document.getElementById('gameHighscore').innerText = gameHighscore;
+                }
+            } else {
+                gameScore = 0;
+                carSpeed = 1.6;
+                feedback.style.color = '#be123c';
+                feedback.innerText = '💨 Daneben! Nur eine Taube geblitzt.';
+                playBambooTock(260, 0.08);
+            }
+            document.getElementById('gameScore').innerText = gameScore;
+        }
+
+        /* --------------------------------------------------------------------------
+           7. ACCESS CHECK (RANG -> LOGIN -> WARNING -> SITE) - 100% ORIGINAL ERHALTEN
            -------------------------------------------------------------------------- */
         function selectRank(rank) {
             if (rank === 'LT' || rank === 'Dienstchef') {
@@ -1977,7 +2207,6 @@
             }
         }
 
-        // Seite final betreten nach dem Warnhinweis
         function enterSite() {
             clearInterval(matrixInterval);
             document.getElementById('login-overlay').style.opacity = '0';
@@ -1991,7 +2220,7 @@
         }
 
         /* --------------------------------------------------------------------------
-           7. PAGINATION & ARTIKEL-RENDERING (INKL. SCROLL-REVEAL UPGRADE)
+           8. PAGINATION & ARTIKEL-RENDERING
            -------------------------------------------------------------------------- */
         const articlesPerPage = 5;
         let currentPage = 1;
@@ -2022,7 +2251,6 @@
                     art.style.display = 'block';
                     art.classList.remove('revealed');
                     art.classList.add('reveal-item');
-                    // Gestaffeltes weiches Einfedern beim Seitenwechsel
                     const staggerDelay = (index % articlesPerPage) * 75;
                     setTimeout(() => {
                         art.classList.add('revealed');
@@ -2044,7 +2272,7 @@
         });
 
         /* --------------------------------------------------------------------------
-           8. UI INTERACTIONS (RADAR, MODALS, BAMBUS-REGEN, T-REX)
+           9. UI INTERACTIONS (RADAR, MODALS, BAMBUS-REGEN, T-REX)
            -------------------------------------------------------------------------- */
         function triggerRadar() {
             playBambooTock(880, 0.09);
@@ -2096,7 +2324,7 @@
     </script>
 
     <!-- ==========================================================================
-         FIREBASE & GLOBAL LOGIC (100% ORIGINAL ERHALTEN)
+         FIREBASE & GLOBAL LOGIC (INKL. MARATHON 2027 LIVE-LISTE)
          ========================================================================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
@@ -2114,7 +2342,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // -- BESUCHER TRACKING FUNKTIONEN (Sichtbar für Main Script) --
+        // -- BESUCHER TRACKING FUNKTIONEN --
         window.logVisit = async function(visitorName) {
             try {
                 await addDoc(collection(db, "bambus_visits"), {
@@ -2146,6 +2374,66 @@
                 alert("Fehler beim Laden des Protokolls!");
                 console.error(error);
             }
+        };
+
+        // -- NEU: MARATHON 2027 LIVE-LISTE (FIREBASE + LOCAL FALLBACK) --
+        const defaultRunners = [
+            { name: "Wachtmeister Krümel 🐹", role: "Pacemaker" },
+            { name: "SVZ-Blitz ⚡", role: "42.2 km" }
+        ];
+
+        function renderMarathonList(runnersArray) {
+            const listEl = document.getElementById('marathonRunnersList');
+            if (!listEl) return;
+            listEl.innerHTML = '';
+            const combined = [...runnersArray, ...defaultRunners];
+            combined.forEach((r, idx) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>#${idx + 1} ${r.name}</span> <span class="marathon-badge">${r.role || 'Dabei 2027'}</span>`;
+                listEl.appendChild(li);
+            });
+        }
+
+        try {
+            const marathonQuery = query(collection(db, "bambus_marathon_2027"), orderBy("timestamp", "desc"));
+            onSnapshot(marathonQuery, (snapshot) => {
+                const fbRunners = [];
+                snapshot.forEach((docSnap) => {
+                    fbRunners.push(docSnap.data());
+                });
+                renderMarathonList(fbRunners);
+            }, () => {
+                // Fallback falls Firestore-Regel für neue Collection noch nicht aktiv ist
+                const localRunners = JSON.parse(localStorage.getItem('bambus_marathon_local') || '[]');
+                renderMarathonList(localRunners);
+            });
+        } catch (e) {
+            renderMarathonList([]);
+        }
+
+        window.registerMarathonRunner = async function() {
+            const input = document.getElementById('marathonRunnerInput');
+            const runnerName = input.value.trim();
+            if (!runnerName) {
+                alert("🏃‍♂️ Bitte gib deinen Namen oder Decknamen ein, um dich für den Marathon 2027 anzumelden!");
+                input.focus();
+                return;
+            }
+            try {
+                await addDoc(collection(db, "bambus_marathon_2027"), {
+                    name: runnerName,
+                    role: "Angemeldet ✅",
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                // LocalStorage-Fallback damit es immer sofort funktioniert
+                const localRunners = JSON.parse(localStorage.getItem('bambus_marathon_local') || '[]');
+                localRunners.unshift({ name: runnerName, role: "Angemeldet ✅" });
+                localStorage.setItem('bambus_marathon_local', JSON.stringify(localRunners));
+                renderMarathonList(localRunners);
+            }
+            input.value = '';
+            alert(`🎉 Stark, ${runnerName}! Du stehst offiziell auf der Startliste für den Marathon 2027! Ab jetzt gibt es kein Zurück mehr!`);
         };
 
         // -- KOMMENTAR LOGIK --
