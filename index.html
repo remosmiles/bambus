@@ -1255,7 +1255,8 @@
 
         <!-- STEP 2: HAFTUNGSAUSSCHLUSS (Wird nach Login angezeigt) -->
         <div class="login-box" id="step-warning" style="display: none; border-color: #ff9900; box-shadow: 0 0 40px rgba(255, 153, 0, 0.8);">
-            <h1 style="color: #ff9900; text-shadow: 0 0 10px #ff9900; font-size: 40px;">⚠️ HAFTUNGSAUSSCHLUSS ⚠️</h1>
+            <!-- HIER ANGEPASST: Schriftgrösse und word-break verhindern Overflow -->
+            <h1 style="color: #ff9900; text-shadow: 0 0 10px #ff9900; font-size: 32px; word-break: break-word; hyphens: auto;">⚠️ HAFTUNGSAUSSCHLUSS ⚠️</h1>
             <p style="font-size: 18px; color: #fff;">Sämtliche Inhalte auf dieser Seite sind rein satirisch, masslos übertrieben und keinesfalls ernst zu nehmen!</p>
             <p style="font-size: 14px; color: #ccc; margin-bottom: 30px;">Der Autor weist jegliche Haftung kategorisch von sich. Wer hier etwas persönlich nimmt, ist selbst schuld. Dem Autor kann absolut nichts zur Last gelegt werden.</p>
             <button onclick="enterSite()" style="background: #ff9900; color: #111;">Verstanden & Weiter</button>
@@ -1282,7 +1283,8 @@
             <p style="font-family: Arial, sans-serif; font-size: 18px;">Die neuen 5G-Antennen des Schwerverkehrszentrums haben soeben unerlaubte Gehirnströme erfasst.</p>
             <p style="font-size: 22px; margin: 20px 0;">Du hast exakt in diesem Moment an jemanden gedacht!</p>
             <div style="background: var(--gray); padding: 15px; border-left: 5px solid #ff9900; margin-bottom: 20px;">
-                <strong style="font-size: 24px; color: var(--dark);">Schöne Grüsse von Remo! 🐼✌️</strong>
+                <!-- HIER ANGEPASST: Anonymer, ironischer Name eingefügt -->
+                <strong style="font-size: 24px; color: var(--dark);">Schöne Grüsse vom legendären Polizisten XY! 👻✌️</strong>
             </div>
             <button class="radar-btn" style="background: #ff9900; color: var(--dark);" onclick="closeMindReader()">Überwachung beenden</button>
         </div>
@@ -1458,7 +1460,7 @@
             <article class="article news-article">
                 <span class="kicker">Herzklopfen am Strassenrand</span>
                 <h2>Verkehrschaos in Flüelen: Alle wollen vom Werkhof-Schönling kontrolliert werden!</h2>
-                <p><strong>FLÜELEN -</strong> Es herrschen absurde Zustände rund um den Werkhof in Flüelen. Seit bekannt ist, dass dort ein besonders charmanter Kollege arbeitet, staut es sich auf den Zufahrtsstrassen. Verkehrspsychologen stehen vor einem Rätsel. Die Bereiche um den Werkhof gleichen zeitweise einem gut besuchten VIP-Wartebereich, weil alle Autofahrer hoffen, einen Blick auf ihn zu erhaschen.</p>
+                <p><strong>FLÜELEN -</strong> Es herrschen absurde Zustände rund um den Werkhof in Flüelen. Seit bekannt ist, dass dort ein besonders charmanter Kollege arbeitet, staut es sich auf den Zufahrtsstrassen. Verkehrspsychologen stehen vor Rätsel. Die Bereiche um den Werkhof gleichen zeitweise einem gut besuchten VIP-Wartebereich, weil alle Autofahrer hoffen, einen Blick auf ihn zu erhaschen.</p>
                 <p>"Ich bin heute schon dreimal mit einem absichtlich defekten Blinker am Werkhof vorbeigefahren, in der Hoffnung, dass er mich für eine Kontrolle rausnimmt", gesteht eine 25-jährige Autofahrerin, die bereits eine beeindruckende Sammlung an Bussen hortet. Der Werkhof musste bereits zusätzliche Ausweichflächen schaffen, weil simulierte Fahrzeugpannen in der Umgebung drastisch zugenommen haben. Es wird derzeit auf höchster Ebene geprüft, ob der Kollege künftig nur noch mit einer verdunkelten Sturmmaske arbeiten darf, um den Verkehrsfluss in Flüelen zu gewährleisten.</p>
                 <button class="radar-btn" onclick="openModal()">Einsatzprotokoll & Liebesbriefe lesen</button>
             </article>
