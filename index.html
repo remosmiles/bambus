@@ -2408,11 +2408,23 @@
             }
             
             try {
-                // Speichert die Idee sicher und unsichtbar in der Firebase Datenbank
+                // 1. Speichert die Idee sicher als Backup in der Firebase Datenbank
                 await addDoc(collection(db, "bambus_ideas"), {
                     name: userName,
                     idea: ideaInput,
                     timestamp: serverTimestamp()
+                });
+
+                // 2. Sendet die E-Mail anonym über Formspree an deine Mail
+                await fetch("https://formspree.io/f/xkjjvqnd", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        Deckname: userName,
+                        Geheime_Idee: ideaInput
+                    })
                 });
                 
                 document.getElementById('ideaUserName').value = '';
